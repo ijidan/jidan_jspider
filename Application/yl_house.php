@@ -2,12 +2,12 @@
 use Beanbun\Beanbun;
 use Beanbun\Lib\Db;
 
-$ROOT_DIR=dirname(__DIR__);
-die($ROOT_DIR);
-require_once($ROOT_DIR . '/vendor/autoload.php');
-require_once($ROOT_DIR.'/debugger.php');
+error_reporting(E_ALL ^E_WARNING ^E_NOTICE);
+$projectDir=dirname(__DIR__);
+$srcDir=$projectDir."/Src";
+require_once ($projectDir . '/vendor/autoload.php');
+require_once ($srcDir.'/debugger.php');
 
-pr("dasmfjiafj9aifj",1);
 // 数据库配置
 Db::$config['zhihu'] = [
     'server' => '127.0.0.1',
