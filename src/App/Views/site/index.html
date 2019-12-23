@@ -1,0 +1,46 @@
+{% extends "layout1.html" %}
+
+{% block main_content %}
+<div class="bc-social">
+	<div class="container">
+		<ul class="bc-social-buttons">
+			<li class="social-weibo " title="Hương：Tel: 01246868666 Mail: huong.nguyen1314520@gmail.com">
+				<i>Hương：Tel: 01246868666 Mail: huong.nguyen1314520@gmail.com</i>
+			</li>
+			<li class="social-weibo contact">
+				<a href="https://www.facebook.com/Layhangtrungviet/" title="Facebook" target="_blank">
+					<!--<i class="fa fa-weibo"></i>-->
+					<i>Facebook：@Layhangtrungviet</i></a>
+			</li>
+
+		</ul>
+	</div>
+</div>
+<div class="container projects">
+
+	<div class="projects-header page-header">
+		<h2>Giới thiệu về trung tâm vận chuyển LayhangTrungViet</h2>
+		<p>Được thành lập từ năm 2013, đến nay trung tâm vận chuyển LayhangTrungViet đã có quá trình 4 năm hình thành và
+			phát triển với phương châm : Uy tín- Nhanh chóng- Chính xác – Bảo mât- Tiết kiệm .Tất cả những gì bạn cần,
+			chúng tôi đều cố gắng hết sức đáp ứng một cách hoàn hảo nhất.Thời gian vận chuyển hàng hóa nhanh chóng: Chỉ
+			từ 2-3 ngày kể từ khi kho chúng tôi nhận được hàng.</p>
+	</div>
+	<div class="row">
+		{% for business in businessList %}
+		<div class="col-sm-6 col-md-4 col-lg-3 ">
+			<div class="thumbnail">
+				<a>
+					<img class="lazy" src="{{cdnUrlApp}}/img/business_icon.png" alt="{{business.title}}">
+				</a>
+				<div class="caption">
+					<h3>
+						<a title="{{business.title}}">{{business.title}}<br></a>
+					</h3>
+					<p>{{business.content}}</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock%}

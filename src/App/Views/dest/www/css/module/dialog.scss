@@ -1,0 +1,45 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: dialog.scss 4807 2014-08-13 06:34:49Z samgui $
+@import "../global/core";
+
+.ui-overlay, #mask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  opacity: .5;
+  z-index: 99;
+}
+
+.ui-dialog {
+  display: none;
+  position: fixed;
+  _position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 5px solid #ccc;
+  background-color: #fff;
+  z-index: 100;
+}
+
+.ui-dialog-title {
+  position: relative;
+  height: 40px;
+  padding: 0 20px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+  font: normal 14px/40px '\5fae\8f6f\96c5\9ed1';
+}
+
+.ui-dialog-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #d0d0d0;
+  font: normal 24px/1em '\5b8b\4f53';
+
+  &:hover { color: #6b175a; }
+}

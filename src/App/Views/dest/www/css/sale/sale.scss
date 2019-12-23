@@ -1,0 +1,257 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: sale.scss 5832 2014-09-13 09:46:24Z samgui $
+@import "../global/core";
+body { background-color: #f5f5f5; }
+.container { @include clear; }
+
+@import "../module/slider";
+
+.ht-navigation { margin-bottom: 40px; }
+
+.ui-slider {
+  width: 1200px;
+  height: 470px;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.ui-slider-prev, .ui-slider-next { top: 205px; }
+
+.col-main {
+  float: left;
+  width: 790px;
+
+  .list-item {
+    position: relative;
+    height: 215px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(4, 0, 0, .1);
+    @include bg_loading;
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(4, 0, 0, .3);
+
+      .mask { @include bgc_rgba($alpha: .2); }
+    }
+
+    .time, .tip {
+      position: absolute;
+      left: 60px;
+      bottom: 20px;
+      padding-left: 20px;
+      font-size: 14px;
+      color: #666;
+      @include bg($url: 'sale/icon/slice/clock.png', $position: left center);
+    }
+
+    .mask {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 550px;
+      height: 140px;
+      padding-top: 75px;
+      *background-image: url(data:);
+      transition: all .3s linear;
+    }
+  }
+}
+
+.floor {
+  position: relative;
+  padding-top: 36px;
+  margin: 20px 0 60px;
+  border-top: 1px dotted #9d9d9d;
+
+  .floor-title {
+    position: absolute;
+    left: 0;
+    font-size: 0;
+    line-height: 99px;
+    @include bg($color: #f5f5f5, $url: 'sale/floor.png');
+  }
+}
+
+.floor-new {
+  margin: 0 0 60px 0;
+  padding: 0;
+  border: none;
+}
+
+.floor-end {
+  .floor-title {
+    top: -20px;
+    width: 260px;
+    height: 28px;
+    background-position: 0 0;
+  }
+}
+
+.floor-passed {
+  .floor-title {
+    top: -20px;
+    width: 320px;
+    height: 28px;
+    background-position: 0 -70px;
+  }
+
+  .icon-end {
+    position: absolute;
+    top: 50%;
+    left: 188px;
+    margin-top: -50px;
+    @include icon($url: 'sale/end.png');
+  }
+}
+
+.floor-begin {
+  .floor-title {
+    top: -20px;
+    width: 300px;
+    height: 38px;
+    background-position: 0 -30px;
+  }
+
+  .mask, .list-item:hover .mask { @include bgc_rgba(#401036, .8); }
+
+  .start-time {
+    display: block;
+    margin: 0 85px;
+    color: #fff;
+    font: normal 18px/34px '\5fae\8f6f\96c5\9ed1';
+    @include clear;
+
+    .place { float: left; }
+    .date { float: right; text-align: right; }
+  }
+
+  .last { border-top: 1px dotted #fff; }
+}
+
+.col-side {
+  float: right;
+  width: 360px;
+
+  .ui-tab {
+    margin-bottom: 20px;
+    border-top: 2px solid #ccc;
+    background-color: #F2F2F2;
+    box-shadow: 0 1px 3px rgba(4, 0, 0, .1);
+  }
+
+  .ui-tab-trigger {
+    position: relative;
+    top: -2px;
+    @include clear;
+
+    .item {
+      $width: 100%;
+      float: left;
+      width: $width/3;
+      height: 38px;
+      line-height: 38px;
+      border-top: 2px solid #ccc;
+      color: #333;
+      font-size: 14px;
+      text-align: center;
+      cursor: default;
+    }
+
+    .current {
+      border-top-color: #6b155a;
+      color: #ce2c5b;
+      background-color: #fff;
+    }
+  }
+
+  .ui-tab-container {
+    position: relative;
+    min-height: 100px;
+    _height: 100px;
+    margin-top: -2px;
+    padding: 20px 18px 0;
+    background-color: #fff;
+
+    .promote { display: block; margin-bottom: 20px; }
+
+    .item {
+      display: none;
+      margin-left: -12px;
+      @include clear;
+
+      li {
+        float: left;
+        margin: 0 0 12px 12px;
+        _display: inline;
+      }
+    }
+
+    .current { display: block; }
+
+    .time-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+      border-top: 1px dotted #ddd;
+      height: 0;
+    }
+
+    .time {
+      position: absolute;
+      left: 50%;
+      margin: -7px 0 0 -53px;
+      padding: 0 5px;
+      text-align: center;
+      background-color: #fff;
+    }
+  }
+
+  .mod-shopping-process {
+    .ui-tab-container { padding: 25px 0; text-align: center; }
+  }
+
+  .mod-guide { transition: top .5s linear; }
+
+  .sale-guide-fixed {
+    position: fixed;
+    top: 70px;
+    width: 360px;
+  }
+}
+
+.sale-nav-fixed .app-qrcode {
+  width: 82px;
+  height: 152px;
+  @include bg($url: 'sale/app-qrcode.png');
+}
+
+.sale-floor-nav {
+  background-color: #fff;
+
+  a {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .current a { background-color: #cd2d5b; color: #fff; }
+}
+
+.toolbar-item {
+  width: 80px; margin-bottom: 0;
+
+  &:hover .toolbar-item-text { padding: 14px 20px; }
+}
+
+.toolbar-item-cart {
+  &, &:hover { background-position: 20px 9px; }
+  .toolbar-item-text { left: 33px; }
+}
+
+.toolbar-item-cart .toolbar-item-text { left: 33px; }
+.toolbar-item-service { background-position: 20px -52px; }
+.toolbar-item-backtop { background-position: 20px -113px; box-shadow: 0 3px 6px rgba(4, 0, 0, .08); }
+.sale-floor-nav a, .toolbar-item { border-top: 1px solid #ddd; }

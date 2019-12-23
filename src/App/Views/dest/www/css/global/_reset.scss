@@ -1,0 +1,14 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: _reset.scss 701 2014-04-30 01:37:50Z samgui $
+@import "core";
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin: 0; padding: 0; }
+body, button, input, select, textarea { font: 12px/1.5 '\5fae\8f6f\96c5\9ed1', 'Lucida Grande', Arial, '\5b8b\4f53'; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+ul, ol { list-style: none; }
+iframe, img { border: 0; vertical-align: top; }
+table { border-collapse: collapse; border-spacing: 0; }
+i, b, s, em { font-style: normal; }
+del { font-family: '\5b8b\4f53'; }
+a { text-decoration: none; }
