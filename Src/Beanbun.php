@@ -287,7 +287,10 @@ class Beanbun
         }
     }
 
-    // 爬虫进程
+	/**
+	 * 爬虫进程
+	 * @param $worker
+	 */
     public function onWorkerStart($worker)
     {
         foreach ($this->startWorkerHooks as $hook) {
@@ -476,20 +479,6 @@ class Beanbun
             foreach ($urls as $url) {
                 $this->queue()->add($url);
             }
-        }
-    }
-
-	/**
-	 * 中间件
-	 * @param $middleware
-	 * @param string $action
-	 */
-    public function middleware($middleware, $action = 'handle')
-    {
-        if (is_object($middleware)) {
-            $middleware->$action($this);
-        } else {
-            call_user_func($middleware, $this);
         }
     }
 }
