@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f96f2d581c48cddb3e283314c7184dd",
+    "content-hash": "bd5b560ad42a6eeaff6943fea5c27da9",
     "packages": [
         {
             "name": "akrabat/ip-address-middleware",
@@ -1396,6 +1396,52 @@
             "time": "2019-10-06T11:29:25+00:00"
         },
         {
+            "name": "mnapoli/silly",
+            "version": "1.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mnapoli/silly.git",
+                "reference": "66807f87abd2ab8e5708754d70b4b601f5614c32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mnapoli/silly/zipball/66807f87abd2ab8e5708754d70b4b601f5614c32",
+                "reference": "66807f87abd2ab8e5708754d70b4b601f5614c32",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "php-di/invoker": "~2.0",
+                "psr/container": "^1.0",
+                "symfony/console": "~3.0|~4.0|~5.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.12",
+                "mnapoli/phpunit-easymock": "~1.0",
+                "phpunit/phpunit": "~6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Silly\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Silly CLI micro-framework based on Symfony Console",
+            "keywords": [
+                "PSR-11",
+                "cli",
+                "console",
+                "framework",
+                "micro-framework",
+                "silly"
+            ],
+            "time": "2019-11-26T20:07:27+00:00"
+        },
+        {
             "name": "mobiledetect/mobiledetectlib",
             "version": "2.8.34",
             "source": {
@@ -2097,6 +2143,49 @@
                 "xml"
             ],
             "time": "2019-11-17T08:37:31+00:00"
+        },
+        {
+            "name": "php-di/invoker",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-DI/Invoker.git",
+                "reference": "540c27c86f663e20fe39a24cd72fa76cdb21d41a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-DI/Invoker/zipball/540c27c86f663e20fe39a24cd72fa76cdb21d41a",
+                "reference": "540c27c86f663e20fe39a24cd72fa76cdb21d41a",
+                "shasum": ""
+            },
+            "require": {
+                "psr/container": "~1.0"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1.8",
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Invoker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generic and extensible callable invoker",
+            "homepage": "https://github.com/PHP-DI/Invoker",
+            "keywords": [
+                "callable",
+                "dependency",
+                "dependency-injection",
+                "injection",
+                "invoke",
+                "invoker"
+            ],
+            "time": "2017-03-20T19:28:22+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -3162,6 +3251,82 @@
             "time": "2019-11-28T18:03:50+00:00"
         },
         {
+            "name": "symfony/console",
+            "version": "v4.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "82437719dab1e6bdd28726af14cb345c2ec816d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/82437719dab1e6bdd28726af14cb345c2ec816d0",
+                "reference": "82437719dab1e6bdd28726af14cb345c2ec816d0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/polyfill-mbstring": "~1.0",
+                "symfony/polyfill-php73": "^1.8",
+                "symfony/service-contracts": "^1.1|^2"
+            },
+            "conflict": {
+                "symfony/dependency-injection": "<3.4",
+                "symfony/event-dispatcher": "<4.3|>=5",
+                "symfony/lock": "<4.4",
+                "symfony/process": "<3.3"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "^3.4|^4.0|^5.0",
+                "symfony/dependency-injection": "^3.4|^4.0|^5.0",
+                "symfony/event-dispatcher": "^4.3",
+                "symfony/lock": "^4.4|^5.0",
+                "symfony/process": "^3.4|^4.0|^5.0",
+                "symfony/var-dumper": "^4.3|^5.0"
+            },
+            "suggest": {
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": "",
+                "symfony/lock": "",
+                "symfony/process": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Console\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "https://symfony.com",
+            "time": "2019-12-17T10:32:23+00:00"
+        },
+        {
             "name": "symfony/finder",
             "version": "v4.4.2",
             "source": {
@@ -3443,6 +3608,122 @@
                 "shim"
             ],
             "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php73",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php73.git",
+                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/4b0e2222c55a25b4541305a053013d5647d3a25f",
+                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.13-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php73\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-11-27T16:25:15+00:00"
+        },
+        {
+            "name": "symfony/service-contracts",
+            "version": "v1.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/service-contracts.git",
+                "reference": "ffc7f5692092df31515df2a5ecf3b7302b3ddacf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/ffc7f5692092df31515df2a5ecf3b7302b3ddacf",
+                "reference": "ffc7f5692092df31515df2a5ecf3b7302b3ddacf",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "psr/container": "^1.0"
+            },
+            "suggest": {
+                "symfony/service-implementation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\Service\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to writing services",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "time": "2019-10-14T12:27:06+00:00"
         },
         {
             "name": "symfony/var-dumper",

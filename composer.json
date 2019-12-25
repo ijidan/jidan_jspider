@@ -31,7 +31,8 @@
         "jaeger/phpquery-single": "^1.0",
         "php-curl-class/php-curl-class": "^8.5",
         "shuber/curl": "^1.0",
-        "ralouphie/getallheaders": "^3.0"
+        "ralouphie/getallheaders": "^3.0",
+        "mnapoli/silly": "^1.7"
     },
     "autoload": {
         "psr-4": {

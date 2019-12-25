@@ -16,6 +16,7 @@ return array(
     'DOMEvent' => $vendorDir . '/jaeger/phpquery-single/phpQuery.php',
     'EasyPeasyICS' => $vendorDir . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
     'ICallbackNamed' => $vendorDir . '/jaeger/phpquery-single/phpQuery.php',
+    'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'Mobile_Detect' => $vendorDir . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
     'Nette\\ArgumentOutOfRangeException' => $vendorDir . '/nette/utils/src/Utils/exceptions.php',
     'Nette\\Bridges\\CacheDI\\CacheExtension' => $vendorDir . '/nette/caching/src/Bridges/CacheDI/CacheExtension.php',
