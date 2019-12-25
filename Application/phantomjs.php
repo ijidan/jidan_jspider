@@ -1,10 +1,10 @@
 <?php
-use Beanbun\Beanbun;
+use Beanbun\JSpider;
 use JonnyW\PhantomJs\Client;
 
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$beanbun = new Beanbun;
+$beanbun = new JSpider;
 $beanbun->name = 'phantom';
 $beanbun->count = 5;
 $beanbun->interval = 2;

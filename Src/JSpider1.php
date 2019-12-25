@@ -1,8 +1,8 @@
 <?php
-namespace Beanbun;
+namespace JSpider;
 
-use Beanbun\Exception\BeanbunException;
-use Beanbun\Lib\Helper;
+use JSpider\Exception\BeanbunException;
+use JSpider\Lib\Helper;
 use Exception;
 use GuzzleHttp\Client;
 use Lib\Net\Response;
@@ -10,7 +10,7 @@ use Service\BaseService;
 use Workerman\Lib\Timer;
 use Workerman\Worker;
 
-class Beanbun
+class JSpider1
 {
     const VERSION = '1.0.4';
 
@@ -130,7 +130,7 @@ class Beanbun
 	 */
     public function start()
     {
-        if (!isset($this->commands[1])) {
+    	if (!isset($this->commands[1])) {
             $this->daemonize = false;
         }
 
@@ -241,7 +241,7 @@ class Beanbun
 
         $this->startWorkerHooks[] = function ($beanbun) {
             $beanbun->queue()->maxQueueSize = $beanbun->max;
-            $beanbun->timer_id = Beanbun::timer($beanbun->interval, [$beanbun, 'crawler']);
+            $beanbun->timer_id = JSpider1::timer($beanbun->interval, [$beanbun, 'crawler']);
         };
 
         $this->beforeDownloadPageHooks[] = [$this, 'defaultBeforeDownloadPage'];
@@ -312,11 +312,11 @@ class Beanbun
     ]) {
         if ($callback === 'memory' || $callback === null) {
             $this->queueFactory = function ($args) {
-                return new \Beanbun\Queue\MemoryQueue($args);
+                return new \JSpider\Queue\MemoryQueue($args);
             };
         } elseif ($callback == 'redis') {
             $this->queueFactory = function ($args) {
-                return new \Beanbun\Queue\RedisQueue($args);
+                return new \JSpider\Queue\RedisQueue($args);
             };
         } else {
             $this->queueFactory = $callback;

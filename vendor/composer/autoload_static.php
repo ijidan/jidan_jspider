@@ -161,6 +161,7 @@ class ComposerStaticInit55a8e3f095259a35f7c2a1b746575ae9
         array (
             'JmesPath\\' => 9,
             'Jaeger\\' => 7,
+            'JSpider\\' => 8,
         ),
         'I' => 
         array (
@@ -190,10 +191,6 @@ class ComposerStaticInit55a8e3f095259a35f7c2a1b746575ae9
             'Cache\\TagInterop\\' => 17,
             'Cache\\Adapter\\Filesystem\\' => 25,
             'Cache\\Adapter\\Common\\' => 21,
-        ),
-        'B' => 
-        array (
-            'Beanbun\\' => 8,
         ),
         'A' => 
         array (
@@ -369,6 +366,10 @@ class ComposerStaticInit55a8e3f095259a35f7c2a1b746575ae9
         array (
             0 => __DIR__ . '/..' . '/jaeger/g-http/src',
         ),
+        'JSpider\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Invoker\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-di/invoker/src',
@@ -424,10 +425,6 @@ class ComposerStaticInit55a8e3f095259a35f7c2a1b746575ae9
         'Cache\\Adapter\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/cache/adapter-common',
-        ),
-        'Beanbun\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
         ),
         'Aws\\' => 
         array (

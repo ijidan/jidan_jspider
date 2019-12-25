@@ -1,12 +1,33 @@
 <?php
-use Beanbun\Beanbun;
-use Beanbun\Lib\Db;
+use JSpider\JSpider1;
+use JSpider\Lib\Db;
+use Lib\Net\Request;
+use Service\BaseService;
 
 error_reporting(E_ALL ^E_WARNING ^E_NOTICE);
 $projectDir=dirname(__DIR__);
 $srcDir=$projectDir."/Src";
+
 require_once ($projectDir . '/vendor/autoload.php');
 require_once ($srcDir.'/debugger.php');
+
+$seed=[
+	"https://th.uoolu.com/house/",
+	"https://www.uoolu.com/house-[id].html"
+];
+$url="https://www.uoolu.com/house/rim_data/1749995581/";
+
+$response=BaseService::sendGetRequest($url,[],["parser"=> Request::PARSER_HTML]);
+if($response->fail()){
+	echo "失败";
+	die("dhfaudh");
+}
+$data=$response->getData();
+$data=str_replace("var marklist=","",$data);
+$dataArray=\json_decode($data,true);
+pr($dataArray,1);
+
+
 
 // 数据库配置
 Db::$config['zhihu'] = [
@@ -17,6 +38,8 @@ Db::$config['zhihu'] = [
     'database_name' => 'zhihu',
     'charset' => 'utf8',
 ];
+
+
 
 function getProxies($beanbun) {
     $client = new \GuzzleHttp\Client();
@@ -44,21 +67,21 @@ function getProxies($beanbun) {
     }
 }
 
-$beanbun = new Beanbun;
+$beanbun = new JSpider1;
 $beanbun->name = 'zhihu_user';
 $beanbun->count = 5;
 $beanbun->interval = 4;
-$beanbun->seed = 'https://www.zhihu.com/api/v4/members/zhang-jia-wei/followers?include=data%5B*%5D.following_count%2Cfollower_count&limit=20&offset=0';
+$beanbun->seed = 'https://www.uoolu.com/house/rim_data/1749995581/';
 $beanbun->logFile = __DIR__ . '/zhihu_user_access.log';
 
-if ($argv[1] == 'start') {
-    getProxies($beanbun);
-}
-
-$beanbun->startWorker = function($beanbun) {
-    // 每隔半小时，更新一下代理池
-    Beanbun::timer(1800, 'getProxies', $beanbun);
-};
+//if ($argv[1] == 'start') {
+//    getProxies($beanbun);
+//}
+//
+//$beanbun->startWorker = function($beanbun) {
+//    // 每隔半小时，更新一下代理池
+//    Beanbun::timer(1800, 'getProxies', $beanbun);
+//};
 
 $beanbun->beforeDownloadPage = function ($beanbun) {
     // 在爬取前设置请求的 headers 

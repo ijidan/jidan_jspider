@@ -66,6 +66,9 @@ class Request {
 		if (isset($config["business"]) && $config["business"]) {
 			$this->businessConfig = array_merge($this->businessConfig, $config["business"]);
 		}
+		if (isset($config["parser"]) && $config["parser"]) {
+			$this->parser = $config["parser"];
+		}
 		$logName = 'request.log';
 		$this->logger = BaseLogger::instance(BaseLogger::CHANNEL_BUSINESS_SERVICE);
 	}
@@ -179,6 +182,7 @@ class Request {
 		$response = null;
 		$httpClient = new Client($this->guzzleHttpConfig);
 		try {
+			dump($this->method,1);
 			switch ($this->method) {
 				case self::METHOD_GET:
 					$config = array_merge($this->guzzleHttpConfig, ['query' => $this->params]);

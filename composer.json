@@ -36,7 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Beanbun\\": "src/",
+            "JSpider\\": "src/",
             "Lib\\": "protected/lib",
             "Service\\": "protected/business/service"
         }

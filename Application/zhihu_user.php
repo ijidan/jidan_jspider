@@ -1,5 +1,5 @@
 <?php
-use Beanbun\Beanbun;
+use Beanbun\JSpider;
 use Beanbun\Lib\Db;
 
 $ROOT_DIR=dirname(__DIR__);
@@ -42,7 +42,7 @@ function getProxies($beanbun) {
     }
 }
 
-$beanbun = new Beanbun;
+$beanbun = new JSpider;
 $beanbun->name = 'zhihu_user';
 $beanbun->count = 5;
 $beanbun->interval = 4;
@@ -55,7 +55,7 @@ if ($argv[1] == 'start') {
 
 $beanbun->startWorker = function($beanbun) {
     // 每隔半小时，更新一下代理池
-    Beanbun::timer(1800, 'getProxies', $beanbun);
+    JSpider::timer(1800, 'getProxies', $beanbun);
 };
 
 $beanbun->beforeDownloadPage = function ($beanbun) {

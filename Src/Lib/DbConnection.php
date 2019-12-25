@@ -1,5 +1,5 @@
 <?php
-namespace Beanbun\Lib;
+namespace JSpider\Lib;
 
 use Exception;
 use PDO;

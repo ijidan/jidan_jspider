@@ -47,6 +47,7 @@ return array(
     'LayerShifter\\TLDDatabase\\' => array($vendorDir . '/layershifter/tld-database/src'),
     'JmesPath\\' => array($vendorDir . '/mtdowling/jmespath.php/src'),
     'Jaeger\\' => array($vendorDir . '/jaeger/g-http/src'),
+    'JSpider\\' => array($baseDir . '/src'),
     'Invoker\\' => array($vendorDir . '/php-di/invoker/src'),
     'Interop\\Container\\' => array($vendorDir . '/container-interop/container-interop/src/Interop/Container'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
@@ -61,6 +62,5 @@ return array(
     'Cache\\TagInterop\\' => array($vendorDir . '/cache/tag-interop'),
     'Cache\\Adapter\\Filesystem\\' => array($vendorDir . '/cache/filesystem-adapter'),
     'Cache\\Adapter\\Common\\' => array($vendorDir . '/cache/adapter-common'),
-    'Beanbun\\' => array($baseDir . '/src'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
 );

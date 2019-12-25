@@ -5,8 +5,8 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
  * 调试函数，支持中断，非中断情况可调用多次，支持多个变量
  * 用法：dump($var1,$var2...); 中断用法：dump($var1,$var2...,1)
  */
-if (!function_exists("dump")) {
-	function dump() {
+if (!function_exists("dumpp")) {
+	function dumpp() {
 		echo "\r\n\r\n" . '<pre style="background-color:#ddd; font-size:12px">' . "\r\n";
 		$args = func_get_args();
 		$last = array_slice($args, -1, 1);

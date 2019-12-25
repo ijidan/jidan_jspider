@@ -1,5 +1,5 @@
 <?php
-namespace Beanbun\Exception;
+namespace JSpider\Exception;
 
 class BeanbunException extends \Exception
 {

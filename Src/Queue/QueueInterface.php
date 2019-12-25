@@ -1,5 +1,5 @@
 <?php
-namespace Beanbun\Queue;
+namespace JSpider\Queue;
 
 interface QueueInterface
 {
