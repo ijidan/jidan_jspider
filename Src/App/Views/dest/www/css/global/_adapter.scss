@@ -1,0 +1,21 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: _adapter.scss 4477 2014-08-05 03:14:18Z samgui $
+@import "../global/core";
+
+.container { width: 1200px; }
+
+.ht-search {
+  width: 526px;
+  margin-left: 175px;
+
+  .txt-search { width: 406px; }
+  .tip-search { width: 530px; }
+}
+
+.ui-progressbar { width: 392px; }
+
+.ht-support {
+  .ht-logo { width: 228px; }
+  .col { width: 180px; }
+}

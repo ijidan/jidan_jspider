@@ -1,0 +1,8 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: icon.scss 4807 2014-08-13 06:34:49Z samgui $
+@import "../global/core";
+
+.icon-success-42 { @include icon($url: 'module/icon/slice/success-42.png'); }
+.icon-error-42 { @include icon($url: 'module/icon/slice/error-42.png'); }
+.icon-error-28 { @include icon($url: 'module/icon/slice/error-28.png'); }

@@ -1,0 +1,169 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: _sidebar.scss 6221 2014-09-20 10:12:24Z samgui $
+@import "../global/core";
+.icon-rank { @include icon($url: 'product/rank.png'); }
+.col-aside {
+  float: left;
+  width: 190px;
+
+  .mod {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+
+    .hd {
+      height: 36px;
+      line-height: 36px;
+      padding: 0 14px;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+      font-weight: 400;
+      background-color: #f7f7f7;
+    }
+
+    .bd { padding: 0 14px; }
+
+    .ft {
+      height: 50px;
+      text-align: center;
+
+      .gap {
+        display: inline-block;
+        width: 40px;
+        height: 0;
+        border-bottom: 1px solid #f0f0f0;
+        vertical-align: middle;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=1.224646798818428e-16, M21=-1.224646798818428e-16, M22=-1, SizingMethod='auto expand')";
+        filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=1.224646798818428e-16, M21=-1.224646798818428e-16, M22=-1, SizingMethod='auto expand');
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
+    }
+
+    .mod-list { @include clear; }
+  }
+
+  .mod-hotsale {
+    .bd { padding-top: 2px; padding-bottom: 20px; }
+
+    .pic, .name { display: block; }
+
+    .pic {
+      padding: 18px 0 6px;
+      text-align: center;
+      @include img_resize(160px, 124px);
+    }
+
+    .name {
+      padding-bottom: 6px;
+      line-height: 18px;
+      color: #666;
+
+      &:hover { color: #cd2d5b; }
+    }
+
+    .price { color: #333; }
+  }
+
+  .mod-hotbrand {
+    .bd { padding: 10px 0; }
+
+    .list-item {
+      float: left;
+      width: 75px;
+      margin: 10px 9px 10px 10px;
+      text-align: center;
+
+      &:hover .name { color: #333; }
+
+      .name {
+        display: block;
+        padding-top: 2px;
+        color: #999;
+      }
+    }
+  }
+
+  .mod-topsale {
+    .hd { position: relative; }
+
+    .list-item {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .tab-nav {
+      position: absolute;
+      top: 8px;
+      right: 0;
+      padding-right: 2px;
+      @include clear;
+
+      .item {
+        float: left;
+        width: 19px;
+        height: 19px;
+        line-height: 19px;
+        margin-right: 8px;
+        border-radius: 19px;
+        text-align: center;
+        font-size: 12px;
+        color: #333;
+      }
+
+      .active { color: #fff; background-color: #cd2d5b; }
+    }
+
+    .tab-pane {
+      display: none;
+
+      &.active { display: block; }
+    }
+
+    .icon-rank {
+      position: absolute;
+      margin: -5px 0 0 -9px;
+      padding-left: 10px;
+      font: normal 24px/24px arial;
+      color: #999;
+      z-index: 2;
+    }
+
+    .pic {
+      float: left;
+      margin-right: 8px;
+      border: 1px solid #ddd;
+      @include img_resize(100px, 100px);
+    }
+
+    .name {
+      display: block;
+      line-height: 18px;
+      padding-top: 5px;
+      color: #333;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .price-other {
+      display: block;
+      padding: 65px 0 2px;
+      color: #999;
+      font-family: '\5fae\8f6f\96c5\9ed1';
+    }
+
+    .price { color: #cc2e5b; }
+  }
+
+  .ui-slider-prev,
+  .ui-slider-next {
+    display: inline-block;
+    width: 22px;
+    height: 32px;
+    vertical-align: middle;
+    @include bg($url: 'product/arrow.png');
+  }
+
+  .ui-slider-prev { background-position: -88px 8px; }
+  .ui-slider-next { background-position: -65px 8px; }
+}

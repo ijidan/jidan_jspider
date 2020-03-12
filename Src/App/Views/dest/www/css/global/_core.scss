@@ -1,0 +1,68 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: _core.scss 5929 2014-09-15 10:27:53Z samgui $
+
+//mixins
+@mixin clear() {
+  *zoom: 1;
+
+  &:after {
+    content: '\20';
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+@mixin bg($color: null, $url: '', $repeat: no-repeat, $position: null) {
+  background: $color image-url($url) $repeat $position;
+}
+
+@mixin bg_url($url: '') {
+  background-image: image-url($url);
+}
+
+@mixin bg_cover($url:''){
+  @include bg($url: $url);
+  background-size: cover;
+  *filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$url}',sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$url}',sizingMethod='scale')";
+}
+
+@mixin bgc_rgba($color: #000000, $alpha: .6) {
+  $rgba: rgba($color, $alpha);
+  background-color: $rgba;
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType = 0, StartColorStr = '#{ie-hex-str($rgba)}', EndColorStr = '#{ie-hex-str($rgba)}');
+
+  :root & { filter: none; }
+}
+
+@mixin bg_loading (){
+  @include bg($url: 'module/loading.gif', $position: center);
+}
+
+@mixin img_resize($width, $height) {
+  position: relative;
+  width: $width;
+  height: $height;
+  overflow: hidden;
+  @include bg_loading;
+
+  img {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: $width;
+    max-height: $height;
+  }
+}
+
+@mixin icon($color: null, $url: '', $size: true) {
+  display: inline-block;
+  @if($size) {
+    width: image-width($url);
+    height: image-height($url);
+  }
+  @include bg($color, $url);
+}

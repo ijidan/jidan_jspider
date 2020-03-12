@@ -1,0 +1,13 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: pagination.scss 5913 2014-09-15 09:03:03Z samgui $
+@import "../global/core";
+
+.pagination {
+  text-align: right;
+  @include clear;
+
+  &, a { color: #666; }
+  li { display: inline-block; margin: 0 10px; }
+  .active { color: #f0323f; }
+}

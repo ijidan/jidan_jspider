@@ -1,12 +1,13 @@
 {
     "name": "jidan/j-spider",
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.6",
         "slim/slim": "3.5.0",
         "monolog/monolog": "1.21.0",
         "slim/php-view": "2.1.0",
         "respect/validation": "1.0.5",
         "dflydev/fig-cookies": "v1.0.2",
+        "geoip2/geoip2": "~2.0",
         "phpmailer/phpmailer": "~5.2",
         "mustache/mustache": "~2.5",
         "slim/pdo": "~1.9",
@@ -31,14 +32,9 @@
         "jaeger/phpquery-single": "^1.0",
         "php-curl-class/php-curl-class": "^8.5",
         "shuber/curl": "^1.0",
-        "ralouphie/getallheaders": "^3.0",
-        "mnapoli/silly": "^1.7"
-    },
-    "autoload": {
-        "psr-4": {
-            "JSpider\\": "src/",
-            "Lib\\": "protected/lib",
-            "Service\\": "protected/business/service"
-        }
+        "symfony/filesystem": "^4.2",
+        "symfony/dom-crawler": "^4.2",
+        "symfony/css-selector": "^4.2",
+        "ralouphie/getallheaders": "^3.0"
     }
 }

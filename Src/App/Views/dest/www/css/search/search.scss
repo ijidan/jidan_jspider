@@ -1,0 +1,240 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: search.scss 701 2014-04-30 01:37:50Z samgui $
+@import "../global/core";
+@import "../module/pagination";
+@import "../module/breadcrumb";
+@import "../product/sidebar";
+.icon-sort {
+  display: inline-block;
+  margin-left: 5px;
+  @include bg($url: 'search/icon/sort.png');
+}
+.col-main {
+  float: right;
+  width: 992px;
+
+  .row {
+    position: relative;
+    border: 1px solid #ddd;
+    @include clear;
+
+    .row-title { height: 44px; line-height: 44px; }
+    .row-content { height: 31px; padding: 13px 80px 0 0; }
+    .row-title, .item { float: left; color: #666; }
+
+    .item {
+      margin-right: 40px;
+      padding-bottom: 13px;
+      white-space: nowrap;
+    }
+  }
+
+  .row-title {
+    width: 76px;
+    padding-left: 20px;
+    color: #333;
+  }
+
+  .row-content { @include clear; overflow: hidden; }
+
+  .row-extra {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 13px 20px 0 0;
+
+    .item { position: relative; margin-right: 20px; }
+    .icon-plus { vertical-align: -2px; font: normal 18px '\5fae\8f6f\96c5\9ed1'; }
+
+    .icon-arrow {
+      position: absolute;
+      top: 2px;
+      left: 30px;
+      font: bold 14px '\5b8b\4f53';
+      -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865475, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865475, SizingMethod='auto expand')";
+      filter: progid:DXImageTransform.Microsoft.Matrix(M11 = 0.7071067811865475, M12 = -0.7071067811865477, M21 = 0.7071067811865477, M22 = 0.7071067811865475, SizingMethod = 'auto expand');
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+  }
+
+  .row-selected, .row-sort { background-color: #f5f7f6; }
+
+  .row-selected {
+    .row-content { padding-top: 10px; }
+
+    .item {
+      position: relative;
+      height: 24px;
+      line-height: 24px;
+      padding: 0 23px 0 16px;
+      color: #fff;
+      background-color: #6b155a;
+    }
+
+    .icon-delete {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      @include icon($url: 'search/icon/slice/delete.png');
+    }
+  }
+
+  .row-price {
+    border-bottom: 1px solid #ddd;
+
+    .form-control {
+      width: 40px;
+      height: 20px;
+      padding: 1px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      height: 24px;
+      line-height: 24px;
+      padding: 0 10px;
+      margin-left: 10px;
+      color: #fff;
+      background-color: #6b155a;
+    }
+  }
+
+  .row-catalog { margin-bottom: 20px; }
+
+  .row-sort {
+    padding-left: 18px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f7f6;
+
+    .item {
+      color: #333;
+
+      .icon-sort {
+        width: 8px;
+        height: 11px;
+        vertical-align: -1px;
+        background-position: -11px 0;
+      }
+    }
+
+    .item-heat .icon-sort {
+      width: 10px;
+      height: 6px;
+      vertical-align: middle;
+      background-position: 0 0;
+    }
+
+    .sort-desc .icon-sort { background-position: -20px 0; }
+    .sort-asc .icon-sort { background-position: -29px 0; }
+  }
+
+  .row-unfold {
+    .row-content { height: auto; }
+
+    .icon-arrow {
+      top: 0;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=1.224646798818428e-16, M21=-1.224646798818428e-16, M22=-1, SizingMethod='auto expand')";
+      filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=1.224646798818428e-16, M21=-1.224646798818428e-16, M22=-1, SizingMethod='auto expand');
+      -ms-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+    }
+  }
+
+  .mod-list { margin-bottom: 20px; @include clear; }
+
+  .list-item {
+    position: relative;
+    float: left;
+    width: 248px;
+    height: 319px;
+    overflow: hidden;
+
+    &:hover {
+      overflow: visible;
+      z-index: 2;
+
+      .mod-item { height: auto; border-color: #e6e6e6; }
+    }
+  }
+
+  .mod-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 208px;
+    height: 315px;
+    padding: 0 16px;
+    border: 4px solid #fff;
+    background-color: #fff;
+    transition: all .1s linear;
+
+    .pic {
+      display: block;
+      padding: 40px 14px 16px;
+      @include img_resize(180px, 180px);
+    }
+
+    .name {
+      display: block;
+      height: 36px;
+      line-height: 18px;
+      margin-bottom: 5px;
+      color: #666;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .price { font-size: 14px; }
+
+    .price-other {
+      float: right;
+      color: #999;
+      font-family: '\5fae\8f6f\96c5\9ed1';
+    }
+
+    .tag {
+      position: absolute;
+      top: -5px;
+      left: 18px;
+      width: 48px;
+      height: 18px;
+      line-height: 18px;
+      text-align: center;
+      color: #fff;
+      background-color: #ca2b5c;
+    }
+
+    .extra {
+      margin-top: 16px;
+      padding: 7px 0;
+      border-top: 1px solid #ddd;
+
+      .logo-merchant { margin: 0 4px; vertical-align: -7px; }
+    }
+  }
+
+  .mod-empty {
+    margin-top: 20px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    color: #666;
+
+    .title {
+      margin-bottom: 25px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .keyword { color: #6b155a; }
+
+    .suggest {
+      margin: 5px 0 0 18px;
+      line-height: 20px;
+      list-style: decimal;
+    }
+  }
+}

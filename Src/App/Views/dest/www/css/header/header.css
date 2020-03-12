@@ -1,0 +1,187 @@
+.icon-mobile, .icon-cart { display:inline-block; width:9px; height:14px;
+	background:url('http://manager.layhangtrungviet.com/www/img/module/icon/slice/mobile.png?1408419386') no-repeat; width:9px; height:14px; margin-right:4px; vertical-align:-2px }
+
+.icon-cart { width:14px; background-image:url('//manager.layhangtrungviet.com/www/img/module/icon/slice/cart.png?1408419386'); vertical-align:-3px }
+
+.icon-hot { width:23px; height:12px; background-image:url('//manager.layhangtrungviet.com/www/img/module/icon/slice/hot.png?1408419386') }
+
+.icon-baby, .icon-food, .icon-beauty, .icon-3c, .icon-jewel, .icon-bag, .icon-life, .icon-outdoor, .icon-underwear { display:inline-block; width:20px; height:313px; background:url('http://manager.layhangtrungviet.com/www/img/module/icon/category.png?1408419386') no-repeat; width:20px; height:20px; margin-right:20px; vertical-align:-4px }
+
+.icon-baby { background-position:0 0 }
+
+.icon-food { background-position:0 -42px }
+
+.icon-beauty { background-position:0 -85px }
+
+.icon-3c { background-position:0 -125px }
+
+.icon-jewel { background-position:0 -167px }
+
+.icon-bag { background-position:0 -209px }
+
+.icon-life { background-position:0 -252px }
+
+.icon-outdoor { background-position:0 -294px }
+
+.icon-underwear { background-position:0 -294px }
+
+.ht-broswer-zoom, .ht-broswer-upgrade { border-bottom:1px solid #e9c58c; background-color:#fff2d1; color:#984b12 }
+
+.ht-broswer-zoom .container, .ht-broswer-upgrade .container { position:relative; height:26px; line-height:26px }
+
+.ht-broswer-zoom .icon-warning, .ht-broswer-upgrade .icon-warning { display:inline-block; width:40px; height:15px; background:url('http://manager.layhangtrungviet.com/www/img/module/icon/tips-ie6.png?1408419386') no-repeat }
+
+.ht-broswer-zoom .icon-warning, .ht-broswer-upgrade .icon-warning { display:inline-block; width:22px; height:15px; vertical-align:-2px; *vertical-align:middle }
+
+.ht-broswer-zoom .close, .ht-broswer-upgrade .close { position:absolute; right:0; top:0; font-size:18px; color:#e4af4d; font-family:Tahoma; font-weight:bold; overflow:hidden; z-index:2 }
+
+.ht-broswer-zoom .close, .ht-broswer-zoom .close:hover, .ht-broswer-upgrade .close, .ht-broswer-upgrade .close:hover { text-decoration:none }
+
+.ht-broswer-zoom a, .ht-broswer-upgrade a { margin:0 1px; color:#1e79c6; text-decoration:underline }
+
+.ht-broswer-zoom a:hover, .ht-broswer-upgrade a:hover { text-decoration:underline }
+
+.ht-broswer-zoom { display:none; padding:15px 0; font:normal 14px/26px \5fae\8f6f\96c5\9ed1 }
+
+.ht-broswer-zoom .zoom-detect { position:absolute; right:0; bottom:0; visibility:visible }
+
+.ht-logo { float:left; height:47px; font-size:0; background:url('//manager.layhangtrungviet.com/www/img/module/logo.png?1408419386') no-repeat left center }
+
+.ht-navbar { position:relative; height:29px; border-bottom:1px solid #eeeeee; background-color:#ffffff; z-index:49 }
+
+.ht-navbar .container { padding-top:6px }
+.ht-navbar .navbar-nav li { float:left; padding:0 10px }
+
+.ht-navbar .navbar-right { float:right; margin-right:-10px }
+
+.ht-navbar a { color:#666666 }
+
+.ht-navbar a:hover, .ht-navbar a:hover span { color:#cc2e5b }
+
+.ht-navbar .cart-count { padding:0 4px; color:#cc2e5b; font-family:arial }
+
+.ht-header-wrapper { height:120px; background-color:#ffffff }
+
+.ht-header { padding:42px 0 31px; background-color:#ffffff; -webkit-transition:top .5s ease-in; transition:top .5s ease-in }
+
+.ht-header .container { position:relative }
+
+.ht-header .ht-logo { width:160px }
+
+.ht-header .ht-search, .ht-header .ht-slogan { margin-top:-1px }
+
+.ht-header .mod-promote { position:absolute; top:-12px; right:0 }
+
+.ht-search { position:relative; float:left; width:566px; margin-left:155px; border:2px solid #6b175a }
+
+.ht-search .txt-search { width:447px; height:22px; line-height:22px; padding:5px 3px 5px 5px; border:1px solid #ffffff; border-left-color:#e1e0e0; background-color:#ffffff; -webkit-appearance:none }
+
+.ht-search .txt-search:focus { outline:none }
+
+.ht-search .btn-search { position:absolute; top:-2px; right:-2px; width:112px; height:38px; line-height:38px; border:none; color:#ffffff; text-align:center; font-size:16px; background-color:#6b175a; cursor:pointer; -webkit-appearance:none; border-radius:0; outline:none }
+
+.ht-search .btn-search:focus { outline:none }
+
+.ht-search .tip-search { display:none; position:absolute; top:45px; left:-2px; width:570px; z-index:2; background-color:rgba(0, 0, 0, 0.7); filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#B3000000', EndColorStr='#B3000000'); box-shadow:0 4px 4px rgba(4, 0, 0, 0.2) }
+
+:root .ht-search .tip-search { -webkit-filter:none; filter:none }
+
+.ht-search .tip-search, .ht-search .tip-search a { color:#ffffff }
+
+.ht-search .tip-search a { text-decoration:underline }
+
+.ht-search .tip-search .tip-arrow { position:absolute; bottom:100%; left:23px; width:0; height:0; border-width:6px; border-color:transparent transparent #000000 transparent; border-style:dashed dashed solid dashed; font-size:0; opacity:.7; overflow:hidden }
+
+.ht-search .tip-search .tip-content { padding:10px 20px }
+
+.ht-search .mod-partner { position:absolute; top:45px; left:-2px; color:#666666 }
+
+.ht-search .mod-partner dt, .ht-search .mod-partner dd { float:left; height:12px; line-height:12px }
+
+.ht-search .mod-partner .gap, .ht-search .mod-partner a { padding-right:18px }
+
+.ht-search .mod-partner .gap { width:0; border-left:1px solid #cccccc }
+
+.ht-search .mod-partner a { color:#6b155a }
+
+.ht-search .mod-partner a:hover { text-decoration:underline }
+
+.ht-progress { float:right; width:526px; margin:3px 0 0 314px; height:38px; background:url('http://manager.layhangtrungviet.com/www/img/module/progress.png?1408419386') no-repeat }
+
+.ht-progress .step-item { float:left; padding-top:28px; color:#666666 }
+
+.ht-progress .step-item1 { width:220px; padding-left:10px }
+
+.ht-progress .step-item2 { width:224px }
+
+.ht-progress-step1 { background-position:center 0 }
+
+.ht-progress-step2 { background-position:center -39px }
+
+.ht-progress-step3 { background-position:center -81px }
+
+.ht-progress-step1 .step-item1, .ht-progress-step2 .step-item1, .ht-progress-step2 .step-item2, .ht-progress-step3 .step-item1, .ht-progress-step3 .step-item2, .ht-progress-step3 .step-item3 { color:#7abd54 }
+
+.ht-slogan { float:right; width:290px; height:38px; line-height:38px; font-size:12px; overflow:hidden;
+	background:url('http://manager.layhangtrungviet.com/www/img/module/slogan.png?1408419386') no-repeat left center
+}
+
+.ht-slogan a { display:inline-block; color:#333333; letter-spacing:1px }
+
+.ht-slogan .overseas { margin-left:28px }
+
+.ht-slogan .authentic { margin-left:54px }
+
+.ht-slogan .clearance { margin-left:44px }
+
+.ht-minicart { position:absolute; top:4px; right:0; font-size:14px }
+
+.ht-minicart .lnk-cart { height:24px; line-height:24px; margin-right:10px; padding-right:8px; border-right:1px solid #eeeeee; color:#666666 }
+
+.ht-minicart .lnk-cart:hover { color:#cd2d5b }
+
+.ht-minicart .lnk-cart:hover .mod-list { display:block }
+
+.ht-minicart .arrow { display:inline-block; width:0; height:0; margin-left:5px; border-width:4px; border-color:#999999 transparent transparent transparent; border-style:solid dashed dashed dashed; overflow:hidden; font-size:0 }
+
+.ht-minicart .mod-list { display:none; position:absolute }
+
+.ht-minicart .cart-count { display:inline-block; width:22px; height:22px; padding:0 0 12px 11px; vertical-align:8px; text-align:center; color:#ffffff; background:url('http://manager.layhangtrungviet.com/www/img/module/icon/cart.png?1409715982') no-repeat }
+
+.ht-header-fixed { position:fixed; top:0; left:0; width:100%; padding:11px 0; margin:0; z-index:49; box-shadow:0 3px 5px rgba(4, 0, 0, 0.05) }
+
+.ht-header-fixed .ht-logo { height:35px; background-position:0 7px }
+
+.ht-header-fixed .ht-search, .ht-header-fixed .ht-slogan { margin-top:0 }
+
+.ht-header-fixed .mod-partner { display:none }
+
+.ht-navigation { background-color:#ffffff }
+
+.ht-navigation .container { position:relative; border-bottom:2px solid #6b155a }
+
+.ht-navigation .navigation { *zoom:1 }
+
+.ht-navigation .navigation:after { content:'\20'; display:block; height:0; clear:both }
+
+.ht-navigation .item { position:relative; float:left; width:180px; height:38px; text-align:center; font:bold 18px/38px '\5fae\8f6f\96c5\9ed1' }
+
+.ht-navigation .item a { color:#333333 }
+
+.ht-navigation .item a:hover { color:#6b155a }
+
+.ht-navigation .item-catalog { background-color:#6b155a }
+
+.ht-navigation .item-catalog .arrow { display:inline-block; width:13px; height:8px; margin-left:12px; background:url('http://manager.layhangtrungviet.com/www/img/module/icon/arrow.png?1410424898') no-repeat 0 -8px }
+
+.ht-navigation .item-catalog a { display:block; font:normal 14px/38px '\5fae\8f6f\96c5\9ed1'; cursor:default }
+
+.ht-navigation .item-catalog a, .ht-navigation .item-catalog a:hover { color:#ffffff !important }
+
+.ht-navigation .active { border-color:#6b155a }
+
+.ht-navigation .active a { color:#6b155a }
+
+.ht-navigation .active .arrow { background-position:0 0 }
+
+.ht-navigation .icon-hot { position:absolute; margin:4px 0 0 2px }

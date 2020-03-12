@@ -1,0 +1,19 @@
+@charset "UTF-8";
+// @Copyright 2014 Taohai, Inc.
+// @update $Id: alert.scss 4566 2014-08-07 03:18:10Z samgui $
+@import "../global/core";
+
+.ui-alert { padding: 30px 60px; background-color: #faf9ef; }
+
+.ui-alert-title {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #ff7b2b;
+}
+
+.ui-alert-container {
+  line-height: 1.8em;
+  color: #666;
+
+  a { color: #199cfa; }
+}
