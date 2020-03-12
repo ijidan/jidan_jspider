@@ -5,8 +5,6 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Utils;
 
 use Nette;
@@ -15,15 +13,16 @@ use Nette;
 /**
  * File system tool.
  */
-final class FileSystem
+class FileSystem
 {
 	use Nette\StaticClass;
 
 	/**
 	 * Creates a directory.
+	 * @return void
 	 * @throws Nette\IOException
 	 */
-	public static function createDir(string $dir, int $mode = 0777): void
+	public static function createDir($dir, $mode = 0777)
 	{
 		if (!is_dir($dir) && !@mkdir($dir, $mode, true) && !is_dir($dir)) { // @ - dir may already exist
 			throw new Nette\IOException("Unable to create directory '$dir'. " . self::getLastError());
@@ -33,9 +32,10 @@ final class FileSystem
 
 	/**
 	 * Copies a file or directory.
+	 * @return void
 	 * @throws Nette\IOException
 	 */
-	public static function copy(string $source, string $dest, bool $overwrite = true): void
+	public static function copy($source, $dest, $overwrite = true)
 	{
 		if (stream_is_local($source) && !file_exists($source)) {
 			throw new Nette\IOException("File or directory '$source' not found.");
@@ -58,7 +58,7 @@ final class FileSystem
 
 		} else {
 			static::createDir(dirname($dest));
-			if (($s = @fopen($source, 'rb')) && ($d = @fopen($dest, 'wb')) && @stream_copy_to_stream($s, $d) === false) { // @ is escalated to exception
+			if (@stream_copy_to_stream(fopen($source, 'r'), fopen($dest, 'w')) === false) { // @ is escalated to exception
 				throw new Nette\IOException("Unable to copy file '$source' to '$dest'. " . self::getLastError());
 			}
 		}
@@ -67,9 +67,10 @@ final class FileSystem
 
 	/**
 	 * Deletes a file or directory.
+	 * @return void
 	 * @throws Nette\IOException
 	 */
-	public static function delete(string $path): void
+	public static function delete($path)
 	{
 		if (is_file($path) || is_link($path)) {
 			$func = DIRECTORY_SEPARATOR === '\\' && is_dir($path) ? 'rmdir' : 'unlink';
@@ -90,10 +91,11 @@ final class FileSystem
 
 	/**
 	 * Renames a file or directory.
+	 * @return void
 	 * @throws Nette\IOException
 	 * @throws Nette\InvalidStateException if the target file or directory already exist
 	 */
-	public static function rename(string $name, string $newName, bool $overwrite = true): void
+	public static function rename($name, $newName, $overwrite = true)
 	{
 		if (!$overwrite && file_exists($newName)) {
 			throw new Nette\InvalidStateException("File or directory '$newName' already exists.");
@@ -115,9 +117,10 @@ final class FileSystem
 
 	/**
 	 * Reads file content.
+	 * @return string
 	 * @throws Nette\IOException
 	 */
-	public static function read(string $file): string
+	public static function read($file)
 	{
 		$content = @file_get_contents($file); // @ is escalated to exception
 		if ($content === false) {
@@ -129,9 +132,10 @@ final class FileSystem
 
 	/**
 	 * Writes a string to a file.
+	 * @return void
 	 * @throws Nette\IOException
 	 */
-	public static function write(string $file, string $content, ?int $mode = 0666): void
+	public static function write($file, $content, $mode = 0666)
 	{
 		static::createDir(dirname($file));
 		if (@file_put_contents($file, $content) === false) { // @ is escalated to exception
@@ -145,14 +149,15 @@ final class FileSystem
 
 	/**
 	 * Is path absolute?
+	 * @return bool
 	 */
-	public static function isAbsolute(string $path): bool
+	public static function isAbsolute($path)
 	{
 		return (bool) preg_match('#([a-z]:)?[/\\\\]|[a-z][a-z0-9+.-]*://#Ai', $path);
 	}
 
 
-	private static function getLastError(): string
+	private static function getLastError()
 	{
 		return preg_replace('#^\w+\(.*?\): #', '', error_get_last()['message']);
 	}

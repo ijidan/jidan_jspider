@@ -5,8 +5,6 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Utils;
 
 use Nette;
@@ -19,9 +17,11 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 {
 
 	/**
+	 * @param  array to wrap
+	 * @param  bool
 	 * @return static
 	 */
-	public static function from(array $arr, bool $recursive = true)
+	public static function from($arr, $recursive = true)
 	{
 		$obj = new static;
 		foreach ($arr as $key => $value) {
@@ -37,8 +37,9 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 
 	/**
 	 * Returns an iterator over all items.
+	 * @return \RecursiveArrayIterator
 	 */
-	public function getIterator(): \RecursiveArrayIterator
+	public function getIterator()
 	{
 		return new \RecursiveArrayIterator((array) $this);
 	}
@@ -46,8 +47,9 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 
 	/**
 	 * Returns items count.
+	 * @return int
 	 */
-	public function count(): int
+	public function count()
 	{
 		return count((array) $this);
 	}
@@ -55,8 +57,9 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 
 	/**
 	 * Replaces or appends a item.
+	 * @return void
 	 */
-	public function offsetSet($key, $value): void
+	public function offsetSet($key, $value)
 	{
 		if (!is_scalar($key)) { // prevents null
 			throw new Nette\InvalidArgumentException(sprintf('Key must be either a string or an integer, %s given.', gettype($key)));
@@ -77,8 +80,9 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 
 	/**
 	 * Determines whether a item exists.
+	 * @return bool
 	 */
-	public function offsetExists($key): bool
+	public function offsetExists($key)
 	{
 		return isset($this->$key);
 	}
@@ -86,8 +90,9 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 
 	/**
 	 * Removes the element from this list.
+	 * @return void
 	 */
-	public function offsetUnset($key): void
+	public function offsetUnset($key)
 	{
 		unset($this->$key);
 	}

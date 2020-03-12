@@ -7,7 +7,7 @@ use Curl\Decoder;
 
 class Curl
 {
-    const VERSION = '8.6.1';
+    const VERSION = '8.7.0';
     const DEFAULT_TIMEOUT = 30;
 
     public $curl;
@@ -309,7 +309,7 @@ class Curl
             if (is_file($download_filename) && $filesize = filesize($download_filename)) {
                 $first_byte_position = $filesize;
                 $range = $first_byte_position . '-';
-                $this->setOpt(CURLOPT_RANGE, $range);
+                $this->setRange($range);
                 $this->fileHandle = fopen($download_filename, 'ab');
             } else {
                 $this->fileHandle = fopen($download_filename, 'wb');
@@ -326,7 +326,7 @@ class Curl
             };
         }
 
-        $this->setOpt(CURLOPT_FILE, $this->fileHandle);
+        $this->setFile($this->fileHandle);
         $this->get($url);
 
         return ! $this->error;
@@ -926,6 +926,17 @@ class Curl
     }
 
     /**
+     * Set File
+     *
+     * @access public
+     * @param  $file
+     */
+    public function setFile($file)
+    {
+        $this->setOpt(CURLOPT_FILE, $file);
+    }
+
+    /**
      * Set Header
      *
      * Add extra header to include in the request.
@@ -1113,6 +1124,17 @@ class Curl
     }
 
     /**
+     * Set Range
+     *
+     * @access public
+     * @param  $range
+     */
+    public function setRange($range)
+    {
+        $this->setOpt(CURLOPT_RANGE, $range);
+    }
+
+    /**
      * Set Referer
      *
      * @access public
@@ -1274,8 +1296,15 @@ class Curl
      * @param  bool $on
      * @param  resource $output
      */
-    public function verbose($on = true, $output = STDERR)
+    public function verbose($on = true, $output = 'STDERR')
     {
+        if ($output === 'STDERR') {
+            if (!defined('STDERR')) {
+                define('STDERR', fopen('php://stderr', 'wb'));
+            }
+            $output = STDERR;
+        }
+
         // Turn off CURLINFO_HEADER_OUT for verbose to work. This has the side
         // effect of causing Curl::requestHeaders to be empty.
         if ($on) {
@@ -1586,7 +1615,7 @@ class Curl
 
         // Reset CURLOPT_FILE with STDOUT to avoid: "curl_exec(): CURLOPT_FILE
         // resource has gone away, resetting to default".
-        $this->setOpt(CURLOPT_FILE, STDOUT);
+        $this->setFile(STDOUT);
 
         // Reset CURLOPT_RETURNTRANSFER to tell cURL to return subsequent
         // responses as the return value of curl_exec(). Without this,

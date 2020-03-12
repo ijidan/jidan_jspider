@@ -25,16 +25,17 @@
         "phpoffice/phpspreadsheet": "^1.6",
         "wapmorgan/unified-archive": "^0.1.2",
         "naucon/file": "^1.0",
-        "akrabat/ip-address-middleware": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "aws/aws-sdk-php": "^3.92",
-        "jaeger/querylist": "^4.1",
         "jaeger/phpquery-single": "^1.0",
         "php-curl-class/php-curl-class": "^8.5",
         "shuber/curl": "^1.0",
-        "symfony/filesystem": "^4.2",
-        "symfony/dom-crawler": "^4.2",
-        "symfony/css-selector": "^4.2",
         "ralouphie/getallheaders": "^3.0"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        }
     }
 }
