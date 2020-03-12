@@ -97,6 +97,7 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'T' => 
         array (
             'Twig\\' => 5,
+            'Tools\\' => 6,
         ),
         'S' => 
         array (
@@ -137,6 +138,7 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         ),
         'L' => 
         array (
+            'Lib\\' => 4,
             'LayerShifter\\TLDSupport\\' => 24,
             'LayerShifter\\TLDExtract\\' => 24,
             'LayerShifter\\TLDDatabase\\' => 25,
@@ -175,6 +177,7 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'A' => 
         array (
             'Aws\\' => 4,
+            'App\\' => 4,
         ),
     );
 
@@ -194,6 +197,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'Tools\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Tools',
         ),
         'Symfony\\Polyfill\\Php72\\' => 
         array (
@@ -284,6 +291,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
+        'Lib\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib',
+        ),
         'LayerShifter\\TLDSupport\\' => 
         array (
             0 => __DIR__ . '/..' . '/layershifter/tld-support/src',
@@ -351,6 +362,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'Aws\\' => 
         array (
             0 => __DIR__ . '/..' . '/aws/aws-sdk-php/src',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/App',
         ),
     );
 

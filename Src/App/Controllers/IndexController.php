@@ -1,12 +1,7 @@
 <?php
 namespace App\Controllers;
 
-use App\Models\GameConst;
-use App\Models\User;
-use App\Models\UserAuth;
-use App\Models\UserDayRecentStatistics;
-use App\Models\UserGameRecentStatistics;
-use App\Models\UserStatistics;
+
 use App\Models\UserUtil;
 use Lib\BaseController;
 use Lib\Util\Config;
@@ -32,6 +27,7 @@ class IndexController extends BaseController
 	/**
 	 * 获取用户登录信息
 	 * @return array
+	 * @throws \Exception
 	 */
     protected function getUserInfo()
     {

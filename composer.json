@@ -1,41 +1,48 @@
 {
-    "name": "jidan/j-spider",
-    "require": {
-        "php": ">=5.6",
-        "slim/slim": "3.5.0",
-        "monolog/monolog": "1.21.0",
-        "slim/php-view": "2.1.0",
-        "respect/validation": "1.0.5",
-        "dflydev/fig-cookies": "v1.0.2",
-        "geoip2/geoip2": "~2.0",
-        "phpmailer/phpmailer": "~5.2",
-        "mustache/mustache": "~2.5",
-        "slim/pdo": "~1.9",
-        "codeguy/upload": "^1.3",
-        "slim/middleware": "^1.0",
-        "gregwar/captcha": "1.*",
-        "gregwar/image": "2.*",
-        "mobiledetect/mobiledetectlib": "^2.8",
-        "layershifter/tld-extract": "*",
-        "slim/csrf": "*",
-        "malkusch/lock": "^1.0",
-        "slim/twig-view": "^2.2",
-        "workerman/gateway-worker" : ">=3.0.0",
-        "nette/caching": "^2.5",
-        "phpoffice/phpspreadsheet": "^1.6",
-        "wapmorgan/unified-archive": "^0.1.2",
-        "naucon/file": "^1.0",
-        "guzzlehttp/guzzle": "^6.3",
-        "aws/aws-sdk-php": "^3.92",
-        "jaeger/phpquery-single": "^1.0",
-        "php-curl-class/php-curl-class": "^8.5",
-        "shuber/curl": "^1.0",
-        "ralouphie/getallheaders": "^3.0"
-    },
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://mirrors.aliyun.com/composer/"
-        }
-    }
+  "name":"jidan/j-spider",
+  "require":{
+	"php":">=5.6",
+	"slim/slim":"3.5.0",
+	"monolog/monolog":"1.21.0",
+	"slim/php-view":"2.1.0",
+	"respect/validation":"1.0.5",
+	"dflydev/fig-cookies":"v1.0.2",
+	"geoip2/geoip2":"~2.0",
+	"phpmailer/phpmailer":"~5.2",
+	"mustache/mustache":"~2.5",
+	"slim/pdo":"~1.9",
+	"codeguy/upload":"^1.3",
+	"slim/middleware":"^1.0",
+	"gregwar/captcha":"1.*",
+	"gregwar/image":"2.*",
+	"mobiledetect/mobiledetectlib":"^2.8",
+	"layershifter/tld-extract":"*",
+	"slim/csrf":"*",
+	"malkusch/lock":"^1.0",
+	"slim/twig-view":"^2.2",
+	"workerman/gateway-worker":">=3.0.0",
+	"nette/caching":"^2.5",
+	"phpoffice/phpspreadsheet":"^1.6",
+	"wapmorgan/unified-archive":"^0.1.2",
+	"naucon/file":"^1.0",
+	"guzzlehttp/guzzle":"^6.3",
+	"aws/aws-sdk-php":"^3.92",
+	"jaeger/phpquery-single":"^1.0",
+	"php-curl-class/php-curl-class":"^8.5",
+	"shuber/curl":"^1.0",
+	"ralouphie/getallheaders":"^3.0"
+  },
+  "autoload":{
+	"psr-4":{
+	  "App\\":"src\\App",
+	  "Tools\\":"src\\Tools",
+	  "Lib\\":"lib"
+	}
+  },
+  "repositories":{
+	"packagist":{
+	  "type":"composer",
+	  "url":"https://mirrors.aliyun.com/composer/"
+	}
+  }
 }

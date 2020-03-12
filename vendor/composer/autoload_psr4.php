@@ -10,6 +10,7 @@ return array(
     'malkusch\\lock\\' => array($vendorDir . '/malkusch/lock/classes'),
     'Workerman\\' => array($vendorDir . '/workerman/workerman'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
+    'Tools\\' => array($baseDir . '/src/Tools'),
     'Symfony\\Polyfill\\Php72\\' => array($vendorDir . '/symfony/polyfill-php72'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Intl\\Idn\\' => array($vendorDir . '/symfony/polyfill-intl-idn'),
@@ -32,6 +33,7 @@ return array(
     'MaxMind\\Exception\\' => array($vendorDir . '/maxmind/web-service-common/src/Exception'),
     'MaxMind\\Db\\' => array($vendorDir . '/maxmind-db/reader/src/MaxMind/Db'),
     'Matrix\\' => array($vendorDir . '/markbaker/matrix/classes/src'),
+    'Lib\\' => array($baseDir . '/lib'),
     'LayerShifter\\TLDSupport\\' => array($vendorDir . '/layershifter/tld-support/src'),
     'LayerShifter\\TLDExtract\\' => array($vendorDir . '/layershifter/tld-extract/src'),
     'LayerShifter\\TLDDatabase\\' => array($vendorDir . '/layershifter/tld-database/src'),
@@ -49,4 +51,5 @@ return array(
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
+    'App\\' => array($baseDir . '/src/App'),
 );

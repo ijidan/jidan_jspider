@@ -2,13 +2,10 @@
 
 namespace App\Controllers;
 
-use DirectoryIterator;
-use Lib\Util\CommonUtil;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Tools\Models\Article;
 use Tools\Models\ArticleCategory;
-use Naucon\File\File;
 
 
 
@@ -21,35 +18,9 @@ class SiteController extends IndexController {
 	/**
 	 * 首页
 	 * @return mixed
-	 * @throws \Naucon\File\Exception\FileException
+	 * @throws \Exception
 	 */
 	public function index() {
-		set_time_limit(0);
-		$docsPath = BASE_DIR . DIRECTORY_SEPARATOR . "/docs/plush_toys";
-		$it = new DirectoryIterator($docsPath);
-		$idx=1;
-		$targetPath="/data/plush_toys";
-
-		foreach ($it as $file) {
-			if (!$file->isDot() && $file->isDir()) {
-				$pathName=$file->getPathname();
-				$fileName=$file->getFilename();
-				$operationPath=$pathName."/".$fileName."/主图";
-				$it_=new DirectoryIterator($operationPath);
-				foreach($it_ as $file_){
-					if($file_->isFile()) {
-						$path_=$file_->getPathname();
-						$fileObject = new File($path_);
-						$ext=$fileObject->getExtension();
-						$fullFileName=CommonUtil::fillZero($idx,5);
-						$fullName="SDP-PT-{$fullFileName}.{$ext}";
-						$fileObject->rename($fullName);
-						$fileObject->copy($targetPath);
-					}
-				}
-			}
-		}
-		dump("1", 1);
 		$businessList = [
 			[
 				"title"   => "MUA HÀNG TRỰC TUYẾN",
@@ -90,6 +61,7 @@ class SiteController extends IndexController {
 	/**
 	 * 报价
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function price() {
 		$categoryId = ArticleCategory::ARTICLE_CATEGORY_PRICE;
@@ -99,6 +71,7 @@ class SiteController extends IndexController {
 	/**
 	 * 协议
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function agreement() {
 		$categoryId = ArticleCategory::ARTICLE_CATEGORY_AGREEMENT;
@@ -108,6 +81,7 @@ class SiteController extends IndexController {
 	/**
 	 * 介绍
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function introduction() {
 		$categoryId = ArticleCategory::ARTICLE_CATEGORY_INTRODUCTION;
@@ -118,6 +92,7 @@ class SiteController extends IndexController {
 	 * 容器
 	 * @param $categoryId
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	private function getArticleContainer($categoryId) {
 		return $this->renderTemplate("site/content", ["categoryId" => $categoryId]);

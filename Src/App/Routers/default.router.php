@@ -16,5 +16,4 @@ $app->group('', function () use ($app) {
 
 //统一处理session
 $app->add(new \App\Middlewares\SessionMiddleware());
-$app->add(new \RKA\Middleware\IpAddress(true));
 //$app->add(new \App\Middlewares\CaseInsensitiveMiddleware());
