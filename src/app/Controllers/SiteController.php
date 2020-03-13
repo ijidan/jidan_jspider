@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use Business\ULu;
+use Lib\Http\UserAgent;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Tools\Models\Article;
@@ -21,6 +23,8 @@ class SiteController extends IndexController {
 	 * @throws \Exception
 	 */
 	public function index() {
+		$data=ULu::crawlDetail('737974129');
+		dump($data,1);
 		$businessList = [
 			[
 				"title"   => "MUA HÀNG TRỰC TUYẾN",
@@ -98,29 +102,4 @@ class SiteController extends IndexController {
 		return $this->renderTemplate("site/content", ["categoryId" => $categoryId]);
 	}
 
-	/**
-	 * 文章内容
-	 * @param Request $request
-	 * @param Response $response
-	 * @param array $params
-	 * @return mixed
-	 */
-	public function richText(Request $request, Response $response, array $params) {
-		$categoryId = $params["category_id"];
-		$content = $this->findArticleContent($categoryId);
-		return $this->renderTemplate("site/rich_text", ["article" => $content]);
-	}
-
-	/**
-	 * 获取文章内容
-	 * @param $categoryId
-	 * @return mixed
-	 */
-	private function findArticleContent($categoryId) {
-		$category = ArticleCategory::findByCategoryKey($categoryId);
-		$categoryId = $category["id"];
-		$article = Article::findOne("category_id=?", [$categoryId]);
-		$content = $article["content"];
-		return $content;
-	}
 }

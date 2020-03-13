@@ -1,8 +1,8 @@
 <?php
 
-namespace Service;
+namespace Lib\Net;
 
-use Lib\Net\Request;
+
 use Lib\Util\Config;
 
 /**

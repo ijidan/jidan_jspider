@@ -1,14 +1,14 @@
 <?php
-namespace Models;
+namespace Model;
 
 use Lib\BaseModel;
 
 /**
- * 用户
+ * 用户表
  * Class User
  * @package Models
  */
-class Session extends BaseModel {
+class User extends BaseModel {
 	/**
 	 * 表前缀
 	 * @return string

@@ -29,6 +29,7 @@ return array(
     'Naucon\\Utility\\' => array($vendorDir . '/naucon/utility/src'),
     'Naucon\\File\\' => array($vendorDir . '/naucon/file/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Model\\' => array($baseDir . '/model'),
     'MaxMind\\WebService\\' => array($vendorDir . '/maxmind/web-service-common/src/WebService'),
     'MaxMind\\Exception\\' => array($vendorDir . '/maxmind/web-service-common/src/Exception'),
     'MaxMind\\Db\\' => array($vendorDir . '/maxmind-db/reader/src/MaxMind/Db'),
@@ -50,6 +51,7 @@ return array(
     'Curl\\' => array($vendorDir . '/php-curl-class/php-curl-class/src/Curl'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
+    'Business\\' => array($baseDir . '/business'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
     'App\\' => array($baseDir . '/src/App'),
 );

@@ -2,7 +2,7 @@
 
 namespace Lib\Session;
 
-use Lib\MC;
+use Lib\Cache\MC;
 
 /**
  * Memcached Session 支持

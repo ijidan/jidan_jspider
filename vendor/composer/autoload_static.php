@@ -131,6 +131,7 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Model\\' => 6,
             'MaxMind\\WebService\\' => 19,
             'MaxMind\\Exception\\' => 18,
             'MaxMind\\Db\\' => 11,
@@ -173,6 +174,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
             'Curl\\' => 5,
             'Composer\\CaBundle\\' => 18,
             'Complex\\' => 8,
+        ),
+        'B' => 
+        array (
+            'Business\\' => 9,
         ),
         'A' => 
         array (
@@ -275,6 +280,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Model\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/model',
+        ),
         'MaxMind\\WebService\\' => 
         array (
             0 => __DIR__ . '/..' . '/maxmind/web-service-common/src/WebService',
@@ -358,6 +367,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
+        ),
+        'Business\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/business',
         ),
         'Aws\\' => 
         array (

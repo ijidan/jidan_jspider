@@ -36,7 +36,9 @@
 	"psr-4":{
 	  "App\\":"src\\App",
 	  "Tools\\":"src\\Tools",
-	  "Lib\\":"lib"
+	  "Lib\\":"lib",
+	  "Model\\":"model",
+	  "Business\\":"business"
 	}
   },
   "repositories":{

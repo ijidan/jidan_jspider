@@ -1,12 +1,12 @@
 <?php
 
-namespace Lib\Util;
+namespace Business;
 
 use League\Flysystem\FileNotFoundException;
+use Lib\Util\CommonUtil;
 use Symfony\Component\Console\Output\OutputInterface;
 use League\Csv\Writer;
 use Curl\Curl;
-use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Filesystem\Filesystem;
 use Tools\Models\SdGBProduct;
 
@@ -16,7 +16,7 @@ use Tools\Models\SdGBProduct;
  * Class GearBestUtil
  * @package Lib\Util
  */
-class GearBestUtil {
+class GearBest {
 
 	const GB_URL = "https://www.gearbest.com/";
 	const TEXT_SYMBOL = "_text";
@@ -281,7 +281,6 @@ class GearBestUtil {
 	 * 提取数据
 	 * @param $content
 	 * @param $express
-	 * @param $attr
 	 * @return array|mixed
 	 */
 	public static function computeData($content, $express, $attr) {
