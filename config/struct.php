@@ -2,7 +2,7 @@
 
 $cdnUrl="http://cdn.smiledeer.com";
 $appCdnUrl=$cdnUrl."/app";
-$toolsCdnUrl=$cdnUrl."tools";
+$toolsCdnUrl=$cdnUrl."/tools";
 return [
 	'server_url' => 'http://www.smiledeer.com/',
 	'manager_url' => 'http://http://manager.smiledeer.com/',

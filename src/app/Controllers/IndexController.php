@@ -186,15 +186,11 @@ class IndexController extends BaseController
         $cdnUrlTools=$struct['cdn_url_tools'];
         $userInfo = $this->getUserInfo();
         $languageList = $this->getLanguage($selected);
-        $text = Config::loadI18n($selected, 'page');
-        
+
         $tplData = [
             'cdnUrlApp'     => $cdnUrlApp,
             'cdnUrlTools'     => $cdnUrlTools,
-            'text'           => $text,
-            'stringText'     => rawurlencode(json_encode($text)),
             'language'       => $languageList,
-            'stringLanguage' => rawurlencode(json_encode($languageList)),
             'uInfo'          => $userInfo,
             'stringUInfo'    => rawurlencode(json_encode($userInfo)),
             "serverTime"     => time()
