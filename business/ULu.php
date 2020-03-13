@@ -16,8 +16,11 @@ class ULu extends BaseCrawl {
 	const BASE_URL = "https://www.uoolu.com/";
 
 	public static function crawlDetail($id, OutputInterface $output=null) {
-		$url=self::BASE_URL.'house-'.$id.'.html';
-		$content=BaseService::sendGetRequest($url);
-		pr($content,1);
+		$url=self::BASE_URL.'house/rim_data/'.$id;
+		$rsp=BaseService::sendGetRequest($url);
+		$content=$rsp->success() ? $rsp->getData():'';
+		$markList=str_replace('var marklist=','',$content);
+		$markList=\json_decode($markList,true);
+		pr($markList,1);
 	}
 }

@@ -197,8 +197,9 @@ class Request {
 			} else {
 				$contents = $response->getBody()->getContents();
 				$result = json_decode($contents, true);
+				$lastError=json_last_error();
 				//判断是否JSON
-				if (json_last_error() == JSON_ERROR_NONE) {
+				if (json_last_error() == JSON_ERROR_NONE && $result) {
 					if (isset($result['code']) && $result['code']) {
 						$message = $this->getMessage($result);
 						//记录日志
