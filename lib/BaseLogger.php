@@ -29,6 +29,8 @@ class BaseLogger
 	const CHANNEL_USER_BOX = "user_box";
 	const CHANNEL_PHONE_CODE = "phone_code";
 
+	const CHANNEL_SPIDER_CACHE="spider_cache";
+
 	//日志记录至数据库
 	const DB = 'logger';
 	const DB_COLLECTION = 'logger';
@@ -44,10 +46,11 @@ class BaseLogger
 	/**
 	 * 实例
 	 * @param $channel
+	 * @param string $fileName
 	 * @return Logger
 	 * @throws \Exception
 	 */
-    public static function instance($channel)
+    public static function instance($channel,$fileName='')
     {
         $level = Logger::INFO;
         //存Mongo
@@ -57,7 +60,10 @@ class BaseLogger
         //$mongodb = BaseModel::dbInstance($dbKey);
         //$mongodbHandler = new MongoDBHandler($mongodb, $database, $collection, $level);
         //存文件
-        $file = BASE_DIR . '/storage/' . $channel .'/' . date('Y-m-d') . '.log';
+	    if(!$fileName){
+	    	$fileName=$channel .'/' . date('Y-m-d') . '.log';
+	    }
+        $file = BASE_DIR . '/storage/' . $fileName;
         $streamHandler = new StreamHandler($file, $level);
         $streamHandler->setFormatter(new JsonFormatter());
         //初始化Logger

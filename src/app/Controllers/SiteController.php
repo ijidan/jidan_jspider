@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use Business\KuaiDaiLi;
 use Business\ULu;
+use Business\WaiGF;
 use Lib\Http\UserAgent;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -23,7 +25,18 @@ class SiteController extends IndexController {
 	 * @throws \Exception
 	 */
 	public function index() {
-		$data=ULu::crawlDetail('737974129');
+		$wf=new WaiGF();
+//		$data=$wf->crawlCountryCity();
+//		$data=$wf->crawlPageCnt('/newhouselist_t1016_a0_m0_j0_o1.html');
+//		$data=$wf->crawAllId();
+		$id=36560;
+		$data=$wf->crawlDetail($id);
+		dump($data,1);
+		$obj= new ULu();
+		$id='563940838';
+		$detail=$obj->crawlDetail($id);
+		dump($detail,1);
+		$data=(new ULu())->crawlLocationRound($id);
 		dump($data,1);
 		$businessList = [
 			[

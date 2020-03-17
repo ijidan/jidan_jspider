@@ -7,6 +7,7 @@ use Lib\Util\CommonUtil;
 use Symfony\Component\Console\Output\OutputInterface;
 use League\Csv\Writer;
 use Curl\Curl;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Filesystem\Filesystem;
 use Tools\Models\SdGBProduct;
 

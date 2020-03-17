@@ -175,7 +175,7 @@ class Request {
 					$config = array_merge($this->guzzleHttpConfig, ['query' => $this->params]);
 					$link = $this->url . "?" . http_build_query($this->params);
 					$link = urldecode($link);
-					//pr($link,1);
+					//pr($link,$config,1);
 					$response = $httpClient->get($this->url, $config);
 					break;
 				case self::METHOD_POST:
@@ -189,42 +189,30 @@ class Request {
 			/** @var \GuzzleHttp\Psr7\Response $response */
 			$statusCode = $response->getStatusCode();
 			$message = $response->getReasonPhrase();
-
 			if ($statusCode != Response::HTTP_STATUS_CODE_SUCCESS) {
 				//记录日志
 				$this->addLog($statusCode, "", $message);
 				$response = new Response(RetCode::REQ_FAIL, $message, []);
 			} else {
 				$contents = $response->getBody()->getContents();
+				//记录日志
+				$this->addLog($statusCode, $contents, "请求成功");
 				$result = json_decode($contents, true);
-				$lastError=json_last_error();
 				//判断是否JSON
 				if (json_last_error() == JSON_ERROR_NONE && $result) {
-					if (isset($result['code']) && $result['code']) {
-						$message = $this->getMessage($result);
-						//记录日志
-						$this->addLog($statusCode, $contents, $message);
-						$response = new Response(RetCode::JSON_PARSE_FAIL, $message, $result);
-					} else {
-						$data = $result['data'] ?: [];
-						if ($result["code"] != RetCode::SUCCESS) {
-							//记录日志
-							$this->addLog($statusCode, $data, "请求成功，返回错误码");
-
-							$message = $this->getMessage($result);
+					if (isset($result['code'])) {
+						if ($result['code'] == RetCode::SUCCESS) {
+							$data = isset($result['data']) ? $result['data'] : [];
 							$response = new Response(RetCode::UNKNOWN, '', $data, $message);
 						} else {
-							if (NOW < strtotime("20170814 16:00")) {
-								$this->addLog($statusCode, $data, $message, "addInfo");
-							}
-
-							$message = $this->getMessage($result);
-							$response = new Response(RetCode::SUCCESS, '', $data, $message);
+							//记录日志
+							$response = new Response(RetCode::JSON_PARSE_FAIL, $message, $result);
 						}
+					} else {
+						$response = new Response(RetCode::SUCCESS, 'JSON格式', $contents, $message);
 					}
-
 				} else {
-					$response = new Response(RetCode::SUCCESS, '非JSON', $contents, $message);
+					$response = new Response(RetCode::SUCCESS, '非JSON格式', $contents, $message);
 				}
 			}
 		} catch (\Exception $e) {

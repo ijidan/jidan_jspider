@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">        <title>曼谷房产信息_泰国曼谷买房_泰国曼谷房价_外国买房网</title>     <meta name="keywords" content="泰国曼谷房产信息,曼谷房产,曼谷买房,曼谷购房,曼谷买房移民" />
+    <meta name="description" content="外国买房网为您提供全面的泰国曼谷房产信息，是曼谷房产投资、移民、留学首选的曼谷房产网站。" />
+        <script type="text/javascript" src="/skins2019/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/skins2019/js/swiper.min.js"></script>
+<script type="text/javascript" src="/skins2019/layer/layer.js"></script>
+<script type="text/javascript" src="/skins2019/js/wow.js"></script>
+<link rel="stylesheet" href="/skins2019/css/swiper.min.css" />
+<link rel="stylesheet" href="/skins2019/css/animate.css" />
+<link rel="stylesheet" href="/skins2019/css/style.css" />
+<script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+<script type="text/javascript" src="/js/scrollLoad.js"></script>
+<link rel='image_src' href='/img/wgf_logo.png?v=2016' />
+<!--[if lt IE 8]>
+<link href="css/IE6_style.css" rel="stylesheet" type="text/css" />
+  <div id="bodyMask2" class="browser-mask"></div>
+    <div class='browser-box'>
+        <h2>噢，您是否知道您正在使用的浏览器无法完全支持我们的页面？</h2>
+        <h3>很抱歉，由于您当前浏览器是IE6版本无法完美呈现该页面。</h3>
+        <div>
+            <span>如果你还不知道什么是HTML5标准，请看<a href="http://zh.wikipedia.org/wiki/HTML5" target='_blank'>维基百科</a>。</span>建议您使用以下浏览器的最新版本：
+        </div>
+        <ul>
+            <li><a class="ico icoChrome" title='谷歌Chrome浏览器' href="http://www.google.cn/chrome/browser/desktop/index.html" target='_blank'></a></li>
+            <li><a class="ico icoOpera" title='Opera浏览器' href="http://www.opera.com/" target='_blank'></a></li>
+            <li><a class="ico icoFirefox" title='火狐浏览器' href="http://www.firefox.com.cn/download/" target='_blank'></a></li>
+            <li><a class="ico icoSafar" title='Safar浏览器' href="http://www.apple.com.cn/safari/download/" target='_blank'></a></li>
+        </UL>
+
+        <p><a class="ico icoGt" href="http://www.microsoft.com/zh-cn/download/internet-explorer-8-details.aspx">升级IE浏览器</a></p>
+        </div>
+ <![endif]-->
+        <script>
+			var menu = 2;
+		</script>
+</head>
+<body>
+<img src="/img/wgf_logo.png" style="display: none;" data-pinit="registered" alt="海外房产_海外房产投资_国外房产_海外房产网_外房 | 外国买房网">
+<!--top_line-->
+<div id="top_line">
+    <div class="w1200">
+        <div class="wleft">
+            <a href="/usa/" class="usa" target="_blank">美国</a>
+            <a href="/thai/" class="thailand" target="_blank">泰国</a>
+            <a href="/country_c2025.html" target="_blank" class="jap"><i class="iconfont">&#xe605;</i>日本</a>
+            <a href="/greece.html" class="greece" target="_blank">希腊</a>
+            <a href="/turkey.html" class="turkey" target="_blank">土耳其</a>
+            <a href="/country_c6089.html" class="yuenan" target="_blank">越南</a>
+            <a href="//m.waigf.com/" class="f18" target="_blank"><i class="iconfont">&#xe633;</i>手机版</a>
+            <span class="tel_num"><i class="iconfont">&#xe621;</i>400-082-8015</span>
+            <span class="f20 hovercode">
+                <i class="iconfont">&#xe679;</i>置业顾问
+                <div class="top_code">
+                    <img src="/skins2019/img/cai_weicat_01.jpg" />
+                    <img src="/skins2019/img/cai_weicat_02.jpg" />
+                    <img src="/skins2019/img/cai_weicat_03.jpg" />
+                    <img src="/skins2019/img/cai_weicat_04.jpg" />
+                    <img src="/skins2019/img/cai_weicat_05.jpg" />
+                </div>
+            </span>
+            
+        </div>
+        <div class="wright">
+            <span class="f20 hovercode">
+                <i class="iconfont">&#xe679;</i>微信
+                <div class="top_code"><img src="/skins2019/img/footcode.png" /></div>
+            </span>
+            <a href="#" class="top_login_btn"><i class="iconfont">&#xe608;</i>登录</a>
+            <a href="#" class="top_reg_btn"><i class="iconfont">&#xe683;</i>注册</a>          
+            <!--已经登录状态-移除登录按钮 start-->
+            <div class="top_signin_btn" style="display:none;">
+                <div class="username"><a href="/Member/" target="_blank"><i class="iconfont">&#xe608;</i></a> <i class="iconfont arrow">&#xecf1;</i></div>
+                <div class="user_tools">
+                    <a href="/Member/userInfo.html" target="_blank">个人信息</a>
+                    <a href="/Member/news.html" target="_blank">发布新闻</a>
+                    <a href="/Member/house1.html" target="_blank">发布新房</a>
+                    <a href="/Member/house.html" target="_blank">发布二手房</a>
+                    <a href="/Member/yimin.html" target="_blank">发布移民</a>
+                    <a href="/Member/collect.html" target="_blank">收藏</a>
+                    <a href="/Member/shopfeedback.html" target="_blank">中介留言</a>
+                    <a href="/shop/default_${User.Id}.html" target="_blank">查看中介</a>
+                    <a href="/Member/usersmessage.html" target="_blank">站内短信</a>
+                    <a href="/Member/logout.html" class="quit">退出</a>
+                </div>
+            </div>
+            <!--已经登录状态-移除登录按钮 end-->
+        </div>
+    </div>
+</div>
+
+<!--header-->
+<div id="header">
+    <div class="logo">
+        <a href="/" title="外国买房网">
+            <img src="/skins2019/img/logo.jpg" alt="外国买房网" />
+        </a>
+    </div>
+    <div id="nav">
+        <ul>
+            <li><a href="/" target="_blank">首 页</a><i></i></li>
+            <li><a href="/news.html" target="_blank">外房资讯</a><i></i></li>
+            <li><a href="/newhouse.html" target="_blank">海外房产</a><i></i></li>
+            <li><a href="/secondhouse.html" target="_blank">二手房 </a><i></i></li>
+            <li><a href="/immigrant.html" target="_blank">移民</a><i></i></li>
+            <li><a href="/overseas.html" target="_blank">留学/投资</a><i></i></li>
+            <li><a href="/exhibtion.html" target="_blank">展会</a><i></i></li>
+            <li><a href="/agent.html" target="_blank">经纪人</a><i></i></li>
+        </ul>
+    </div>
+</div>
+<!--header-->
+    
+<!--nybanner-->
+<div id="nybanner" class="newhouse">
+	<div class="w">
+        <b>搜索曼谷房产</b><form method="get" name="frmsearch" action="/search" target="_blank" onsubmit="return checksearch()"><input type="hidden" name="t" value="newhouse" />
+		<div class="house_search">
+			<input type="text" name="p" id="p" placeholder="请输入搜索关键字 如：清迈稀缺精品养老公寓"/>
+			<input type="submit" value="搜索房源" />
+		</div> </form>
+                   <div class="hot_search">
+                       <a href="/search/?t=newhouse&p=%E6%B3%B0%E5%9B%BD" target="_blank">泰国房产</a>
+                       <a href="/search/?t=newhouse&p=%E6%99%AE%E5%90%89%E5%B2%9B" target="_blank">普吉岛</a>
+                       <a href="/search/?t=newhouse&p=%E5%86%A0%E5%86%9B%E4%B9%8B%E9%97%A8" target="_blank">冠军之门</a>
+                       <a href="/search/?t=newhouse&p=%E6%B0%B4%E6%98%9F%E4%B9%8B%E5%9F%8E" target="_blank">水星之城</a>
+                       <a href="/search/?t=newhouse&p=utl" target="_blank">utl公寓</a>
+                   </div>
+                   <div class="banner_nav">
+                       <a href="/"><i class="iconfont">&#xe6a2;</i>外国买房网</a> &gt;<span><a href="/newhouse.html" title="环球新房">环球新房</a></span>&gt;	<a href='/newhouselist_t3_a0_m0_j0.html'>泰国</a> > <a href='/newhouselist_t1016_a0_m0_j0.html'>曼谷</a>                   </div>
+	</div>
+</div>
+<div class="shopnav2">
+    <ul>
+                <li><a href="/country_c3.html">泰国买房网 </a></li>
+        <li>|</li>
+        <li><a href="/news_c3.html">泰国新闻</a></li>
+        <li>|</li>
+        <li><a href="/newhouselist_t3_a0_m0_j0_o1.html">泰国房产</a></li>        <li>|</li>
+        <li><a href="/secondhouselist_t3_a0_m0_j0_o1.html" target="_blank">泰国二手房</a></li>         <li>|</li>
+        <li><a href="/immigrant_c3.html">泰国移民</a></li>        <li>|</li>
+        <li><a href="/overseas_c3_a3.html">泰国留学/投资</a></li>
+        <li>|</li>
+        <li><a href="/agent_c3.html">泰国房产经纪人</a></li>
+            </ul>
+</div><!--select tools-->
+<div id="select_tools">
+	<ul>
+        <li id="country_btn">
+            <span>热门国家</span><a href="/newhouselist_t0_a0_m0_j0_o1.html" class="all ">全部</a>
+                        <a href="/newhouselist_t3_a0_m0_j0_o1.html" data-id="3" class="active" >泰国</a>
+                        <a href="/newhouselist_t1_a0_m0_j0_o1.html" data-id="1">美国</a>
+                        <a href="/newhouselist_t4051_a0_m0_j0_o1.html" data-id="4051">希腊</a>
+                        <a href="/newhouselist_t6100_a0_m0_j0_o1.html" data-id="6100">土耳其</a>
+                        <a href="/newhouselist_t11_a0_m0_j0_o1.html" data-id="11">澳大利亚</a>
+                        <a href="/newhouselist_t12_a0_m0_j0_o1.html" data-id="12">英国</a>
+                        <a href="/newhouselist_t2025_a0_m0_j0_o1.html" data-id="2025">日本</a>
+                        <a href="/newhouselist_t3048_a0_m0_j0_o1.html" data-id="3048">加拿大</a>
+                        <a href="/newhouselist_t4064_a0_m0_j0_o1.html" data-id="4064">马来西亚</a>
+                        <a href="/newhouselist_t4067_a0_m0_j0_o1.html" data-id="4067">意大利</a>
+                        <a href="/newhouselist_t4070_a0_m0_j0_o1.html" data-id="4070">塞浦路斯</a>
+                        <a href="/newhouselist_t4071_a0_m0_j0_o1.html" data-id="4071">柬埔寨</a>
+                        <a href="/newhouselist_t4065_a0_m0_j0_o1.html" data-id="4065">阿联酋</a>
+                        <a href="/newhouselist_t4079_a0_m0_j0_o1.html" data-id="4079">韩国</a>
+                        <a href="/newhouselist_t6085_a0_m0_j0_o1.html" data-id="6085">菲律宾</a>
+                        <a href="/newhouselist_t6089_a0_m0_j0_o1.html" data-id="6089">越南</a>
+                        <a href="/newhouselist_t5083_a0_m0_j0_o1.html" data-id="5083">马尔代夫</a>
+                    </li>
+        <li id="country_area" class="active">
+           
+        </li>
+        <li>
+            <span>房屋总价</span>          
+            <a href="/newhouselist_t1016_a0_m0_j0_o1.html"  class="all active" >全部</a>
+            <a href="/newhouselist_t1016_a0_m0_j1_o1.html" title="" >100万以下</a>
+            <a href="/newhouselist_t1016_a0_m0_j2_o1.html" title="" >100万-300万</a>
+            <a href="/newhouselist_t1016_a0_m0_j3_o1.html" title="" >300万-500万</a>
+            <a href="/newhouselist_t1016_a0_m0_j4_o1.html" title="" >500万-700万</a>
+            <a href="/newhouselist_t1016_a0_m0_j5_o1.html" title="" >700万-900万</a>
+            <a href="/newhouselist_t1016_a0_m0_j6_o1.html" title="" >900万以上</a>
+        </li>
+        <li>
+            <span>房产面积</span>   
+         		<a href="/newhouselist_t1016_a0_m0_j0_o1.html" class="all active">全部</a>
+					<a href="/newhouselist_t1016_a0_m1_j0_o1.html" title="">100m<sup>2</sup>以下</a>
+					<a href="/newhouselist_t1016_a0_m2_j0_o1.html" title="">100-200m<sup>2</sup></a>
+					<a href="/newhouselist_t1016_a0_m3_j0_o1.html" title="">200-300m<sup>2</sup></a>
+					<a href="/newhouselist_t1016_a0_m4_j0_o1.html" title="">300m<sup>2</sup>以上</a>
+        </li>
+        <li>
+            <span>物业类型</span>          
+            <a href="/newhouselist_t1016_a0_m0_j0_o1.html"  class="all active" >全部</a>
+            <a href="/newhouselist_t1016_a1_m0_j0_o1.html" title="独栋别墅" >独栋别墅</a>
+            <a href="/newhouselist_t1016_a2_m0_j0_o1.html" title="联排别墅" >联排别墅</a>
+            <a href="/newhouselist_t1016_a3_m0_j0_o1.html" title="公寓" >公寓</a>
+            <a href="/newhouselist_t1016_a4_m0_j0_o1.html" title="酒店" >酒店</a>
+            <a href="/newhouselist_t1016_a6_m0_j0_o1.html" title="民宿" >民宿</a>
+            <a href="/newhouselist_t1016_a5_m0_j0_o1.html" title="其他" >其他</a>
+		</li>
+	</ul>
+</div>
+<div class="mainw">
+	<div class="main_left left_ntop">
+		<div class="sort_tools">
+			<span class="active">默认排序</span><span>价格</span><span>面积</span><span class="">更新时间</span><i></i>
+		</div>
+        <div class="house_list">
+            <!--1-->
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/36560.html" class="house_img">
+                    <img alt="曼谷·暹罗豪庭拉差达 - Siamese Exclusive Ratchada" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190322/2019322153913842.jpg" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/36560.html" class="name">曼谷·暹罗豪庭拉差达 - Siamese Exclusive Ratchada</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:11826
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>346 Ratchadaphisek Rd, Samsen Nok, Huai Khwang, Krung Thep Maha Nakhon 10310泰国
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：31-57m2 / 有车位
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(36560);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·暹罗豪庭拉差达 - Siamese Exclusive Ratchada',36560)" class="house_talk" data-title="曼谷·暹罗豪庭拉差达 - Siamese Exclusive Ratchada"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>70</b>万元
+                        <span>预计回报率：<b>5</b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/36527.html" class="house_img">
+                    <img alt="曼谷·Noble Revolve Ratchada 2" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190221/201922110151415.png" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/36527.html" class="name">曼谷·Noble Revolve Ratchada 2</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:11793
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>38 Ratchadaphisek Rd, Khwaeng Huai Khwang, Khet Huai Khwang, Krung Thep Maha Nakhon 10310泰国
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：22-52m2 / 有车位
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(36527);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·Noble Revolve Ratchada 2',36527)" class="house_talk" data-title="曼谷·Noble Revolve Ratchada 2"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>76</b>万元
+                        <span>预计回报率：<b>7</b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/36355.html" class="house_img">
+                    <img alt="曼谷·Noble BE 33公寓 - Sukhumvit 33" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190122/201912211493289.jpg" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/36355.html" class="name">曼谷·Noble BE 33公寓 - Sukhumvit 33</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:11621
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>泰国 Bangkok, Sukhumvit Rd, 202Sukhumvit soi 31Sukhumvit rd. Klongtonnua Wattana Bangkok 10110
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：34.25-76.82m2 / 有车位
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(36355);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·Noble BE 33公寓 - Sukhumvit 33',36355)" class="house_talk" data-title="曼谷·Noble BE 33公寓 - Sukhumvit 33"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>140</b>万元
+                        <span>预计回报率：<b>6</b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/34717.html" class="house_img">
+                    <img alt="曼谷·菁英公馆 - Niche MONO Ramkhamhaeng" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20181128/20181128141350220.png" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/34717.html" class="name">曼谷·菁英公馆 - Niche MONO Ramkhamhaeng</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:10983
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>泰国 Krung Thep Maha Nakhon, Ramkhamhaeng 36 Alley, 202邮政编码: 10240
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：28-51m2 / 有车位
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(34717);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·菁英公馆 - Niche MONO Ramkhamhaeng',34717)" class="house_talk" data-title="曼谷·菁英公馆 - Niche MONO Ramkhamhaeng"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>65</b>万元
+                        <span>预计回报率：<b></b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/30095.html" class="house_img">
+                    <img alt="曼谷·XT Huai Khwang公寓" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190527/201952793545557.jpg" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/30095.html" class="name">曼谷·XT Huai Khwang公寓</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:9363
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>Thanon Ratchadaphisek, Krung Thep Maha Nakhon, 泰国
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：27.75-60.00m2 / 有车位
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(30095);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·XT Huai Khwang公寓',30095)" class="house_talk" data-title="曼谷·XT Huai Khwang公寓"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>92</b>万元
+                        <span>预计回报率：<b>7</b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/34818.html" class="house_img">
+                    <img alt="曼谷·The Collection公寓" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20181205/2018125164727604.png" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/34818.html" class="name">曼谷·The Collection公寓</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:11078
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>ถนน รัชดาภิเษก - ซอย สุขุมวิท 16 Khlong Toei, Bangkok 10110泰国
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：33.91-138.40m2 / 271
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(34818);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·The Collection公寓',34818)" class="house_talk" data-title="曼谷·The Collection公寓"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>137</b>万元
+                        <span>预计回报率：<b>5</b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/34796.html" class="house_img">
+                    <img alt="曼谷·FYNN Asoke 中央公园" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20181204/2018124105122529.png" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/34796.html" class="name">曼谷·FYNN Asoke 中央公园</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:11066
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>Sukhumvit 10 Alley, Khwaeng Khlong Toei, Khet Khlong Toei, Krung Thep Maha Nakhon 10110泰国
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：30.27-105.64m2 / 有车位
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(34796);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·FYNN Asoke 中央公园',34796)" class="house_talk" data-title="曼谷·FYNN Asoke 中央公园"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>130</b>万元
+                        <span>预计回报率：<b></b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/33425.html" class="house_img">
+                    <img alt="曼谷·东方双子星 - Ideo Mobi Sukhumvit Eastpoint" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20181031/20181031103425958.png" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/33425.html" class="name">曼谷·东方双子星 - Ideo Mobi Sukhumvit Eastpoint</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:10685
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>Sukhumvit Rd, Khwaeng Bang Na, Khet Bang Na, Krung Thep Maha Nakhon 10260泰国
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：25-56m2 / 有车位
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(33425);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·东方双子星 - Ideo Mobi Sukhumvit Eastpoint',33425)" class="house_talk" data-title="曼谷·东方双子星 - Ideo Mobi Sukhumvit Eastpoint"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>49</b>万元
+                        <span>预计回报率：<b>6</b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/31208.html" class="house_img">
+                    <img alt="曼谷·财富公馆 - Level Condominium" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190527/201952795343237.jpg" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/31208.html" class="name">曼谷·财富公馆 - Level Condominium</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:9467
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>Soi Wat Srivaree Noi , Debaratana Road, Bang Chalong, Bang Phli District, Samut Prakan Province
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：29-42m2 / 有车位
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(31208);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·财富公馆 - Level Condominium',31208)" class="house_talk" data-title="曼谷·财富公馆 - Level Condominium"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>34</b>万元
+                        <span>预计回报率：<b>8</b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <div class="house_tab">
+                <a target="_blank" href="/newhouse/33337.html" class="house_img">
+                    <img alt="曼谷·星耀通罗 - The Room Sukhumvit 38" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190613/2019613171016344.png" />
+                </a>
+                <div class="house_txt">
+                    <a target="_blank" href="/newhouse/33337.html" class="name">曼谷·星耀通罗 - The Room Sukhumvit 38</a>
+                    <p>
+                        <i class="iconfont">&#xe6a6;</i>房屋编号:10584
+                    </p>
+                    <p class="address">
+                        <i class="iconfont">&#xe61a;</i>At Soi Sukhumvit 38 (soi Suntisuk)
+                    </p>
+                    <p>
+                        <i class="iconfont">&#xe6a2;</i>精装 / 公寓 / 面积：44-91m2 / 有车位
+                    </p>
+                    <p class="book_order">
+                        <a href="javascript:addnewcollect(33337);" class="house_book"><i class="iconfont">&#xe6e7;</i>加入收藏</a>
+                        <a href="javascript:zixun(2,'曼谷·星耀通罗 - The Room Sukhumvit 38',33337)" class="house_talk" data-title="曼谷·星耀通罗 - The Room Sukhumvit 38"><i class="iconfont">&#xe68d;</i>在线咨询</a>
+                    </p>
+                    <p class="house_agent">
+                                            </p>
+                    <div class="house_price">
+                        <b>224</b>万元
+                        <span>预计回报率：<b></b>%</span>
+                    </div>
+                </div>
+            </div>          
+                        <!--1-->
+            <!--page-->
+            <div id="pagefy">
+                <a disabled>首页</a>　<a disabled>上一页</a>  <a href="/newhouselist_t1016_a0_m0_j0_o1_p2.html">下一页</a>　<a href="/newhouselist_t1016_a0_m0_j0_o1_p243.html">尾页</a> <div class="info">页次：<input type="text" id="EnterGoFigure"  value="1"/> / 243　<button  class="InputJumpEvent" onclick='InputJumpEvent(243,1);function InputJumpEvent(){var e=document.getElementById("EnterGoFigure"),v=e.value;if(v>arguments[0]){alert("跳转数不能超出总页数！");}else if(v<=0){alert("跳转数必须大于 0 ！");}else if(v!=arguments[1]){top.location.href="/newhouselist_t1016_a0_m0_j0_o1_p"+v+".html"}else{};}'>GO</button></div>
+            </div>
+
+            <!--page-->
+        </div>
+	</div>
+	<!--right-->
+	<div class="main_right">
+		<div class="pro_right_tab">
+			<div class="title"><span><i class="iconfont">&#xe616;</i>热门评论</span><i class="line"></i></div>
+            <div class="Comments_rlist">
+    <ul>
+                <li>
+            <a href="/news/120687.html" target="_blank" title="新冠影响下，美国房市意外火爆，亚洲买家激增！">新冠影响下，美国房市意外火爆，亚洲买家激增！</a>
+            <p><b>美国佛罗里达商业地产：</b>房产是硬资产，尤其是美国的房产，疫情在全球各地蔓延，美国楼市的表现往往相当不错，而且通常不会受到股市的影响。</p>
+            <time>2020-03-09</time>
+        </li>  
+                <li>
+            <a href="/news/120653.html" target="_blank" title="投资日本房产，国人为何偏爱大阪房产？">投资日本房产，国人为何偏爱大阪房产？</a>
+            <p><b>13049424374：</b>这两年日本大阪的房子确实比东京的有竞争力，大阪房价上涨也是必然的趋势。</p>
+            <time>2020-03-04</time>
+        </li>  
+                <li>
+            <a href="/news/120657.html" target="_blank" title="疫情之下，房地产企业的「危」与「机」">疫情之下，房地产企业的「危」与「机」</a>
+            <p><b>SHADOW GLOBAL：</b>今年的房产哪有什么危，全是机了。大发展的年份。</p>
+            <time>2020-03-04</time>
+        </li>  
+            </ul>
+</div>		</div>	
+		
+		<!--相关新闻-->
+		<div class="pro_right_tab">
+			<div class="title"><span><i class="iconfont">&#xe669;</i>相关新闻</span><i class="line"></i><a href="hotnews.html">+MORE</a></div>
+			<div class="rnews_list">
+                <ul>
+
+                                        <li>
+                        <a target="_blank" href="/news/120678.html" title="泰国top10房地产开发商排名，来看看你知道几个？" class="r_news_title tran0">泰国top10房地产开发商排名，来看看你知道几个？</a>
+                        <time>2020-03-07</time>
+                    </li>
+                                        <li>
+                        <a target="_blank" href="/news/120666.html" title="未来可期，泰国房产将迎来新一轮暴增！" class="r_news_title tran0">未来可期，泰国房产将迎来新一轮暴增！</a>
+                        <time>2020-03-05</time>
+                    </li>
+                                        <li>
+                        <a target="_blank" href="/news/120665.html" title="泰国经济4.0，为什么泰国房产这么受欢迎？" class="r_news_title tran0">泰国经济4.0，为什么泰国房产这么受欢迎？</a>
+                        <time>2020-03-05</time>
+                    </li>
+                                        <li>
+                        <a target="_blank" href="/news/120660.html" title="疫情后，2020年泰国房产会有怎样的“变化”？" class="r_news_title tran0">疫情后，2020年泰国房产会有怎样的“变化”？</a>
+                        <time>2020-03-04</time>
+                    </li>
+                                        <li>
+                        <a target="_blank" href="/news/120618.html" title="疫情后经济，看2020泰国房产投资走向" class="r_news_title tran0">疫情后经济，看2020泰国房产投资走向</a>
+                        <time>2020-02-26</time>
+                    </li>
+                                        <li>
+                        <a target="_blank" href="/news/120612.html" title="2020年，泰国房产还有什么有利投资点？" class="r_news_title tran0">2020年，泰国房产还有什么有利投资点？</a>
+                        <time>2020-02-25</time>
+                    </li>
+                                        <li>
+                        <a target="_blank" href="/news/120604.html" title="【投资指南】一张图详解泰国曼谷地铁沿线区域分布" class="r_news_title tran0">【投资指南】一张图详解泰国曼谷地铁沿线区域分布</a>
+                        <time>2020-02-23</time>
+                    </li>
+                                        <li>
+                        <a target="_blank" href="/news/120603.html" title="疫情当道，你的资产配置了吗？晒晒你的"睡后收入"" class="r_news_title tran0">疫情当道，你的资产配置了吗？晒晒你的"睡后收入"</a>
+                        <time>2020-02-23</time>
+                    </li>
+                                        <li>
+                        <a target="_blank" href="/news/120602.html" title="2020年泰国房市稳定，整体经济预计增长7％！" class="r_news_title tran0">2020年泰国房市稳定，整体经济预计增长7％！</a>
+                        <time>2020-02-22</time>
+                    </li>
+                                        <li>
+                        <a target="_blank" href="/news/120592.html" title="专家预测：泰国房地产市场今年将增长5%-7%" class="r_news_title tran0">专家预测：泰国房地产市场今年将增长5%-7%</a>
+                        <time>2020-02-20</time>
+                    </li>
+                                    </ul>
+			</div>
+		</div>	
+		<!--相关房源-->
+		<div class="pro_right_tab">
+			<div class="title"><span><i class="iconfont">&#xe631;</i>相关房源</span><i class="line"></i><a href="hotnewhouse.html">+MORE</a></div>
+			<div class="rpro_rom_list">
+                <ul>
+                                        <li>
+                        <a target="_blank" href="/newhouse/36560.html">
+                            <img alt="曼谷·暹罗豪庭拉差达 - Siamese Exclusive Ratchada" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190322/2019322153913842.jpg"/>
+                            <span>
+                                <b>曼谷·暹罗豪庭拉差达 - Siamese Exclusive Ratchada</b>
+                                <p>房价：70万元起</p>
+                            </span>
+                        </a>
+                    </li>                   
+                                        <li>
+                        <a target="_blank" href="/newhouse/30095.html">
+                            <img alt="曼谷·XT Huai Khwang公寓" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190527/201952793545557.jpg"/>
+                            <span>
+                                <b>曼谷·XT Huai Khwang公寓</b>
+                                <p>房价：92万元起</p>
+                            </span>
+                        </a>
+                    </li>                   
+                                        <li>
+                        <a target="_blank" href="/newhouse/34717.html">
+                            <img alt="曼谷·菁英公馆 - Niche MONO Ramkhamhaeng" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20181128/20181128141350220.png"/>
+                            <span>
+                                <b>曼谷·菁英公馆 - Niche MONO Ramkhamhaeng</b>
+                                <p>房价：65万元起</p>
+                            </span>
+                        </a>
+                    </li>                   
+                                        <li>
+                        <a target="_blank" href="/newhouse/31208.html">
+                            <img alt="曼谷·财富公馆 - Level Condominium" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190527/201952795343237.jpg"/>
+                            <span>
+                                <b>曼谷·财富公馆 - Level Condominium</b>
+                                <p>房价：34万元起</p>
+                            </span>
+                        </a>
+                    </li>                   
+                                        <li>
+                        <a target="_blank" href="/newhouse/24473.html">
+                            <img alt="曼谷·大都会国际公寓 • 新唐人-Metro Luxe Ratchada" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20171023135848713.jpg"/>
+                            <span>
+                                <b>曼谷·大都会国际公寓 • 新唐人-Metro Luxe Ratchada</b>
+                                <p>房价：74万元起</p>
+                            </span>
+                        </a>
+                    </li>                   
+                                        <li>
+                        <a target="_blank" href="/newhouse/30092.html">
+                            <img alt="曼谷·Maestro 03 轻奢花园住宅 - RATCHADA-RAMA 9" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190531/2019531995382.png"/>
+                            <span>
+                                <b>曼谷·Maestro 03 轻奢花园住宅 - RATCHADA-RAMA 9</b>
+                                <p>房价：85万元起</p>
+                            </span>
+                        </a>
+                    </li>                   
+                                        <li>
+                        <a target="_blank" href="/newhouse/24475.html">
+                            <img alt="曼谷·oka HAUS 公寓 - Thonglor区|日式|高层|度假风【Sansiri】" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/2017118114751396.jpg"/>
+                            <span>
+                                <b>曼谷·oka HAUS 公寓 - Thonglor区|日式|高层|度假风【Sansiri】</b>
+                                <p>房价：102万元起</p>
+                            </span>
+                        </a>
+                    </li>                   
+                                        <li>
+                        <a target="_blank" href="/newhouse/24939.html">
+                            <img alt="曼谷·THE LINE Phahon-Pradipat 公寓 - Phayathai区|Pradipat路|家庭花园【Sansiri】" src="/images/loading.gif" class="selector" data-url="/upload/newhouse/20190614/201961494759699.jpg"/>
+                            <span>
+                                <b>曼谷·THE LINE Phahon-Pradipat 公寓 - Phayathai区|Pradipat路|家庭花园【Sansiri】</b>
+                                <p>房价：120万元起</p>
+                            </span>
+                        </a>
+                    </li>                   
+                                    </ul>
+			</div>
+		</div>	
+		
+	</div>
+	<!--right-->
+</div>
+
+  
+      <!--foot	-->
+<div id="footer">
+    <div class="footw">
+        <div class="foot_logo">
+            <img src="/skins2019/img/footlogo.png" alt="" />
+            <a href="/aboutus.html" title="关于我们" rel="nofollow">关于我们</a>
+            <a href="/vip.html" title="会员服务" rel="nofollow">会员服务</a>
+            <a href="/honor.html" title="公司资质" rel="nofollow">公司资质</a>
+        </div>
+        <div class="foot_tel">
+            <span>24小时服务热线</span>
+            <p class="tel">
+                <i class="iconfont">&#xe621;</i>400-082-8015
+            </p>
+            <p>
+                <i class="iconfont">&#xe610;</i>admin&waigf.com(&改成@)
+            </p>
+        </div>
+        <div class="foot_code">
+            <div class="foot_code_list">
+                <span>
+                    <img src="/skins2019/img/cai_weicat.png" />
+                    	置业顾问
+                </span>
+               
+                <span>
+                    <img src="/skins2019/img/foot_code.jpg" />
+                    官方微信
+                </span>
+            </div>
+            <!--qq-->
+            <div class="foot_qq">
+                <p>
+                    项目合作QQ：
+                    <a href="tencent://message/?uin=20698379&amp;Site=&amp;Menu=yes" target="_blank" rel="nofollow"><i class="iconfont">&#xe62e;</i>20698379</a>
+                </p>
+                <p>
+                    房产咨询QQ：
+                    <a href="tencent://message/?uin=20849308&amp;Site=&amp;Menu=yes" target="_blank" rel="nofollow"><i class="iconfont">&#xe62e;</i>20849308</a>
+                </p>
+                <p>
+                    友情链接QQ：
+                    <a href="tencent://message/?uin=504797229&amp;Site=&amp;Menu=yes" target="_blank" rel="nofollow"><i class="iconfont">&#xe62e;</i>504797229</a>
+                </p>
+                <p>
+                    <a href="//www.51.la/?comId=18896151" target="_blank" title="51.La 网站流量统计系统" rel="nofollow">网站统计</a>
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        外国买房网-全球华人海外房产交易平台,海外房产网1 ©2019 外国买房网_外房 版权所有 <a href="http://www.beian.miit.gov.cn" target="_blank" rel="nofollow">浙ICP备13012890号-4</a>
+    </div>
+</div>
+<!--foot-->
+
+<!--float_tools-->
+<div id="float_tools">
+    <ul>
+        <li id="search_btn">
+            <i class="iconfont">&#xe60d;</i>
+            <span>房源搜索</span>
+        </li>
+
+        <li id="quick_login_btn">
+            <i class="iconfont">&#xe608;</i>
+            <span>快速登录</span>
+        </li>
+        <li id="talk_btn">
+            <i class="iconfont">&#xe64e;</i>
+            <span>在线留言</span>
+        </li>
+        <li>
+            <i class="iconfont">&#xe629;</i>
+            <span>咨询热线</span>
+            <div class="ftel">
+                400-082-8015
+            </div>
+        </li>
+        <li>
+            <i class="iconfont">&#xe65a;</i>
+            <span>官方微信</span>
+            <div class="fcode">
+                <img src="/skins2019/img/footcode.png" />
+            </div>
+        </li>
+        <li id="dcgotop">
+            <i class="iconfont">&#xe634;</i>
+            <span>返回顶部</span>
+        </li>
+    </ul>
+</div>
+<!--float_tools-->
+<!--search-->
+<div id="search_tab">
+    <div class="search_closed">
+        <i class="iconfont">&#xe60b;</i>
+    </div>
+    <div class="search_left">
+        <div class="search_title">
+            热门搜索
+        </div><!--控制10个-->
+        <div class="search_resault">         
+                                <a target="_blank" href="/newhouse/47067.html" title="达拉斯·贝拉湖庄园 Belle Lagos 独栋别墅 - 23万美金起|包租3年|首付40%">达拉斯·贝拉湖庄园 Belle Lagos 独栋别墅 - 23万美金起|包租3年|首付40%</a>                  
+                                <a target="_blank" href="/newhouse/47086.html" title="日本·大阪·  西城区 ·天三别馆·天王寺公园南三期 - TOYOTOMI STAY Premium">日本·大阪·  西城区 ·天三别馆·天王寺公园南三期 - TOYOTOMI STAY Premium</a>                  
+                                <a target="_blank" href="/newhouse/36560.html" title="曼谷·暹罗豪庭拉差达 - Siamese Exclusive Ratchada">曼谷·暹罗豪庭拉差达 - Siamese Exclusive Ratchada</a>                  
+                                <a target="_blank" href="/newhouse/36196.html" title="希腊.雅典市中心 阿瑞斯豪华公寓">希腊.雅典市中心 阿瑞斯豪华公寓</a>                  
+                                <a target="_blank" href="/newhouse/43479.html" title="希腊·克里特岛·干尼亚海滨公寓项目">希腊·克里特岛·干尼亚海滨公寓项目</a>                  
+                                <a target="_blank" href="/newhouse/45860.html" title="土耳其·伊斯坦布尔·罗塔娜酒店式公寓 - 115万起|包租3年|收益4%">土耳其·伊斯坦布尔·罗塔娜酒店式公寓 - 115万起|包租3年|收益4%</a>                  
+                                <a target="_blank" href="/newhouse/45861.html" title="土耳其·伊斯坦布尔·泰瑞斯花园公寓 - TERAS KULE">土耳其·伊斯坦布尔·泰瑞斯花园公寓 - TERAS KULE</a>                  
+                                <a target="_blank" href="/newhouse/46871.html" title="河内Hanoi Paragon二室一厅公寓">河内Hanoi Paragon二室一厅公寓</a>                  
+                                <a target="_blank" href="/newhouse/30095.html" title="曼谷·XT Huai Khwang公寓">曼谷·XT Huai Khwang公寓</a>                  
+                                <a target="_blank" href="/newhouse/34717.html" title="曼谷·菁英公馆 - Niche MONO Ramkhamhaeng">曼谷·菁英公馆 - Niche MONO Ramkhamhaeng</a>                  
+                    </div>
+    </div>
+    <div class="search_right">
+        <div class="search_kuang">
+            <form method="get" name="frmsearch" action="/search" target="_blank" onsubmit="return checksearch()">
+                <div class="raido_list">
+                    <span><input type="radio" name="t" value="news">资讯</span>
+                    <span><input type="radio" name="t" value="newhouse" checked="">新房</span>
+                    <span><input type="radio" name="t" value="sechouse">二手房</span>
+                    <span><input type="radio" name="t" value="exhibtion">展会</span>
+                    <span><input type="radio" name="t" value="liuxue">留学</span>
+                    <span><input type="radio" name="t" value="yiming">移民</span>
+                    <span><input type="radio" name="t" value="touzi">投资</span>
+                </div>
+                <input type="text" name="p" id="p" value="" placeholder="海外房产、移民、留学请搜索" class="inputs_txt" />
+                <input type="submit" value="搜 索" />
+            </form>
+        </div>
+    </div>
+</div>
+<!--search-->
+<!--qucik——login-->
+<div id="quick_login">
+    <div class="login_left">
+        <div class="login_qq">
+            <a href="/common/qqlogin.aspx">
+                <i class="iconfont">&#xe612;</i>
+                QQ授权登录
+            </a>
+        </div>
+        <div class="login_wecat">
+            <a href="javascript:weixinlogin();">
+                <i class="iconfont">&#xe660;</i>
+                微信授权登录
+            </a>
+        </div>
+    </div>
+    <div class="login_right">
+        <div class="login_logo">
+            <img src="/skins2019/img/logo_png.png" alt="" /><b>400-082-8015</b><i class="iconfont">&#xe621;</i>
+        </div>
+        <div class="subline"></div>
+        <div class="login">
+            <input type="text" name="logusernaame" id="logusernaame" value="" placeholder="请输入您的用户名/手机号/ sername/phone number." />
+            <input type="password" name="logpassword" id="logpassword" value="" placeholder="请输入登录密码/login password" />
+            <div class="password_tools">
+                <div class="remember">
+                    <input type="checkbox" name="cbxAutoLogin" id="cbxAutoLogin" value="" />记住密码
+                </div>
+                <a href="#" id="find_password_btn">
+                    忘记密码
+                </a>
+            </div>
+            <input type="submit" class="login_btn" name="" id="" onclick="login()" value="登 录 / Sign in">
+            <div class="nouser">
+                还没有账号？ <a href="#" class="reg_btn">立即注册</a>
+            </div>
+        </div>
+        <div class="login reg hide">
+            <input type="hidden" id="ticket" value="" /><input type="hidden" id="randstr" value="" />
+            <input type="text" name="regusername" id="regusername" value="" placeholder="手机号码/账号/username/phone number." />
+            <div class="Verification">
+                <input type="password" name="regpassword" id="regpassword" value="" placeholder="请输入登录密码/login password" />
+                <button id="TencentCaptcha" data-appid="2018549612" data-cbfn="callback">验证 Verify</button>
+            </div>
+
+            <input type="submit" class="login_btn regedit-tj" disabled="disabled" onclick="reg()" name="" id="" value="请验证后再注册 / Registration">
+            <div class="nouser">
+                <span>我已接受外房网的<a href="#" id="privacy">使用条款</a></span>
+                <span>已有外房网账号? <a href="#" class="login_btn">立即登录</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="talk_online">
+    <input type="hidden" id="lei" name="lei" value="1" /><input type="hidden" id="parentid" name="parentid" value="0" /><input type="hidden" id="parentname" name="parentname" value="" />
+    <div class="talk_title"><i class="iconfont">&#xe606;</i>正在跟客服小薇沟通中<span class="auto_point">.</span><i class="iconfont talk_closed_btn">&#xe604;</i></div>
+    <textarea class="talk_cont" maxlength="200" id="onlinecontent" placeholder="请告诉我们您的需求，平台尽快与您联系。"></textarea>
+    <div class="talk_submit_btn">
+        <div class="talk_tel">
+            <i class="iconfont">&#xe633;</i>
+            <input type="text" id="onlinemobile" placeholder="请留下您的联系方式" />
+        </div>
+        <input type="submit" id="onlinetj" class="talk_send_btn" value="发 送">
+    </div>
+</div>
+<!--协议-->
+<div id="privacy_content">
+    <script type="text/javascript" src="/skins2019/js/privacy.js"></script>
+</div>
+<!--协议-->
+<script type="text/javascript" src="/skins2019/js/public.js"></script>
+<script type="text/javascript" src="/skins2019/js/basejs.js?v=20191016"></script>
+<div style="display:none">
+<script src="//s5.cnzz.com/z_stat.php?id=1275771744&web_id=1275771744" language="JavaScript"></script></div><div style="display:none">
+<script language="javascript" async type="text/javascript" src="//js.users.51.la/18896151.js"></script></div>
+<script>$(".selector").scrollLoading(); (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();</script>
+
+
+
+
+		
+
+    <script>
+        $(document).ready(function(e) {            
+            $("#parentid").val("0");
+            $("#lei").val("2");
+            $("#parentname").val("曼谷新房");
+        });
+        var aid = "0"; var mid = "0"; var jid = "0"; var oid = "1"; var tid = "1016"; var pid = "3"; 
+        	
+</script>
+ <script type="text/javascript" src="/skins2019/js/newhouse.js"></script>
+    <!-- 对比 end --></body>
+</html>

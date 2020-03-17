@@ -27,10 +27,15 @@
 	"naucon/file":"^1.0",
 	"guzzlehttp/guzzle":"^6.3",
 	"aws/aws-sdk-php":"^3.92",
-	"jaeger/phpquery-single":"^1.0",
 	"php-curl-class/php-curl-class":"^8.5",
 	"shuber/curl":"^1.0",
-	"ralouphie/getallheaders":"^3.0"
+	"ralouphie/getallheaders":"^3.0",
+    "league/flysystem": "1.0.65",
+    "gregwar/cache": "^1.0",
+    "symfony/filesystem": "3.4.38",
+    "jaeger/querylist": "3.2.1",
+    "symfony/dom-crawler": "3.4.38",
+    "symfony/css-selector": "3.4.38"
   },
   "autoload":{
 	"psr-4":{
