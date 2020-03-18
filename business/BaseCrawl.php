@@ -97,7 +97,7 @@ abstract class BaseCrawl {
 		$this->isConsole = $this->isConsole();
 		$this->isOutputLog = $this->isConsole && $output;
 		$this->computePlatform();
-		$this->cacheDir = BASE_DIR . '/storage/cache/' . $this->platform . '/';
+		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->platform . '/';
 		$userAgent = UserAgent::random();
 		$guzzleConfig = [
 			'timeout' => 20,
@@ -105,15 +105,18 @@ abstract class BaseCrawl {
 				'User-Agent' => $userAgent
 			]
 		];
+		$needUUID=['need_uuid'=> false];
 		$config = $debugModel ? [
-			'guzzleHttp' => $guzzleConfig
+			'guzzleHttp' => $guzzleConfig,
+			'custom'=>$needUUID
 		] : [
 			'guzzleHttp' => $guzzleConfig + [
 					'proxy' => [
 						'http' => 'tcp://163.204.246.18:9999', // Use this proxy with "http"
 						//'https' => 'tcp://localhost:9124', // Use this proxy with "https",
 					]
-				]
+				],
+			'custom'=>$needUUID
 		];
 		$this->config = $config;
 

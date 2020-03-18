@@ -45,6 +45,12 @@ class Request {
 	);
 
 	/**
+	 * 行为配置
+	 * @var array
+	 */
+	private $customConfig=array();
+
+	/**
 	 * 配置文件
 	 * Request constructor.
 	 * @param array $config
@@ -56,6 +62,10 @@ class Request {
 		}
 		if (isset($config["business"]) && $config["business"]) {
 			$this->businessConfig = array_merge($this->businessConfig, $config["business"]);
+		}
+
+		if (isset($config["custom"]) && $config["custom"]) {
+			$this->customConfig = array_merge($this->customConfig, $config["custom"]);
 		}
 		$logName = 'request.log';
 		$this->logger = BaseLogger::instance(BaseLogger::CHANNEL_BUSINESS_SERVICE);
@@ -116,7 +126,8 @@ class Request {
 	 * @return array
 	 */
 	public function setParams(array $params) {
-		return $this->params = $this->method == self::METHOD_GET ? array_merge($params, ["uuid" => $this->uuid]) : $params;
+		$mergedParams=isset($this->customConfig['need_uuid']) && $this->customConfig['need_uuid']==false ? $params:array_merge($params, ["uuid" => $this->uuid]);
+		return $this->params = $this->method == self::METHOD_GET ? $mergedParams : $params;
 	}
 
 	/**
