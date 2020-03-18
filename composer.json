@@ -35,7 +35,8 @@
     "symfony/filesystem": "3.4.38",
     "jaeger/querylist": "3.2.1",
     "symfony/dom-crawler": "3.4.38",
-    "symfony/css-selector": "3.4.38"
+    "symfony/css-selector": "3.4.38",
+    "mnapoli/silly": "1.5.1"
   },
   "autoload":{
 	"psr-4":{

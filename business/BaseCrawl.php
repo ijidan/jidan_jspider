@@ -70,6 +70,8 @@ abstract class BaseCrawl {
 
 	protected $baseUrl = '';
 
+	protected $isConsole=false;
+
 	/**
 	 * 构造函数
 	 * BaseCrawl constructor.
@@ -82,6 +84,7 @@ abstract class BaseCrawl {
 		$this->logger = BaseLogger::instance(BaseLogger::CHANNEL_SPIDER_CACHE);
 		$this->output = $output;
 		$this->useCache = $useCache;
+		$this->isConsole=$this->isConsole();
 		$this->computePlatform();
 		$this->cacheDir = BASE_DIR . '/storage/cache/' . $this->platform . '/';
 		$userAgent = UserAgent::random();
@@ -257,6 +260,8 @@ abstract class BaseCrawl {
 				$content = $this->getContent($fileName);
 			} catch (\Exception $e) {
 			}
+		}else{
+			$this->writeFile($fileName,'');
 		}
 		$content = trim($content);
 		return $content;
@@ -270,12 +275,12 @@ abstract class BaseCrawl {
 	 * @param null $func
 	 * @return array|mixed
 	 */
-	protected function computeData($content, $express, $attr = self::TEXT_SYMBOL,$func=null) {
+	protected function computeData($content, $express, $attr = self::TEXT_SYMBOL, $func = null) {
 		$crawler = new Crawler($content);
 		$node = $crawler->filter($express);
-		if($func!==null){
-			$node=is_numeric($func) ? $node->eq($func):$node->$func();
-		}
+		//		if($func!==null){
+		//			$node=is_numeric($func) ? $node->eq($func):$node->$func();
+		//		}
 		$isAttrArray = is_array($attr);
 		$attrList = $isAttrArray ? $attr : [$attr];
 		$map = [];
@@ -298,7 +303,7 @@ abstract class BaseCrawl {
 	 * @param null $func
 	 * @return mixed
 	 */
-	protected function computeOnlyOneData($content, $express, $attr = self::TEXT_SYMBOL,$func=null) {
+	protected function computeOnlyOneData($content, $express, $attr = self::TEXT_SYMBOL, $func = null) {
 		$computedData = $this->computeData($content, $express, $attr);
 		return $computedData[0];
 	}
@@ -308,21 +313,29 @@ abstract class BaseCrawl {
 	 * @param $content
 	 * @param $express
 	 * @param null $func
-	 * @param string $pattern
-	 * @return string
+	 * @param string $replacePattern
+	 * @return string|string[]|null
 	 */
-	protected function computeHtmlContent($content, $express, $func = null, $pattern = '') {
+	protected function computeHtmlContent($content, $express, $func = null, $replacePattern = '') {
 		$crawler = new Crawler($content);
 		$node = $crawler->filter($express);
 		if ($func !== null) {
-			$node=is_numeric($func) ? $node->eq($func):$node->$func();
+			$node = is_numeric($func) ? $node->eq($func) : $node->$func();
 		}
 		$content = $node->html();
 		$content = trim($content);
-		if ($pattern) {
-			$content = preg_replace($pattern, '', $content);
+		if ($replacePattern) {
+			$content = preg_replace($replacePattern, '', $content);
 		}
 		return $content;
+	}
+
+	/**
+	 * 是否命令行
+	 * @return bool
+	 */
+	protected function isConsole() {
+		return php_sapi_name() == 'cli' ? true : false;
 	}
 
 }

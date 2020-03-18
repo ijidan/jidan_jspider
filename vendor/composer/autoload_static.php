@@ -108,11 +108,14 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\DomCrawler\\' => 29,
+            'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
+            'Symfony\\Component\\Console\\' => 26,
             'Slim\\Views\\' => 11,
             'Slim\\PDO\\' => 9,
             'Slim\\Csrf\\' => 10,
             'Slim\\' => 5,
+            'Silly\\' => 6,
         ),
         'R' => 
         array (
@@ -158,6 +161,7 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         ),
         'I' => 
         array (
+            'Invoker\\' => 8,
             'Interop\\Container\\' => 18,
         ),
         'G' => 
@@ -243,9 +247,17 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         array (
             0 => __DIR__ . '/..' . '/symfony/dom-crawler',
         ),
+        'Symfony\\Component\\Debug\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/debug',
+        ),
         'Symfony\\Component\\CssSelector\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/css-selector',
+        ),
+        'Symfony\\Component\\Console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/console',
         ),
         'Slim\\Views\\' => 
         array (
@@ -263,6 +275,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
+        ),
+        'Silly\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mnapoli/silly/src',
         ),
         'Respect\\Validation\\' => 
         array (
@@ -347,6 +363,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'JmesPath\\' => 
         array (
             0 => __DIR__ . '/..' . '/mtdowling/jmespath.php/src',
+        ),
+        'Invoker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-di/invoker/src',
         ),
         'Interop\\Container\\' => 
         array (
