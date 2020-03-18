@@ -21,10 +21,12 @@ class SiteController extends IndexController {
 	 * @throws \Exception
 	 */
 	public function index() {
-		$test=new Test(null,false);
-		$data=$test->index();
-		dump($data,1);
+//		$test=new Test(null,false);
+//		$data=$test->index();
+//		dump($data,1);
 		$wf=new WaiGF();
+		$data=$wf->crawl();
+		dump($data,1);
 //		$data=$wf->crawlCountryCity();
 //		$data=$wf->crawlPageCnt('/newhouselist_t1016_a0_m0_j0_o1.html');
 //		$data=$wf->crawAllId();

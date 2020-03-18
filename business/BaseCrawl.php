@@ -105,10 +105,10 @@ abstract class BaseCrawl {
 				'User-Agent' => $userAgent
 			]
 		];
-		$needUUID=['need_uuid'=> false];
+		$needUUID = ['need_uuid' => false];
 		$config = $debugModel ? [
 			'guzzleHttp' => $guzzleConfig,
-			'custom'=>$needUUID
+			'custom'     => $needUUID
 		] : [
 			'guzzleHttp' => $guzzleConfig + [
 					'proxy' => [
@@ -116,7 +116,7 @@ abstract class BaseCrawl {
 						//'https' => 'tcp://localhost:9124', // Use this proxy with "https",
 					]
 				],
-			'custom'=>$needUUID
+			'custom'     => $needUUID
 		];
 		$this->config = $config;
 
@@ -377,6 +377,16 @@ abstract class BaseCrawl {
 	 */
 	protected function isConsole() {
 		return php_sapi_name() == 'cli' ? true : false;
+	}
+
+	/**
+	 * 随机等待多少微秒
+	 * @return int
+	 */
+	protected function waitRandomMS() {
+		$rand = mt_rand(500000, 2500000);
+		usleep($rand);
+		return $rand;
 	}
 
 }

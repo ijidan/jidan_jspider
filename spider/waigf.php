@@ -13,6 +13,9 @@ $app->command('crawl [type] [keyword1] [keyword2]', function ($type, $keyword1, 
 			$wf=new WaiGF($output);
 			$wf->crawlCountryCity();
 			break;
+		case 'all':
+			$wf=new WaiGF($output);
+			$wf->crawl();
 	}
 	$output->writeln("执行完毕");
 });

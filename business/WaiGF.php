@@ -36,7 +36,7 @@ class WaiGF extends BaseCrawl {
 			$this->warning($msg);
 		}
 		if ($isSuccess) {
-			$this->doCountryCity($contentArr);
+			//$this->doCountryCity($contentArr);
 		}
 		return $contentArr;
 	}
@@ -123,22 +123,28 @@ class WaiGF extends BaseCrawl {
 		$pageCnt = str_replace('页次： /', '', $pageCnt);
 		$pageCnt = str_replace('GO', '', $pageCnt);
 		$pageCnt = intval($pageCnt);
+		if ($pageCnt == 1) {
+			$houseTabCnt = $this->computeData($content, '.house_list .house_tab');
+			if (!$houseTabCnt) {
+				$pageCnt = 0;
+			}
+		}
 		$this->success('页数抓取完毕');
 		return $pageCnt;
 	}
 
 	/**
 	 * 爬取所有ID
+	 * @param $shortUrl
 	 * @return array|mixed
 	 * @throws Exception
 	 */
-	public function crawAllId() {
-		$fileName = __FUNCTION__;
-		$shortUrl = '/newhouselist_t1016_a0_m0_j0_o1_p1.html';
+	public function crawAllId($shortUrl) {
 		$shortUrl = trim($shortUrl, '/');
+		$fileName = __FUNCTION__ . '_url_' . $shortUrl;
 		$url = $this->baseUrl . $shortUrl;
 		$content = $this->fetchContent($fileName, $url);
-		$idList = $this->computeData($content, '.house_txt a.name', "href");
+		$idList = $this->computeData($content, '.house_tab .house_txt a.name', "href");
 		if ($idList) {
 			array_walk($idList, function (&$value) {
 				$pattern = '/(\d)+/';
@@ -159,11 +165,13 @@ class WaiGF extends BaseCrawl {
 
 	/**
 	 * 抓取详情
+	 * @param $originCountryId
+	 * @param $originCityId
 	 * @param $id
 	 * @return array
-	 * @throws Exception
+	 * @throws \ErrorException
 	 */
-	public function crawlDetail($id) {
+	public function crawlDetail($originCountryId, $originCityId, $id) {
 		$fileName = __FUNCTION__ . '_id_' . $id;
 		$url = $this->baseUrl . 'newhouse/' . $id . '.html';
 		$content = $this->fetchContent($fileName, $url);
@@ -184,9 +192,7 @@ class WaiGF extends BaseCrawl {
 		//户型图
 		$projectLayoutImg = $this->extractImageList($content, $express, 3);
 		//入库
-		$countryId = 3;
-		$cityId = 1016;
-		$this->doDetail($countryId, $cityId, $id, $title, $address, $tag, $minRmbPrice, $otherInfo, $projectAdvantage, $projectAround, $projectRealImg, $projectLayoutImg);
+		$this->doDetail($originCountryId, $originCityId, $id, $title, $address, $tag, $minRmbPrice, $otherInfo, $projectAdvantage, $projectAround, $projectRealImg, $projectLayoutImg);
 		$detailData = [
 			'house_id'           => $id,
 			'title'              => $title,
@@ -229,6 +235,7 @@ class WaiGF extends BaseCrawl {
 			'f_city_id'            => $cityId,
 			'f_country_id'         => $countryId,
 			'f_title'              => $title,
+			'f_price'              => $minRmbPrice,
 			'f_address'            => $address,
 			'f_tag'                => $tag,
 			'f_other_info'         => $otherInfo,
@@ -276,7 +283,57 @@ class WaiGF extends BaseCrawl {
 		return $imgList;
 	}
 
+	/**
+	 * 开始爬取
+	 * @throws Exception
+	 */
 	public function crawl() {
+		$this->info('开始：国家城市 爬取');
+		$countryContent = $this->crawlCountryCity();
+		$this->info('结束：国家城市 爬取');
+		if (!$countryContent) {
+			$this->error('错误：国家城市 爬取');
+		}
+		$countryContent = [$countryContent[12]];
+		$this->info('开始：总页数计算');
+		foreach ($countryContent as $country) {
+			//随机等待多少微秒
+			$this->waitRandomMS();
+			$originCountryName = $country['name'];
+			$originCountryId = $country['id'];
+			$cityContent = isset($country['children']) && $country['children'] ? $country['children'] : [];
+			if (!$cityContent) {
+				$this->error('警告：' . $originCountryName . ' 无城市');
+				continue;
+			}
+			foreach ($cityContent as $city) {
+				//随机等待多少微秒
+				$this->waitRandomMS();
+				$originCityName = $city['cname'];
+				$originCityId = $city['cid'];
+				$originCityUrl = $city['curl'];
+				$pageCnt = $this->crawlPageCnt($originCityUrl);
+				if ($pageCnt == 0) {
+					$this->warning("警告：$originCountryName $originCityName 项目个数为 0");
+					continue;
+				}
+				$this->warning('提示：' . $originCountryName . ' ' . $originCityName . ' 一共' . $pageCnt . '页');
+				for ($i = 1; $i <= $pageCnt; $i++) {
+					//随机等待多少微秒
+					$this->waitRandomMS();
+					$pageIdx = '_p' . $i;
+					$shortUrl = str_replace('.html', $pageIdx . '.html', $originCityUrl);
+					$allId = $this->crawAllId($shortUrl);
+					$allIdCnt = count($allId);
+					$this->info('提示：' . $originCountryName . ' ' . $originCityName . ' 一共' . $allIdCnt . '个项目');
+					foreach ($allId as $id) {
+						$this->info("开始：$originCountryName $originCityName 项目 $id 爬取'");
+						$this->crawlDetail($originCountryId, $originCityId, $id);
+						$this->info("结束：$originCountryName $originCityName 项目 $id 爬取'");
+					}
+				}
+			}
+		}
 		// TODO: Implement crawl() method.
 	}
 }
