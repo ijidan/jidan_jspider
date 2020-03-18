@@ -372,4 +372,17 @@ class CommonUtil {
 	public static function removeSpace($str) {
 		return str_replace(" ", "", $str);
 	}
+
+	/**
+	 * 数组转字符串数组
+	 * @param array $array
+	 * @return array
+	 */
+	public static function Array2String(array $array){
+		$convertedArray=[];
+		foreach ($array as $idx=>$val){
+			$convertedArray[$idx]=is_array($val)?join(',',$val):$val;
+		}
+		return $convertedArray;
+	}
 }

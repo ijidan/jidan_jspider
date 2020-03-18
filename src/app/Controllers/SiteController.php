@@ -21,19 +21,18 @@ class SiteController extends IndexController {
 	 */
 	public function index() {
 		$wf=new WaiGF();
-		$data=$wf->crawlCountryCity();
+//		$data=$wf->crawlCountryCity();
 //		$data=$wf->crawlPageCnt('/newhouselist_t1016_a0_m0_j0_o1.html');
 //		$data=$wf->crawAllId();
-		pr($data,1);
 		$id=36560;
 		$data=$wf->crawlDetail($id);
-		dump($data,1);
-		$obj= new ULu();
-		$id='563940838';
-		$detail=$obj->crawlDetail($id);
-		dump($detail,1);
-		$data=(new ULu())->crawlLocationRound($id);
-		dump($data,1);
+		pr($data,1);
+//		$obj= new ULu();
+//		$id='563940838';
+//		$detail=$obj->crawlDetail($id);
+//		dump($detail,1);
+//		$data=(new ULu())->crawlLocationRound($id);
+//		dump($data,1);
 		$businessList = [
 			[
 				"title"   => "MUA HÀNG TRỰC TUYẾN",

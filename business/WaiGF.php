@@ -3,8 +3,10 @@
 namespace Business;
 
 use Exception;
+use Lib\Util\CommonUtil;
 use Model\WaiGF\City;
 use Model\WaiGF\Country;
+use Model\WaiGF\House;
 
 /**
  * 爬虫爬数据
@@ -53,26 +55,18 @@ class WaiGF extends BaseCrawl {
 
 			$countryModel = new Country();
 			$countryRecord = Country::findOne('f_origin_id=?', [$countryId]);
+			$countryInsData = [
+				'f_name'        => $countryName,
+				'f_origin_id'   => $countryId,
+				'f_url'         => $countryUrl,
+				'f_update_time' => time()
+			];
 			if ($countryRecord) {
-				$countryKvMap = [
-					'f_name'        => '?',
-					'f_origin_id'   => '?',
-					'f_url'         => '?',
-					'f_update_time' => '?'
-				];
-				$countryValues = [$countryName, $countryId, $countryUrl, time(), $countryId];
-				$countryModel->update($countryKvMap, 'f_origin_id=?', $countryValues);
+				$countryModel->update($countryInsData, 'f_origin_id=' . $countryId);
 			} else {
-				$countryInsData = [
-					'f_name'        => $countryName,
-					'f_origin_id'   => $countryId,
-					'f_url'         => $countryUrl,
-					'f_create_time' => time(),
-					'f_update_time' => time()
-				];
 				$countryModel->insert($countryInsData);
 			}
-			$this->info('国家 ' . $countryName . ':' . $countryId . '入库完毕');
+			$this->success('国家 ' . $countryName . ':' . $countryId . '入库完毕');
 			//城市
 			if ($cityList) {
 				$this->doCity($countryId, $cityList);
@@ -94,27 +88,19 @@ class WaiGF extends BaseCrawl {
 			$cityName = $city['cname'];
 			$cityId = $city['cid'];
 			$cityUrl = $city['curl'];
+
 			$cityModel = new City();
 			$cityRecord = City::findOne('f_origin_id=?', [$cityId]);
+			$cityInsData = [
+				'f_name'        => $cityName,
+				'f_origin_id'   => $cityId,
+				'f_url'         => $cityUrl,
+				'f_country_id'  => $countryFId,
+				'f_update_time' => time()
+			];
 			if ($cityRecord) {
-				$cityKvMap = [
-					'f_name'        => '?',
-					'f_origin_id'   => '?',
-					'f_url'         => '?',
-					'f_country_id'  => '?',
-					'f_update_time' => '?'
-				];
-				$cityValues = [$cityName, $cityId, $cityUrl, $countryFId, time(), $cityId];
-				$cityModel->update($cityKvMap, 'f_origin_id=?', $cityValues);
+				$cityModel->update($cityInsData, 'f_origin_id=' . $cityId);
 			} else {
-				$cityInsData = [
-					'f_name'        => $cityName,
-					'f_origin_id'   => $cityId,
-					'f_url'         => $cityUrl,
-					'f_country_id'  => $countryFId,
-					'f_create_time' => time(),
-					'f_update_time' => time()
-				];
 				$cityModel->insert($cityInsData);
 			}
 			$this->info('城市 ' . $cityName . ':' . $cityId . '入库完毕');
@@ -197,7 +183,12 @@ class WaiGF extends BaseCrawl {
 		$projectRealImg = $this->extractImageList($content, $express, 2);
 		//户型图
 		$projectLayoutImg = $this->extractImageList($content, $express, 3);
+		//入库
+		$countryId = 3;
+		$cityId = 1016;
+		$this->doDetail($countryId, $cityId, $id, $title, $address, $tag, $minRmbPrice, $otherInfo, $projectAdvantage, $projectAround, $projectRealImg, $projectLayoutImg);
 		$detailData = [
+			'house_id'           => $id,
 			'title'              => $title,
 			'address'            => $address,
 			'tag'                => $tag,
@@ -209,6 +200,53 @@ class WaiGF extends BaseCrawl {
 			'project_layout_img' => $projectLayoutImg
 		];
 		return $detailData;
+	}
+
+	/**
+	 * 房源入库
+	 * @param $originCountryId
+	 * @param $originCityId
+	 * @param $houseId
+	 * @param $title
+	 * @param $address
+	 * @param $tag
+	 * @param $minRmbPrice
+	 * @param $otherInfo
+	 * @param $projectAdvantage
+	 * @param $projectAround
+	 * @param $projectRealImg
+	 * @param $projectLayoutImg
+	 * @throws \ErrorException
+	 */
+	private function doDetail($originCountryId, $originCityId, $houseId, $title, $address, $tag, $minRmbPrice, $otherInfo, $projectAdvantage, $projectAround, $projectRealImg, $projectLayoutImg) {
+		$countryRecord = Country::findOne('f_origin_id=?', [$originCountryId]);
+		$cityRecord = City::findOne('f_origin_id=?', [$originCityId]);
+		$countryId = $countryRecord['f_id'];
+		$cityId = $cityRecord['f_id'];
+		$houseRecord = House::findOne('f_origin_id=?', [$houseId]);
+		$houseInsData = [
+			'f_origin_id'          => $houseId,
+			'f_city_id'            => $cityId,
+			'f_country_id'         => $countryId,
+			'f_title'              => $title,
+			'f_address'            => $address,
+			'f_tag'                => $tag,
+			'f_other_info'         => $otherInfo,
+			'f_project_advantage'  => $projectAdvantage,
+			'f_project_around'     => $projectAround,
+			'f_project_real_img'   => $projectRealImg,
+			'f_project_layout_img' => $projectLayoutImg,
+			'f_update_time'        => time()
+		];
+		$houseInsData = CommonUtil::Array2String($houseInsData);
+		$houseModel = new House();
+		if ($houseRecord) {
+			$houseModel->update($houseInsData, 'f_origin_id=' . $houseId);
+		} else {
+			$houseModel->insert($houseInsData);
+		}
+		$this->info('房源 ' . $title . ':' . $houseId . '入库完毕');
+
 	}
 
 	/**
