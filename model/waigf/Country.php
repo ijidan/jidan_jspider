@@ -1,14 +1,14 @@
 <?php
-namespace Model;
+namespace Model\WaiGF;
 
 use Lib\BaseModel;
 
 /**
- * 用户表
- * Class User
- * @package Models
+ * 国家表
+ * Class Country
+ * @package Model\Waigf
  */
-class User extends BaseModel {
+class Country extends BaseModel {
 	/**
 	 * 数据库名
 	 * @return mixed

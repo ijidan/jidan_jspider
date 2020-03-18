@@ -1,4 +1,5 @@
 <?php
+
 namespace Lib;
 
 use Lib\DataBase\BaseDatabase;
@@ -7,6 +8,7 @@ use Lib\DataBase\BaseInsertStatement;
 use Lib\DataBase\BaseSelectStatement;
 use Lib\DataBase\BaseUpdateStatement;
 use Lib\Util\Config;
+use Lib\Util\Paginate;
 
 
 /**
@@ -29,7 +31,6 @@ abstract class BaseModel {
 	 * @throws \ErrorException
 	 */
 	public function __construct() {
-		$this->pdo = self::getPdoInstance();
 	}
 
 	/**
@@ -141,15 +142,15 @@ abstract class BaseModel {
 	 * @return int
 	 */
 	public static function update(array $kvMap_, $where = "", array $values_ = []) {
-		$argsNum=func_num_args();
-		if($argsNum==2){
-			$_kvMap=$_values=[];
-			self::genKvMapAndValues($kvMap_,$_kvMap,$_values);
-			$kvMap=$_kvMap;
-			$values=$_values;
-		}else{
-			$kvMap=$kvMap_;
-			$values=$values_;
+		$argsNum = func_num_args();
+		if ($argsNum == 2) {
+			$_kvMap = $_values = [];
+			self::genKvMapAndValues($kvMap_, $_kvMap, $_values);
+			$kvMap = $_kvMap;
+			$values = $_values;
+		} else {
+			$kvMap = $kvMap_;
+			$values = $values_;
 		}
 
 		$model = self::getModel();
@@ -192,22 +193,30 @@ abstract class BaseModel {
 	/**
 	 *获取model
 	 * @return BaseModel
+	 * @throws \ErrorException
 	 */
 	private static function getModel() {
 		$cls = get_called_class();
 		/** @var BaseModel $model */
 		$model = new $cls();
+		$dbName=$model->getDatabaseName();
+		$model->pdo=self::getPdoInstance($dbName);
 		return $model;
 	}
 
 	/**
 	 * 单例
+	 * @param $dbName
 	 * @return BaseDatabase|null
 	 * @throws \ErrorException
 	 */
-	private static function getPdoInstance() {
+	private static function getPdoInstance($dbName) {
 		if (is_null(self::$instance)) {
-			$dbConfig = Config::loadConfig('database')["mysql"]["db1"];
+			$mysqlConfig=Config::loadConfig('database')["mysql"];
+			if(!isset($mysqlConfig[$dbName])){
+				throw new \RuntimeException('数据库连接配置不存在：'.$dbName);
+			}
+			$dbConfig = $mysqlConfig[$dbName];
 			$host = $dbConfig["host"];
 			$user = $dbConfig["user"];
 			$password = $dbConfig["password"];
@@ -231,7 +240,7 @@ abstract class BaseModel {
 		array_walk($data, function ($item) use (&$questionMark) {
 			$questionMark .= "?,";
 		});
-		$questionMark=rtrim($questionMark,",");
+		$questionMark = rtrim($questionMark, ",");
 		return $questionMark;
 	}
 
@@ -242,15 +251,28 @@ abstract class BaseModel {
 	 * @param array $values
 	 */
 	public static function genKvMapAndValues($insData, array &$kvMap, array &$values) {
-		$kvMap_=[];
-		$values_=[];
+		$kvMap_ = [];
+		$values_ = [];
 		array_walk($insData, function ($value, $key) use (&$kvMap_, &$values_) {
 			$kvMap_[$key] = "?";
 			array_push($values_, $value);
 		});
-		$kvMap=$kvMap_;
-		$values=$values_;
+		$kvMap = $kvMap_;
+		$values = $values_;
 	}
+
+	/**
+	 * 数据库名
+	 * @return mixed
+	 */
+	abstract public function getDatabaseName();
+
+	/**
+	 * 表名
+	 * @return mixed
+	 */
+	abstract public function getTableName();
+
 
 	/**
 	 * 表前缀
@@ -258,11 +280,6 @@ abstract class BaseModel {
 	 */
 	abstract public function getTablePrefix();
 
-	/**
-	 * 表名
-	 * @return mixed
-	 */
-	abstract public function getTableName();
 
 	/**
 	 * 主键

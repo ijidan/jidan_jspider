@@ -2,12 +2,12 @@
 
 return [
 	"mysql"   => [
-		'db1' => [
-			"host"     => "127.0.0.1",
-			"user"     => "root",
-			"password" => "zhuan1234",
-			"database" => "viet",
-			"prefix"   => "self_"
+		'd_spider_waigf' => [
+			"host"     => "172.16.10.251",
+			"user"     => "hnb",
+			"password" => "alyHnb2015",
+			"database" => "d_spider_waigf",
+			"prefix"   => "f_"
 		]
 	],
 	"mongodb" => [

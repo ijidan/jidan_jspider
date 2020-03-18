@@ -1,17 +1,17 @@
 [
     {
         "name": "aws/aws-sdk-php",
-        "version": "3.133.35",
-        "version_normalized": "3.133.35.0",
+        "version": "3.133.38",
+        "version_normalized": "3.133.38.0",
         "source": {
             "type": "git",
             "url": "https://github.com/aws/aws-sdk-php.git",
-            "reference": "ab87be32ed4f52a9779d40277e4989af35be7dd5"
+            "reference": "5ec9442162d83f94918bc17136a2b674a04784e5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ab87be32ed4f52a9779d40277e4989af35be7dd5",
-            "reference": "ab87be32ed4f52a9779d40277e4989af35be7dd5",
+            "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5ec9442162d83f94918bc17136a2b674a04784e5",
+            "reference": "5ec9442162d83f94918bc17136a2b674a04784e5",
             "shasum": "",
             "mirrors": [
                 {
@@ -52,7 +52,7 @@
             "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages",
             "ext-sockets": "To use client-side monitoring"
         },
-        "time": "2020-03-12T19:45:53+00:00",
+        "time": "2020-03-17T18:16:01+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4274,17 +4274,17 @@
     },
     {
         "name": "workerman/workerman",
-        "version": "v4.0.1",
-        "version_normalized": "4.0.1.0",
+        "version": "v4.0.2",
+        "version_normalized": "4.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/walkor/Workerman.git",
-            "reference": "2b563b164ae1cf5e0d8190b9480c87f0802a9ae9"
+            "reference": "fa8bd8d9036d4d62d6ba34e26a0fc2f472dd38b9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/walkor/Workerman/zipball/2b563b164ae1cf5e0d8190b9480c87f0802a9ae9",
-            "reference": "2b563b164ae1cf5e0d8190b9480c87f0802a9ae9",
+            "url": "https://api.github.com/repos/walkor/Workerman/zipball/fa8bd8d9036d4d62d6ba34e26a0fc2f472dd38b9",
+            "reference": "fa8bd8d9036d4d62d6ba34e26a0fc2f472dd38b9",
             "shasum": "",
             "mirrors": [
                 {
@@ -4299,7 +4299,7 @@
         "suggest": {
             "ext-event": "For better performance. "
         },
-        "time": "2020-03-09T08:36:50+00:00",
+        "time": "2020-03-13T08:15:30+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

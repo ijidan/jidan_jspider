@@ -7,10 +7,10 @@ include 'config.php';
 
 $app = new Silly\Application();
 
-$app->command('run [type] [keyword1] [keyword2]', function ($type, $keyword1, $keyword2, OutputInterface $output) {
+$app->command('crawl [type] [keyword1] [keyword2]', function ($type, $keyword1, $keyword2, OutputInterface $output) {
 	switch ($type) {
 		case 'city':
-			$wf=new WaiGF($output,false);
+			$wf=new WaiGF($output);
 			$wf->crawlCountryCity();
 			break;
 	}

@@ -2,8 +2,9 @@
 
 namespace Business;
 
-
 use Exception;
+use Model\WaiGF\City;
+use Model\WaiGF\Country;
 
 /**
  * 爬虫爬数据
@@ -24,8 +25,102 @@ class WaiGF extends BaseCrawl {
 		$url = $this->baseUrl . 'common/diqujson.ashx';
 		$content = $this->fetchContent($fileName, $url);
 		$contentArr = json_decode($content, true);
+		$isSuccess = json_last_error() == JSON_ERROR_NONE && $contentArr ? true : false;
+		$msg = $isSuccess ? '解析正确' : '解析错误，错误信息为：' . json_last_error_msg();
+		$msg = '国家城市抓取完毕，' . $msg;
+		if ($isSuccess) {
+			$this->success($msg);
+		} else {
+			$this->warning($msg);
+		}
+		if ($isSuccess) {
+			$this->doCountryCity($contentArr);
+		}
 		return $contentArr;
 	}
+
+	/**
+	 * 国家城市入库
+	 * @param array $contentArr
+	 * @throws \ErrorException
+	 */
+	private function doCountryCity(array $contentArr) {
+		foreach ($contentArr as $country) {
+			$countryName = $country['name'];
+			$countryId = $country['id'];
+			$countryUrl = $country['url'];
+			$cityList = $country['children'];
+
+			$countryModel = new Country();
+			$countryRecord = Country::findOne('f_origin_id=?', [$countryId]);
+			if ($countryRecord) {
+				$countryKvMap = [
+					'f_name'        => '?',
+					'f_origin_id'   => '?',
+					'f_url'         => '?',
+					'f_update_time' => '?'
+				];
+				$countryValues = [$countryName, $countryId, $countryUrl, time(), $countryId];
+				$countryModel->update($countryKvMap, 'f_origin_id=?', $countryValues);
+			} else {
+				$countryInsData = [
+					'f_name'        => $countryName,
+					'f_origin_id'   => $countryId,
+					'f_url'         => $countryUrl,
+					'f_create_time' => time(),
+					'f_update_time' => time()
+				];
+				$countryModel->insert($countryInsData);
+			}
+			$this->info('国家 ' . $countryName . ':' . $countryId . '入库完毕');
+			//城市
+			if ($cityList) {
+				$this->doCity($countryId, $cityList);
+			}
+		}
+	}
+
+	/**
+	 * 城市入库
+	 * @param $countryId
+	 * @param array $cityList
+	 * @throws \ErrorException
+	 */
+	private function doCity($countryId, array $cityList) {
+		$countryRecord = Country::findOne('f_origin_id=?', [$countryId]);
+		$countryFId = $countryRecord['f_id'];
+		foreach ($cityList as $city) {
+
+			$cityName = $city['cname'];
+			$cityId = $city['cid'];
+			$cityUrl = $city['curl'];
+			$cityModel = new City();
+			$cityRecord = City::findOne('f_origin_id=?', [$cityId]);
+			if ($cityRecord) {
+				$cityKvMap = [
+					'f_name'        => '?',
+					'f_origin_id'   => '?',
+					'f_url'         => '?',
+					'f_country_id'  => '?',
+					'f_update_time' => '?'
+				];
+				$cityValues = [$cityName, $cityId, $cityUrl, $countryFId, time(), $cityId];
+				$cityModel->update($cityKvMap, 'f_origin_id=?', $cityValues);
+			} else {
+				$cityInsData = [
+					'f_name'        => $cityName,
+					'f_origin_id'   => $cityId,
+					'f_url'         => $cityUrl,
+					'f_country_id'  => $countryFId,
+					'f_create_time' => time(),
+					'f_update_time' => time()
+				];
+				$cityModel->insert($cityInsData);
+			}
+			$this->info('城市 ' . $cityName . ':' . $cityId . '入库完毕');
+		}
+	}
+
 
 	/**
 	 * 计算页数
@@ -42,6 +137,7 @@ class WaiGF extends BaseCrawl {
 		$pageCnt = str_replace('页次： /', '', $pageCnt);
 		$pageCnt = str_replace('GO', '', $pageCnt);
 		$pageCnt = intval($pageCnt);
+		$this->success('页数抓取完毕');
 		return $pageCnt;
 	}
 
@@ -64,6 +160,13 @@ class WaiGF extends BaseCrawl {
 				$id = $matches[0];
 				$value = $id;
 			});
+		}
+		$cnt = count($idList);
+		$msg = '所有ID抓取完毕，一共 ' . $cnt . ' 个';
+		if ($cnt) {
+			$this->success($msg);
+		} else {
+			$this->warning($msg);
 		}
 		return $idList;
 	}
@@ -107,6 +210,7 @@ class WaiGF extends BaseCrawl {
 		];
 		return $detailData;
 	}
+
 	/**
 	 * 提取图片
 	 * @param $content

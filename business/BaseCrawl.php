@@ -66,15 +66,25 @@ abstract class BaseCrawl {
 	 * @var Cache
 	 */
 	protected $cache;
-
-
+	/**
+	 * BaseURl
+	 * @var string
+	 */
 	protected $baseUrl = '';
-
-	protected $isConsole=false;
+	/**
+	 * 是否命令行
+	 * @var bool
+	 */
+	protected $isConsole = false;
+	/**
+	 * 是否输出日志
+	 * @var bool
+	 */
+	protected $isOutputLog = false;
 
 	/**
 	 * 构造函数
-	 * BaseCrawl constructor.
+	 * BaseCrawl constructor
 	 * @param OutputInterface $output
 	 * @param bool $useCache 是否使用缓存
 	 * @param bool $debugModel 调试模式
@@ -84,7 +94,8 @@ abstract class BaseCrawl {
 		$this->logger = BaseLogger::instance(BaseLogger::CHANNEL_SPIDER_CACHE);
 		$this->output = $output;
 		$this->useCache = $useCache;
-		$this->isConsole=$this->isConsole();
+		$this->isConsole = $this->isConsole();
+		$this->isOutputLog = $this->isConsole && $output;
 		$this->computePlatform();
 		$this->cacheDir = BASE_DIR . '/storage/cache/' . $this->platform . '/';
 		$userAgent = UserAgent::random();
@@ -120,16 +131,48 @@ abstract class BaseCrawl {
 
 	abstract public function crawl();
 
-
 	/**
 	 * 输出信息
 	 * @param $message
-	 * @param OutputInterface $output
-	 * @param $fg
-	 * @param $bg
+	 * @param string $fg
 	 */
-	public function writeColorLn($message, $fg) {
-		$this->output->writeln("<fg=$fg>$message</>");
+	public function writeColorLn($message, $fg = '') {
+		if ($this->isOutputLog) {
+			$msg = $fg ? "<fg=$fg>$message</>" : "$message";
+			$this->output->writeln($msg);
+		}
+	}
+
+	/**
+	 * 信息
+	 * @param $message
+	 */
+	public function info($message) {
+		$this->writeColorLn($message);
+	}
+
+	/**
+	 * 错误信息
+	 * @param $message
+	 */
+	public function error($message) {
+		$this->writeColorLn($message, self::COLOR_RED);
+	}
+
+	/**
+	 * 警告信息
+	 * @param $message
+	 */
+	public function warning($message) {
+		$this->writeColorLn($message, self::COLOR_YELLOW);
+	}
+
+	/**
+	 * 成功信息
+	 * @param $message
+	 */
+	public function success($message) {
+		$this->writeColorLn($message, self::COLOR_BLUE);
 	}
 
 	/**
@@ -260,27 +303,23 @@ abstract class BaseCrawl {
 				$content = $this->getContent($fileName);
 			} catch (\Exception $e) {
 			}
-		}else{
-			$this->writeFile($fileName,'');
+		} else {
+			$this->writeFile($fileName, '');
 		}
 		$content = trim($content);
 		return $content;
 	}
 
 	/**
-	 * 提取数据
+	 * 抓取数据
 	 * @param $content
 	 * @param $express
 	 * @param string $attr
-	 * @param null $func
 	 * @return array|mixed
 	 */
-	protected function computeData($content, $express, $attr = self::TEXT_SYMBOL, $func = null) {
+	protected function computeData($content, $express, $attr = self::TEXT_SYMBOL) {
 		$crawler = new Crawler($content);
 		$node = $crawler->filter($express);
-		//		if($func!==null){
-		//			$node=is_numeric($func) ? $node->eq($func):$node->$func();
-		//		}
 		$isAttrArray = is_array($attr);
 		$attrList = $isAttrArray ? $attr : [$attr];
 		$map = [];
@@ -296,14 +335,13 @@ abstract class BaseCrawl {
 	}
 
 	/**
-	 * 提取只有一条数据的数据
+	 * 提取只有一条的数据
 	 * @param $content
 	 * @param $express
 	 * @param string $attr
-	 * @param null $func
 	 * @return mixed
 	 */
-	protected function computeOnlyOneData($content, $express, $attr = self::TEXT_SYMBOL, $func = null) {
+	protected function computeOnlyOneData($content, $express, $attr = self::TEXT_SYMBOL) {
 		$computedData = $this->computeData($content, $express, $attr);
 		return $computedData[0];
 	}

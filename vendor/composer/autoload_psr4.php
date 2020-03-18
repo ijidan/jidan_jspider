@@ -10,7 +10,7 @@ return array(
     'malkusch\\lock\\' => array($vendorDir . '/malkusch/lock/classes'),
     'Workerman\\' => array($vendorDir . '/workerman/workerman'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
-    'Tools\\' => array($baseDir . '/src/Tools'),
+    'Tools\\' => array($baseDir . '/src/tools'),
     'Symfony\\Polyfill\\Php72\\' => array($vendorDir . '/symfony/polyfill-php72'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Intl\\Idn\\' => array($vendorDir . '/symfony/polyfill-intl-idn'),
@@ -62,5 +62,5 @@ return array(
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
     'Business\\' => array($baseDir . '/business'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
-    'App\\' => array($baseDir . '/src/App'),
+    'App\\' => array($baseDir . '/src/app'),
 );

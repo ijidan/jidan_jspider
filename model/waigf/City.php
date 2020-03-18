@@ -1,14 +1,14 @@
 <?php
-namespace Model;
+namespace Model\WaiGF;
 
 use Lib\BaseModel;
 
 /**
- * 用户表
- * Class User
- * @package Models
+ * 城市表
+ * Class City
+ * @package Model\WaiGF
  */
-class User extends BaseModel {
+class City extends BaseModel {
 	/**
 	 * 数据库名
 	 * @return mixed
@@ -23,7 +23,7 @@ class User extends BaseModel {
 	 * @return mixed
 	 */
 	public function getTableName() {
-		return 'country';
+		return 'city';
 		// TODO: Implement getTableName() method.
 	}
 

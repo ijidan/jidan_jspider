@@ -2,15 +2,10 @@
 
 namespace App\Controllers;
 
-use Business\KuaiDaiLi;
 use Business\ULu;
 use Business\WaiGF;
-use Lib\Http\UserAgent;
-use Slim\Http\Request;
-use Slim\Http\Response;
-use Tools\Models\Article;
 use Tools\Models\ArticleCategory;
-
+use Lib\User;
 
 
 /**
@@ -26,9 +21,10 @@ class SiteController extends IndexController {
 	 */
 	public function index() {
 		$wf=new WaiGF();
-//		$data=$wf->crawlCountryCity();
+		$data=$wf->crawlCountryCity();
 //		$data=$wf->crawlPageCnt('/newhouselist_t1016_a0_m0_j0_o1.html');
 //		$data=$wf->crawAllId();
+		pr($data,1);
 		$id=36560;
 		$data=$wf->crawlDetail($id);
 		dump($data,1);
