@@ -42,6 +42,7 @@
 	"psr-4":{
 	  "App\\":"src\\app",
 	  "Tools\\":"src\\tools",
+	  "Api\\": "src\\api",
 	  "Lib\\":"lib",
 	  "Model\\":"model",
 	  "Business\\":"business"

@@ -63,4 +63,5 @@ return array(
     'Business\\' => array($baseDir . '/business'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
     'App\\' => array($baseDir . '/src/app'),
+    'Api\\' => array($baseDir . '/src/api'),
 );

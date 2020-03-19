@@ -9,7 +9,7 @@ $inIFrame = $_GET['ref'] == 'iframe';
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>smileDeer Manager</title>
+	<title>Tools</title>
 	<link rel="stylesheet" href="../ywj/ui/backend/default.css"/>
 	<link rel="stylesheet" href="../css/jquery.jqzoom.css"/>
 	<link rel="stylesheet" href="/ChatJs/css/jquery.chatjs.css"/>
@@ -34,7 +34,7 @@ $inIFrame = $_GET['ref'] == 'iframe';
 <div id="page">
 	<div id="header">
 		<h1 id="logo">
-			<a href="/">Manager</a>
+			<a href="/">Tools</a>
 		</h1>
 		<div id="welcome">
 			<?php $loginUser = IndexController::getLoginUser(); ?>

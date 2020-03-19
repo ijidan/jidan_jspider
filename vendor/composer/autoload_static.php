@@ -195,6 +195,7 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         array (
             'Aws\\' => 4,
             'App\\' => 4,
+            'Api\\' => 4,
         ),
     );
 
@@ -427,6 +428,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/app',
+        ),
+        'Api\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/api',
         ),
     );
 

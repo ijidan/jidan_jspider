@@ -1,15 +1,15 @@
 <?php
 
-$cdnUrl="http://cdn.smiledeer.com";
-$appCdnUrl="/app";
+$cdnUrl="http://www.jspider.com";
+$appCdnUrl="";
 $toolsCdnUrl="/tools";
 return [
-	'server_url' => 'http://www.smiledeer.com/',
-	'manager_url' => 'http://http://manager.smiledeer.com/',
+	'server_url' => 'http://www.jspider.com/',
+	'manager_url' => 'http://tools.jspider.com/',
 	'cdn_url_app' => $appCdnUrl,
 	'cdn_url_tools'=> $toolsCdnUrl,
-	'img_url' => 'http://image.smiledeer.com/',
-	'img_dir' => '/data/websites/smile_deer_img',
+	'img_url' => 'http://image.jspider.com/',
+	'img_dir' => '/data/jspider/img',
 	'languages' => [
 		'en' => [
 			'name' => 'English',
@@ -19,9 +19,9 @@ return [
 		]
 	],
 	'language_default' => 'zh_CN', //默认语言
-	'cookie_salt' => 'smiledeer',
+	'cookie_salt' => 'jspider',
 	'cookie' => [
-		'domain' => '.smiledeer.com'
+		'domain' => '.jspider.com'
 	],
 	'event_log_path' => BASE_DIR . '/storage/events/'
 ];
