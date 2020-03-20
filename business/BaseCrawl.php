@@ -6,6 +6,7 @@ use Gregwar\Cache\Cache;
 use Lib\BaseLogger;
 use Lib\Http\UserAgent;
 use Lib\Net\BaseService;
+use Model\Spider\HouseSeq;
 use Symfony\Component\Console\Output\OutputInterface;
 use League\Flysystem\FileNotFoundException;
 use Symfony\Component\DomCrawler\Crawler;
@@ -366,7 +367,13 @@ abstract class BaseCrawl {
 		$content = $node->html();
 		$content = trim($content);
 		if ($replacePattern) {
-			$content = preg_replace($replacePattern, '', $content);
+			if(is_array($replacePattern)){
+				foreach ($replacePattern as $key=> $value){
+					$content = preg_replace($key, $value, $content);
+				}
+			}else{
+				$content = preg_replace($replacePattern, '', $content);
+			}
 		}
 		return $content;
 	}
@@ -387,6 +394,30 @@ abstract class BaseCrawl {
 		$rand = mt_rand(500000, 2500000);
 		usleep($rand);
 		return $rand;
+	}
+
+	/**
+	 * 获取分布式ID
+	 * @return int
+	 * @throws \ErrorException
+	 */
+	public function getNextHouseSeq() {
+		$lastRecord = HouseSeq::findOne('f_platform=?', [$this->platform], 'f_id', 'DESC');
+		if ($lastRecord) {
+			$lastId = $lastRecord['f_id'];
+			$step = $lastRecord['f_step'];
+			$nextId = $lastId + $step;
+		} else {
+			$nextId = 1;
+		}
+		$insData = [
+			'f_id'          => $nextId,
+			'f_step'        => 1,
+			'f_platform'    => $this->platform,
+			'f_create_time' => time()
+		];
+		HouseSeq::insert($insData);
+		return $nextId;
 	}
 
 }

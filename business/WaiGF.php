@@ -169,7 +169,7 @@ class WaiGF extends BaseCrawl {
 	 * @param $originCityId
 	 * @param $id
 	 * @return array
-	 * @throws \ErrorException
+	 * @throws Exception
 	 */
 	public function crawlDetail($originCountryId, $originCityId, $id) {
 		$fileName = __FUNCTION__ . '_id_' . $id;
@@ -184,10 +184,13 @@ class WaiGF extends BaseCrawl {
 		$otherInfo = join($otherInfo, ',');
 		//项目相关
 		$express = '.prod_content';
-		$pattern = '/(.*)img(.*)/';
-		$projectAdvantage = $this->computeHtmlContent($content, $express, 'first', $pattern);
-		$projectAround = $this->computeHtmlContent($content, $express, 1, $pattern);
-		//实景图
+		$patternList=[
+			'/(.*)img(.*)/'=>'',
+			'/<a.*\>(.*)\<\/a>/'=>'$1'
+		];
+		$projectAdvantage = $this->computeHtmlContent($content, $express, 'first', $patternList);
+		$projectAround = $this->computeHtmlContent($content, $express, 1, $patternList);
+		//$patternList
 		$projectRealImg = $this->extractImageList($content, $express, 2);
 		//户型图
 		$projectLayoutImg = $this->extractImageList($content, $express, 3);
@@ -230,7 +233,9 @@ class WaiGF extends BaseCrawl {
 		$countryId = $countryRecord['f_id'];
 		$cityId = $cityRecord['f_id'];
 		$houseRecord = House::findOne('f_origin_id=?', [$houseId]);
+		$nextHouseId = $this->getNextHouseSeq();
 		$houseInsData = [
+			'f_id'                 => $nextHouseId,
 			'f_origin_id'          => $houseId,
 			'f_city_id'            => $cityId,
 			'f_country_id'         => $countryId,
@@ -276,7 +281,7 @@ class WaiGF extends BaseCrawl {
 		$imgList = [];
 		array_walk($filteredProjectImgContentList, function ($value) use (&$imgList, $pattern) {
 			$re = preg_match($pattern, $value, $matches);
-			if ($re !== false) {
+			if ($re !== false && $matches) {
 				array_push($imgList, $matches[1]);
 			}
 		});

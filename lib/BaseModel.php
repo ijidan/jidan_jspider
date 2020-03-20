@@ -50,6 +50,7 @@ abstract class BaseModel {
 	 * @param string $order
 	 * @param string $orderType
 	 * @return array|mixed
+	 * @throws \ErrorException
 	 */
 	public static function findOne($where = "", array $values = [], $order = "", $orderType = "ASC") {
 		$data = self::find($where, $values, $order, $orderType);
@@ -69,6 +70,8 @@ abstract class BaseModel {
 	 */
 	public static function find($where = "", array $values = [], $order = "", $orderType = "ASC", $offset = 0, $limit = 0) {
 		$model = self::getModel();
+		if(strpos($where,'platform')!==false){
+		}
 		$fullTableName = $model->getFullTableName();
 		/** @var BaseSelectStatement $selectStatement */
 		$selectStatement = $model->pdo->select()->from($fullTableName);
@@ -217,7 +220,7 @@ abstract class BaseModel {
 	 * @throws \ErrorException
 	 */
 	private static function getPdoInstance($dbName) {
-		if (is_null(self::$instance)) {
+		if (is_null(self::$instance[$dbName])) {
 			$mysqlConfig=Config::loadConfig('database')["mysql"];
 			if(!isset($mysqlConfig[$dbName])){
 				throw new \RuntimeException('数据库连接配置不存在：'.$dbName);
@@ -226,11 +229,10 @@ abstract class BaseModel {
 			$host = $dbConfig["host"];
 			$user = $dbConfig["user"];
 			$password = $dbConfig["password"];
-			$dbName = $dbConfig["database"];
 			$dsn = "mysql:host=${host};dbname=${dbName};charset=utf8";
-			self::$instance = new BaseDatabase($dsn, $user, $password);
+			self::$instance[$dbName] = new BaseDatabase($dsn, $user, $password);
 		}
-		return self::$instance;
+		return self::$instance[$dbName];
 	}
 
 	/**

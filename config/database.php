@@ -6,8 +6,11 @@ return [
 			"host"     => "172.16.10.251",
 			"user"     => "hnb",
 			"password" => "alyHnb2015",
-			"database" => "d_spider_waigf",
-			"prefix"   => "f_"
+		],
+		'd_spider_common' => [
+			"host"     => "172.16.10.251",
+			"user"     => "hnb",
+			"password" => "alyHnb2015",
 		]
 	],
 	"mongodb" => [
