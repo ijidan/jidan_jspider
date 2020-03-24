@@ -190,7 +190,6 @@ class WaiGF extends BaseCrawl {
 		];
 		$projectAdvantage = $this->computeHtmlContent($content, $express, 'first', $patternList);
 		$projectAround = $this->computeHtmlContent($content, $express, 1, $patternList);
-		//$patternList
 		$projectRealImg = $this->extractImageList($content, $express, 2);
 		//户型图
 		$projectLayoutImg = $this->extractImageList($content, $express, 3);
