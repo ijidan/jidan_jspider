@@ -52,7 +52,7 @@
             "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages",
             "ext-sockets": "To use client-side monitoring"
         },
-        "time": "2020-03-17T18:16:01+00:00",
+        "time": "2020-03-17 18:16:01",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -119,7 +119,7 @@
         "require-dev": {
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2013-07-07T17:01:41+00:00",
+        "time": "2013-07-07 17:01:41",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -177,7 +177,7 @@
             "psr/log": "^1.0",
             "symfony/process": "^2.5 || ^3.0 || ^4.0 || ^5.0"
         },
-        "time": "2020-01-13T10:02:55+00:00",
+        "time": "2020-01-13 10:02:55",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -234,7 +234,7 @@
         "require": {
             "psr/container": "^1.0"
         },
-        "time": "2017-02-14T19:40:03+00:00",
+        "time": "2017-02-14 19:40:03",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -280,7 +280,7 @@
             "phpunit/phpunit": "~4.5",
             "squizlabs/php_codesniffer": "~2.3"
         },
-        "time": "2016-03-28T09:10:18+00:00",
+        "time": "2016-03-28 09:10:18",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -342,7 +342,7 @@
             "phpunit/phpunit": "5.*",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2019-12-12T18:48:39+00:00",
+        "time": "2019-12-12 18:48:39",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -396,7 +396,7 @@
         "require": {
             "php": ">=5.3"
         },
-        "time": "2016-09-23T08:16:04+00:00",
+        "time": "2016-09-23 08:16:04",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -452,7 +452,7 @@
         "require-dev": {
             "phpunit/phpunit": "^6.4"
         },
-        "time": "2020-01-22T14:54:02+00:00",
+        "time": "2020-01-22 14:54:02",
         "type": "captcha",
         "installation-source": "dist",
         "autoload": {
@@ -517,7 +517,7 @@
         "suggest": {
             "behat/transliterator": "Transliterator provides ability to set non-latin1 pretty names"
         },
-        "time": "2019-03-01T15:55:29+00:00",
+        "time": "2019-03-01 15:55:29",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -579,7 +579,7 @@
             "ext-intl": "Required for Internationalized Domain Name (IDN) support",
             "psr/log": "Required for using the Log middleware"
         },
-        "time": "2019-12-23T11:57:10+00:00",
+        "time": "2019-12-23 11:57:10",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -645,7 +645,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.0"
         },
-        "time": "2016-12-20T10:07:11+00:00",
+        "time": "2016-12-20 10:07:11",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -713,7 +713,7 @@
         "suggest": {
             "zendframework/zend-httphandlerrunner": "Emit PSR-7 responses"
         },
-        "time": "2019-07-01T23:21:34+00:00",
+        "time": "2019-07-01 23:21:34",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -780,7 +780,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2017-12-07T02:13:37+00:00",
+        "time": "2017-12-07 02:13:37",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -835,7 +835,7 @@
         "suggest": {
             "monolog/monolog": "Log support"
         },
-        "time": "2017-06-09T04:25:07+00:00",
+        "time": "2017-06-09 04:25:07",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -894,7 +894,7 @@
             "phpunit/phpunit": "^4.8 || ^5.0",
             "squizlabs/php_codesniffer": "~2.0"
         },
-        "time": "2019-08-04T10:03:36+00:00",
+        "time": "2019-08-04 10:03:36",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -952,7 +952,7 @@
             "phpunit/phpunit": "^4.8 || ^5.0",
             "squizlabs/php_codesniffer": "~2.0"
         },
-        "time": "2019-02-11T14:37:05+00:00",
+        "time": "2019-02-11 14:37:05",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1011,7 +1011,7 @@
             "phpunit/phpunit": "4.8.*",
             "squizlabs/php_codesniffer": "2.*"
         },
-        "time": "2016-06-18T12:28:04+00:00",
+        "time": "2016-06-18 12:28:04",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1080,7 +1080,7 @@
             "spatie/flysystem-dropbox": "Allows you to use Dropbox storage",
             "srmklive/flysystem-dropbox-v2": "Allows you to use Dropbox storage for PHP 5 applications"
         },
-        "time": "2020-03-08T18:53:20+00:00",
+        "time": "2020-03-08 18:53:20",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1168,7 +1168,7 @@
         "suggest": {
             "ext-pnctl": "Enables locking with flock without busy waiting in CLI scripts"
         },
-        "time": "2018-07-07T18:43:25+00:00",
+        "time": "2018-07-07 18:43:25",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1244,7 +1244,7 @@
             "sebastian/phpcpd": "2.*",
             "squizlabs/php_codesniffer": "^3.4.0"
         },
-        "time": "2020-03-11T20:15:49+00:00",
+        "time": "2020-03-11 20:15:49",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1346,7 +1346,7 @@
             "sebastian/phpcpd": "^3.0",
             "squizlabs/php_codesniffer": "^3.0@dev"
         },
-        "time": "2019-10-06T11:29:25+00:00",
+        "time": "2019-10-06 11:29:25",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1429,7 +1429,7 @@
             "ext-gmp": "bcmath or gmp is required for decoding larger integers with the pure PHP decoder",
             "ext-maxminddb": "A C-based database decoder that provides significantly faster lookups"
         },
-        "time": "2019-12-19T22:59:03+00:00",
+        "time": "2019-12-19 22:59:03",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1490,7 +1490,7 @@
             "phpunit/phpunit": "^4.8.36 || ^5.7 || ^6.5 || ^7.0",
             "squizlabs/php_codesniffer": "3.*"
         },
-        "time": "2019-12-12T15:56:05+00:00",
+        "time": "2019-12-12 15:56:05",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1543,7 +1543,7 @@
             "mnapoli/phpunit-easymock": "~0.1.0",
             "phpunit/phpunit": "~4.5"
         },
-        "time": "2016-09-16T11:44:03+00:00",
+        "time": "2016-09-16 11:44:03",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1591,7 +1591,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.8.35||~5.7"
         },
-        "time": "2019-09-18T18:44:20+00:00",
+        "time": "2019-09-18 18:44:20",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1678,7 +1678,7 @@
             "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
             "sentry/sentry": "Allow sending log messages to a Sentry server"
         },
-        "time": "2016-07-29T03:23:52+00:00",
+        "time": "2016-07-29 03:23:52",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1739,7 +1739,7 @@
             "composer/xdebug-handler": "^1.2",
             "phpunit/phpunit": "^4.8.36|^7.5.15"
         },
-        "time": "2019-12-30T18:03:34+00:00",
+        "time": "2019-12-30 18:03:34",
         "bin": [
             "bin/jp.php"
         ],
@@ -1803,7 +1803,7 @@
             "friendsofphp/php-cs-fixer": "~1.11",
             "phpunit/phpunit": "~3.7|~4.0|~5.0"
         },
-        "time": "2019-11-23T21:40:31+00:00",
+        "time": "2019-11-23 21:40:31",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1857,7 +1857,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.8.*"
         },
-        "time": "2018-03-09T14:09:29+00:00",
+        "time": "2018-03-09 14:09:29",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1914,7 +1914,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.8.*"
         },
-        "time": "2017-05-25T16:43:53+00:00",
+        "time": "2017-05-25 16:43:53",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1985,7 +1985,7 @@
         "suggest": {
             "ext-pdo_sqlite": "to use SQLiteStorage or SQLiteJournal"
         },
-        "time": "2019-11-19T18:38:13+00:00",
+        "time": "2019-11-19 18:38:13",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2056,7 +2056,7 @@
             "nette/tester": "~2.0",
             "tracy/tracy": "^2.3"
         },
-        "time": "2018-06-28T11:49:23+00:00",
+        "time": "2018-06-28 11:49:23",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2133,7 +2133,7 @@
             "ext-mbstring": "to use Strings::lower() etc...",
             "ext-xml": "to use Strings::length() etc. when mbstring is not available"
         },
-        "time": "2019-11-19T00:32:02+00:00",
+        "time": "2019-11-19 00:32:02",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2211,7 +2211,7 @@
         "require-dev": {
             "phpunit/phpunit": "^4.8.35|~5.7"
         },
-        "time": "2018-02-13T20:26:39+00:00",
+        "time": "2018-02-13 20:26:39",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2268,7 +2268,7 @@
         "suggest": {
             "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
         },
-        "time": "2019-01-03T20:59:08+00:00",
+        "time": "2019-01-03 20:59:08",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2328,7 +2328,7 @@
         "suggest": {
             "ext-mbstring": "*"
         },
-        "time": "2020-02-29T05:02:55+00:00",
+        "time": "2020-02-29 05:02:55",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2398,7 +2398,7 @@
             "athletic/athletic": "~0.1.8",
             "phpunit/phpunit": "~4.5"
         },
-        "time": "2016-07-14T13:09:58+00:00",
+        "time": "2016-07-14 13:09:58",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2469,7 +2469,7 @@
         "suggest": {
             "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
         },
-        "time": "2018-11-15T22:32:31+00:00",
+        "time": "2018-11-15 22:32:31",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2563,7 +2563,7 @@
             "mpdf/mpdf": "Option for rendering PDF with PDF Writer",
             "tecnickcom/tcpdf": "Option for rendering PDF with PDF Writer"
         },
-        "time": "2019-07-08T21:21:25+00:00",
+        "time": "2019-07-08 21:21:25",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2636,7 +2636,7 @@
         "require-dev": {
             "symfony/phpunit-bridge": "^3.2"
         },
-        "time": "2018-01-21T07:42:36+00:00",
+        "time": "2018-01-21 07:42:36",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2690,7 +2690,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2017-02-14T16:28:37+00:00",
+        "time": "2017-02-14 16:28:37",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2747,7 +2747,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-08-06T14:39:51+00:00",
+        "time": "2016-08-06 14:39:51",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2805,7 +2805,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2019-11-01T11:05:21+00:00",
+        "time": "2019-11-01 11:05:21",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2860,7 +2860,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2017-10-23T01:57:42+00:00",
+        "time": "2017-10-23 01:57:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2920,7 +2920,7 @@
             "php-coveralls/php-coveralls": "^2.1",
             "phpunit/phpunit": "^5 || ^6.5"
         },
-        "time": "2019-03-08T08:55:37+00:00",
+        "time": "2019-03-08 08:55:37",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2981,7 +2981,7 @@
             "symfony/validator": "Use Symfony validator through Respect\\Validation",
             "zendframework/zend-validator": "Use Zend Framework validator through Respect\\Validation"
         },
-        "time": "2016-03-31T17:39:15+00:00",
+        "time": "2016-03-31 17:39:15",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3033,7 +3033,7 @@
                 }
             ]
         },
-        "time": "2012-06-02T20:57:42+00:00",
+        "time": "2012-06-02 20:57:42",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -3078,7 +3078,7 @@
             "phpunit/phpunit": "^4.0",
             "slim/slim": "~3.0"
         },
-        "time": "2018-08-22T16:12:18+00:00",
+        "time": "2018-08-22 16:12:18",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3131,7 +3131,7 @@
             "php": ">=5.3.0",
             "slim/slim": ">=2.3.0"
         },
-        "time": "2013-09-18T18:13:40+00:00",
+        "time": "2013-09-18 18:13:40",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3182,7 +3182,7 @@
             "ext-pdo": "*",
             "php": ">=5.3.0"
         },
-        "time": "2017-08-15T10:42:44+00:00",
+        "time": "2017-08-15 10:42:44",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3240,7 +3240,7 @@
             "phpunit/phpunit": "^5.0",
             "slim/slim": "^3.0"
         },
-        "time": "2016-03-04T09:48:50+00:00",
+        "time": "2016-03-04 09:48:50",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3304,7 +3304,7 @@
             "phpunit/phpunit": "^4.0",
             "squizlabs/php_codesniffer": "^2.5"
         },
-        "time": "2016-07-26T15:12:13+00:00",
+        "time": "2016-07-26 15:12:13",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3377,7 +3377,7 @@
             "phpunit/phpunit": "^4.8|^5.7",
             "slim/slim": "^3.10"
         },
-        "time": "2019-11-28T18:03:50+00:00",
+        "time": "2019-11-28 18:03:50",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3453,7 +3453,7 @@
             "symfony/lock": "",
             "symfony/process": ""
         },
-        "time": "2020-02-15T13:27:16+00:00",
+        "time": "2020-02-15 13:27:16",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3510,7 +3510,7 @@
         "require": {
             "php": "^5.5.9|>=7.0.8"
         },
-        "time": "2020-02-04T08:04:52+00:00",
+        "time": "2020-02-04 08:04:52",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3578,7 +3578,7 @@
         "require-dev": {
             "symfony/http-kernel": "~2.8|~3.0|~4.0"
         },
-        "time": "2020-02-03T15:10:40+00:00",
+        "time": "2020-02-03 15:10:40",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3643,7 +3643,7 @@
         "suggest": {
             "symfony/css-selector": ""
         },
-        "time": "2020-02-26T17:12:32+00:00",
+        "time": "2020-02-26 17:12:32",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3701,7 +3701,7 @@
             "php": "^5.5.9|>=7.0.8",
             "symfony/polyfill-ctype": "~1.8"
         },
-        "time": "2020-01-17T08:50:08+00:00",
+        "time": "2020-01-17 08:50:08",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3758,7 +3758,7 @@
         "require": {
             "php": "^5.5.9|>=7.0.8"
         },
-        "time": "2020-02-14T07:34:21+00:00",
+        "time": "2020-02-14 07:34:21",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3818,7 +3818,7 @@
         "suggest": {
             "ext-ctype": "For best performance"
         },
-        "time": "2020-01-13T11:15:53+00:00",
+        "time": "2020-01-13 11:15:53",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3886,7 +3886,7 @@
         "suggest": {
             "ext-intl": "For best performance"
         },
-        "time": "2020-01-17T12:01:36+00:00",
+        "time": "2020-01-17 12:01:36",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3954,7 +3954,7 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2020-01-13T11:15:53+00:00",
+        "time": "2020-01-13 11:15:53",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4018,7 +4018,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2020-01-13T11:15:53+00:00",
+        "time": "2020-01-13 11:15:53",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4086,7 +4086,7 @@
             "psr/container": "^1.0",
             "symfony/phpunit-bridge": "^4.4|^5.0"
         },
-        "time": "2020-02-11T05:59:23+00:00",
+        "time": "2020-02-11 05:59:23",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -4175,7 +4175,7 @@
             "phpclasses/php-iso-file": "ISO support",
             "wapmorgan/cab-archive": "CAB support"
         },
-        "time": "2020-01-13T00:24:26+00:00",
+        "time": "2020-01-13 00:24:26",
         "bin": [
             "bin/cam"
         ],
@@ -4254,7 +4254,7 @@
         "require": {
             "workerman/workerman": ">=3.5.0"
         },
-        "time": "2020-03-09T12:03:30+00:00",
+        "time": "2020-03-09 12:03:30",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -4299,7 +4299,7 @@
         "suggest": {
             "ext-event": "For better performance. "
         },
-        "time": "2020-03-13T08:15:30+00:00",
+        "time": "2020-03-13 08:15:30",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -4324,6 +4324,551 @@
         "keywords": [
             "asynchronous",
             "event-loop"
+        ]
+    },
+    {
+        "name": "guzzle/inflection",
+        "version": "v3.9.2",
+        "version_normalized": "3.9.2.0",
+        "target-dir": "Guzzle/Inflection",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Guzzle3/inflection.git",
+            "reference": "c3ee7d90d0674d94834b843115d07c58570fc2e4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Guzzle3/inflection/zipball/c3ee7d90d0674d94834b843115d07c58570fc2e4",
+            "reference": "c3ee7d90d0674d94834b843115d07c58570fc2e4",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "time": "2013-06-11 00:24:07",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Guzzle\\Inflection": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Guzzle inflection component",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "Guzzle",
+            "inflection"
+        ],
+        "abandoned": "guzzle/guzzle"
+    },
+    {
+        "name": "symfony/event-dispatcher",
+        "version": "v3.4.38",
+        "version_normalized": "3.4.38.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/event-dispatcher.git",
+            "reference": "2f67a869aef3eecf42e7f8be4a8b86c92308686c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/2f67a869aef3eecf42e7f8be4a8b86c92308686c",
+            "reference": "2f67a869aef3eecf42e7f8be4a8b86c92308686c",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "php": "^5.5.9|>=7.0.8"
+        },
+        "conflict": {
+            "symfony/dependency-injection": "<3.3"
+        },
+        "require-dev": {
+            "psr/log": "~1.0",
+            "symfony/config": "~2.8|~3.0|~4.0",
+            "symfony/dependency-injection": "~3.3|~4.0",
+            "symfony/expression-language": "~2.8|~3.0|~4.0",
+            "symfony/stopwatch": "~2.8|~3.0|~4.0"
+        },
+        "suggest": {
+            "symfony/dependency-injection": "",
+            "symfony/http-kernel": ""
+        },
+        "time": "2020-02-04 08:04:52",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\EventDispatcher\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony EventDispatcher Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "guzzle/common",
+        "version": "v3.9.2",
+        "version_normalized": "3.9.2.0",
+        "target-dir": "Guzzle/Common",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Guzzle3/common.git",
+            "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Guzzle3/common/zipball/2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
+            "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "symfony/event-dispatcher": ">=2.1"
+        },
+        "time": "2014-08-11 04:32:36",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Guzzle\\Common": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Common libraries used by Guzzle",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "collection",
+            "common",
+            "event",
+            "exception"
+        ],
+        "abandoned": "guzzle/guzzle"
+    },
+    {
+        "name": "guzzle/stream",
+        "version": "v3.9.2",
+        "version_normalized": "3.9.2.0",
+        "target-dir": "Guzzle/Stream",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Guzzle3/stream.git",
+            "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Guzzle3/stream/zipball/60c7fed02e98d2c518dae8f97874c8f4622100f0",
+            "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "guzzle/common": "self.version",
+            "php": ">=5.3.2"
+        },
+        "suggest": {
+            "guzzle/http": "To convert Guzzle request objects to PHP streams"
+        },
+        "time": "2014-05-01 21:36:02",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Guzzle\\Stream": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Guzzle stream wrapper component",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "Guzzle",
+            "component",
+            "stream"
+        ],
+        "abandoned": "guzzle/guzzle"
+    },
+    {
+        "name": "guzzle/parser",
+        "version": "v3.9.2",
+        "version_normalized": "3.9.2.0",
+        "target-dir": "Guzzle/Parser",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Guzzle3/parser.git",
+            "reference": "6874d171318a8e93eb6d224cf85e4678490b625c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Guzzle3/parser/zipball/6874d171318a8e93eb6d224cf85e4678490b625c",
+            "reference": "6874d171318a8e93eb6d224cf85e4678490b625c",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "time": "2014-02-05 18:29:46",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Guzzle\\Parser": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Interchangeable parsers used by Guzzle",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "URI Template",
+            "cookie",
+            "http",
+            "message",
+            "url"
+        ],
+        "abandoned": "guzzle/guzzle"
+    },
+    {
+        "name": "guzzle/http",
+        "version": "v3.9.2",
+        "version_normalized": "3.9.2.0",
+        "target-dir": "Guzzle/Http",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Guzzle3/http.git",
+            "reference": "1e8dd1e2ba9dc42332396f39fbfab950b2301dc5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Guzzle3/http/zipball/1e8dd1e2ba9dc42332396f39fbfab950b2301dc5",
+            "reference": "1e8dd1e2ba9dc42332396f39fbfab950b2301dc5",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "guzzle/common": "self.version",
+            "guzzle/parser": "self.version",
+            "guzzle/stream": "self.version",
+            "php": ">=5.3.2"
+        },
+        "suggest": {
+            "ext-curl": "*"
+        },
+        "time": "2014-08-11 04:32:36",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Guzzle\\Http": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "HTTP libraries used by Guzzle",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "Guzzle",
+            "client",
+            "curl",
+            "http",
+            "http client"
+        ],
+        "abandoned": "guzzle/guzzle"
+    },
+    {
+        "name": "guzzle/cache",
+        "version": "v3.9.2",
+        "version_normalized": "3.9.2.0",
+        "target-dir": "Guzzle/Cache",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Guzzle3/cache.git",
+            "reference": "9d20d5afd4203f84893e809777ffa01e47bd4ea7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Guzzle3/cache/zipball/9d20d5afd4203f84893e809777ffa01e47bd4ea7",
+            "reference": "9d20d5afd4203f84893e809777ffa01e47bd4ea7",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "guzzle/common": "self.version",
+            "php": ">=5.3.2"
+        },
+        "time": "2014-01-08 21:24:51",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Guzzle\\Cache": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Guzzle cache adapter component",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "Guzzle",
+            "adapter",
+            "cache",
+            "doctrine",
+            "zf"
+        ],
+        "abandoned": "guzzle/guzzle"
+    },
+    {
+        "name": "guzzle/service",
+        "version": "v3.9.2",
+        "version_normalized": "3.9.2.0",
+        "target-dir": "Guzzle/Service",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Guzzle3/service.git",
+            "reference": "583c623473b45cc3dd607ab19d9629a0a4fbb762"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Guzzle3/service/zipball/583c623473b45cc3dd607ab19d9629a0a4fbb762",
+            "reference": "583c623473b45cc3dd607ab19d9629a0a4fbb762",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "guzzle/cache": "self.version",
+            "guzzle/http": "self.version",
+            "guzzle/inflection": "self.version",
+            "php": ">=5.3.2"
+        },
+        "time": "2014-04-23 20:54:52",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Guzzle\\Service": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "Guzzle service component for abstracting RESTful web services",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "Guzzle",
+            "rest",
+            "web service",
+            "webservice"
+        ],
+        "abandoned": "guzzle/guzzle"
+    },
+    {
+        "name": "cpliakas/psolr",
+        "version": "0.6.3",
+        "version_normalized": "0.6.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cpliakas/psolr.git",
+            "reference": "b3dff7658c88f5c56d6012c170faf215acf3c698"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cpliakas/psolr/zipball/b3dff7658c88f5c56d6012c170faf215acf3c698",
+            "reference": "b3dff7658c88f5c56d6012c170faf215acf3c698",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "guzzle/service": "~3.0",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "pdepend/pdepend": "~1.0",
+            "phploc/phploc": "~2.0",
+            "phpunit/phpunit": "~3.0",
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "time": "2014-02-18 12:53:55",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "PSolr": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chris Pliakas",
+                "email": "opensource@chrispliakas.com",
+                "role": "Project Lead"
+            },
+            {
+                "name": "See contributors",
+                "homepage": "https://github.com/cpliakas/psolr/graphs/contributors"
+            }
+        ],
+        "description": "A PHP client for Apache Solr.",
+        "homepage": "https://github.com/cpliakas/psolr",
+        "keywords": [
+            "solr"
         ]
     }
 ]

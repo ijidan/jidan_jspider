@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc78651db338db125109085b9e6b3bbe",
+    "hash": "67e7f07b8e1ffd5288d2e4a9446a65b3",
+    "content-hash": "daa9f615eb8cd3e79073380e8c2ec03d",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -94,7 +95,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-03-17T18:16:01+00:00"
+            "time": "2020-03-17 18:16:01"
         },
         {
             "name": "codeguy/upload",
@@ -147,7 +148,7 @@
                 "upload",
                 "validation"
             ],
-            "time": "2013-07-07T17:01:41+00:00"
+            "time": "2013-07-07 17:01:41"
         },
         {
             "name": "composer/ca-bundle",
@@ -209,7 +210,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2020-01-13T10:02:55+00:00"
+            "time": "2020-01-13 10:02:55"
         },
         {
             "name": "container-interop/container-interop",
@@ -247,7 +248,65 @@
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
             "abandoned": "psr/container",
-            "time": "2017-02-14T19:40:03+00:00"
+            "time": "2017-02-14 19:40:03"
+        },
+        {
+            "name": "cpliakas/psolr",
+            "version": "0.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cpliakas/psolr.git",
+                "reference": "b3dff7658c88f5c56d6012c170faf215acf3c698"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cpliakas/psolr/zipball/b3dff7658c88f5c56d6012c170faf215acf3c698",
+                "reference": "b3dff7658c88f5c56d6012c170faf215acf3c698",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "guzzle/service": "~3.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "pdepend/pdepend": "~1.0",
+                "phploc/phploc": "~2.0",
+                "phpunit/phpunit": "~3.0",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PSolr": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Pliakas",
+                    "email": "opensource@chrispliakas.com",
+                    "role": "Project Lead"
+                },
+                {
+                    "name": "See contributors",
+                    "homepage": "https://github.com/cpliakas/psolr/graphs/contributors"
+                }
+            ],
+            "description": "A PHP client for Apache Solr.",
+            "homepage": "https://github.com/cpliakas/psolr",
+            "keywords": [
+                "solr"
+            ],
+            "time": "2014-02-18 12:53:55"
         },
         {
             "name": "dflydev/fig-cookies",
@@ -305,7 +364,7 @@
                 "psr-7",
                 "psr7"
             ],
-            "time": "2016-03-28T09:10:18+00:00"
+            "time": "2016-03-28 09:10:18"
         },
         {
             "name": "geoip2/geoip2",
@@ -364,7 +423,7 @@
                 "geolocation",
                 "maxmind"
             ],
-            "time": "2019-12-12T18:48:39+00:00"
+            "time": "2019-12-12 18:48:39"
         },
         {
             "name": "gregwar/cache",
@@ -413,7 +472,7 @@
                 "file-system",
                 "system"
             ],
-            "time": "2016-09-23T08:16:04+00:00"
+            "time": "2016-09-23 08:16:04"
         },
         {
             "name": "gregwar/captcha",
@@ -472,7 +531,7 @@
                 "captcha",
                 "spam"
             ],
-            "time": "2020-01-22T14:54:02+00:00"
+            "time": "2020-01-22 14:54:02"
         },
         {
             "name": "gregwar/image",
@@ -530,7 +589,407 @@
                 "gd",
                 "image"
             ],
-            "time": "2019-03-01T15:55:29+00:00"
+            "time": "2019-03-01 15:55:29"
+        },
+        {
+            "name": "guzzle/cache",
+            "version": "v3.9.2",
+            "target-dir": "Guzzle/Cache",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Guzzle3/cache.git",
+                "reference": "9d20d5afd4203f84893e809777ffa01e47bd4ea7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/cache/zipball/9d20d5afd4203f84893e809777ffa01e47bd4ea7",
+                "reference": "9d20d5afd4203f84893e809777ffa01e47bd4ea7",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "guzzle/common": "self.version",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Cache": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle cache adapter component",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "adapter",
+                "cache",
+                "doctrine",
+                "zf"
+            ],
+            "abandoned": "guzzle/guzzle",
+            "time": "2014-01-08 21:24:51"
+        },
+        {
+            "name": "guzzle/common",
+            "version": "v3.9.2",
+            "target-dir": "Guzzle/Common",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Guzzle3/common.git",
+                "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/common/zipball/2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
+                "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/event-dispatcher": ">=2.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Common": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Common libraries used by Guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "collection",
+                "common",
+                "event",
+                "exception"
+            ],
+            "abandoned": "guzzle/guzzle",
+            "time": "2014-08-11 04:32:36"
+        },
+        {
+            "name": "guzzle/http",
+            "version": "v3.9.2",
+            "target-dir": "Guzzle/Http",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Guzzle3/http.git",
+                "reference": "1e8dd1e2ba9dc42332396f39fbfab950b2301dc5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/http/zipball/1e8dd1e2ba9dc42332396f39fbfab950b2301dc5",
+                "reference": "1e8dd1e2ba9dc42332396f39fbfab950b2301dc5",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "guzzle/common": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/stream": "self.version",
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Http": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "HTTP libraries used by Guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "client",
+                "curl",
+                "http",
+                "http client"
+            ],
+            "abandoned": "guzzle/guzzle",
+            "time": "2014-08-11 04:32:36"
+        },
+        {
+            "name": "guzzle/inflection",
+            "version": "v3.9.2",
+            "target-dir": "Guzzle/Inflection",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Guzzle3/inflection.git",
+                "reference": "c3ee7d90d0674d94834b843115d07c58570fc2e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/inflection/zipball/c3ee7d90d0674d94834b843115d07c58570fc2e4",
+                "reference": "c3ee7d90d0674d94834b843115d07c58570fc2e4",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Inflection": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle inflection component",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "inflection"
+            ],
+            "abandoned": "guzzle/guzzle",
+            "time": "2013-06-11 00:24:07"
+        },
+        {
+            "name": "guzzle/parser",
+            "version": "v3.9.2",
+            "target-dir": "Guzzle/Parser",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Guzzle3/parser.git",
+                "reference": "6874d171318a8e93eb6d224cf85e4678490b625c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/parser/zipball/6874d171318a8e93eb6d224cf85e4678490b625c",
+                "reference": "6874d171318a8e93eb6d224cf85e4678490b625c",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Parser": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Interchangeable parsers used by Guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "URI Template",
+                "cookie",
+                "http",
+                "message",
+                "url"
+            ],
+            "abandoned": "guzzle/guzzle",
+            "time": "2014-02-05 18:29:46"
+        },
+        {
+            "name": "guzzle/service",
+            "version": "v3.9.2",
+            "target-dir": "Guzzle/Service",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Guzzle3/service.git",
+                "reference": "583c623473b45cc3dd607ab19d9629a0a4fbb762"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/service/zipball/583c623473b45cc3dd607ab19d9629a0a4fbb762",
+                "reference": "583c623473b45cc3dd607ab19d9629a0a4fbb762",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "guzzle/cache": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Service": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle service component for abstracting RESTful web services",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "rest",
+                "web service",
+                "webservice"
+            ],
+            "abandoned": "guzzle/guzzle",
+            "time": "2014-04-23 20:54:52"
+        },
+        {
+            "name": "guzzle/stream",
+            "version": "v3.9.2",
+            "target-dir": "Guzzle/Stream",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Guzzle3/stream.git",
+                "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Guzzle3/stream/zipball/60c7fed02e98d2c518dae8f97874c8f4622100f0",
+                "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "guzzle/common": "self.version",
+                "php": ">=5.3.2"
+            },
+            "suggest": {
+                "guzzle/http": "To convert Guzzle request objects to PHP streams"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Stream": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle stream wrapper component",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "component",
+                "stream"
+            ],
+            "abandoned": "guzzle/guzzle",
+            "time": "2014-05-01 21:36:02"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -603,7 +1062,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2019-12-23T11:57:10+00:00"
+            "time": "2019-12-23 11:57:10"
         },
         {
             "name": "guzzlehttp/promises",
@@ -660,7 +1119,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20T10:07:11+00:00"
+            "time": "2016-12-20 10:07:11"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -737,7 +1196,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-07-01T23:21:34+00:00"
+            "time": "2019-07-01 23:21:34"
         },
         {
             "name": "jaeger/phpquery-single",
@@ -786,7 +1245,7 @@
             ],
             "description": "phpQuery单文件版本，是Querylist的依赖(http://querylist.cc/)，phpQuery项目主页:http://code.google.com/p/phpquery/",
             "homepage": "http://code.google.com/p/phpquery/",
-            "time": "2017-12-07T02:13:37+00:00"
+            "time": "2017-12-07 02:13:37"
         },
         {
             "name": "jaeger/querylist",
@@ -838,7 +1297,7 @@
                 "phpQuery",
                 "spider"
             ],
-            "time": "2017-06-09T04:25:07+00:00"
+            "time": "2017-06-09 04:25:07"
         },
         {
             "name": "layershifter/tld-database",
@@ -895,7 +1354,7 @@
                 "domain database",
                 "tld database"
             ],
-            "time": "2019-08-04T10:03:36+00:00"
+            "time": "2019-08-04 10:03:36"
         },
         {
             "name": "layershifter/tld-extract",
@@ -953,7 +1412,7 @@
                 "domain parser"
             ],
             "abandoned": true,
-            "time": "2019-02-11T14:37:05+00:00"
+            "time": "2019-02-11 14:37:05"
         },
         {
             "name": "layershifter/tld-support",
@@ -1003,7 +1462,7 @@
             ],
             "description": "Support package for TLDDatabase and TLDExtract",
             "abandoned": true,
-            "time": "2016-06-18T12:28:04+00:00"
+            "time": "2016-06-18 12:28:04"
         },
         {
             "name": "league/flysystem",
@@ -1093,7 +1552,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2020-03-08T18:53:20+00:00"
+            "time": "2020-03-08 18:53:20"
         },
         {
             "name": "malkusch/lock",
@@ -1177,7 +1636,7 @@
                 "redlock",
                 "semaphore"
             ],
-            "time": "2018-07-07T18:43:25+00:00"
+            "time": "2018-07-07 18:43:25"
         },
         {
             "name": "markbaker/complex",
@@ -1278,7 +1737,7 @@
                 "complex",
                 "mathematics"
             ],
-            "time": "2020-03-11T20:15:49+00:00"
+            "time": "2020-03-11 20:15:49"
         },
         {
             "name": "markbaker/matrix",
@@ -1353,7 +1812,7 @@
                 "matrix",
                 "vector"
             ],
-            "time": "2019-10-06T11:29:25+00:00"
+            "time": "2019-10-06 11:29:25"
         },
         {
             "name": "maxmind-db/reader",
@@ -1419,7 +1878,7 @@
                 "geolocation",
                 "maxmind"
             ],
-            "time": "2019-12-19T22:59:03+00:00"
+            "time": "2019-12-19 22:59:03"
         },
         {
             "name": "maxmind/web-service-common",
@@ -1471,7 +1930,7 @@
             ],
             "description": "Internal MaxMind Web Service API",
             "homepage": "https://github.com/maxmind/web-service-common-php",
-            "time": "2019-12-12T15:56:05+00:00"
+            "time": "2019-12-12 15:56:05"
         },
         {
             "name": "mnapoli/silly",
@@ -1521,7 +1980,7 @@
                 "micro-framework",
                 "silly"
             ],
-            "time": "2016-09-16T11:44:03+00:00"
+            "time": "2016-09-16 11:44:03"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -1579,7 +2038,7 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "time": "2019-09-18T18:44:20+00:00"
+            "time": "2019-09-18 18:44:20"
         },
         {
             "name": "monolog/monolog",
@@ -1663,7 +2122,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-07-29T03:23:52+00:00"
+            "time": "2016-07-29 03:23:52"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -1726,7 +2185,7 @@
                 "json",
                 "jsonpath"
             ],
-            "time": "2019-12-30T18:03:34+00:00"
+            "time": "2019-12-30 18:03:34"
         },
         {
             "name": "mustache/mustache",
@@ -1778,7 +2237,7 @@
                 "mustache",
                 "templating"
             ],
-            "time": "2019-11-23T21:40:31+00:00"
+            "time": "2019-11-23 21:40:31"
         },
         {
             "name": "naucon/file",
@@ -1834,7 +2293,7 @@
                 "move",
                 "rename"
             ],
-            "time": "2018-03-09T14:09:29+00:00"
+            "time": "2018-03-09 14:09:29"
         },
         {
             "name": "naucon/utility",
@@ -1892,7 +2351,7 @@
                 "set",
                 "utility"
             ],
-            "time": "2017-05-25T16:43:53+00:00"
+            "time": "2017-05-25 16:43:53"
         },
         {
             "name": "nette/caching",
@@ -1967,7 +2426,7 @@
                 "nette",
                 "sqlite"
             ],
-            "time": "2019-11-19T18:38:13+00:00"
+            "time": "2019-11-19 18:38:13"
         },
         {
             "name": "nette/finder",
@@ -2035,7 +2494,7 @@
                 "iterator",
                 "nette"
             ],
-            "time": "2018-06-28T11:49:23+00:00"
+            "time": "2018-06-28 11:49:23"
         },
         {
             "name": "nette/utils",
@@ -2123,7 +2582,7 @@
                 "utility",
                 "validation"
             ],
-            "time": "2019-11-19T00:32:02+00:00"
+            "time": "2019-11-19 00:32:02"
         },
         {
             "name": "nikic/fast-route",
@@ -2175,7 +2634,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2018-02-13T20:26:39+00:00"
+            "time": "2018-02-13 20:26:39"
         },
         {
             "name": "paragonie/random_compat",
@@ -2230,7 +2689,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2019-01-03T20:59:08+00:00"
+            "time": "2019-01-03 20:59:08"
         },
         {
             "name": "php-curl-class/php-curl-class",
@@ -2303,7 +2762,7 @@
                 "web-service",
                 "xml"
             ],
-            "time": "2020-02-29T05:02:55+00:00"
+            "time": "2020-02-29 05:02:55"
         },
         {
             "name": "php-di/invoker",
@@ -2352,7 +2811,7 @@
                 "invoke",
                 "invoker"
             ],
-            "time": "2016-07-14T13:09:58+00:00"
+            "time": "2016-07-14 13:09:58"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -2435,7 +2894,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2018-11-15T22:32:31+00:00"
+            "time": "2018-11-15 22:32:31"
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -2535,7 +2994,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2019-07-08T21:21:25+00:00"
+            "time": "2019-07-08 21:21:25"
         },
         {
             "name": "pimple/pimple",
@@ -2591,7 +3050,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2018-01-21T07:42:36+00:00"
+            "time": "2018-01-21 07:42:36"
         },
         {
             "name": "psr/container",
@@ -2646,7 +3105,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14T16:28:37+00:00"
+            "time": "2017-02-14 16:28:37"
         },
         {
             "name": "psr/http-message",
@@ -2702,7 +3161,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -2755,7 +3214,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2019-11-01T11:05:21+00:00"
+            "time": "2019-11-01 11:05:21"
         },
         {
             "name": "psr/simple-cache",
@@ -2809,7 +3268,7 @@
                 "psr-16",
                 "simple-cache"
             ],
-            "time": "2017-10-23T01:57:42+00:00"
+            "time": "2017-10-23 01:57:42"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -2855,7 +3314,7 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
-            "time": "2019-03-08T08:55:37+00:00"
+            "time": "2019-03-08 08:55:37"
         },
         {
             "name": "respect/validation",
@@ -2925,7 +3384,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2016-03-31T17:39:15+00:00"
+            "time": "2016-03-31 17:39:15"
         },
         {
             "name": "shuber/curl",
@@ -2959,7 +3418,7 @@
                 "scraper",
                 "spider"
             ],
-            "time": "2012-06-02T20:57:42+00:00"
+            "time": "2012-06-02 20:57:42"
         },
         {
             "name": "slim/csrf",
@@ -3015,7 +3474,7 @@
                 "middleware",
                 "slim"
             ],
-            "time": "2018-08-22T16:12:18+00:00"
+            "time": "2018-08-22 16:12:18"
         },
         {
             "name": "slim/middleware",
@@ -3064,7 +3523,7 @@
                 "middleware",
                 "slim"
             ],
-            "time": "2013-09-18T18:13:40+00:00"
+            "time": "2013-09-18 18:13:40"
         },
         {
             "name": "slim/pdo",
@@ -3117,7 +3576,7 @@
                 "slim"
             ],
             "abandoned": "faapz/pdo",
-            "time": "2017-08-15T10:42:44+00:00"
+            "time": "2017-08-15 10:42:44"
         },
         {
             "name": "slim/php-view",
@@ -3172,7 +3631,7 @@
                 "template",
                 "view"
             ],
-            "time": "2016-03-04T09:48:50+00:00"
+            "time": "2016-03-04 09:48:50"
         },
         {
             "name": "slim/slim",
@@ -3248,7 +3707,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2016-07-26T15:12:13+00:00"
+            "time": "2016-07-26 15:12:13"
         },
         {
             "name": "slim/twig-view",
@@ -3305,7 +3764,7 @@
                 "twig",
                 "view"
             ],
-            "time": "2019-11-28T18:03:50+00:00"
+            "time": "2019-11-28 18:03:50"
         },
         {
             "name": "symfony/console",
@@ -3383,7 +3842,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-15T13:27:16+00:00"
+            "time": "2020-02-15 13:27:16"
         },
         {
             "name": "symfony/css-selector",
@@ -3442,7 +3901,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-04T08:04:52+00:00"
+            "time": "2020-02-04 08:04:52"
         },
         {
             "name": "symfony/debug",
@@ -3504,7 +3963,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-03T15:10:40+00:00"
+            "time": "2020-02-03 15:10:40"
         },
         {
             "name": "symfony/dom-crawler",
@@ -3567,7 +4026,76 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-26T17:12:32+00:00"
+            "time": "2020-02-26 17:12:32"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v3.4.38",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "2f67a869aef3eecf42e7f8be4a8b86c92308686c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/2f67a869aef3eecf42e7f8be4a8b86c92308686c",
+                "reference": "2f67a869aef3eecf42e7f8be4a8b86c92308686c",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "^5.5.9|>=7.0.8"
+            },
+            "conflict": {
+                "symfony/dependency-injection": "<3.3"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~2.8|~3.0|~4.0",
+                "symfony/dependency-injection": "~3.3|~4.0",
+                "symfony/expression-language": "~2.8|~3.0|~4.0",
+                "symfony/stopwatch": "~2.8|~3.0|~4.0"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\EventDispatcher\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony EventDispatcher Component",
+            "homepage": "https://symfony.com",
+            "time": "2020-02-04 08:04:52"
         },
         {
             "name": "symfony/filesystem",
@@ -3623,7 +4151,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2020-01-17T08:50:08+00:00"
+            "time": "2020-01-17 08:50:08"
         },
         {
             "name": "symfony/finder",
@@ -3678,7 +4206,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2020-02-14T07:34:21+00:00"
+            "time": "2020-02-14 07:34:21"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -3742,7 +4270,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "time": "2020-01-13 11:15:53"
         },
         {
             "name": "symfony/polyfill-intl-idn",
@@ -3810,7 +4338,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-01-17T12:01:36+00:00"
+            "time": "2020-01-17 12:01:36"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -3875,7 +4403,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "time": "2020-01-13 11:15:53"
         },
         {
             "name": "symfony/polyfill-php72",
@@ -3936,7 +4464,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "time": "2020-01-13 11:15:53"
         },
         {
             "name": "twig/twig",
@@ -4006,7 +4534,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2020-02-11T05:59:23+00:00"
+            "time": "2020-02-11 05:59:23"
         },
         {
             "name": "wapmorgan/unified-archive",
@@ -4105,7 +4633,7 @@
                 "tar",
                 "zip"
             ],
-            "time": "2020-01-13T00:24:26+00:00"
+            "time": "2020-01-13 00:24:26"
         },
         {
             "name": "workerman/gateway-worker",
@@ -4145,7 +4673,7 @@
                 "communication",
                 "distributed"
             ],
-            "time": "2020-03-09T12:03:30+00:00"
+            "time": "2020-03-09 12:03:30"
         },
         {
             "name": "workerman/workerman",
@@ -4197,7 +4725,7 @@
                 "asynchronous",
                 "event-loop"
             ],
-            "time": "2020-03-13T08:15:30+00:00"
+            "time": "2020-03-13 08:15:30"
         }
     ],
     "packages-dev": [],
