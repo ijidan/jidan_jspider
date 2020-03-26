@@ -2,6 +2,7 @@
 
 namespace Lib;
 
+use Lib\Net\BaseService;
 use Lib\Util\Config;
 use Lib\Util\Paginate;
 
@@ -234,7 +235,6 @@ abstract class BaseSolr {
 	}
 
 
-
 	/**
 	 * 获取Model
 	 * @return BaseSolr
@@ -269,6 +269,40 @@ abstract class BaseSolr {
 			self::$instance[$connectionName] = $client;
 		}
 		return self::$instance[$connectionName];
+	}
+
+	/**
+	 * 分词
+	 * @param $txt
+	 * @param bool $rawData
+	 * @param string $fieldType
+	 * @return array
+	 * @throws \ErrorException
+	 */
+	public static function splitWord($txt, $rawData = false, $fieldType = 'text_smartcn') {
+		$model = self::getModel();
+		$solr = $model->solr;
+		$options = $solr->getOptions();
+		$host = $options['hostname'];
+		$port = $options['port'];
+		$path = $options['path'];
+		$coreName = $model->getCoreName();
+		$url = "http://{$host}:{$port}/{$path}/analysis/field";
+		$params = [
+			'analysis.fieldtype'  => $fieldType,
+			'analysis.fieldvalue' => $txt,
+			'analysis.showmatch'  => 'true',
+			'verbose_output'      => 0,
+			'wt'                  => 'json'
+		];
+		$rsp = BaseService::sendGetRequest($url, $params);
+		if ($rsp->fail()) {
+			return [];
+		}
+		$jsonData = $rsp->getData();
+		$data = \json_decode($jsonData, true);
+		$data = $data['analysis']['field_types'][$fieldType]['index'][1];
+		return $rawData ? $data : array_column($data, 'text');
 	}
 
 	/**
