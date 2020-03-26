@@ -2,26 +2,21 @@
 
 namespace Lib;
 
-use Lib\DataBase\BaseDeleteStatement;
-use Lib\DataBase\BaseInsertStatement;
-use Lib\DataBase\BaseSelectStatement;
-use Lib\DataBase\BaseUpdateStatement;
 use Lib\Util\Config;
 use Lib\Util\Paginate;
-use PSolr\Client\SolrClient;
-use PSolr\Request\Add;
-use PSolr\Request\Document;
 
 /**
+ * 基础Model
  * Class BaseSolr
  * @package Lib
  */
 abstract class BaseSolr {
 
 	/**
-	 * @var SolrClient $solr
+	 * @var \SolrClient $solr
 	 */
 	protected $solr;
+
 	/**
 	 * @var null
 	 */
@@ -35,25 +30,22 @@ abstract class BaseSolr {
 	public function __construct() {
 	}
 
-
 	/**
 	 * 查找一个
-	 * @param string $where
-	 * @param array $values
+	 * @param array $qKvMap
 	 * @param string $order
 	 * @param string $orderType
 	 * @return array|mixed
 	 * @throws \ErrorException
 	 */
-	public static function findOne($where = "", array $values = [], $order = "", $orderType = "ASC") {
-		$data = self::find($where, $values, $order, $orderType);
+	public static function findOne(array $qKvMap, $order = "", $orderType = "ASC") {
+		$data = self::find($qKvMap, $order, $orderType, 0, 1);
 		return $data ? $data[0] : [];
 	}
 
 	/**
 	 * 查找
-	 * @param string $where
-	 * @param array $values
+	 * @param array $qKvMap
 	 * @param string $order
 	 * @param string $orderType
 	 * @param int $offset
@@ -61,138 +53,187 @@ abstract class BaseSolr {
 	 * @return array
 	 * @throws \ErrorException
 	 */
-	public static function find($where = "", array $values = [], $order = "", $orderType = "ASC", $offset = 0, $limit = 0) {
+	public static function find(array $qKvMap, $order = "", $orderType = "ASC", $offset = 0, $limit = 0) {
 		$model = self::getModel();
-		if (strpos($where, 'platform') !== false) {
+		$solr = $model->solr;
+		$qList = [];
+		foreach ($qKvMap as $key => $value) {
+			$qList[] = "{$key}:{$value}";
 		}
-		$fullTableName = $model->getFullTableName();
-		/** @var BaseSelectStatement $selectStatement */
-		$selectStatement = $model->pdo->select()->from($fullTableName);
-		self::buildWhere($selectStatement, $where, $values);
+		$qString = $qList ? join(' AND ', $qList) : '*:*';
+		$query = new \SolrQuery();
+		$query->setQuery($qString);
+		if ($order && $orderType) {
+			$map = [
+				'asc'  => \SolrQuery::ORDER_ASC,
+				'desc' => \SolrQuery::ORDER_DESC
+			];
+			$query->addSortField($order, $map[strtolower($orderType)]);
+		}
+		if ($offset) {
+			$query->setStart($offset);
+		}
 		if ($limit) {
-			$selectStatement->limit($limit, $offset);
+			$query->setRows($limit);
 		}
-		if ($order) {
-			$selectStatement->orderBy($order, $orderType);
+		$response = $solr->query($query);
+		if (!$response->success()) {
+			return [];
 		}
-		$stmt = $selectStatement->execute();
-		$data = $stmt->fetchAll();
-		return $data;
+		$resArray = $response->getArrayResponse();
+		$docs = $resArray['response']['docs'];
+		return $docs;
 	}
 
 	/**
 	 * 分页查询
 	 * @param Paginate $paginate
-	 * @param string $where
-	 * @param array $values
+	 * @param array $qKvMap
 	 * @param string $order
 	 * @param string $orderType
 	 * @return array
 	 * @throws \ErrorException
 	 */
-	public static function paginate(Paginate &$paginate, $where = "", array $values = [], $order = "", $orderType = "ASC") {
+	public static function paginate(Paginate &$paginate, array $qKvMap, $order = "", $orderType = "ASC") {
 		$model = self::getModel();
 		$limit = $paginate->getLimit();
-		$count = $model->count($where, $values);
+		$count = $model->count($qKvMap);
 		$paginate->setItemTotal($count);
-		$data = $model->find($where, $values, $order, $orderType, $limit[0], $limit[1]);
+		$data = $model->find($qKvMap, $order, $orderType, $limit[0], $limit[1]);
 		return $data;
 	}
 
+
 	/**
 	 * 查询总数
-	 * @param string $where
-	 * @param array $values
+	 * @param array $qKvMap
 	 * @return int
 	 * @throws \ErrorException
 	 */
-	public static function count($where = "", array $values = []) {
+	public static function count(array $qKvMap) {
 		$model = self::getModel();
-		$fullTableName = $model->getFullTableName();
-		/** @var BaseSelectStatement $selectStatement */
-		$selectStatement = $model->pdo->select()->from($fullTableName);
-		self::buildWhere($selectStatement, $where, $values);
-		$stmt = $selectStatement->execute();
-		$cnt = $stmt->rowCount();
+		$solr = $model->solr;
+		$qList = [];
+		foreach ($qKvMap as $key => $value) {
+			$qList[] = "{$key}:{$value}";
+		}
+		$qString = $qList ? join(' AND ', $qList) : '*:*';
+		$query = new \SolrQuery();
+		$query->setQuery($qString);
+		$response = $solr->query($query);
+		if (!$response->success()) {
+			return 0;
+		}
+		$resArray = $response->getArrayResponse();
+		$cnt = $resArray['response']['numFound'];
 		return $cnt;
 	}
 
 	/**
-	 * 插入数据
+	 * 插入一条数据
 	 * @param array $kvMap
-	 * @return \PSolr\Response\Response|\SimpleXMLElement
+	 * @return mixed
 	 * @throws \ErrorException
 	 */
 	public static function insert(array $kvMap) {
+		ksort($kvMap);
 		$model = self::getModel();
-		$solr=$model->solr;
-		$add = Add::factory();
-		$document        = new Document();
-		foreach ($kvMap as $key=>$value){
-			$document->$key=$value;
+		$solr = $model->solr;
+		$doc = new \SolrInputDocument();
+		foreach ($kvMap as $key => $value) {
+			$doc->addField($key, $value);
 		}
-		$add->addDocument($document);
-		$response = $add->sendRequest($solr,['Content-Type'=>'application/json']);
-		return  $response;
+		$solr->addDocument($doc);
+		$response = $solr->commit();
+		return $response;
+	}
+
+	/**
+	 * 批量插入多条数据
+	 * @param array $kvMapList
+	 * @throws \ErrorException
+	 */
+	public static function batchInsert(array $kvMapList) {
+		if (count($kvMapList) == count($kvMapList, 1)) {
+			throw new \InvalidArgumentException('must be a multi array');
+		}
+		foreach ($kvMapList as $kvMap) {
+			self::insert($kvMap);
+		}
 	}
 
 	/**
 	 * 更新
-	 * @param array $kvMap_
-	 * @param string $where
-	 * @param array $values_
-	 * @return int
+	 * @param array $qKvMap
+	 * @param $id
+	 * @return mixed
 	 * @throws \ErrorException
 	 */
-	public static function update(array $kvMap_, $where = "", array $values_ = []) {
-		$argsNum = func_num_args();
-		if ($argsNum == 2) {
-			$_kvMap = $_values = [];
-			self::genKvMapAndValues($kvMap_, $_kvMap, $_values);
-			$kvMap = $_kvMap;
-			$values = $_values;
-		} else {
-			$kvMap = $kvMap_;
-			$values = $values_;
+	public static function update(array $qKvMap, $id) {
+		if (!$qKvMap) {
+			throw new \InvalidArgumentException('qkvMap cant be empty');
 		}
-
 		$model = self::getModel();
-		$fullTableName = $model->getFullTableName();
-		/** @var BaseUpdateStatement $updateStatement */
-		$updateStatement = $model->pdo->update($kvMap)->table($fullTableName);
-		self::buildWhere($updateStatement, $where, $values);
-		$affectedRows = $updateStatement->execute();
-		return $affectedRows;
+		$solr = $model->solr;
+		$qList = ["id:{$id}"];
+		foreach ($qKvMap as $key => $value) {
+			$qList[] = "{$key}:{$value}";
+		}
+		$qString = join(' AND ', $qList);
+		$query = new \SolrQuery();
+		$query->setQuery($qString);
+		$response = $solr->commit();
+		return $response->success();
 	}
 
 	/**
 	 * 删除
-	 * @param string $where
-	 * @param array $values
-	 * @return int
+	 * @param array $qKvMap
+	 * @return mixed
 	 * @throws \ErrorException
 	 */
-	public static function delete($where = "", array $values = []) {
+	public static function delete(array $qKvMap) {
 		$model = self::getModel();
-		$fullTableName = $model->getFullTableName();
-		/** @var BaseDeleteStatement $deleteStatement */
-		$deleteStatement = $model->pdo->delete()->from($fullTableName);
-		self::buildWhere($deleteStatement, $where, $values);
-		$affectedRows = $deleteStatement->execute();
-		return $affectedRows;
+		$solr = $model->solr;
+		$qList = [];
+		foreach ($qKvMap as $key => $value) {
+			$qList[] = "{$key}:{$value}";
+		}
+		$qString = $qList ? join(' AND ', $qList) : '*:*';
+		$solr->deleteByQuery($qString);
+		$response = $solr->commit();
+		return $response->success();
 	}
 
 	/**
-	 * @param BaseSelectStatement|BaseInsertStatement|BaseUpdateStatement|BaseDeleteStatement $statement
-	 * @param string $where
-	 * @param array $values
+	 * 根据唯一ID删除
+	 * @param $id
+	 * @return mixed
+	 * @throws \ErrorException
 	 */
-	private static function buildWhere(&$statement, $where = "", array $values = []) {
-		if ($where) {
-			$statement->setConditionWhere($where);
-			$statement->setConditionValues($values);
-		}
+	public static function deleteById($id) {
+		$model = self::getModel();
+		$solr = $model->solr;
+		$solr->deleteById($id);
+		$response = $solr->commit();
+		return $response->success();
 	}
+
+	/**
+	 * 根据唯一ID批量删除
+	 * @param array $ids
+	 * @return mixed
+	 * @throws \ErrorException
+	 */
+	public static function deleteByIds(array $ids) {
+		$model = self::getModel();
+		$solr = $model->solr;
+		$solr->deleteByIds($ids);
+		$response = $solr->commit();
+		return $response->success();
+	}
+
+
 
 	/**
 	 * 获取Model
@@ -209,7 +250,6 @@ abstract class BaseSolr {
 		return $model;
 	}
 
-
 	/**
 	 * 单例
 	 * @param $connectionName
@@ -223,50 +263,12 @@ abstract class BaseSolr {
 			if (!isset($solrConfig[$connectionName])) {
 				throw new \RuntimeException('solr连接配置不存在：' . $connectionName);
 			}
-			$dbConfig = $solrConfig[$connectionName];
-			$host = $dbConfig["host"];
-			$port = $dbConfig["port"];
-			$solr = SolrClient::factory(array(
-				'base_url'  => "http://{$host}:{$port}",
-				'base_path' => "/solr/{$coreName}",
-			));
-			self::$instance[$connectionName] = $solr;
+			$config = $solrConfig[$connectionName];
+			$config['path'] = "/solr/{$coreName}";
+			$client = new \SolrClient($config);
+			self::$instance[$connectionName] = $client;
 		}
 		return self::$instance[$connectionName];
-	}
-
-	/**
-	 * 构造Question Mark
-	 * @param array $data
-	 * @return string
-	 */
-	public static function buildQuestionMark(array $data) {
-		if (!$data) {
-			throw new \InvalidArgumentException("param error");
-		}
-		$questionMark = "";
-		array_walk($data, function ($item) use (&$questionMark) {
-			$questionMark .= "?,";
-		});
-		$questionMark = rtrim($questionMark, ",");
-		return $questionMark;
-	}
-
-	/**
-	 * 产生相关的数据
-	 * @param $insData
-	 * @param array $kvMap
-	 * @param array $values
-	 */
-	public static function genKvMapAndValues($insData, array &$kvMap, array &$values) {
-		$kvMap_ = [];
-		$values_ = [];
-		array_walk($insData, function ($value, $key) use (&$kvMap_, &$values_) {
-			$kvMap_[$key] = "?";
-			array_push($values_, $value);
-		});
-		$kvMap = $kvMap_;
-		$values = $values_;
 	}
 
 	/**

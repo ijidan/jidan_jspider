@@ -1,21 +1,22 @@
 <?php
+
 namespace App\Models;
 
 use Lib\BaseSolr;
 
 /**
- * Class JCG
+ * 房源
+ * Class House
  * @package App\Models
  */
-class JCG extends BaseSolr
-{
+class House extends BaseSolr {
 
 	/**
 	 * 数据库名
 	 * @return mixed
 	 */
 	public function getConnectionName() {
-		return 'jcg';
+		return 'house';
 	}
 
 	/**
@@ -23,6 +24,6 @@ class JCG extends BaseSolr
 	 * @return mixed
 	 */
 	public function getCoreName() {
-		return 'jcg';
+		return 'house';
 	}
 }
