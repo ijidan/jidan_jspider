@@ -164,27 +164,33 @@ abstract class BaseSolr {
 	}
 
 	/**
-	 * 更新
-	 * @param array $qKvMap
-	 * @param $id
-	 * @return mixed
+	 * 更新 //TODO 如果数据量太大，导致URL太长会报错
+	 * @param array $kvMap
+	 * @param $uniqueKey
+	 * @param $uniqueKeyValue
+	 * @return bool
 	 * @throws \ErrorException
 	 */
-	public static function update(array $qKvMap, $id) {
-		if (!$qKvMap) {
+	public static function update(array $kvMap, $uniqueKey, $uniqueKeyValue) {
+		if (!$kvMap) {
 			throw new \InvalidArgumentException('qkvMap cant be empty');
 		}
-		$model = self::getModel();
-		$solr = $model->solr;
-		$qList = ["id:{$id}"];
-		foreach ($qKvMap as $key => $value) {
-			$qList[] = "{$key}:{$value}";
+		$idxData = [$uniqueKey => $uniqueKeyValue];
+		foreach ($kvMap as $key => $value) {
+			$map = ['set' => $value];
+			$idxData[$key] = $map;
 		}
-		$qString = join(' AND ', $qList);
-		$query = new \SolrQuery();
-		$query->setQuery($qString);
-		$response = $solr->commit();
-		return $response->success();
+		//Base Url
+		$baseUrl = self::buildSolrBaseUrl();
+		$url = $baseUrl . '/update/json';
+		$params = [
+			'stream.body'        => \json_encode([$idxData]),
+			'stream.contentType' => 'application/json',
+			'commit'             => 'true',
+			'json.command'       => 'true'
+		];
+		$rsp = BaseService::sendGetRequest($url, $params);
+		return $rsp->success();
 	}
 
 	/**
@@ -251,6 +257,22 @@ abstract class BaseSolr {
 	}
 
 	/**
+	 * 构造BASE URL
+	 * @return string
+	 * @throws \ErrorException
+	 */
+	private static function buildSolrBaseUrl() {
+		$model = self::getModel();
+		$solr = $model->solr;
+		$options = $solr->getOptions();
+		$host = $options['hostname'];
+		$port = $options['port'];
+		$path = $options['path'];
+		$url = "http://{$host}:{$port}/{$path}";
+		return $url;
+	}
+
+	/**
 	 * 单例
 	 * @param $connectionName
 	 * @param $coreName
@@ -278,16 +300,11 @@ abstract class BaseSolr {
 	 * @param string $fieldType
 	 * @return array
 	 * @throws \ErrorException
+	 * @throws \Exception
 	 */
 	public static function splitWord($txt, $rawData = false, $fieldType = 'text_smartcn') {
-		$model = self::getModel();
-		$solr = $model->solr;
-		$options = $solr->getOptions();
-		$host = $options['hostname'];
-		$port = $options['port'];
-		$path = $options['path'];
-		$coreName = $model->getCoreName();
-		$url = "http://{$host}:{$port}/{$path}/analysis/field";
+		$baseUrl = self::buildSolrBaseUrl();
+		$url = $baseUrl . '/analysis/field';
 		$params = [
 			'analysis.fieldtype'  => $fieldType,
 			'analysis.fieldvalue' => $txt,
