@@ -26,8 +26,7 @@ class BaseService {
 	 * @return \GuzzleHttp\Psr7\Response|\Lib\Net\Response|mixed|null|\Psr\Http\Message\ResponseInterface
 	 * @throws \Exception
 	 */
-	public static function sendGetRequest($host = "", array $param = [], array $requestConfig = [])
-	{
+	public static function sendGetRequest($host = "", array $param = [], array $requestConfig = []) {
 		return self::sendRequest(Request::METHOD_GET, $host, $param, $requestConfig);
 	}
 
@@ -39,9 +38,47 @@ class BaseService {
 	 * @return \GuzzleHttp\Psr7\Response|\Lib\Net\Response|mixed|null|\Psr\Http\Message\ResponseInterface
 	 * @throws \Exception
 	 */
-	public static function sendPostRequest($host = "", array $param = [], array $requestConfig = [])
-	{
+	public static function sendPostRequest($host = "", array $param = [], array $requestConfig = []) {
 		return self::sendRequest(Request::METHOD_POST, $host, $param, $requestConfig);
+	}
+
+
+	/**
+	 * 文件上传
+	 * @param string $host
+	 * @param string $filePath
+	 * @param string $name
+	 * @param array $requestConfig
+	 * @return \GuzzleHttp\Psr7\Response|Response|\Psr\Http\Message\ResponseInterface|null
+	 * @throws \Exception
+	 */
+	public static function sendFile($host = "", $filePath = "",  $name='upfile',array $requestConfig = []) {
+		$content = fopen($filePath, 'r');
+		$param = [
+			'name'     => $name,
+			'contents' => $content
+		];
+		/** @var Request $request */
+		$request = Request::instance($requestConfig);
+		$request->setUrl($host);
+		$request->setParams($param);
+		return $request->sendFile();
+	}
+
+	/**
+	 * 下载文件
+	 * @param $host
+	 * @param string $destPath
+	 * @param array $requestConfig
+	 * @return Response|null
+	 * @throws \Exception
+	 */
+	public static function getFile($host,$destPath="/tmp/",array $requestConfig = []){
+		/** @var Request $request */
+		$request = Request::instance($requestConfig);
+		$request->setUrl($host);
+		$request->setParams(['dest_path'=> $destPath]);
+		return $request->getFile();
 	}
 
 	/**
@@ -52,8 +89,7 @@ class BaseService {
 	 * @return \GuzzleHttp\Psr7\Response|\Lib\Net\Response|mixed|null|\Psr\Http\Message\ResponseInterface
 	 * @throws \Exception
 	 */
-	public static function sendPutRequest($host = "", array $params = [], array $requestConfig = [])
-	{
+	public static function sendPutRequest($host = "", array $params = [], array $requestConfig = []) {
 		return self::sendRequest(Request::METHOD_PUT, $host, $params, $requestConfig);
 	}
 
@@ -66,8 +102,7 @@ class BaseService {
 	 * @return \GuzzleHttp\Psr7\Response|\Lib\Net\Response|mixed|null|\Psr\Http\Message\ResponseInterface
 	 * @throws \Exception
 	 */
-	private static function sendRequest($method, $host = "", array $param = [], array $requestConfig = [])
-	{
+	private static function sendRequest($method, $host = "", array $param = [], array $requestConfig = []) {
 		/** @var Request $request */
 		$request = Request::instance($requestConfig);
 		$request->setMethod($method);
@@ -85,8 +120,7 @@ class BaseService {
 	 * @throws \Exception
 	 * @internal param $keyItem
 	 */
-	protected static function doGetRequest($configKey, array $params, array $requestConfig = [])
-	{
+	protected static function doGetRequest($configKey, array $params, array $requestConfig = []) {
 		$host = self::getRequestHost($configKey);
 		$response = self::sendGetRequest($host, $params, $requestConfig);
 		if ($response->fail()) {
@@ -104,8 +138,7 @@ class BaseService {
 	 * @return null
 	 * @throws \Exception
 	 */
-	protected static function doPostRequest($configKey, array $params, array $requestConfig = [])
-	{
+	protected static function doPostRequest($configKey, array $params, array $requestConfig = []) {
 		$host = self::getRequestHost($configKey);
 		$response = self::sendPostRequest($host, $params, $requestConfig);
 		if ($response->fail()) {
@@ -123,8 +156,7 @@ class BaseService {
 	 * @return bool
 	 * @throws \Exception
 	 */
-	protected static function doPutRequest($configKey, array $params, array $requestConfig = [])
-	{
+	protected static function doPutRequest($configKey, array $params, array $requestConfig = []) {
 		$host = self::getRequestHost($configKey);
 		$response = self::sendPutRequest($host, $params, $requestConfig);
 		if ($response->fail()) {
@@ -138,8 +170,7 @@ class BaseService {
 	 * @param $key
 	 * @return mixed
 	 */
-	public static function getRequestHost($key)
-	{
+	public static function getRequestHost($key) {
 		$key = "service_config/" . $key;
 		$host = Config::getConfigItem($key);
 		return $host;

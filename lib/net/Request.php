@@ -6,6 +6,7 @@ use App\Models\Queue;
 use GuzzleHttp\Client;
 use Lib\BaseLogger;
 use Lib\Util\UuidUtil;
+use SplFileInfo;
 
 /**
  * 请求类
@@ -48,7 +49,7 @@ class Request {
 	 * 行为配置
 	 * @var array
 	 */
-	private $customConfig=array();
+	private $customConfig = array();
 
 	/**
 	 * 配置文件
@@ -126,7 +127,7 @@ class Request {
 	 * @return array
 	 */
 	public function setParams(array $params) {
-		$mergedParams=isset($this->customConfig['need_uuid']) && $this->customConfig['need_uuid']==false ? $params:array_merge($params, ["uuid" => $this->uuid]);
+		$mergedParams = isset($this->customConfig['need_uuid']) && $this->customConfig['need_uuid'] == false ? $params : array_merge($params, ["uuid" => $this->uuid]);
 		return $this->params = $this->method == self::METHOD_GET ? $mergedParams : $params;
 	}
 
@@ -178,7 +179,6 @@ class Request {
 		}
 		*/
 		$this->startTime = microtime(true);
-		$response = null;
 		$httpClient = new Client($this->guzzleHttpConfig);
 		try {
 			switch ($this->method) {
@@ -187,45 +187,18 @@ class Request {
 					$link = $this->url . "?" . http_build_query($this->params);
 					$link = urldecode($link);
 					//pr($link,$config,1);
-					$response = $httpClient->get($this->url, $config);
+					$rsp = $httpClient->get($this->url, $config);
 					break;
 				case self::METHOD_POST:
 					$config = array_merge($this->guzzleHttpConfig, ['body' => \json_encode($this->params)]);
-					$response = $httpClient->post($this->url, $config);
+					$rsp = $httpClient->post($this->url, $config);
 					break;
 				case self::METHOD_PUT:
 					$config = array_merge($this->guzzleHttpConfig, ['body' => \json_encode($this->params)]);
-					$response = $httpClient->put($this->url, $config);
+					$rsp = $httpClient->put($this->url, $config);
 			}
-			/** @var \GuzzleHttp\Psr7\Response $response */
-			$statusCode = $response->getStatusCode();
-			$message = $response->getReasonPhrase();
-			if ($statusCode != Response::HTTP_STATUS_CODE_SUCCESS) {
-				//记录日志
-				$this->addLog($statusCode, "", $message);
-				$response = new Response(RetCode::REQ_FAIL, $message, []);
-			} else {
-				$contents = $response->getBody()->getContents();
-				//记录日志
-				$this->addLog($statusCode, $contents, "请求成功");
-				$result = json_decode($contents, true);
-				//判断是否JSON
-				if (json_last_error() == JSON_ERROR_NONE && $result) {
-					if (isset($result['code'])) {
-						if ($result['code'] == RetCode::SUCCESS) {
-							$data = isset($result['data']) ? $result['data'] : [];
-							$response = new Response(RetCode::UNKNOWN, '', $data, $message);
-						} else {
-							//记录日志
-							$response = new Response(RetCode::JSON_PARSE_FAIL, $message, $result);
-						}
-					} else {
-						$response = new Response(RetCode::SUCCESS, 'JSON格式', $contents, $message);
-					}
-				} else {
-					$response = new Response(RetCode::SUCCESS, '非JSON格式', $contents, $message);
-				}
-			}
+			/** @var \GuzzleHttp\Psr7\Response $rsp */
+			$response = $this->handleResponse($rsp);
 		} catch (\Exception $e) {
 			$msg = $e->getMessage();
 			//记录日志
@@ -235,6 +208,110 @@ class Request {
 			//$this->sendRequestExceptionMail($msg);
 		}
 		return $response;
+	}
+
+	/**
+	 * 处理响应
+	 * @param \GuzzleHttp\Psr7\Response $rsp
+	 * @return Response
+	 */
+	private function handleResponse($rsp) {
+		$statusCode = $rsp->getStatusCode();
+		$message = $rsp->getReasonPhrase();
+		if ($statusCode != Response::HTTP_STATUS_CODE_SUCCESS) {
+			//记录日志
+			$this->addLog($statusCode, "", $message);
+			$response = new Response(RetCode::REQ_FAIL, $message, []);
+		} else {
+			$contents = $rsp->getBody()->getContents();
+			//记录日志
+			$this->addLog($statusCode, $contents, "请求成功");
+			$result = json_decode($contents, true);
+			//判断是否JSON
+			if (json_last_error() == JSON_ERROR_NONE && $result) {
+				if (isset($result['code'])) {
+					if ($result['code'] == RetCode::SUCCESS) {
+						$data = isset($result['data']) ? $result['data'] : [];
+						$response = new Response(RetCode::UNKNOWN, '', $data, $message);
+					} else {
+						//记录日志
+						$response = new Response(RetCode::JSON_PARSE_FAIL, $message, $result);
+					}
+				} else {
+					$response = new Response(RetCode::SUCCESS, 'JSON格式', $contents, $message);
+				}
+			} else {
+				$response = new Response(RetCode::SUCCESS, '非JSON格式', $contents, $message);
+			}
+		}
+		return $response;
+	}
+
+	/**
+	 * 发送文件
+	 * @return \GuzzleHttp\Psr7\Response|Response|\Psr\Http\Message\ResponseInterface|null
+	 * @throws \Exception
+	 */
+	public function sendFile() {
+		if (!$this->url) {
+			throw new \Exception('REQUEST NEED HOST');
+		}
+		$this->startTime = microtime(true);
+		$response = null;
+		$httpClient = new Client($this->guzzleHttpConfig);
+		try {
+			$body = ['multipart' => [$this->params]];
+			$config = array_merge($this->guzzleHttpConfig, $body);
+			$rsp = $httpClient->post($this->url, $config);
+			/** @var \GuzzleHttp\Psr7\Response $rsp */
+			$response = $this->handleResponse($rsp);
+		} catch (\Exception $e) {
+			$msg = $e->getMessage();
+			//记录日志
+			$this->addLog(0, "", "请求异常" . $msg);
+			$response = new Response(RetCode::UNKNOWN, $msg, []);
+		}
+		return $response;
+	}
+
+	/**
+	 * 下载图片
+	 * @return Response|null
+	 * @throws \Exception
+	 */
+	public function getFile() {
+		if (!$this->url) {
+			throw new \Exception('REQUEST NEED HOST');
+		}
+		$this->startTime = microtime(true);
+		$response = null;
+		$httpClient = new Client($this->guzzleHttpConfig);
+		try {
+			$file = new SplFileInfo($this->url);
+			$ext = $file->getExtension();
+			$destPath = $this->params['dest_path'];
+			$fileName = 'dn_' . time() . rand(1, 100000) . '.' . $ext;
+			$filePath = $destPath . $fileName;
+			$body = ['save_to' => $filePath];
+			$config = array_merge($this->guzzleHttpConfig, $body);
+			$rsp = $httpClient->get($this->url, $config);
+			$statusCode = $rsp->getStatusCode();
+			$message = $rsp->getReasonPhrase();
+			if ($statusCode != Response::HTTP_STATUS_CODE_SUCCESS) {
+				//记录日志
+				$this->addLog($statusCode, "", $message);
+				$response = new Response(RetCode::REQ_FAIL, $message, []);
+			} else {
+				$response = new Response(RetCode::SUCCESS, '下载成功', ['path' => $filePath], $message);
+			}
+		} catch (\Exception $e) {
+			$msg = $e->getMessage();
+			//记录日志
+			$this->addLog(0, "", "请求异常" . $msg);
+			$response = new Response(RetCode::UNKNOWN, $msg, []);
+		}
+		return $response;
+
 	}
 
 	/**
