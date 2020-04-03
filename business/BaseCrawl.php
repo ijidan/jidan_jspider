@@ -68,6 +68,8 @@ abstract class BaseCrawl {
 	 */
 	protected $platform = '';
 
+	protected $platformsSubDir='';
+
 	/**
 	 * @var Cache
 	 */
@@ -106,7 +108,11 @@ abstract class BaseCrawl {
 		$this->isConsole = $this->isConsole();
 		$this->isOutputLog = $this->isConsole && $output;
 		$this->computePlatform();
-		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->platform . '/';
+		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->platform;
+		if($this->platformsSubDir){
+			$this->cacheDir.='/'.$this->platformsSubDir;
+		}
+		$this->cacheDir.='/';
 		$userAgent = UserAgent::random();
 		$guzzleConfig = [
 			'timeout' => 20,
