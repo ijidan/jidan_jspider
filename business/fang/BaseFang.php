@@ -34,9 +34,8 @@ class BaseFang extends BaseCrawl {
 	 * @return int|mixed
 	 */
 	public function computeListPageUrl($page = 1) {
-		$url = $this->baseUrl . 'news/market_{{pageIdx}}.htm';
-		$page = str_replace('{{pageIdx}}', $page, $url);
-		return $page;
+		$url = $this->baseUrl . "news/market_{$page}.htm";
+		return $url;
 	}
 
 	/**
@@ -60,7 +59,6 @@ class BaseFang extends BaseCrawl {
 		$content = $this->fetchContent($fileName, $shortUrl);
 		$pattern = '/<a rel=\"nofollow\" href=\"\/news\/market_(\d+)\.htm\">尾页<\/a>/';
 		$pageCnt = $this->regComputeOnlyOneData($content, $pattern);
-		$this->success("总页数抓取结束：一共 {$pageCnt} 页");
 		return $pageCnt;
 	}
 
@@ -83,8 +81,9 @@ class BaseFang extends BaseCrawl {
 			});
 		}
 		$thumbnailList = $this->computeData($content, '.fl img', 'src');
+		$abstractList = $this->computeData($content, '.fr p');
 		//ID入库
-		$this->doId($idList, $thumbnailList);
+		$this->doId($idList, $thumbnailList,$abstractList);
 		$newIdList = array_filter($idList, function ($value) {
 			return $value > 0;
 		});
@@ -151,7 +150,7 @@ class BaseFang extends BaseCrawl {
 		$insData = [
 			'f_country'     => $this->country,
 			'f_title'       => $title,
-			'f_abstract'    => $abstract,
+			'f_content_abstract'    => $abstract,
 			'f_content'     => $content,
 			'f_update_time' => time()
 		];
@@ -176,10 +175,11 @@ class BaseFang extends BaseCrawl {
 	 * ID入库
 	 * @param array $idList
 	 * @param array $thumbnailList
+	 * @param array $abstractList
 	 * @return bool
 	 * @throws \ErrorException
 	 */
-	private function doId(array $idList, array $thumbnailList) {
+	private function doId(array $idList, array $thumbnailList,array $abstractList) {
 		if (!$idList) {
 			return false;
 		}
@@ -189,10 +189,12 @@ class BaseFang extends BaseCrawl {
 				continue;
 			}
 			$thumbnail = isset($thumbnailList[$idx]) ? $thumbnailList[$idx] : '';
+			$abstract=isset($abstractList[$idx]) ? $abstractList[$idx] : '';
 			$record = News::findOne('f_origin_id=?', [$id]);
 			$insData = [
 				'f_country'     => $this->country,
 				'f_thumbnail'   => $thumbnail,
+				'f_abstract'=> $abstract,
 				'f_update_time' => time()
 			];
 			if ($record) {
@@ -239,7 +241,7 @@ class BaseFang extends BaseCrawl {
 	 * @throws Exception
 	 */
 	public function crawl() {
-		$this->info('总页数住区开始');
+		$this->info('总页数抓取开始');
 		$firstListPat = $this->computeListPageUrl(1);
 		$pageCnt = $this->crawlPageCnt($firstListPat);
 		$pageCnt = 1;

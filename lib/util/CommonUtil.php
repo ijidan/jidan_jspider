@@ -378,11 +378,21 @@ class CommonUtil {
 	 * @param array $array
 	 * @return array
 	 */
-	public static function Array2String(array $array){
-		$convertedArray=[];
-		foreach ($array as $idx=>$val){
-			$convertedArray[$idx]=is_array($val)?join(',',$val):$val;
+	public static function Array2String(array $array) {
+		$convertedArray = [];
+		foreach ($array as $idx => $val) {
+			$convertedArray[$idx] = is_array($val) ? join(',', $val) : $val;
 		}
 		return $convertedArray;
+	}
+
+	/**
+	 * 是否是正则表达式
+	 * @param $str
+	 * @return bool
+	 */
+	public static function isReg($str) {
+		$preg = "/^\/.*\/$/";
+		return preg_match($preg, $str) ? true : false;
 	}
 }
