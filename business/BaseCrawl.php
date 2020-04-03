@@ -68,7 +68,7 @@ abstract class BaseCrawl {
 	 */
 	protected $platform = '';
 
-	protected $platformsSubDir='';
+	protected $platformsSubDir = '';
 
 	/**
 	 * @var Cache
@@ -109,10 +109,10 @@ abstract class BaseCrawl {
 		$this->isOutputLog = $this->isConsole && $output;
 		$this->computePlatform();
 		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->platform;
-		if($this->platformsSubDir){
-			$this->cacheDir.='/'.$this->platformsSubDir;
+		if ($this->platformsSubDir) {
+			$this->cacheDir .= '/' . $this->platformsSubDir;
 		}
-		$this->cacheDir.='/';
+		$this->cacheDir .= '/';
 		$userAgent = UserAgent::random();
 		$guzzleConfig = [
 			'timeout' => 20,
@@ -451,6 +451,30 @@ abstract class BaseCrawl {
 				}
 			} else {
 				$content = preg_replace($replacePattern, '', $content);
+			}
+		}
+		return $content;
+	}
+
+	/**
+	 * 根据位置替换内容
+	 * @param $content
+	 * @param array $replacePatternList
+	 * @return mixed
+	 */
+	protected function computePositionRemovedContent($content, array $replacePatternList) {
+		foreach ($replacePatternList as $express => $replaceArr) {
+			$re = preg_match_all($express, $content, $matches);
+			if ($re === false) {
+				continue;
+			}
+			$matchList = $matches[0];
+			foreach ($replaceArr as $idx => $value) {
+				$_idx = $idx >= 0 ? $idx : count($matchList) - abs($idx);
+				$find = isset($matchList[$_idx]) ? $matchList[$_idx] : "";
+				if ($find) {
+					$content = str_replace($find, '', $content);
+				}
 			}
 		}
 		return $content;

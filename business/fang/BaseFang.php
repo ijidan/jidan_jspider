@@ -17,9 +17,11 @@ use Model\Spider\NewsSeq;
  */
 class BaseFang extends BaseCrawl {
 
+	public $platformsSubDir = ''; //子目录
 	public $country = ''; //国家
 
-	public $detailReplacePatternList = []; //想起替换正则
+	public $detailReplacePatternList = []; //详情替换正则
+	public $detailRemovePositionPatternList = []; //详情页按照位置替换内容正则
 
 	public $removeKeywordsContainerExpress = '';
 	public $removeKeywords = [];
@@ -83,14 +85,17 @@ class BaseFang extends BaseCrawl {
 		$thumbnailList = $this->computeData($content, '.fl img', 'src');
 		//ID入库
 		$this->doId($idList, $thumbnailList);
-		$cnt = count($idList);
+		$newIdList = array_filter($idList, function ($value) {
+			return $value > 0;
+		});
+		$cnt = count($newIdList);
 		$msg = "所有ID抓取结束：一共 {$cnt} 个";
 		if ($cnt) {
 			$this->success($msg);
 		} else {
 			$this->warning($msg);
 		}
-		return $idList;
+		return $newIdList;
 	}
 
 	/**
@@ -107,13 +112,15 @@ class BaseFang extends BaseCrawl {
 		$htmlContent = $this->fetchContent($fileName, $url);
 		$title = $this->computeOnlyOneData($htmlContent, '.textTit h1');
 		$abstract = $this->computeOnlyOneData($htmlContent, 'div.abstract');
-		if ($this->detailReplacePatternList) {
-			$content = $this->computeHtmlContent($htmlContent, '.mtcomment', 'first', $this->detailReplacePatternList);
-		} else {
-			$content = $this->computeHtmlContent($htmlContent, '.mtcomment', 'first');
-		}
+
+		//详情页替换
+		$replacePattern = $this->detailReplacePatternList ?: '';
+		$content = $this->computeHtmlContent($htmlContent, '.mtcomment', 'first', $replacePattern);
 		if ($this->removeKeywordsContainerExpress && $this->removeKeywords) {
 			$content = $this->computeNodeRemovedContent($content, $this->removeKeywordsContainerExpress, $this->removeKeywords);
+		}
+		if ($this->detailRemovePositionPatternList) {
+			$content = $this->computePositionRemovedContent($content, $this->detailRemovePositionPatternList);
 		}
 		//入库
 		$seqId = $this->doDetail($id, $title, $abstract, $content);
@@ -178,20 +185,29 @@ class BaseFang extends BaseCrawl {
 		}
 		$cls = NewsSeq::class;
 		foreach ($idList as $idx => $id) {
+			if ($id == 0) {
+				continue;
+			}
+			$thumbnail = isset($thumbnailList[$idx]) ? $thumbnailList[$idx] : '';
 			$record = News::findOne('f_origin_id=?', [$id]);
 			$insData = [
 				'f_country'     => $this->country,
-				'f_thumbnail'   => isset($thumbnailList[$idx]) ? $thumbnailList[$idx] : '',
+				'f_thumbnail'   => $thumbnail,
 				'f_update_time' => time()
 			];
 			if ($record) {
+				$seqId = $record['f_id'];
 				News::update($insData, 'f_origin_id=' . $id);
 			} else {
 				$nextId = $this->getNextSeq($cls);
+				$seqId = $nextId;
 				$insData['f_id'] = $nextId;
 				$insData['f_origin_id'] = $id;
 				News::insert($insData);
 			}
+			pr($seqId, $thumbnail);
+			//插入图片
+			$this->doImage($seqId, [$thumbnail]);
 		}
 		return true;
 	}

@@ -10,9 +10,24 @@ namespace Business\Fang;
  */
 class JPFang extends BaseFang {
 
-	public $country='jp';
-	public $removeKeywordsContainerExpress = 'section[powered-by="xiumi.us"]';
-	public $removeKeywords = ['专注于马来西亚', '搜房', '咨询筛选匹配成交签约移居安家售后物业管理等服务', '楼盘的交易平台'];
+	public $platformsSubDir = 'jp';
+	public $country = 'jp';
+
+	public $detailReplacePatternList = [
+		'/.*咨询热线.*/'                                                               => '',
+		'/.*微信.*/'                                                                 => '',
+		'/.*推荐房源.*/'                                                               => '',
+		'/.*<p style="text-align: center;"><font color="#0066cc"><\/font><\/p>.*/' => '',
+		'/.*房源ID.*/'                                                               => '',
+		'/.*推荐指数.*/'                                                               => '',
+		'/.*<p>价格：.*万日元<\/p>.*/'                                                   => '',
+		'/.*<p>格局：.*<\/p>.*/'                                                      => '',
+		'/.*<p>装修：.*<\/p>.*/'                                                      => '',
+		'/.*<p>产权：.*<\/p>*/'                                                       => '',
+		'/.*<p>联系方式：.*<\/p>*/'                                                     => '',
+
+	];
+
 	public $baseUrl = "https://japan.fang.com/";
 
 }
