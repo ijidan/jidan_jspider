@@ -205,7 +205,6 @@ class BaseFang extends BaseCrawl {
 				$insData['f_origin_id'] = $id;
 				News::insert($insData);
 			}
-			pr($seqId, $thumbnail);
 			//插入图片
 			$this->doImage($seqId, [$thumbnail]);
 		}
