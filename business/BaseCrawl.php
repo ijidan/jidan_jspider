@@ -315,13 +315,15 @@ abstract class BaseCrawl {
 	}
 
 	/**
-	 * 获取内容
+	 * 获取内容，提供编码转换
 	 * @param $fileName
 	 * @param $url
-	 * @return bool|string|null
+	 * @param string $sourceCharset
+	 * @param string $destCharset
+	 * @return bool|false|string|null
 	 * @throws Exception
 	 */
-	protected function fetchContent($fileName, $url) {
+	protected function fetchContent($fileName, $url,$sourceCharset='UTF-8',$destCharset='') {
 		$fileName = $this->standardizeFileName($fileName);
 		$content = $this->fetchContentFromCache($fileName);
 		if (!$content) {
@@ -331,6 +333,9 @@ abstract class BaseCrawl {
 		}
 		if (!$content) {
 			throw new RuntimeException($fileName . ':content empty');
+		}
+		if($sourceCharset && $destCharset){
+			$content=iconv( $sourceCharset, $destCharset , $content);
 		}
 		return $content;
 	}

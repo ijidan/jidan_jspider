@@ -68,7 +68,6 @@ class ULu extends BaseCrawl {
 	private function computeLng($content) {
 		return $this->computeLngLat($content, 'longitude');
 	}
-
 	/**
 	 * 计算维度
 	 * @param $content
@@ -95,7 +94,7 @@ class ULu extends BaseCrawl {
 			}
 		}
 		if (!$content) {
-			$url = self::BASE_URL . 'house/rim_data/' . $id;
+			$url = $this->baseUrl . 'house/rim_data/' . $id;
 			$rsp = BaseService::sendGetRequest($url, [], $this->config);
 			$content = $rsp->success() ? $rsp->getData() : '';
 			$this->writeFile($fileName, $content);
@@ -111,7 +110,83 @@ class ULu extends BaseCrawl {
 		return $markListByIcon;
 	}
 
+	public function crawlTopic(){
+		$this->platformsSubDir="topic";
+		$pageCnt=2751;
+		$pageCnt=1;
+		for ($i=1;$i<=$pageCnt;$i++){
+			$currentUrl=$this->computeTopicPageUrl($i);
+			$data=$this->crawTopicDetail($currentUrl);
+			pr($data,1);
+		}
+	}
+
+	public function crawTopicDetail($shortUrl) {
+		$fileName = __FUNCTION__ . '_url_' . $shortUrl;
+		$content = $this->fetchContent($fileName, $shortUrl);
+		dump($content,1);
+		$idList = $this->computeData($content, '.strongTit a', "href");
+		if ($idList) {
+			array_walk($idList, function (&$value) {
+				$pattern = '/(\d)+/';
+				preg_match($pattern, $value, $matches);
+				$id = $matches[0];
+				$value = $id;
+			});
+		}
+		$thumbnailList = $this->computeData($content, '.fl img', 'src');
+		$abstractList = $this->computeData($content, '.fr p');
+		//ID入库
+		$this->doId($idList, $thumbnailList,$abstractList);
+		$newIdList = array_filter($idList, function ($value) {
+			return $value > 0;
+		});
+		$cnt = count($newIdList);
+		$msg = "所有ID抓取结束：一共 {$cnt} 个";
+		if ($cnt) {
+			$this->success($msg);
+		} else {
+			$this->warning($msg);
+		}
+		return $newIdList;
+	}
+
+	/**
+	 * 计算主题URL
+	 * @param int $page
+	 * @return string
+	 */
+	private function computeTopicPageUrl($page=1){
+		$url=$this->baseUrl."topic2/{$page}/";
+		return $url;
+	}
+
+
 	public function crawl() {
 		// TODO: Implement crawl() method.
+	}
+
+	/**
+	 * 获取Guzzle配置
+	 * @return mixed
+	 */
+	public function getGuzzleHttpConfig() {
+		// TODO: Implement getGuzzleHttpConfig() method.
+	}
+
+	/**
+	 * 获取业务配置
+	 * @return mixed
+	 */
+	public function getBusinessConfig() {
+		// TODO: Implement getBusinessConfig() method.
+	}
+
+	/**
+	 * 获取自定义配置
+	 * @return mixed
+	 */
+	public function getCustomConfig() {
+		// TODO: Implement getCustomConfig() method.
 	}
 }

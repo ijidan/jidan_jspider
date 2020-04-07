@@ -1,0 +1,893 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cn" lang="cn" dir="ltr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<script type="text/javascript" src="js/init.js"></script>
+<meta name="format-detection" content="telephone=no" />
+<title>海外生活资讯外房海外房产网</title>
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="keywords" content="海外生活,置业资讯,外房网" />
+<meta name="description" content="海外生活,置业资讯,外房网" />
+<script type="text/javascript">window.onerror=function(){return true;}</script> <script type="text/javascript"> var ROOT_PATH = 'https://www.glofang.com/'; </script>
+<link href="https://www.glofang.com/css/main.css" rel="stylesheet" type="text/css" />
+<link href="https://www.glofang.com/css/global_home.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="https://www.glofang.com/css/news_list.css?v=282">
+<script type="text/javascript" src="https://www.glofang.com/js/main.js"></script>
+<script type="text/javascript" src="https://www.glofang.com/js/jquery.lazyload.min.js"></script>
+</head>
+<body>
+
+<link rel="stylesheet" type="text/css" href="https://www.glofang.com/css/gobal.css" />
+<link rel="stylesheet" type="text/css" href="https://www.glofang.com/css/css.css" />
+<style>
+.divContainer{ padding:7px 0 0;}
+.header_nav ul li a.nselect{ background:#a04c53}
+.city_list ul{height:auto;}
+</style>
+<script type="text/javascript" src="https://www.glofang.com/js/jquery-1.8.3.js"></script> <script type="text/javascript" src="https://www.glofang.com/js/njs.js"></script>
+<div class="header">
+<div class="header_top">
+<div class="box">
+<a href="/member/login.php">登录</a>
+<a href="/member/register.php">注册</a><div class="header_city">所有国家<i class="arrow"></i>
+<span id="header_city_list" class="city_list" style="width:726px;">
+<div class="fl">
+<h3 class="city_icon">亚洲</h3>
+<ul class="no_border">
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/JPproperty-c157-1.html">日本</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/TLproperty-c163-1.html">泰国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/MYproperty-c159-1.html">马来西亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/PHproperty-c1105-1.html">菲律宾</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/AEproperty-c1084-1.html">迪拜</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/SGproperty-c6-1.html">新加坡</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Korproperty-c160-1.html">韩国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/cambodia-c1098-1.html">柬埔寨</a></li>
+</ul>
+<ul>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/VNproperty-c1152-1.html">越南</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/IDproperty-c1155-1.html">印尼</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/INDproperty-c2696-1.html">印度</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Laos-c2703-1.html">老挝</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/MMproperty-c2724-1.html">缅甸</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/LKAproperty-c2727-1.html">斯里兰卡</a></li>
+</ul> </div>
+<div class="fl">
+<h3 class="city_icon">欧洲</h3>
+<ul class="no_border"> <li><a rel="nofollow" href="https://www.glofang.com/newhouse/GERproperty-c166-1.html">德国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/UKproperty-c5-1.html">英国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Spproperty-c161-1.html">西班牙</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/PORproperty-c162-1.html">葡萄牙</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/CYproperty-c7-1.html">塞浦路斯</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/FRAproperty-c158-1.html">法国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/ITAproperty-c164-1.html">意大利</a></li>
+</ul>
+<ul> <li><a rel="nofollow" href="https://www.glofang.com/newhouse/GREproperty-c165-1.html">希腊</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/skproperty-c1119-1.html">斯洛伐克</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/hrproperty-c1122-1.html">克罗地亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/CHproperty-c1149-1.html">瑞士</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/HUproperty-c1150-1.html">匈牙利</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/BGproperty-c1151-1.html">保加利亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/RUproperty-c1153-1.html">俄罗斯</a></li>
+</ul>
+<ul> <li><a rel="nofollow" href="https://www.glofang.com/newhouse/MTproperty-c1156-1.html">马耳他</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/NLproperty-c1157-1.html">荷兰</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/finproperty-c1223-1.html">芬兰</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/heishan-c2646-1.html">黑山</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/bolan-c2649-1.html">波兰</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Romania-c2687-1.html">罗马尼亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Belgium-c2688-1.html">比利时</a></li>
+</ul>
+<ul> <li><a rel="nofollow" href="https://www.glofang.com/newhouse/sewden-c2698-1.html">瑞典</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/aodili-c2699-1.html">奥地利</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/TRproperty-c2716-1.html">土耳其</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/CZproperty-c2723-1.html">捷克</a></li>
+</div>
+<div class="fl">
+<h3 class="city_icon">美洲</h3>
+<ul style="width:120px;">
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/us-c1-1.html">美国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/CAproperty-c3-1.html">加拿大</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/GRDproperty-c1083-1.html">格林纳达</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/StKitts-c1092-1.html">圣基茨</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/AGproperty-c1154-1.html">安提瓜巴布达</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Ciproperty-c2689-1.html">开曼群岛</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Puri-c2690-1.html">波多黎各</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/JORproperty-c2695-1.html">牙买加</a></li>
+</ul>
+</div>
+<div class="fl">
+<h3 class="city_icon">大洋洲</h3>
+<ul class="no_border">
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/AUproperty-c2-1.html">澳大利亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/NZproperty-c4-1.html">新西兰</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/fijiproperty-c1226-1.html">斐济</a></li>
+</ul>
+</div>
+</span>
+</div>
+<div class="fr">
+<ul class="header_link">
+<li><a href="/">首页</a><i></i></li>
+<li><a href="/fwtg/">房屋托管</a><i></i></li>
+<li><a href="/exhibit/">展会</a><i></i></li>
+<li><a href="http://ask.glofang.com/">问答</a><i></i></li>
+<li><a href="http://ym.glofang.com/" target="_blank">移民签证</a><i></i></li>
+<li><a href="/ad/Advertise/index.html" target="_blank">广告服务</a><i></i></li>
+<li><a href="/Advertise/index.html" target="_blank">Advertise</a></li>
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="header_banner">
+<div class="beader_box">
+<div class="box">
+<span class="search search_bg">
+</span>
+<div class="search">
+<a href="https://www.glofang.com/" title="外房网"><h1 class="search_logo">外房网</h1></a>
+<a class="search_btn" href="/member/register.php">免费注册</a><a class="search_btn" href="/member/my.php?mid=6&action=add">发布房源</a>
+<i class="cb"></i>
+<form id="destoon_search" action="/api/search.php" onsubmit="return Dsearch(1);">
+<input type="hidden" name="moduleid" value="8" id="ser_moduleid" />
+<input type="hidden" name="spread" value="0" id="ser_spread" />
+<span class="input_label">
+<span id="search_con">
+
+资讯
+</span>
+<i class="search_arrow"></i>
+<ul class="search_list">
+<li><a class="check_list" href="javascript:;">房源</a></li>
+</ul>
+</span>
+<input type="text" name="kw" id="search_text" value="" placeholder="输入国家 / 州 / 省 / 城市" />
+<input type="submit" name="" id="search_btn" value="search" />
+</form>
+<script src="https://www.glofang.com/js/serch.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="header_nav" style="height:78px">
+<div class="box">
+<div class="nav">
+<ul class="nav_list">
+<li><a class="nav_font" href="/">首页</a></li>
+<li><a class="nav_font" href="https://www.glofang.com/company/?kfs=1">开发商专区</a></li>
+<li><a class="nav_font" href="https://www.glofang.com/newhouse/?hz=1">奢华豪宅</a></li>
+<li><a class="nav_font" href="https://www.glofang.com/company/">海外房产中介</a></li>
+<li>
+<span class="sub_nav_list sub_nav_list_current">
+<span class="nav_font">
+<a href="https://www.glofang.com/news/" style="padding:0px;">海外资讯</a>
+</span>
+<div class="sub_nav" style="display:block;">
+<div class="box">
+<ul>
+<li><a href="https://www.glofang.com/news/list/28/">海外房产新闻</a></li>
+<li><a href="https://www.glofang.com/news/list/29/">留学指南</a></li>
+<li><a href="https://www.glofang.com/news/list/30/">移民指南</a></li>
+<li><a href="https://www.glofang.com/news/list/31/">海外购房指南</a></li>
+<li><a href="https://www.glofang.com/news/list/32/">专家专栏</a></li>
+<li><a href="https://www.glofang.com/news/list/33/">海外生活</a></li>
+<li><a href="https://www.glofang.com/news/list/34/">买房经验</a></li>
+<li><a href="https://www.glofang.com/news/list/35/">物业特写</a></li>
+<li><a href="https://www.glofang.com/news/list/36/">实用信息</a></li>
+<li><a href="https://www.glofang.com/news/list/1132/">English column</a></li>
+</ul>
+</div>
+</div>
+</span>
+</li>
+<li><a class="nav_font" href="http://ym.glofang.com/" target="_blank">移民签证</a></li>
+<li><a class="nav_font" href="/video/" target="_blank">视频</a></li>
+</ul>
+<div class="nav_contact">
+<div>Listing Ad &nbsp;020-82081382</div>
+<div class="nav_contact_sub">
+<div style="border-top: 1px solid #FFF;">邮箱 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9beb5b6bfb8b7be99beb5b6bfb8b7bef7bab6b4">[email&#160;protected]</a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="divContent">
+<div class="breadcrumb">
+您当前的位置：<a href="https://www.glofang.com/">首页</a> &raquo; <a href="https://www.glofang.com/news/">资讯</a> &raquo; <a href="https://www.glofang.com/news/list/33/">海外生活</a> </div>
+</div>
+<div class="divContent">
+<div class="news_left left">
+<div class="two_con">
+<div class="two_con_div">
+<div class="two_con_imgdiv">
+<a href="https://www.glofang.com/news/show/82371/" title="航空业最大并购 合并后双方股票大涨-热点" target="_blank">
+<img src="http://www.glofang.com/file/upload/201709/07/17-32-18-51-1.jpg" width="240" height="320" alt="航空业最大并购 合并后双方股票大涨-热点" onerror="imgError(this,320,240,1);" />
+</a>
+</div>
+<h2>
+<a href="https://www.glofang.com/news/show/82371/" title="航空业最大并购 合并后双方股票大涨-热点" target="_blank">航空业最大并购 合并后双方股票大涨-热点</a>
+</h2>
+<p>根据美国媒体称，工业企业集团美国联合技术公司在当地时间9月4日达成一项协议，以230亿美元的价格收购知名飞机零部件制造商英国罗...</p>
+<a class="new_list_more right block" href="https://www.glofang.com/news/show/82371/" title="航空业最大并购 合并后双方股票大涨-热点" target="_blank">更多&gt;&gt;</a>
+</div>
+<div class="two_con_div">
+<div class="two_con_imgdiv">
+<a href="https://www.glofang.com/news/show/100422/" title="日本很奇葩？看看这些个节日你心里应该有数了！" target="_blank">
+<img src="http://www.glofang.com/file/upload/201808/23/10-39-12-57-874.png" width="240" height="320" alt="日本很奇葩？看看这些个节日你心里应该有数了！" onerror="imgError(this,320,240,1);" />
+</a>
+</div>
+<h2>
+<a href="https://www.glofang.com/news/show/100422/" title="日本很奇葩？看看这些个节日你心里应该有数了！" target="_blank">日本很奇葩？看看这些个节日你心里应该有数了！</a>
+</h2>
+<p>提起外国的节日，总是能想起圣诞节、复活节，万圣节等一系列西方的盛大节日。但是对于我们的邻居日本，他们的文化输出却很落后，...</p>
+<a class="new_list_more right block" href="https://www.glofang.com/news/show/100422/" title="日本很奇葩？看看这些个节日你心里应该有数了！" target="_blank">更多&gt;&gt;</a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con">
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109097/" title="这个以“细节”打动人心的国家，又一次吸引了世界的目光" target="_blank"><img src="https://www.glofang.com/file/upload/202004/02/20-35-20-78-713.png" alt="这个以“细节”打动人心的国家，又一次吸引了世界的目光" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109097/" title="这个以“细节”打动人心的国家，又一次吸引了世界的目光" target="_blank">这个以“细节”打动人心的国家，又一次吸引了世界的目光</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-04-02</h2>
+<p>2020年的开篇有太多的焦虑和不安，而近日来海外新冠肺炎确诊病例不断增加的报道，似乎也为这份焦虑和不安冠上了一个漫长的期限。...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109097/" title="这个以“细节”打动人心的国家，又一次吸引了世界的目光" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109096/" title="疫情当下，日本房产还值得投资吗？" target="_blank"><img src="https://www.glofang.com/file/upload/202004/02/20-21-14-44-713.png" alt="疫情当下，日本房产还值得投资吗？" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109096/" title="疫情当下，日本房产还值得投资吗？" target="_blank">疫情当下，日本房产还值得投资吗？</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-04-02</h2>
+<p>今年，全世界都过着一种患难与共，同舟共济的日子。2020年已过去了四分之一，国内总算熬过了疫情最严峻的阶段，然而新型冠状病毒...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109096/" title="疫情当下，日本房产还值得投资吗？" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109081/" title="【注意】签证快要到期的小伙伴，速速看过来！" target="_blank"><img src="https://www.glofang.com/file/upload/202004/01/21-23-59-93-713.png" alt="【注意】签证快要到期的小伙伴，速速看过来！" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109081/" title="【注意】签证快要到期的小伙伴，速速看过来！" target="_blank">【注意】签证快要到期的小伙伴，速速看过来！</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-04-01</h2>
+<p>这个文章的内容对于持有中长期签证的小伙伴来说很重要。...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109081/" title="【注意】签证快要到期的小伙伴，速速看过来！" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109080/" title="日本这15趟特色列车，每一辆都不舍得错过" target="_blank"><img src="https://www.glofang.com/file/upload/202004/01/21-10-19-10-713.png" alt="日本这15趟特色列车，每一辆都不舍得错过" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109080/" title="日本这15趟特色列车，每一辆都不舍得错过" target="_blank">日本这15趟特色列车，每一辆都不舍得错过</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-04-01</h2>
+<p>九州是日本第三大岛，全岛火山广布，森林较多，海岸线曲折，充满人文和自然相得益彰的诗情画意。在这样一个节奏很慢的地方，各式...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109080/" title="日本这15趟特色列车，每一辆都不舍得错过" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109079/" title="东京残奥会延期了，日本的无障碍设施建设得怎么样了？" target="_blank"><img src="https://www.glofang.com/file/upload/202004/01/20-53-10-60-713.png" alt="东京残奥会延期了，日本的无障碍设施建设得怎么样了？" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109079/" title="东京残奥会延期了，日本的无障碍设施建设得怎么样了？" target="_blank">东京残奥会延期了，日本的无障碍设施建设得怎么样了？</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-04-01</h2>
+<p>最近大家知晓2020年的奥运会由于疫情的原因推迟，而原定于2020年8月25日的东京残奥会，同样也被推迟一年。虽然如此，但是早在201...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109079/" title="东京残奥会延期了，日本的无障碍设施建设得怎么样了？" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109057/" title="最新关东地区宜居排行榜出炉！又将成为投资风向标" target="_blank"><img src="https://www.glofang.com/file/upload/202003/31/21-00-52-96-713.png" alt="最新关东地区宜居排行榜出炉！又将成为投资风向标" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109057/" title="最新关东地区宜居排行榜出炉！又将成为投资风向标" target="_blank">最新关东地区宜居排行榜出炉！又将成为投资风向标</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-03-31</h2>
+<p>近日，日本最新公布了一组2020年度关东地区最宜居住的车站排行榜调查数据。在很多情况下，这里上榜的地名大家可能都没有听过。这...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109057/" title="最新关东地区宜居排行榜出炉！又将成为投资风向标" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109056/" title="【必看】详解最新日本签证政策变化" target="_blank"><img src="https://www.glofang.com/file/upload/202003/31/20-37-45-26-713.png" alt="【必看】详解最新日本签证政策变化" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109056/" title="【必看】详解最新日本签证政策变化" target="_blank">【必看】详解最新日本签证政策变化</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-03-31</h2>
+<p>3月27日下午，为了配合日本政府控制新型肺炎的传染的扩大，外务省宣布了于3月28日0时开始实施的关于查证限制的新...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109056/" title="【必看】详解最新日本签证政策变化" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109044/" title="胡志明市停止了54条公交路线，河内将公交车频率降低了80％" target="_blank"><img src="https://www.glofang.com/file/upload/202003/31/09-24-19-93-68208.jpg" alt="胡志明市停止了54条公交路线，河内将公交车频率降低了80％" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109044/" title="胡志明市停止了54条公交路线，河内将公交车频率降低了80％" target="_blank">胡志明市停止了54条公交路线，河内将公交车频率降低了80％</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-03-31</h2>
+<p>胡志明市停止了54条公交路线，河内将公交车频率降低了80％...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109044/" title="胡志明市停止了54条公交路线，河内将公交车频率降低了80％" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109040/" title="“封城”关上 一扇门，“樱飘雪”又推开一扇窗" target="_blank"><img src="https://www.glofang.com/file/upload/202003/30/21-29-51-60-713.png" alt="“封城”关上 一扇门，“樱飘雪”又推开一扇窗" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109040/" title="“封城”关上 一扇门，“樱飘雪”又推开一扇窗" target="_blank">“封城”关上 一扇门，“樱飘雪”又推开一扇窗</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-03-30</h2>
+<p>昨天，东京下大雪了，而且是32年不遇的鹅毛大雪。先来观看一段视频，看看这雪下得有多大吧。...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109040/" title="“封城”关上 一扇门，“樱飘雪”又推开一扇窗" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_con_div">
+<div class="list_con_img_div left">
+<a href="https://www.glofang.com/news/show/109039/" title="日本喜剧天王因新冠肺炎去世！你以为你离疫情有多远？" target="_blank"><img src="https://www.glofang.com/file/upload/202003/30/21-02-35-30-713.png" alt="日本喜剧天王因新冠肺炎去世！你以为你离疫情有多远？" width="150" height="112" /></a>
+</div><div class="list_con_text_div left">
+<h3>
+<a href="https://www.glofang.com/news/show/109039/" title="日本喜剧天王因新冠肺炎去世！你以为你离疫情有多远？" target="_blank">日本喜剧天王因新冠肺炎去世！你以为你离疫情有多远？</a>
+</h3>
+<h2 style="margin-top:10px;color:#ccc;"> 2020-03-30</h2>
+<p>今天突入其来的消息打击了全日本。
+说是全日本一点都不夸张，日本老牌谐星——志村健因新型肺炎在29日离开人世，享年70岁，又...</p>
+<a class="new_list_more left block" href="https://www.glofang.com/news/show/109039/" title="日本喜剧天王因新冠肺炎去世！你以为你离疫情有多远？" target="_blank"> </a>
+</div>
+<div class="clear"></div>
+</div>
+<div class="list_page_con">
+<div class="list_page"><input type="hidden" id="aijiacms_previous" value="https://www.glofang.com/news/list/33/486/" /><a href="https://www.glofang.com/news/list/33/486/">&nbsp;&#171;上一页&nbsp;</a> <strong>&nbsp;1&nbsp;</strong> <a href="https://www.glofang.com/news/list/33/2/">&nbsp;2&nbsp;</a> &nbsp;&#8230;&nbsp; <a href="https://www.glofang.com/news/list/33/3/">&nbsp;3&nbsp;</a> <a href="https://www.glofang.com/news/list/33/4/">&nbsp;4&nbsp;</a> <a href="https://www.glofang.com/news/list/33/5/">&nbsp;5&nbsp;</a> <a href="https://www.glofang.com/news/list/33/6/">&nbsp;6&nbsp;</a> <a href="https://www.glofang.com/news/list/33/7/">&nbsp;7&nbsp;</a> &nbsp;&#8230;&nbsp; <a href="https://www.glofang.com/news/list/33/485/">&nbsp;485&nbsp;</a> <a href="https://www.glofang.com/news/list/33/486/">&nbsp;486&nbsp;</a> <a href="https://www.glofang.com/news/list/33/2/">&nbsp;下一页&#187;&nbsp;</a> <input type="hidden" id="aijiacms_next" value="https://www.glofang.com/news/list/33/2/" />&nbsp;<cite>共4857条/486页</cite>&nbsp;<input type="text" class="pages_inp" id="aijiacms_pageno" value="1" onkeydown="if(event.keyCode==13 && this.value) {window.location.href='https://www.glofang.com/news/list/33/{aijiacms_page}/'.replace(/\{aijiacms_page\}/, this.value);return false;}"> <input type="button" class="pages_btn" value="GO" onclick="if(Dd('aijiacms_pageno').value>0)window.location.href='https://www.glofang.com/news/list/33/{aijiacms_page}/'.replace(/\{aijiacms_page\}/, Dd('aijiacms_pageno').value);" />
+</div>
+</div></div>
+</div>
+<style>
+.ngj{background:#484848;float:left;min-height:80px;border:0px; margin-bottom:5px;width:240px;cursor:pointer;}
+.ngj:hover{background:#a04c53;}
+.ngj h2{font-size:16px;color:#fff;height:35px;line-height:35px; padding-left:25px;margin-bottom:5px;}
+.ngj h2 img{float:left;padding-top:5px}
+.ngj a{padding:10px;line-height:20px;color:#fff;}
+</style>
+<div class="news_right right">
+<div class="right_conn mar_b_30 list_style_t_none">
+<h3>按国家筛选</h3>
+<ul class="ngj">
+<h2><img src="/images/loc1.png" alt=" "> 美洲</h2>
+<ul style="margin-left:15px;border:0px;">
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/us" style="padding:0px; font-size:14px; color:#fff;">美国</a></li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/canada" style="padding:0px; font-size:14px; color:#fff;">加拿大</a></li>
+</ul>
+</ul>
+<ul class="ngj">
+<h2><img src="/images/loc1.png" alt=" ">大洋洲</h2>
+<ul style="margin-left:15px;border:0px;">
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/astr" style="padding:0px; font-size:14px; color:#fff;">澳大利亚</a></li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/zea" style="padding:0px; font-size:14px; color:#fff;">新西兰</a></li>
+</ul>
+</ul>
+<ul class="ngj">
+<h2><img src="/images/loc1.png" alt=" ">欧洲</h2>
+<ul style="margin-left:15px;border:0px;">
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/eng" style=" font-size:14px; color:#fff;padding:0px;">英国</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/portu" style=" font-size:14px; color:#fff;padding:0px;">葡萄牙</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/fran" style=" font-size:14px; color:#fff;padding:0px;">法国</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/spain" style=" font-size:14px; color:#fff;padding:0px;">西班牙</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/italy" style=" font-size:14px; color:#fff;padding:0px;">意大利</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/gree" style=" font-size:14px; color:#fff;padding:0px;">希腊</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/cyprus" style=" font-size:14px; color:#fff;padding:0px;">塞浦路斯</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/germ" style=" font-size:14px; color:#fff;padding:0px;">德国</a>
+</li>
+</ul>
+</ul>
+<ul class="ngj">
+<h2><img src="/images/loc1.png" alt=" ">亚洲</h2>
+<ul style="margin-left:15px;border:0px;">
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/Singa" style=" font-size:14px; color:#fff;padding:0px;">新加坡</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/thail" style=" font-size:14px; color:#fff;padding:0px;">泰国</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/mala" style=" font-size:14px; color:#fff;padding:0px;">马来西亚</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/japana" style=" font-size:14px; color:#fff;padding:0px;">日本</a>
+</li>
+<li style="width:70px;margin:0 auto;line-height:25px;float:left;border:0px;padding:0px; margin-bottom:5px;"><a href="https://www.glofang.com/korea" style=" font-size:14px; color:#fff;padding:0px;">韩国</a>
+</li>
+</ul>
+</ul>
+<ul>
+
+</ul>
+</div>
+<div class="clear"></div>
+<style>
+.dff {
+    background: none repeat scroll 0 0 #FF0000;
+    color: #FFFFFF;
+    cursor: pointer;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 15px;
+}
+.cxinfo {
+}
+.box_body {
+}
+.cxinfo ul {
+    margin-left: 10px;
+}
+.cxinfo li {
+    height: 360px;
+}
+.cxpp {
+    display: inline;
+    float: left;
+    height: 360px;
+    margin-right: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+    width: 220px;
+}
+.cxpp a {
+    height: 100%;
+}
+.cxpp p {
+    color: #333333;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.ffr {
+}
+.promoIconActive {
+    background: url("images/dtj1.png") no-repeat scroll 0 0 transparent;
+}
+.promoIconActive2 {
+    background: url("images/jbj1.png") no-repeat scroll 0 0 transparent;
+}
+.cxpp .promoIcon {
+    background: none repeat scroll 0 0 #A04C53;
+    height: 28px;
+    position: absolute;
+    right: 0;
+    top: 132px;
+    width: 120px;
+}
+.cxpp .promoIcon .promoA {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    position: absolute;
+    text-align: center;
+    top: 21px;
+    width: 120px;
+}
+.cxpp .promoIcon .promoB {
+    color: #FF0000;
+    font-size: 20px;
+    font-weight: 700;
+    left: 20px;
+    position: absolute;
+    text-align: center;
+    top: 7px;
+    width: 120px;
+}
+.cxpp .promoIcon .promoB_small {
+    font-size: 14px;
+    font-weight: 400;
+}
+.nrt {
+    font-size: 14px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 20px;
+    overflow: hidden;
+    width: 220px;
+}
+.cxpp .promoIcon {
+    height: 28px;
+    position: absolute;
+    right: 0;
+    top: 122px;
+    width: 120px;
+}
+.cxpp .promoIcon .promoB {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 7px;
+    width: 120px;
+}
+.cxinfo h3{ color: #000000;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 18px;}
+ 
+</style>
+<div class="cxinfo">
+<h3>最新推荐房源</h3>
+<ul style="height:auto; overflow:hidden;border-top: 1px solid #DCDCDC;margin-bottom:15px;">
+<li class="cxpp" style="height:180px">
+<a target="_blank" href="https://www.glofang.com/newhouse/show/43626/">
+<img width="220" height="160" src="https://www.glofang.com/file/upload/202004/03/17-06-59-15-135088.png"></a>
+<p><a href="https://www.glofang.com/newhouse/show/43626/">日本東京高级收益公寓 Le-lion南大塚</a></p>
+<div class="promoIcon promoIconActive J_promoIcon">
+<div class="promoA"> </div>
+<div class="promoB">约140万人民币 </div>
+</div>
+</li>
+<li class="cxpp" style="height:180px">
+<a target="_blank" href="https://www.glofang.com/newhouse/show/43625/">
+<img width="220" height="160" src="https://www.glofang.com/file/upload/202004/03/16-46-26-85-135088.png"></a>
+<p><a href="https://www.glofang.com/newhouse/show/43625/">日本東京高级收益公寓 ガリシア早稲田</a></p>
+<div class="promoIcon promoIconActive J_promoIcon">
+<div class="promoA"> </div>
+<div class="promoB">约163万人民币 </div>
+</div>
+</li>
+<li class="cxpp" style="height:180px">
+<a target="_blank" href="https://www.glofang.com/newhouse/show/43624/">
+<img width="220" height="160" src="https://www.glofang.com/file/upload/202004/03/16-26-38-80-135088.png"></a>
+<p><a href="https://www.glofang.com/newhouse/show/43624/">日本大阪市高级收益公寓 ベルエ難波西</a></p>
+<div class="promoIcon promoIconActive J_promoIcon">
+<div class="promoA"> </div>
+<div class="promoB">约98万人民币 </div>
+</div>
+</li>
+<li class="cxpp" style="height:180px">
+<a target="_blank" href="https://www.glofang.com/newhouse/show/43623/">
+<img width="220" height="160" src="https://www.glofang.com/file/upload/202004/03/16-15-02-70-135089.png"></a>
+<p><a href="https://www.glofang.com/newhouse/show/43623/">日本東京高级收益公寓 ソアブール世田谷上馬</a></p>
+<div class="promoIcon promoIconActive J_promoIcon">
+<div class="promoA"> </div>
+<div class="promoB">约148万人民币 </div>
+</div>
+</li>
+</ul>
+</div>
+<div class="right_conn">
+<h3>最新环球资讯</h3>
+<ul>
+<li><a href="https://www.glofang.com/news/show/109119/" title="AVIRA花园别墅：一趟新加披旅程，竟然让我见识到了“一房双城”的生活方式……">AVIRA花园别墅：一趟新加披旅程...</a></li>
+<li><a href="https://www.glofang.com/news/show/109118/" title="投柬有道：金边十大至具投资价值明星楼盘解读">投柬有道：金边十大至具投资价...</a></li>
+<li><a href="https://www.glofang.com/news/show/109117/" title="优居东南亚精选推荐：马来西亚置业适合那些人？">优居东南亚精选推荐：马来西亚...</a></li>
+<li><a href="https://www.glofang.com/news/show/109116/" title="2020年柬埔寨房地产行业发展势头强劲！美元资产优选太子·寰宇中心">2020年柬埔寨房地产行业发展势...</a></li>
+<li><a href="https://www.glofang.com/news/show/109115/" title="日本人的工资怎么花？看在日本生活费支出">日本人的工资怎么花？看在日本...</a></li>
+<li><a href="https://www.glofang.com/news/show/109114/" title="保加利亚移民：保加利亚护照助您轻松获取第二身份">保加利亚移民：保加利亚护照助...</a></li>
+<li><a href="https://www.glofang.com/news/show/109112/" title="保加利亚移民入籍成功案例全案流程分享">保加利亚移民入籍成功案例全案...</a></li>
+<li><a href="https://www.glofang.com/news/show/109111/" title="保加利亚投资：索菲亚获选欧洲未来城市！">保加利亚投资：索菲亚获选欧洲...</a></li>
+<li><a href="https://www.glofang.com/news/show/109113/" title="【马来西亚新山房地产市场】马来西亚房地产专家:市场情绪进一步受到打击，市场有望反弹">【马来西亚新山房地产市场】马...</a></li>
+<li><a href="https://www.glofang.com/news/show/109110/" title="美联储紧急降息50基点刺激投资者神经，金融圈炸了">美联储紧急降息50基点刺激投资...</a></li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<style>
+#juwai_icon1 {background:url("/images/xq_icon.png") ;display: block; background-position: -2px -5px;
+height: 55px;
+margin-bottom: 12px;
+width: 49px;}
+#s_icons_box .icons_box .icon_info{right:60px;}
+#s_icons_box .icons_box i{right:47px;}
+#qq_icon1{background:url("/images/qq_icon.png") ; background-position: -2px -5px;}
+#phone_icon1{background:url("/images/tel_icon.png") ; background-position: 0 -5px;}
+#weixin_icon1{background:url("/images/wx_icon.png") ; background-position: 0 -5px;}
+#top_icon1{background:url("/images/top_icon.png") ; background-position: 0 -5px;}
+#s_icons_box a#weixin_icon1:hover {background:url("/images/wx_icon1.png") no-repeat; background-position: 0 -5px;}
+#s_icons_box a#phone_icon1:hover {background:url("/images/tel_icon1.png") no-repeat; background-position: 0 -5px;}
+#s_icons_box a#qq_icon1:hover {background:url("/images/qq_icon1.png") no-repeat; background-position: 0 -5px;}
+#s_icons_box a#juwai_icon1:hover {background:url("/images/xq_icon1.png") no-repeat; background-position: 0 -5px;}
+#s_icons_box{right:40%;}
+</style>
+<div id="s_icons_box">
+<div class="icons_box">
+<a href="/tjxq.php" id="juwai_icon1"></a>
+<div class="icon_info" id="juwai_info" onclick="return juwaiEnquiry();">
+<a href="/tjxq.php"><span>提交您的置业要求<br>我们将安排专家与你联系</span></a>
+</div>
+<i id="phone_i"></i>
+</div>
+<div class="icons_box">
+<a href="javascript:void(0);" id="qq_icon1"></a>
+<div class="icon_info" id="live800_info">
+<span>12小时在线QQ客服<br>周一至周日 9:00-21:00</span>
+</div>
+<i id="phone_i"></i>
+</div>
+<div class="icons_box">
+<a href="/about/contact.html" id="phone_icon1" target="_blank"></a>
+<div class="icon_info" id="phone_info" style="background-color: #a04c53; color: #FFF;top:-20px">
+<p style="font-size: 13px;">广告热线：020-82081382</p>
+<p style="border: 0;padding: 0;">邮箱：<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="84e3e8ebe2e5eae3c4e3e8ebe2e5eae3aae7ebe9">[email&#160;protected]</a></p>
+</div>
+<i id="phone_i" style=" "></i>
+</div>
+<div class="icons_box">
+<a href="javascript:void(0);" id="weixin_icon1"></a>
+<div class="icon_info" id="weixin_info" style=" ">
+<img src="/images/weixin.jpg" alt="微信服务号">
+<span style="display: block;">外房网微信服务号</span>
+</div>
+<i id="weixin_i" style=" "></i>
+</div>
+<div class="icons_box">
+<a href="javascript:void(0);" id="top_icon1" style="display: block;"></a>
+</div>
+</div>
+
+
+<style>
+.footer_c .city_list{
+width:600px;
+}
+</style>
+<div class="footer">
+<div class="box clearfix1 pb" style=" width:1180px;">
+<div class="footer_l">
+<ul>
+<li class="footer_box_img"><a href=""><img src="http://www.glofang.com/images/footer_logo.png" /></a></li>
+<li class="footer_box">
+<dl>
+<dt>海外房产中介</dt>
+<dd><i class="footer_icon"></i>创建中介商铺</dd>
+<dd><i class="footer_icon"></i>发布展示优质房源</dd>
+</dl>
+</li>
+<li class="footer_box">
+<dl>
+<dt>海外购房者</dt>
+<dd><i class="footer_icon"></i>全球优质房源</dd>
+<dd><i class="footer_icon"></i>海外购房移民资讯</dd>
+<dd><i class="footer_icon"></i>指南服务</dd>
+</dl>
+</li><li class="footer_box">
+<dl>
+<dt>相关配套服务</dt>
+<dd><i class="footer_icon"></i>移民服务</dd>
+<dd><i class="footer_icon"></i>法律税务服务</dd>
+<dd><i class="footer_icon"></i>海外房产展会</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="footer_c">
+<span class="city_list">
+<div class="fl">
+<h3 class="city_icon">亚洲</h3>
+<ul>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/JPproperty-c157-1.html">日本</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/TLproperty-c163-1.html">泰国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/MYproperty-c159-1.html">马来西亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/PHproperty-c1105-1.html">菲律宾</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/AEproperty-c1084-1.html">迪拜</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/SGproperty-c6-1.html">新加坡</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Korproperty-c160-1.html">韩国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/cambodia-c1098-1.html">柬埔寨</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/VNproperty-c1152-1.html">越南</a></li>
+</ul>
+<ul>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/IDproperty-c1155-1.html">印尼</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/INDproperty-c2696-1.html">印度</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Laos-c2703-1.html">老挝</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/MMproperty-c2724-1.html">缅甸</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/LKAproperty-c2727-1.html">斯里兰卡</a></li>
+</ul> </div>
+<div class="fl">
+<h3 class="city_icon">欧洲</h3>
+<ul class="no_border"> <li><a rel="nofollow" href="https://www.glofang.com/newhouse/GERproperty-c166-1.html">德国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/UKproperty-c5-1.html">英国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Spproperty-c161-1.html">西班牙</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/PORproperty-c162-1.html">葡萄牙</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/CYproperty-c7-1.html">塞浦路斯</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/FRAproperty-c158-1.html">法国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/ITAproperty-c164-1.html">意大利</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/GREproperty-c165-1.html">希腊</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/skproperty-c1119-1.html">斯洛伐克</a></li>
+</ul>
+<ul class="footer_current_ul"> <li><a rel="nofollow" href="https://www.glofang.com/newhouse/hrproperty-c1122-1.html">克罗地亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/CHproperty-c1149-1.html">瑞士</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/HUproperty-c1150-1.html">匈牙利</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/BGproperty-c1151-1.html">保加利亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/RUproperty-c1153-1.html">俄罗斯</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/MTproperty-c1156-1.html">马耳他</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/NLproperty-c1157-1.html">荷兰</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/finproperty-c1223-1.html">芬兰</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/heishan-c2646-1.html">黑山</a></li>
+</ul>
+<ul class="footer_current_ul"> <li><a rel="nofollow" href="https://www.glofang.com/newhouse/bolan-c2649-1.html">波兰</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Romania-c2687-1.html">罗马尼亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Belgium-c2688-1.html">比利时</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/sewden-c2698-1.html">瑞典</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/aodili-c2699-1.html">奥地利</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/TRproperty-c2716-1.html">土耳其</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/CZproperty-c2723-1.html">捷克</a></li>
+</ul>
+</div>
+<div class="fl">
+<h3 class="city_icon">美洲</h3>
+<ul>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/us-c1-1.html">美国</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/CAproperty-c3-1.html">加拿大</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/GRDproperty-c1083-1.html">格林纳达</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/StKitts-c1092-1.html">圣基茨</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/AGproperty-c1154-1.html">安提瓜巴布达</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Ciproperty-c2689-1.html">开曼群岛</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/Puri-c2690-1.html">波多黎各</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/JORproperty-c2695-1.html">牙买加</a></li>
+</ul>
+</div>
+<div class="fl">
+<h3 class="city_icon">大洋洲</h3>
+<ul class="no_border">
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/AUproperty-c2-1.html">澳大利亚</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/NZproperty-c4-1.html">新西兰</a></li>
+<li><a rel="nofollow" href="https://www.glofang.com/newhouse/fijiproperty-c1226-1.html">斐济</a></li>
+</ul>
+</div>
+</span>
+</div>
+<div class="footer_r">
+<span class="footer_icon_list"></span>
+<label>Listing on glofang</label>
+<div class="footer_msg">
+020-82081382<br />
+周一至周五 9:00-18:00
+</div>
+<label>联系邮箱</label>
+<div class="footer_msg">
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d2b5bebdb4b3bcb592b5bebdb4b3bcb5fcb1bdbf">[email&#160;protected]</a>
+</div>
+<label>地址（中国）</label>
+<div class="footer_msg">
+广州市天河区棠下天辉商业大厦二楼<br />
+</div>
+</div>
+</div>
+<style>
+.footer_c .city_list li {
+    line-height: 24px;
+    height: 24px;
+    color: #fff;
+}
+</style>
+<div class="link">
+<div class="box">
+<ul class="link_list">
+<li><a href="/about/contact.html" target="_blank">联系我们</a></li>
+<li><a href="/about/index.html" target="_blank">关于我们</a></li>
+<li><a href="/Advertise/index.html" target="_blank">Advertise</a></li>
+<li><a href="/ad/Advertise/index.html" target="_blank">广告服务</a></li>
+<li><a href="/about/hezuo.html" target="_blank">合作机会</a></li>
+<li><a href="/news/show/19623/">媒体报道</a></li>
+<li><a href="/special/" target="_blank">特别专题</a></li>
+<li><a href="/news/list/313/">本站动态</a></li>
+<li><a href="/about/xieyi.html">服务协议</a></li>
+<li><a href="/about/privacy.html">免责声明</a></li>
+<li><a href="">开发商专区</a></li>
+</ul>
+<p>&#169;2013 通樱信息科技（中国）有限公司版权所有 &nbsp;&nbsp;&nbsp;<a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备14075974号-1</a> &nbsp; &nbsp; 反馈邮箱：<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d3c1cde0c7cccfc6c1cec78ec3cfcd">[email&#160;protected]</a> &nbsp; &nbsp;</p>
+<p><a href="http://www.glofang.com/">外房网</a>旗下<a href="http://www.glofang.com/">海外房产网</a>分站：<a href="http://www.glofang.com/newhouse/AUproperty-c2-1.html" target="_blank">澳洲房产</a> &nbsp; <a href="http://www.glofang.com/newhouse/us-c1-1.html" target="_blank">美国房产</a> &nbsp; <a href="http://www.glofang.com/" target="_blank">海外房产</a> &nbsp; <a href="http://www.glofang.com/newhouse/UKproperty-c5-1.html" target="_blank">英国房产</a> &nbsp; <a href="http://www.glofang.com/newhouse/CAproperty-c3-1.html" target="_blank">加拿大房产</a> &nbsp; <a href="http://www.glofang.com/newhouse/NZproperty-c4-1.html" target="_blank">新西兰房产</a> &nbsp; <a href="http://www.glofang.com/newhouse/TLproperty-c163-1.html" target="_blank">泰国房产</a> &nbsp; <a href="http://www.glofang.com/" target="_blank">国外房产</a> &nbsp; <a href="http://www.glofang.com/newhouse/MYproperty-c159-1.html" target="_blank">马来西亚房产</a> &nbsp; <a href="http://www.glofang.com/newhouse/JPproperty-c157-1.html" target="_blank">日本房产</a> <a key="569616cbefbfb00c17b62fd0" logo_size="83x30" logo_type="realname" href="http://www.anquan.org"></a> </p><br>
+</div>
+</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?80a397072c37a139cb43f52ff8cac6d8";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131729163-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-131729163-1');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<script type="text/javascript">
+if(window.location.href.indexOf("luxe") !== -1 || 350 == '' ) $("#weixin_info img").attr("src", $("#weixin_info img").attr("src").replace("_luxe.jpg", ".jpg"));
+$('#top_icon1').click(function() {
+$('html, body').animate({scrollTop: 0},200);return false;
+})
+$(window).bind('scroll resize',function(){
+if($(window).scrollTop()<=0){
+$("#top_icon").hide();
+}else{
+$("#top_icon").show();
+}
+})
+</script>
+<div id="foot_menu" style="display: none;">
+<div id="foot_menu_box">
+</div>
+</div>
+
+
+<script type='text/javascript'> 
+var _agt=_agt||[];
+_agt.push(['_atscu','AG_237441_XULS']);
+_agt.push(['_atsdomain',' ']);
+(function(){
+var ag=document.createElement('script');
+ag.type='text/javascript';
+ag.async = true;
+ag.src=(document.location.protocol=='https:'?'https':'http')+'://'+'t.agrantsem.com/js/ag.js';
+var s=document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ag,s);})();
+</script>
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-2.newrelic.com","licenseKey":"e9434087ff","applicationID":"3676696","transactionName":"ZQRRNkZZW0RQAkRQDFxOZhBdF1xZVQRIFxNaEQ==","queueTime":0,"applicationTime":81,"ttGuid":"","agentToken":"","userAttributes":"","errorBeacon":"bam.nr-data.net","agent":"js-agent.newrelic.com\/nr-411.min.js"}</script>
+<script type="text/javascript">
+var aijiacms_userid = 0;
+var aijiacms_username = '';
+var aijiacms_message = 0;
+var aijiacms_chat = 0;
+var aijiacms_cart = substr_count(get_cookie('cart'), ',');
+var aijiacms_member = '';
+aijiacms_member += '欢迎，<span class="f_red">客人</span> | <a href="https://www.glofang.com/member/login.php">请登录</a> | <a href="https://www.glofang.com/member/register.php">免费注册</a> | <a href="https://www.glofang.com/member/send.php">忘记密码?</a>';
+$('#aijiacms_member').html(aijiacms_member);
+$('#aijiacms_cart').html(aijiacms_cart ? '<strong>'+aijiacms_cart+'</strong>' : 0);
+$('#back2top').click(function() {
+$("html, body").animate({scrollTop:0}, 200);
+});
+</script>
+</body>
+</html>
