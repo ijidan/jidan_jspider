@@ -14,6 +14,9 @@ class GRFang extends BaseFang {
 	public $country = 'gr';
 
 
+	public $cat1=self::CAT1_TRENDS;
+	public $cat2=self::CAT2_MARKET_TRENDS;
+
 	public $detailReplacePatternList = [
 		'/.*希腊购房\/移民等咨询热线.*/' => ''
 	];

@@ -13,6 +13,9 @@ class JPFang extends BaseFang {
 	public $platformsSubDir = 'jp';
 	public $country = 'jp';
 
+	public $cat1=self::CAT1_TRENDS;
+	public $cat2=self::CAT2_MARKET_TRENDS;
+
 	public $detailReplacePatternList = [
 		'/.*咨询热线.*/'                                                               => '',
 		'/.*微信.*/'                                                                 => '',

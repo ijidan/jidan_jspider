@@ -13,6 +13,9 @@ class MYFang extends BaseFang {
 	public $platformsSubDir='my';
 	public $country = 'my';
 
+	public $cat1=self::CAT1_TRENDS;
+	public $cat2=self::CAT2_MARKET_TRENDS;
+
 	public $detailReplacePatternList = [
 		'/<p style="border:0px currentcolor; margin:0px; padding:10px 0px; text-align:start; -webkit-text-stroke-width:0px">[\s\S]*/' => ''
 	];

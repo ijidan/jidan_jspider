@@ -12,6 +12,9 @@ class AUFang extends BaseFang {
 	public $platformsSubDir='au';
 	public $country='au';
 
+	public $cat1=self::CAT1_TRENDS;
+	public $cat2=self::CAT2_MARKET_TRENDS;
+
 	public $baseUrl = "https://au.fang.com/";
 
 }

@@ -17,6 +17,9 @@ class BaseFang extends NewsBase {
 	public $platformsSubDir = ''; //子目录
 	public $country = ''; //国家
 
+	public $cat1;
+	public $cat2;
+
 	public $detailReplacePatternList = []; //详情替换正则
 	public $detailRemovePositionPatternList = []; //详情页按照位置替换内容正则
 
@@ -118,7 +121,7 @@ class BaseFang extends NewsBase {
 			$content = $this->computePositionRemovedContent($content, $this->detailRemovePositionPatternList);
 		}
 		//入库
-		$seqId = $this->doDetail($id, $title, $abstract, $content);
+		$seqId = $this->doDetail($this->cat1,$this->cat2,$id, $title, $abstract, $content);
 		//图片入库
 		$imgList = $this->extractImage($content);
 		$this->doImage($seqId, $imgList);

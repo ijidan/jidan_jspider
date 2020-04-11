@@ -11,6 +11,10 @@ class UKFang extends BaseFang {
 
 	public $platformsSubDir = 'uk';
 	public $country = 'uk';
+
+	public $cat1=self::CAT1_TRENDS;
+	public $cat2=self::CAT2_MARKET_TRENDS;
+
 	public $detailReplacePatternList = [
 		'/.*我们帮你.*/'    => '',
 		'/.*可拨打.*/'     => '',

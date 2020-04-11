@@ -12,6 +12,11 @@ class WorldFang extends BaseFang {
 	public $platformsSubDir = 'world';
 	public $country = 'world';
 
+
+	public $cat1=self::CAT1_TRENDS;
+	public $cat2='';
+
+
 	public $baseUrl = "https://world.fang.com/";
 
 	public $detailRemovePositionPatternList = [
