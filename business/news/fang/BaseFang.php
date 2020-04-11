@@ -2,7 +2,7 @@
 
 namespace Business\News\Fang;
 
-use Business\Category\NewsBase;
+use Business\News\NewsBase;
 use Exception;
 
 
@@ -99,6 +99,7 @@ class BaseFang extends NewsBase {
 	 * @param $id
 	 * @return array|mixed
 	 * @throws \ErrorException
+	 * @throws Exception
 	 */
 	public function crawlDetail($id) {
 		$fileName = __FUNCTION__ . '_id_' . $id;

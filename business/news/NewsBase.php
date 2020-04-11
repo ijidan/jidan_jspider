@@ -1,6 +1,6 @@
 <?php
 
-namespace Business\Category;
+namespace Business\News;
 
 use Business\BaseCrawl;
 use Lib\Util\CommonUtil;
@@ -105,7 +105,7 @@ abstract class NewsBase extends BaseCrawl {
 			}
 			if ($record) {
 				$seqId = $record['f_id'];
-				News::update($insData, 'f_origin_id=' . $seqId);
+				News::update($insData, 'f_id=' . $seqId);
 			} else {
 				$insData['f_origin_id'] = $id;
 				$seqId = News::insert($insData);
@@ -161,7 +161,7 @@ abstract class NewsBase extends BaseCrawl {
 		$insData = CommonUtil::Array2String($insData);
 		if ($record) {
 			$seqId = $record['f_id'];
-			News::update($insData, 'f_origin_id=' . $id);
+			News::update($insData, 'f_id=' . $seqId);
 		} else {
 			$insData['f_origin_id'] = $id;
 			$seqId = News::insert($insData);

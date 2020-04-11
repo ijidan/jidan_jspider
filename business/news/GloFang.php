@@ -2,7 +2,6 @@
 
 namespace Business\News;
 
-use Business\Category\NewsBase;
 use Exception;
 
 /**
@@ -12,8 +11,6 @@ use Exception;
  */
 class GloFang extends NewsBase {
 
-	public $platformsSubDir = ''; //子目录
-	public $country = ''; //国家
 
 	public $baseUrl = 'https://www.glofang.com/';
 

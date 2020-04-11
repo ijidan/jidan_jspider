@@ -2,7 +2,6 @@
 
 namespace Business\News;
 
-use Business\Category\NewsBase;
 use Exception;
 
 /**
@@ -70,7 +69,8 @@ class DigHouse extends NewsBase {
 		$idList = $this->computeData($content, '.ArticleListItem', "href");
 		$this->computeListId($idList);
 		$thumbnailList = $this->computeData($content, '.ArticleListItem img', 'src');
-		$abstractList = $this->computeData($content, '.article-intro title');
+		$abstractList = $this->computeData($content, '.ArticleListItem .rich-text');
+
 		//ID入库
 		$this->doId($idList, $thumbnailList, $abstractList);
 		$newIdList = array_filter($idList, function ($value) {
