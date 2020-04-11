@@ -2,7 +2,7 @@
 
 namespace Business\News;
 
-use Business\Category\NewsCat;
+use Business\Category\NewsBase;
 use Exception;
 
 /**
@@ -10,7 +10,7 @@ use Exception;
  * Class DigHouse
  * @package Business\Deju
  */
-class DigHouse extends NewsCat {
+class DigHouse extends NewsBase {
 
 	public $platformsSubDir = ''; //子目录
 

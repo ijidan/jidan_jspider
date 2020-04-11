@@ -1,15 +1,15 @@
 <?php
 
-use Business\Fang\AUFang;
-use Business\Fang\GRFang;
-use Business\Fang\JPFang;
-use Business\Fang\KHFang;
-use Business\Fang\MYFang;
-use Business\Fang\PHFang;
-use Business\Fang\UKFang;
-use Business\Fang\USFang;
-use Business\Fang\WorldFang;
-use Business\WaiGF;
+
+use Business\News\Fang\AUFang;
+use Business\News\Fang\GRFang;
+use Business\News\Fang\JPFang;
+use Business\News\Fang\KHFang;
+use Business\News\Fang\MYFang;
+use Business\News\Fang\PHFang;
+use Business\News\Fang\UKFang;
+use Business\News\Fang\USFang;
+use Business\News\Fang\WorldFang;
 use Symfony\Component\Console\Output\OutputInterface;
 
 include 'config.php';

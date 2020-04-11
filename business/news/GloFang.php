@@ -2,15 +2,15 @@
 
 namespace Business\News;
 
-use Business\Category\NewsCat;
+use Business\Category\NewsBase;
 use Exception;
 
 /**
  * 资讯爬取
  * Class GloFang
- * @package Business
+ * @package Business\News
  */
-class GloFang extends NewsCat {
+class GloFang extends NewsBase {
 
 	public $platformsSubDir = ''; //子目录
 	public $country = ''; //国家
@@ -71,7 +71,6 @@ class GloFang extends NewsCat {
 		$abstractList = $this->computeData($content, '.list_con_text_div p');
 
 		//ID入库
-//		pr($idList,$thumbnailList,$abstractList,1);
 		$this->doId($idList, $thumbnailList,$abstractList);
 		$newIdList = array_filter($idList, function ($value) {
 			return $value > 0;
