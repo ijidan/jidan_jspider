@@ -62,6 +62,7 @@ abstract class BaseCrawl {
 	 */
 	protected $cacheDir = '';
 
+	protected $business='';
 	/**
 	 * 平台
 	 * @var string
@@ -108,7 +109,7 @@ abstract class BaseCrawl {
 		$this->isConsole = $this->isConsole();
 		$this->isOutputLog = $this->isConsole && $output;
 		$this->computePlatform();
-		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->platform;
+		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->business.'/'.$this->platform;
 		if ($this->platformsSubDir) {
 			$this->cacheDir .= '/' . $this->platformsSubDir;
 		}

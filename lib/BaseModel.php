@@ -137,7 +137,7 @@ abstract class BaseModel {
 		$fullTableName = $model->getFullTableName();
 		/** @var BaseInsertStatement $insertStatement */
 		$insertStatement = $model->pdo->insert($keyList)->into($fullTableName)->values($valueList);
-		$insertId = $insertStatement->execute(false);
+		$insertId = $insertStatement->execute(true);
 		return $insertId;
 	}
 

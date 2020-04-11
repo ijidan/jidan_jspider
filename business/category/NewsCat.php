@@ -3,9 +3,10 @@
 namespace Business\Category;
 
 use Business\BaseCrawl;
-use Lib\BaseModel;
 use Lib\Util\CommonUtil;
-use Model\Spider\NewsSeq;
+use Model\Spider\News;
+use Model\Spider\NewsImage;
+use Slim\PDO\Statement;
 
 /**
  * 资讯类
@@ -15,13 +16,11 @@ use Model\Spider\NewsSeq;
 abstract class NewsCat extends BaseCrawl {
 
 	/**
-	 * @var BaseModel $newsModel ;
+	 * 业务类型
+	 * @var string
 	 */
-	public $newsModel;
-	/**
-	 * @var BaseModel $newsImgModel ;
-	 */
-	public $newsImgModel;
+	public $business='news';
+
 
 	/**
 	 * 计算列表页URL
@@ -36,6 +35,13 @@ abstract class NewsCat extends BaseCrawl {
 	 * @return mixed
 	 */
 	abstract public function computeDetailPageUrl($id);
+
+	/**
+	 * 爬取总数
+	 * @param $url
+	 * @return mixed
+	 */
+	abstract public function crawlPageCnt($url);
 
 	/**
 	 * 爬取所有ID
@@ -53,17 +59,6 @@ abstract class NewsCat extends BaseCrawl {
 
 
 	/**
-	 * 设置模型类别
-	 * @param String $newsCls
-	 * @param String $newsImgCls
-	 */
-	public function setModelCls($newsCls, $newsImgCls) {
-		$this->newsModel = new $newsCls();
-		$this->newsImgModel = new $newsImgCls();
-	}
-
-
-	/**
 	 * 提取ID
 	 * @param array $strIdList
 	 */
@@ -78,25 +73,6 @@ abstract class NewsCat extends BaseCrawl {
 		}
 	}
 
-	/**
-	 * 抓取总页数
-	 * @param $url
-	 * @param $express
-	 * @return mixed
-	 * @throws \Exception
-	 */
-	public function crawlPageCnt($url, $express) {
-		$fileName = __FUNCTION__ . '_url_' . $url;
-		$content = $this->fetchContent($fileName, $url);
-		$idList = $this->computeData($content, $express);
-		$filteredList = array_filter($idList, function ($val) {
-			$intVal = intval($val);
-			$convertedVal = (string)$intVal == $val;
-			return $convertedVal == $val;
-		});
-		$pageCnt = array_pop($filteredList);
-		return $pageCnt;
-	}
 
 	/**
 	 * ID入库
@@ -107,35 +83,32 @@ abstract class NewsCat extends BaseCrawl {
 	 * @return bool
 	 * @throws \ErrorException
 	 */
-	public function doId(array $idList, array $thumbnailList, array $abstractList,array $cusData=[]) {
+	public function doId(array $idList, array $thumbnailList, array $abstractList, array $cusData = []) {
 		if (!$idList) {
 			return false;
 		}
-		$cls = NewsSeq::class;
 		foreach ($idList as $idx => $id) {
 			if ($id == 0) {
 				continue;
 			}
 			$thumbnail = isset($thumbnailList[$idx]) ? $thumbnailList[$idx] : '';
 			$abstract = isset($abstractList[$idx]) ? $abstractList[$idx] : '';
-			$record = $this->newsModel->findOne('f_origin_id=?', [$id]);
+			$record = News::findOne('f_platform= ? and f_origin_id=? ', [$this->platform,$id]);
 			$insData = [
+				'f_platform'    => $this->platform,
 				'f_thumbnail'   => $thumbnail,
 				'f_abstract'    => $abstract,
 				'f_update_time' => time()
 			];
-			if($cusData){
-				$insData=$insData+$cusData;
+			if ($cusData) {
+				$insData = $insData + $cusData;
 			}
 			if ($record) {
 				$seqId = $record['f_id'];
-				$this->newsModel->update($insData, 'f_origin_id=' . $id);
+				News::update($insData, 'f_origin_id=' . $seqId);
 			} else {
-				$nextId = $this->getNextSeq($cls);
-				$seqId = $nextId;
-				$insData['f_id'] = $nextId;
 				$insData['f_origin_id'] = $id;
-				$this->newsModel->insert($insData);
+				$seqId = News::insert($insData);
 			}
 			//插入图片
 			$this->doImage($seqId, [$thumbnail]);
@@ -151,14 +124,14 @@ abstract class NewsCat extends BaseCrawl {
 	 */
 	public function doImage($newsId, array $imgList) {
 		foreach ($imgList as $img) {
-			$record = $this->newsImgModel->findOne('f_origin_img_url=?', [$img]);
+			$record = NewsImage::findOne('f_origin_img_url=?', [$img]);
 			if (!$record) {
 				$insData = [
 					'f_news_id'        => $newsId,
 					'f_origin_img_url' => $img,
 					'f_update_time'    => time()
 				];
-				$this->newsImgModel->insert($insData);
+				NewsImage::insert($insData);
 			}
 		}
 		$this->info("资讯图片入库结束：资讯ID {$newsId}");
@@ -175,7 +148,7 @@ abstract class NewsCat extends BaseCrawl {
 	 * @throws \ErrorException
 	 */
 	public function doDetail($id, $title, $abstract, $content, array $cusData = []) {
-		$record = $this->newsModel->findOne('f_origin_id=?', [$id]);
+		$record = News::findOne('f_origin_id=?', [$id]);
 		$insData = [
 			'f_title'            => $title,
 			'f_content_abstract' => $abstract,
@@ -188,15 +161,10 @@ abstract class NewsCat extends BaseCrawl {
 		$insData = CommonUtil::Array2String($insData);
 		if ($record) {
 			$seqId = $record['f_id'];
-			$this->newsModel->update($insData, 'f_origin_id=' . $id);
+			News::update($insData, 'f_origin_id=' . $id);
 		} else {
-			$cls = NewsSeq::class;
-			$nextId = $this->getNextSeq($cls);
-			$seqId = $nextId;
-
-			$insData['f_id'] = $nextId;
 			$insData['f_origin_id'] = $id;
-			$this->newsModel->insert($insData);
+			$seqId = News::insert($insData);
 		}
 		$this->info("资讯入库结束： ID:{$id}  标题:{$title}");
 		return $seqId;
@@ -210,7 +178,7 @@ abstract class NewsCat extends BaseCrawl {
 	public function crawl() {
 		$this->info('总页数抓取开始');
 		$firstListPage = $this->computeListPageUrl(1);
-		$pageCnt = $this->crawlPageCnt($firstListPage, '.pagination-item');
+		$pageCnt = $this->crawlPageCnt($firstListPage);
 		$pageCnt = 1;
 		$this->info("总页数抓取结束：一共 {$pageCnt} 页");
 		if ($pageCnt) {
@@ -219,6 +187,7 @@ abstract class NewsCat extends BaseCrawl {
 				//随机等待多少秒
 				$this->waitRandomMS();
 				$allId = $this->crawAllId($listPageUrl);
+				pr($allId,1);
 				$this->info("列表抓取开始：第 {$i} 页");
 				foreach ($allId as $id) {
 					$this->info("项目详情抓取开始： ID为 $id");

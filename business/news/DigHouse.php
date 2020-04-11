@@ -1,19 +1,16 @@
 <?php
 
-namespace Business\Deju;
+namespace Business\News;
 
 use Business\Category\NewsCat;
 use Exception;
-use Model\Deju\News;
-use Model\Deju\NewsImage;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * 资讯爬取
- * Class NewsDe
+ * Class DigHouse
  * @package Business\Deju
  */
-class NewsDe extends NewsCat {
+class DigHouse extends NewsCat {
 
 	public $platformsSubDir = ''; //子目录
 
@@ -38,6 +35,27 @@ class NewsDe extends NewsCat {
 		$url = $this->baseUrl . "article/{$id}";
 		return $url;
 	}
+
+	/**
+	 * 抓取总页数
+	 * @param $url
+	 * @param $express
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public function crawlPageCnt($url) {
+		$fileName = __FUNCTION__ . '_url_' . $url;
+		$content = $this->fetchContent($fileName, $url);
+		$idList = $this->computeData($content, '.pagination-item');
+		$filteredList = array_filter($idList, function ($val) {
+			$intVal = intval($val);
+			$convertedVal = (string)$intVal == $val;
+			return $convertedVal == $val;
+		});
+		$pageCnt = array_pop($filteredList);
+		return $pageCnt;
+	}
+
 
 	/**
 	 * 爬取所有的ID
