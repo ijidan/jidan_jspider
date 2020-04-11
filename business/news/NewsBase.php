@@ -191,7 +191,6 @@ abstract class NewsBase extends BaseCrawl {
 	/**
 	 * 开始爬取
 	 * @return mixed|void
-	 * @throws \Exception
 	 */
 	public function crawl() {
 		$this->info('总页数抓取开始');
@@ -204,11 +203,19 @@ abstract class NewsBase extends BaseCrawl {
 				$listPageUrl = $this->computeListPageUrl($i);
 				//随机等待多少秒
 				$this->waitRandomMS();
-				$allId = $this->crawAllId($listPageUrl);
+				try{
+					$allId = $this->crawAllId($listPageUrl);
+				}catch (\Exception $e){
+					continue;
+				}
 				$this->info("列表抓取开始：第 {$i} 页");
 				foreach ($allId as $id) {
 					$this->info("项目详情抓取开始： ID为 $id");
-					$this->crawlDetail($id);
+					try{
+						$this->crawlDetail($id);
+					}catch (\Exception $e){
+						continue;
+					}
 					$this->info("项目详情抓取结束： ID为 $id");
 				}
 			}

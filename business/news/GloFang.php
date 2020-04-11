@@ -93,15 +93,13 @@ class GloFang extends NewsBase {
 	public function crawlDetail($id) {
 		$fileName = __FUNCTION__ . '_id_' . $id;
 		$url = $this->computeDetailPageUrl($id);
-		$htmlContent = $this->fetchContent($fileName, $url,'UTF-8','gb2312//IGNORE');
-		$title = $this->computeOnlyOneData($htmlContent, '.textTit h1');
-		$abstract = $this->computeOnlyOneData($htmlContent, 'div.abstract');
-
+		$htmlContent = $this->fetchContent($fileName, $url);
+		$title = $this->computeOnlyOneData($htmlContent, 'title');
+		$abstract = '';
 		//详情页替换
-		$replacePattern ='';
-		$content = $this->computeHtmlContent($htmlContent, '.mtcomment', 'first', $replacePattern);
+		$content = $this->computeHtmlContent($htmlContent, 'div.news_content', 'first');
 		//入库
-		$seqId = $this->doDetail($id, $title, $abstract, $content);
+		$seqId = $this->doDetail(NewsBase::CAT1_TRENDS,NewsBase::CAT2_OVERSEAS_LIFE,$id, $title, $abstract, $content);
 		//图片入库
 		$imgList = $this->extractImage($content);
 		$this->doImage($seqId, $imgList);
