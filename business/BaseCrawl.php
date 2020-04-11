@@ -10,7 +10,6 @@ use Lib\BaseModel;
 use Lib\Http\UserAgent;
 use Lib\Net\BaseService;
 use Lib\Util\Config;
-use Model\Spider\HouseSeq;
 use RuntimeException;
 use Symfony\Component\Console\Output\OutputInterface;
 use League\Flysystem\FileNotFoundException;
