@@ -1,21 +1,21 @@
 <?php
-namespace Model\Fang;
+namespace Model\Deju;
 
 use Lib\BaseModel;
 
-
 /**
- * 资讯表
- * Class News
- * @package Model\Fang
+ * 资讯图片表
+ * Class NewsImage
+ * @package Model\Deju
  */
-class News extends BaseModel {
+class NewsImage extends BaseModel {
+
 	/**
 	 * 数据库名
 	 * @return mixed
 	 */
 	public function getDatabaseName() {
-		return 'd_spider_fang';
+		return 'd_spider_deju';
 		// TODO: Implement getDatabaseName() method.
 	}
 
@@ -24,7 +24,7 @@ class News extends BaseModel {
 	 * @return mixed
 	 */
 	public function getTableName() {
-		return 'news';
+		return 'news_img';
 		// TODO: Implement getTableName() method.
 	}
 

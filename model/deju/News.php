@@ -1,5 +1,5 @@
 <?php
-namespace Model\Fang;
+namespace Model\Deju;
 
 use Lib\BaseModel;
 
@@ -7,7 +7,7 @@ use Lib\BaseModel;
 /**
  * 资讯表
  * Class News
- * @package Model\Fang
+ * @package Model\Deju
  */
 class News extends BaseModel {
 	/**
@@ -15,7 +15,7 @@ class News extends BaseModel {
 	 * @return mixed
 	 */
 	public function getDatabaseName() {
-		return 'd_spider_fang';
+		return 'd_spider_deju';
 		// TODO: Implement getDatabaseName() method.
 	}
 

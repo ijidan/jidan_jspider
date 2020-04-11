@@ -3,6 +3,7 @@ namespace Model\Fang;
 
 use Lib\BaseModel;
 
+
 /**
  * 资讯图片表
  * Class NewsImage
