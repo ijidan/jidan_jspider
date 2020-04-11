@@ -15,11 +15,22 @@ use Model\Spider\NewsImage;
  */
 abstract class NewsBase extends BaseCrawl {
 
+
+	//一级目录
+	const CAT1_TRENDS = 'cat1_trends'; //新闻动态
+
+	//二级目录
+	const CAT2_MARKET_TRENDS = 'cat1_market_trends'; //市场动态
+	const CAT2_OVERSEAS_LIFE = 'cat2_overseas_life'; //海外生活
+	const CAT2_HOUSE_INVEST = 'cat2_house_invest'; //房产投资
+	const CAT2_HOUSE_EXPERIENCE = 'cat2_house_experience'; //购房攻略/经验
+
+
 	/**
 	 * 业务类型
 	 * @var string
 	 */
-	public $business='news';
+	public $business = 'news';
 
 
 	/**
@@ -93,7 +104,7 @@ abstract class NewsBase extends BaseCrawl {
 			}
 			$thumbnail = isset($thumbnailList[$idx]) ? $thumbnailList[$idx] : '';
 			$abstract = isset($abstractList[$idx]) ? $abstractList[$idx] : '';
-			$record = News::findOne('f_platform= ? and f_origin_id=? ', [$this->platform,$id]);
+			$record = News::findOne('f_platform= ? and f_origin_id=? ', [$this->platform, $id]);
 			$insData = [
 				'f_platform'    => $this->platform,
 				'f_thumbnail'   => $thumbnail,
@@ -139,20 +150,27 @@ abstract class NewsBase extends BaseCrawl {
 
 	/**
 	 * 资讯入库
+	 * @param $cat1
+	 * @param $cat2
 	 * @param $id
 	 * @param $title
 	 * @param $abstract
 	 * @param $content
+	 * @param array $tagList
 	 * @param array $cusData
-	 * @return int|mixed
+	 * @return string
 	 * @throws \ErrorException
 	 */
-	public function doDetail($id, $title, $abstract, $content, array $cusData = []) {
+	public function doDetail($cat1, $cat2, $id, $title, $abstract, $content, array $tagList = [], array $cusData = []) {
+		$tagStr = $tagList ? join(',', $tagList) : '';
 		$record = News::findOne('f_origin_id=?', [$id]);
 		$insData = [
+			'f_cat1'             => $cat1,
+			'f_cat2'             => $cat2,
 			'f_title'            => $title,
 			'f_content_abstract' => $abstract,
 			'f_content'          => $content,
+			'f_tag'              => $tagStr,
 			'f_update_time'      => time()
 		];
 		if ($cusData) {

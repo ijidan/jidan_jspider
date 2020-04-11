@@ -103,8 +103,9 @@ class DigHouse extends NewsBase {
 		//详情页替换
 		$replacePattern = '';
 		$content = $this->computeHtmlContent($htmlContent, '.rich-text', 'first', $replacePattern);
+		$tagList=$this->computeData($htmlContent,'.ToolsLineView span');
 		//入库
-		$seqId = $this->doDetail($id, $title, $abstract, $content);
+		$seqId = $this->doDetail(NewsBase::CAT1_TRENDS,NewsBase::CAT2_HOUSE_INVEST,$id, $title, $abstract, $content,$tagList);
 		//图片入库
 		$imgList = $this->extractImage($content, 'img', 'data-src');
 		$this->doImage($seqId, $imgList);
