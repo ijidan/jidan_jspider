@@ -61,7 +61,7 @@ abstract class BaseCrawl {
 	 */
 	protected $cacheDir = '';
 
-	protected $business='';
+	protected $business = '';
 	/**
 	 * 平台
 	 * @var string
@@ -108,7 +108,7 @@ abstract class BaseCrawl {
 		$this->isConsole = $this->isConsole();
 		$this->isOutputLog = $this->isConsole && $output;
 		$this->computePlatform();
-		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->business.'/'.$this->platform;
+		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->business . '/' . $this->platform;
 		if ($this->platformsSubDir) {
 			$this->cacheDir .= '/' . $this->platformsSubDir;
 		}
@@ -323,7 +323,7 @@ abstract class BaseCrawl {
 	 * @return bool|false|string|null
 	 * @throws Exception
 	 */
-	protected function fetchContent($fileName, $url,$sourceCharset='UTF-8',$destCharset='') {
+	protected function fetchContent($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = '') {
 		$fileName = $this->standardizeFileName($fileName);
 		$content = $this->fetchContentFromCache($fileName);
 		if (!$content) {
@@ -334,8 +334,8 @@ abstract class BaseCrawl {
 		if (!$content) {
 			throw new RuntimeException($fileName . ':content empty');
 		}
-		if($sourceCharset && $destCharset){
-			$content=iconv( $sourceCharset, $destCharset , $content);
+		if ($sourceCharset && $destCharset) {
+			$content = iconv($sourceCharset, $destCharset, $content);
 		}
 		return $content;
 	}
@@ -555,30 +555,6 @@ abstract class BaseCrawl {
 		$rand = mt_rand(500000, 2500000);
 		usleep($rand);
 		return $rand;
-	}
-
-	/**
-	 * 获取分布式ID
-	 * @return int
-	 * @throws ErrorException
-	 */
-	public function getNextHouseSeq() {
-		$lastRecord = HouseSeq::findOne('f_platform=?', [$this->platform], 'f_id', 'DESC');
-		if ($lastRecord) {
-			$lastId = $lastRecord['f_id'];
-			$step = $lastRecord['f_step'];
-			$nextId = $lastId + $step;
-		} else {
-			$nextId = 1;
-		}
-		$insData = [
-			'f_id'          => $nextId,
-			'f_step'        => 1,
-			'f_platform'    => $this->platform,
-			'f_create_time' => time()
-		];
-		HouseSeq::insert($insData);
-		return $nextId;
 	}
 
 	/**
