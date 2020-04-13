@@ -32,6 +32,11 @@ abstract class BaseCrawl {
 	const TEXT_SYMBOL = "_text";
 
 	/**
+	 * 是否debug模式
+	 * @var bool
+	 */
+	protected $isDebugMode = true;
+	/**
 	 * 日志接口
 	 * @var \Monolog\Logger
 	 */
@@ -84,23 +89,28 @@ abstract class BaseCrawl {
 	 * @var bool
 	 */
 	protected $isConsole = false;
+
 	/**
 	 * 是否输出日志
 	 * @var bool
 	 */
 	protected $isOutputLog = false;
 
+	/**
+	 * 图片上传URL
+	 * @var mixed|string
+	 */
 	protected $imgUploadURL = '';
 
 	/**
 	 * 构造函数
-	 * BaseCrawl constructor
-	 * @param OutputInterface $output
+	 * BaseCrawl constructor.
+	 * @param OutputInterface|null $output
 	 * @param bool $useCache 是否使用缓存
-	 * @param bool $debugModel 调试模式
-	 * @throws \Exception
+	 * @param bool $isDebugMode 是否调试模式
+	 * @throws Exception
 	 */
-	public function __construct(OutputInterface $output = null, $useCache = true, $debugModel = true) {
+	public function __construct(OutputInterface $output = null, $useCache = true, $isDebugMode = true) {
 		$this->imgUploadURL = Config::getConfigItem('struct/img_upload_url');
 		$this->logger = BaseLogger::instance(BaseLogger::CHANNEL_SPIDER_CACHE);
 		$this->output = $output;
@@ -113,25 +123,12 @@ abstract class BaseCrawl {
 			$this->cacheDir .= '/' . $this->platformsSubDir;
 		}
 		$this->cacheDir .= '/';
-		$userAgent = UserAgent::random();
-		$guzzleConfig = [
-			'timeout' => 20,
-			'headers' => [
-				'User-Agent' => $userAgent
-			]
-		];
-		$needUUID = ['need_uuid' => false];
-		$config = $debugModel ? [
+		$this->isDebugMode = $isDebugMode;
+		$guzzleConfig = $this->getGuzzleHttpConfig();
+		$customConfig = $this->getCustomConfig();
+		$config = [
 			'guzzleHttp' => $guzzleConfig,
-			'custom'     => $needUUID
-		] : [
-			'guzzleHttp' => $guzzleConfig + [
-					'proxy' => [
-						'http' => 'tcp://163.204.246.18:9999', // Use this proxy with "http"
-						//'https' => 'tcp://localhost:9124', // Use this proxy with "https",
-					]
-				],
-			'custom'     => $needUUID
+			'custom'     => $customConfig
 		];
 		$this->config = $config;
 

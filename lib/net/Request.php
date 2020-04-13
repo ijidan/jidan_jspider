@@ -38,7 +38,7 @@ class Request {
 	private $businessConfig = array();
 
 	/**
-	 * GuzzTle配置
+	 * Guzztle配置
 	 * @var array
 	 */
 	private $guzzleHttpConfig = array(

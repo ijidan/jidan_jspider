@@ -3,6 +3,7 @@
 namespace Business\News;
 
 use Business\BaseCrawl;
+use Lib\Http\UserAgent;
 use Lib\Util\CommonUtil;
 use Model\Spider\News;
 use Model\Spider\NewsImage;
@@ -220,5 +221,43 @@ abstract class NewsBase extends BaseCrawl {
 				}
 			}
 		}
+	}
+
+	/**
+	 * 获取Guzzle配置
+	 * @return mixed
+	 */
+	public function getGuzzleHttpConfig() {
+		$userAgent = UserAgent::random();
+		$guzzleConfig = [
+			'timeout' => 20,
+			'headers' => [
+				'User-Agent' => $userAgent
+			]
+		];
+		if(!$this->isDebugMode){
+			$guzzleConfig['proxy']=[
+				'http' => 'tcp://163.204.246.18:9999'
+			];
+		}
+		return $guzzleConfig;
+	}
+
+
+	/**
+	 * 获取业务配置
+	 * @return mixed
+	 */
+	public function getBusinessConfig() {
+		// TODO: Implement getBusinessConfig() method.
+	}
+
+	/**
+	 * 获取自定义配置
+	 * @return mixed
+	 */
+	public function getCustomConfig() {
+		$customConfig = ['need_uuid' => false];
+		return $customConfig;
 	}
 }

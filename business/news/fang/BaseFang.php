@@ -133,28 +133,4 @@ class BaseFang extends NewsBase {
 		];
 		return $detailData;
 	}
-
-	/**
-	 * 获取Guzzle配置
-	 * @return mixed
-	 */
-	public function getGuzzleHttpConfig() {
-		// TODO: Implement getGuzzleHttpConfig() method.
-	}
-
-	/**
-	 * 获取业务配置
-	 * @return mixed
-	 */
-	public function getBusinessConfig() {
-		// TODO: Implement getBusinessConfig() method.
-	}
-
-	/**
-	 * 获取自定义配置
-	 * @return mixed
-	 */
-	public function getCustomConfig() {
-		// TODO: Implement getCustomConfig() method.
-	}
 }
