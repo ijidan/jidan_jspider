@@ -112,4 +112,11 @@ class GloFang extends NewsBase {
 		return $detailData;
 	}
 
+	/**
+	 * 获取平台
+	 * @return mixed
+	 */
+	public function getPlatform() {
+		return 'glofang';
+	}
 }

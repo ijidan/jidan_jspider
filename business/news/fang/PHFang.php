@@ -24,4 +24,11 @@ class PHFang extends BaseFang {
 	];
 	public $baseUrl = "https://philippines.fang.com/";
 
+	/**
+	 * 获取平台
+	 * @return mixed
+	 */
+	public function getPlatform() {
+		return 'fang_ph';
+	}
 }

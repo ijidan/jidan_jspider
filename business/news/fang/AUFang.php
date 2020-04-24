@@ -17,4 +17,11 @@ class AUFang extends BaseFang {
 
 	public $baseUrl = "https://au.fang.com/";
 
+	/**
+	 * 获取平台
+	 * @return mixed
+	 */
+	public function getPlatform() {
+		return 'fang_au';
+	}
 }

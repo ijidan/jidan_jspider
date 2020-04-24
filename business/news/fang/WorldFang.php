@@ -44,4 +44,12 @@ class WorldFang extends BaseFang {
 		$url = $this->baseUrl . "news/open/{$id}.htm";
 		return $url;
 	}
+
+	/**
+	 * 获取平台
+	 * @return mixed
+	 */
+	public function getPlatform() {
+		return 'fang_world';
+	}
 }

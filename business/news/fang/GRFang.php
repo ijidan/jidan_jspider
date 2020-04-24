@@ -6,7 +6,7 @@ namespace Business\News\Fang;
 /**
  * 希腊
  * Class GRFang
- * @package Business\Fang
+ * @package Business\News\Fang
  */
 class GRFang extends BaseFang {
 
@@ -28,4 +28,11 @@ class GRFang extends BaseFang {
 	];
 	public $baseUrl = "https://greece.fang.com/";
 
+	/**
+	 * 获取平台
+	 * @return mixed
+	 */
+	public function getPlatform() {
+		return 'fang_gr';
+	}
 }

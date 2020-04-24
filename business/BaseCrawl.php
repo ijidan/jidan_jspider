@@ -117,7 +117,7 @@ abstract class BaseCrawl {
 		$this->useCache = $useCache;
 		$this->isConsole = $this->isConsole();
 		$this->isOutputLog = $this->isConsole && $output;
-		$this->computePlatform();
+		$this->platform=$this->getPlatform();
 		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->business . '/' . $this->platform;
 		if ($this->platformsSubDir) {
 			$this->cacheDir .= '/' . $this->platformsSubDir;
@@ -167,6 +167,12 @@ abstract class BaseCrawl {
 	 * @return mixed
 	 */
 	abstract public function getCustomConfig();
+
+	/**
+	 * 获取平台
+	 * @return mixed
+	 */
+	abstract public function getPlatform();
 
 
 	/**

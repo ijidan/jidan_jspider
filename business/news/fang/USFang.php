@@ -22,4 +22,11 @@ class USFang extends BaseFang {
 	];
 	public $baseUrl = "https://us.fang.com/";
 
+	/**
+	 * 获取平台
+	 * @return mixed
+	 */
+	public function getPlatform() {
+		return 'fang_us';
+	}
 }

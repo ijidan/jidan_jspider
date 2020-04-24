@@ -25,4 +25,11 @@ class UKFang extends BaseFang {
 	];
 	public $baseUrl = "https://uk.fang.com/";
 
+	/**
+	 * 获取平台
+	 * @return mixed
+	 */
+	public function getPlatform() {
+		return 'fang_uk';
+	}
 }

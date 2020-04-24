@@ -33,4 +33,11 @@ class JPFang extends BaseFang {
 
 	public $baseUrl = "https://japan.fang.com/";
 
+	/**
+	 * 获取平台
+	 * @return mixed
+	 */
+	public function getPlatform() {
+		return 'fang_jp';
+	}
 }

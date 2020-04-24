@@ -133,4 +133,5 @@ class BaseFang extends NewsBase {
 		];
 		return $detailData;
 	}
+
 }
