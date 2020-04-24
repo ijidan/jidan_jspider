@@ -10,8 +10,12 @@ return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Slim' => array($vendorDir . '/slim/middleware/src'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
+    'Neutron' => array($vendorDir . '/neutron/temporary-filesystem/src'),
     'Mustache' => array($vendorDir . '/mustache/mustache/src'),
     'Gregwar\\Image' => array($vendorDir . '/gregwar/image'),
     'Gregwar\\Cache' => array($vendorDir . '/gregwar/cache'),
+    'FFMpeg' => array($vendorDir . '/php-ffmpeg/php-ffmpeg/src'),
+    'Evenement' => array($vendorDir . '/evenement/evenement/src'),
     'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
+    'Alchemy' => array($vendorDir . '/alchemy/binary-driver/src'),
 );
