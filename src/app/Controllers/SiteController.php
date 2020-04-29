@@ -20,29 +20,6 @@ class SiteController extends IndexController {
 	 * @throws \Exception
 	 */
 	public function index() {
-////		$test=new Test(null,false);
-////		$data=$test->index();
-////		dump($data,1);
-		$wf=new WaiGF();
-		$id=34578;
-		$data=$wf->crawlDetail(4064,6091,$id);
-		dump($data,1);
-		$data=$wf->getNextHouseSeq();
-		dump($data,1);
-//		$data=$wf->crawl();
-//		dump($data,1);
-////		$data=$wf->crawlCountryCity();
-////		$data=$wf->crawlPageCnt('/newhouselist_t1016_a0_m0_j0_o1.html');
-////		$data=$wf->crawAllId();
-		$id=36560;
-		$data=$wf->crawlDetail($id);
-		pr($data,1);
-////		$obj= new ULu();
-////		$id='563940838';
-////		$detail=$obj->crawlDetail($id);
-////		dump($detail,1);
-////		$data=(new ULu())->crawlLocationRound($id);
-////		dump($data,1);
 		$businessList = [
 			[
 				"title"   => "MUA HÀNG TRỰC TUYẾN",

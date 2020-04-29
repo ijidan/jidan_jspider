@@ -84,10 +84,10 @@ class VideoUtil {
 			30 => ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC,
 			60 => ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC
 		];
-		$format=new X264();
+		$format=new X264('libfdk_aac');
 		$format->setAudioCodec("libmp3lame");
 		$this->video->filters()->extractMultipleFrames($map[$everySecond], $destImageFolder)->synchronize();
-		$this->video->save($format, $destImageFilePath);
+		$this->video->save($format, 'libfdk_aac');
 	}
 
 	/**

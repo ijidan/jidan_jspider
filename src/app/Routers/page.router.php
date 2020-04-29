@@ -8,6 +8,7 @@ $app->group('', function () use ($app) {
 	$app->get('/richText/{category_id}', 'App\Controllers\SiteController:richText');
 	$app->get('/agreement', 'App\Controllers\SiteController:agreement');
 	$app->get('/introduction', 'App\Controllers\SiteController:introduction');
-	$app->get('/test','App\Controllers\TestController:index');
+	$app->get('/test/index','App\Controllers\TestController:index');
+	$app->get('/test/video','App\Controllers\TestController:video');
 });
 

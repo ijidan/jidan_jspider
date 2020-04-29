@@ -5,6 +5,10 @@ namespace App\Controllers;
 
 use App\Models\House as SolrHouse;
 use Business\GloFang;
+use Business\News\DigHouse;
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\FFMpeg;
+use Lib\Ffmpeg\VideoUtil;
 use Lib\Net\BaseService;
 use Lib\Util\Paginate;
 use Model\WaiGF\House;
@@ -23,9 +27,10 @@ class TestController extends IndexController {
 	 */
 	public function index() {
 
-		$fang=new GloFang();
-//		$data=$fang->crawlDetail('35517560');
-		$data=$fang->crawl();
+		dump('1',1);
+		$fang=new DigHouse();
+		$data=$fang->crawlDetail('7356');
+//		$data=$fang->crawl();
 		pr($data,1);
 		$url='http://api.shenjian.io/';
 
@@ -66,5 +71,12 @@ class TestController extends IndexController {
 		}
 		dump($data,1);
 		return $this->renderTemplate("site/index", ["businessList" => []]);
+	}
+
+	public function video(){
+		$videoFile=BASE_DIR.'/garden.mp4';
+		$videoUtil=new VideoUtil($videoFile);
+		$videoUtil->extractImages(60,BASE_DIR,'garden');
+		dump('done',1);
 	}
 }
