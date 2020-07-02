@@ -1,6 +1,7 @@
 <?php
 
 use Business\ULu;
+use Business\Uoolu\BGImage;
 use Business\Uoolu\Topic;
 use Lib\Util\SDUtil;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,6 +25,10 @@ $app->command('crawl [type] [keyword1] [keyword2]', function ($type, $keyword1, 
 		case 'topic':
 			$uLu=new Topic($output);
 			$uLu->crawl();
+			break;
+		case 'bg_img';
+			$bgImg=new BGImage();
+			$bgImg->crawl();
 	}
 	$output->writeln("执行完毕");
 });

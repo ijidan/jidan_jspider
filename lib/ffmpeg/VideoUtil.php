@@ -2,14 +2,16 @@
 
 namespace Lib\Ffmpeg;
 
+use Alchemy\BinaryDriver\Listeners\DebugListener as DebugListener;
 use FFMpeg\Coordinate\TimeCode;
-use FFMpeg\Coordinate\Dimension;
 use FFMpeg\FFMpeg;
 use FFMpeg\Filters\Video\ExtractMultipleFramesFilter;
-use FFMpeg\Filters\Video\ResizeFilter;
 use FFMpeg\Format\Video\X264;
 use FFMpeg\Media\Video;
+use getID3;
 use InvalidArgumentException;
+use Lib\Util\ConsoleUtil;
+use Symfony\Component\Console\Output\OutputInterface;
 
 
 /**
@@ -32,7 +34,7 @@ class VideoUtil {
 	private $config = array(
 		'ffmpeg.binaries'  => '/usr/local/bin/ffmpeg',
 		'ffprobe.binaries' => '/usr/local/bin/ffprobe',
-		'timeout'          => 3600*24, // The timeout for the underlying process
+		'timeout'          => 0, // The timeout for the underlying process
 		'ffmpeg.threads'   => 12,   // The number of threads that FFMpeg should use
 	);
 
@@ -42,17 +44,28 @@ class VideoUtil {
 	private $video;
 
 	/**
+	 * @var $output
+	 */
+	private $output;
+
+	/**
 	 * 构造函数
 	 * VideoUtil constructor.
 	 * @param $file
 	 * @param array $config
+	 * @param OutputInterface|null $output
 	 */
-	public function __construct($file, array $config = []) {
+	public function __construct($file, array $config = [],OutputInterface $output=null) {
 		$this->file = $file;
+		$this->output=$output;
 		if ($config) {
 			$this->config = array_merge($this->config, $config);
 		}
 		$ffm = FFMpeg::create($this->config);
+		$ffm->getFFMpegDriver()->listen(new DebugListener());
+		$ffm->getFFMpegDriver()->on('debug', function ($message) {
+			echo $message."\n";
+		});
 		$this->video = $ffm->open($file);
 	}
 
@@ -89,13 +102,25 @@ class VideoUtil {
 		$this->video->filters()->extractMultipleFrames($map[$everySecond], $destImageFolder)->synchronize();
 		$this->video->save($format, 'libfdk_aac');
 	}
-
 	/**
 	 * 裁剪
 	 */
 	public function clip(){
+		$getID3=new getID3();
+		$fileInfo=$getID3->analyze($this->file);
+		dump($fileInfo,1);
+		$data=$this->video->getStreams()->all();
+		pr($data,1);
+		dump(get_class_methods(get_class($this->video)),1);
 		$this->video->filters()->clip(TimeCode::fromSeconds(30), TimeCode::fromSeconds(15));
-		$this->video->filters()->resize(new Dimension(320, 240), ResizeFilter::RESIZEMODE_INSET, true);
-		$this->video->save(new X264(), BASE_DIR.'/cut_and_resize.mp4');
+//		$this->video->filters()->resize(new Dimension(320, 240), ResizeFilter::RESIZEMODE_INSET, true);
+		$format = new X264('libfdk_aac');
+		if($this->output){
+			$consoleUtil=new ConsoleUtil();
+			$format->on('progress', function ($video, $format, $percentage) use($consoleUtil) {
+				$consoleUtil->info("$percentage % done.");
+			});
+		}
+		return $this->video->save($format, BASE_DIR.'/cut_and_resize.mp4');
 	}
 }

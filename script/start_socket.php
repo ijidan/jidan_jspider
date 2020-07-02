@@ -1,6 +1,6 @@
 <?php
 
-require  dirname(dirname(__FILE__))."/public/common.php";
+require 'config.php';
 /**
  * run with command 
  * php start.php start

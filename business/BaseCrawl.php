@@ -463,6 +463,19 @@ abstract class BaseCrawl {
 		}
 		return $content;
 	}
+	protected function computeHtmlContentList($content, $express){
+		$crawler = new Crawler($content);
+		$nodeValues = $crawler->filter($express)->each(function (Crawler $node, $i) {
+			return $node->text();
+		});
+		pr($nodeValues,1);
+
+		$crawler = new Crawler($content);
+		$crawler->filter($express);
+		$data=$crawler->count();
+		pr($data,1);
+
+	}
 
 	/**
 	 * 根据位置替换内容

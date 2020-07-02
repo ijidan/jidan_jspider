@@ -74,9 +74,10 @@ class TestController extends IndexController {
 	}
 
 	public function video(){
-		$videoFile=BASE_DIR.'/garden.mp4';
+		$videoFile=BASE_DIR.'/150903-Noble_BE33_.mp4';
 		$videoUtil=new VideoUtil($videoFile);
-		$videoUtil->extractImages(60,BASE_DIR,'garden');
+		$data = $videoUtil->clip();
+		dump($data,1);
 		dump('done',1);
 	}
 }
