@@ -43,7 +43,7 @@ More examples are available under [/examples](https://github.com/php-curl-class/
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
-use \Curl\Curl;
+use Curl\Curl;
 
 $curl = new Curl();
 $curl->get('https://www.example.com/');
@@ -156,7 +156,7 @@ curl_close($curl->curl);
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
-use \Curl\MultiCurl;
+use Curl\MultiCurl;
 
 // Requests in parallel with callback functions.
 $multi_curl = new MultiCurl();
@@ -268,6 +268,7 @@ Curl::setDigestAuthentication($username, $password = '')
 Curl::setFile($file)
 Curl::setHeader($key, $value)
 Curl::setHeaders($headers)
+Curl::setInterface($interface)
 Curl::setJsonDecoder($mixed)
 Curl::setMaxFilesize($bytes)
 Curl::setOpt($option, $value)
@@ -319,6 +320,7 @@ MultiCurl::setDigestAuthentication($username, $password = '')
 MultiCurl::setFile($file)
 MultiCurl::setHeader($key, $value)
 MultiCurl::setHeaders($headers)
+MultiCurl::setInterface($interface)
 MultiCurl::setJsonDecoder($mixed)
 MultiCurl::setOpt($option, $value)
 MultiCurl::setOpts($options)

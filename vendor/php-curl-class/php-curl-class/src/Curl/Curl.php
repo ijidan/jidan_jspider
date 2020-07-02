@@ -7,7 +7,7 @@ use Curl\Decoder;
 
 class Curl
 {
-    const VERSION = '8.7.0';
+    const VERSION = '8.8.0';
     const DEFAULT_TIMEOUT = 30;
 
     public $curl;
@@ -1220,6 +1220,20 @@ class Curl
     public function setUserAgent($user_agent)
     {
         $this->setOpt(CURLOPT_USERAGENT, $user_agent);
+    }
+
+    /**
+     * Set Interface
+     *
+     * The name of the outgoing network interface to use.
+     * This can be an interface name, an IP address or a host name.
+     *
+     * @access public
+     * @param  $interface
+     */
+    public function setInterface($interface)
+    {
+        $this->setOpt(CURLOPT_INTERFACE, $interface);
     }
 
     /**

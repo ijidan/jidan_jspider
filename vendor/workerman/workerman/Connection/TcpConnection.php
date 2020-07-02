@@ -367,9 +367,14 @@ class TcpConnection extends ConnectionInterface
                 $this->checkBufferWillFull();
                 return;
             }
-            \set_error_handler(function(){});
-            $len = \fwrite($this->_socket, $send_buffer);
-            \restore_error_handler();
+            $len = 0;
+            try {
+                $len = @\fwrite($this->_socket, $send_buffer);
+            } catch (\Exception $e) {
+                Worker::log($e);
+            } catch (\Error $e) {
+                Worker::log($e);
+            }
             // send successful.
             if ($len === \strlen($send_buffer)) {
                 $this->bytesWritten += $len;
@@ -586,9 +591,10 @@ class TcpConnection extends ConnectionInterface
             }
         }
 
-        \set_error_handler(function(){});
-        $buffer = \fread($socket, self::READ_BUFFER_SIZE);
-        \restore_error_handler();
+        $buffer = '';
+        try {
+            $buffer = @\fread($socket, self::READ_BUFFER_SIZE);
+        } catch (\Exception $e) {} catch (\Error $e) {}
 
         // Check connection closed.
         if ($buffer === '' || $buffer === false) {
@@ -601,7 +607,6 @@ class TcpConnection extends ConnectionInterface
             $this->_recvBuffer .= $buffer;
         }
 
-        $recv_len = \strlen($this->_recvBuffer);
         // If the application layer protocol has been set up.
         if ($this->protocol !== null) {
             $parser = $this->protocol;
@@ -609,22 +614,20 @@ class TcpConnection extends ConnectionInterface
                 // The current packet length is known.
                 if ($this->_currentPackageLength) {
                     // Data is not enough for a package.
-                    if ($this->_currentPackageLength > $recv_len) {
+                    if ($this->_currentPackageLength > \strlen($this->_recvBuffer)) {
                         break;
                     }
                 } else {
                     // Get current package length.
-                    \set_error_handler(function($code, $msg, $file, $line){
-                        Worker::safeEcho("$msg in file $file on line $line\n");
-                    });
-                    $this->_currentPackageLength = $parser::input($this->_recvBuffer, $this);
-                    \restore_error_handler();
+                    try {
+                        $this->_currentPackageLength = $parser::input($this->_recvBuffer, $this);
+                    } catch (\Exception $e) {} catch (\Error $e) {}
                     // The packet length is unknown.
                     if ($this->_currentPackageLength === 0) {
                         break;
                     } elseif ($this->_currentPackageLength > 0 && $this->_currentPackageLength <= $this->maxPackageSize) {
                         // Data is not enough for a package.
-                        if ($this->_currentPackageLength > $recv_len) {
+                        if ($this->_currentPackageLength > \strlen($this->_recvBuffer)) {
                             break;
                         }
                     } // Wrong package.
@@ -638,7 +641,7 @@ class TcpConnection extends ConnectionInterface
                 // The data is enough for a packet.
                 ++self::$statistics['total_request'];
                 // The current packet length is equal to the length of the buffer.
-                if ($recv_len === $this->_currentPackageLength) {
+                if (\strlen($this->_recvBuffer) === $this->_currentPackageLength) {
                     $one_request_buffer = $this->_recvBuffer;
                     $this->_recvBuffer  = '';
                 } else {
@@ -646,7 +649,6 @@ class TcpConnection extends ConnectionInterface
                     $one_request_buffer = \substr($this->_recvBuffer, 0, $this->_currentPackageLength);
                     // Remove the current package from the receive buffer.
                     $this->_recvBuffer = \substr($this->_recvBuffer, $this->_currentPackageLength);
-                    $recv_len = \strlen($this->_recvBuffer);
                 }
                 // Reset the current packet length to 0.
                 $this->_currentPackageLength = 0;
@@ -699,9 +701,9 @@ class TcpConnection extends ConnectionInterface
     {
         \set_error_handler(function(){});
         if ($this->transport === 'ssl') {
-            $len = \fwrite($this->_socket, $this->_sendBuffer, 8192);
+            $len = @\fwrite($this->_socket, $this->_sendBuffer, 8192);
         } else {
-            $len = \fwrite($this->_socket, $this->_sendBuffer);
+            $len = @\fwrite($this->_socket, $this->_sendBuffer);
         }
         \restore_error_handler();
         if ($len === \strlen($this->_sendBuffer)) {
@@ -941,9 +943,9 @@ class TcpConnection extends ConnectionInterface
         Worker::$globalEvent->del($this->_socket, EventInterface::EV_WRITE);
 
         // Close socket.
-        \set_error_handler(function(){});
-        \fclose($this->_socket);
-        \restore_error_handler();
+        try {
+            @\fclose($this->_socket);
+        } catch (\Exception $e) {} catch (\Error $e) {}
 
         $this->_status = self::STATUS_CLOSED;
         // Try to emit onClose callback.
@@ -971,6 +973,8 @@ class TcpConnection extends ConnectionInterface
             }
         }
         $this->_sendBuffer = $this->_recvBuffer = '';
+        $this->_currentPackageLength = 0;
+        $this->_isPaused = $this->_sslHandshakeCompleted = false;
         if ($this->_status === self::STATUS_CLOSED) {
             // Cleaning up the callback to avoid memory leaks.
             $this->onMessage = $this->onClose = $this->onError = $this->onBufferFull = $this->onBufferDrain = null;

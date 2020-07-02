@@ -47,18 +47,11 @@ class Http
     protected static $_uploadTmpDir = '';
 
     /**
-     * Cache.
-     *
-     * @var array
-     */
-    protected static $_cache = array();
-
-    /**
      * Open cache.
      *
      * @var bool.
      */
-    public static $_enableCache = true;
+    protected static $_enableCache = true;
 
     /**
      * Get or set session name.
@@ -107,12 +100,15 @@ class Http
      */
     public static function input($recv_buffer, TcpConnection $connection)
     {
+        static $input = array();
+        if (!isset($recv_buffer[512]) && isset($input[$recv_buffer])) {
+            return $input[$recv_buffer];
+        }
         $crlf_pos = \strpos($recv_buffer, "\r\n\r\n");
         if (false === $crlf_pos) {
             // Judge whether the package length exceeds the limit.
             if ($recv_len = \strlen($recv_buffer) >= 16384) {
-                $connection->send("HTTP/1.1 413 Request Entity Too Large\r\n\r\n");
-                $connection->consumeRecvBuffer($recv_len);
+                $connection->close("HTTP/1.1 413 Request Entity Too Large\r\n\r\n");
                 return 0;
             }
             return 0;
@@ -121,22 +117,39 @@ class Http
         $head_len = $crlf_pos + 4;
         $method = \strstr($recv_buffer, ' ', true);
 
-        if ($method === 'GET' || $method === 'OPTIONS' || $method === 'HEAD') {
+        if ($method === 'GET' || $method === 'OPTIONS' || $method === 'HEAD' || $method === 'DELETE') {
+            if (!isset($recv_buffer[512])) {
+                $input[$recv_buffer] = $head_len;
+                if (\count($input) > 512) {
+                    unset($input[key($input)]);
+                }
+            }
             return $head_len;
-        } else if ($method !== 'POST' && $method !== 'PUT' && $method !== 'DELETE') {
-            $connection->send("HTTP/1.1 400 Bad Request\r\n\r\n", true);
-            $connection->consumeRecvBuffer(\strlen($recv_buffer));
+        } else if ($method !== 'POST' && $method !== 'PUT') {
+            $connection->close("HTTP/1.1 400 Bad Request\r\n\r\n", true);
             return 0;
         }
 
         $header = \substr($recv_buffer, 0, $crlf_pos);
+        $length = false;
         if ($pos = \strpos($header, "\r\nContent-Length: ")) {
-            return  $head_len + (int)\substr($header, $pos + 18, 10);
+            $length = $head_len + (int)\substr($header, $pos + 18, 10);
         } else if (\preg_match("/\r\ncontent-length: ?(\d+)/i", $header, $match)) {
-            return $head_len + $match[1];
+            $length = $head_len + $match[1];
         }
 
-        return $method === 'DELETE' ? $head_len : 0;
+        if ($length !== false) {
+            if (!isset($recv_buffer[512])) {
+                $input[$recv_buffer] = $length;
+                if (\count($input) > 512) {
+                    unset($input[key($input)]);
+                }
+            }
+            return $length;
+        }
+
+        $connection->close("HTTP/1.1 400 Bad Request\r\n\r\n", true);
+        return 0;
     }
 
     /**
@@ -148,9 +161,10 @@ class Http
      */
     public static function decode($recv_buffer, TcpConnection $connection)
     {
+        static $requests = array();
         $cacheable = static::$_enableCache && !isset($recv_buffer[512]);
-        if (true === $cacheable && isset(static::$_cache[$recv_buffer])) {
-            $request = static::$_cache[$recv_buffer];
+        if (true === $cacheable && isset($requests[$recv_buffer])) {
+            $request = $requests[$recv_buffer];
             $request->connection = $connection;
             $connection->__request = $request;
             $request->properties = array();
@@ -160,9 +174,9 @@ class Http
         $request->connection = $connection;
         $connection->__request = $request;
         if (true === $cacheable) {
-            static::$_cache[$recv_buffer] = $request;
-            if (\count(static::$_cache) > 512) {
-                unset(static::$_cache[key(static::$_cache)]);
+            $requests[$recv_buffer] = $request;
+            if (\count($requests) > 512) {
+                unset($requests[key($requests)]);
             }
         }
         return $request;
@@ -206,11 +220,21 @@ class Http
         }
 
         if (isset($response->file)) {
-            $file = $response->file;
-            $body_len = (int)\filesize($file);
-            $response->header('Content-Length', $body_len);
-            if ($body_len < 1024 * 1024) {
-                $connection->send((string)$response . file_get_contents($file, false, null, 0, $body_len), true);
+            $file = $response->file['file'];
+            $offset = $response->file['offset'];
+            $length = $response->file['length'];
+            $file_size = (int)\filesize($file);
+            $body_len = $length > 0 ? $length : $file_size - $offset;
+            $response->withHeaders(array(
+                'Content-Length' => $body_len,
+                'Accept-Ranges'  => 'bytes',
+            ));
+            if ($offset || $length) {
+                $offset_end = $offset + $body_len - 1;
+                $response->header('Content-Range', "bytes $offset-$offset_end/$file_size");
+            }
+            if ($body_len < 2 * 1024 * 1024) {
+                $connection->send((string)$response . file_get_contents($file, false, null, $offset, $body_len), true);
                 return '';
             }
             $handler = \fopen($file, 'r');
@@ -219,7 +243,7 @@ class Http
                 return '';
             }
             $connection->send((string)$response, true);
-            static::sendStream($connection, $handler);
+            static::sendStream($connection, $handler, $offset, $length);
             return '';
         }
 
@@ -231,16 +255,34 @@ class Http
      *
      * @param TcpConnection $connection
      * @param $handler
+     * @param $offset
+     * @param $length
      */
-    protected static function sendStream(TcpConnection $connection, $handler)
+    protected static function sendStream(TcpConnection $connection, $handler, $offset = 0, $length = 0)
     {
         $connection->bufferFull = false;
+        if ($offset !== 0) {
+            \fseek($handler, $offset);
+        }
+        $offset_end = $offset + $length;
         // Read file content from disk piece by piece and send to client.
-        $do_write = function () use ($connection, $handler) {
+        $do_write = function () use ($connection, $handler, $length, $offset_end) {
             // Send buffer not full.
             while ($connection->bufferFull === false) {
                 // Read from disk.
-                $buffer = \fread($handler, 8192);
+                $size = 1024 * 1024;
+                if ($length !== 0) {
+                    $tell = \ftell($handler);
+                    $remain_size = $offset_end - $tell;
+                    if ($remain_size <= 0) {
+                        fclose($handler);
+                        $connection->onBufferDrain = null;
+                        return;
+                    }
+                    $size = $remain_size > $size ? $size : $remain_size;
+                }
+
+                $buffer = \fread($handler, $size);
                 // Read eof.
                 if ($buffer === '' || $buffer === false) {
                     fclose($handler);

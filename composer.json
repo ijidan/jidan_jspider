@@ -38,7 +38,8 @@
     "symfony/css-selector": "3.4.38",
     "mnapoli/silly": "1.5.1",
     "elasticsearch/elasticsearch": "5.5.0",
-    "php-ffmpeg/php-ffmpeg": "^0.16.0"
+    "php-ffmpeg/php-ffmpeg": "^0.16.0",
+    "james-heinrich/getid3": "^1.9"
   },
   "autoload":{
 	"psr-4":{
