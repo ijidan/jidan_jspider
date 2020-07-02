@@ -73,11 +73,13 @@ class TestController extends IndexController {
 		return $this->renderTemplate("site/index", ["businessList" => []]);
 	}
 
+	/**
+	 * 视频LOGO
+	 */
 	public function video(){
 		$videoFile=BASE_DIR.'/150903-Noble_BE33_.mp4';
 		$videoUtil=new VideoUtil($videoFile);
 		$data = $videoUtil->clip();
 		dump($data,1);
-		dump('done',1);
 	}
 }

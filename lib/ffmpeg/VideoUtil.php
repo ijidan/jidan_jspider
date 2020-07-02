@@ -55,19 +55,47 @@ class VideoUtil {
 	 * @param array $config
 	 * @param OutputInterface|null $output
 	 */
-	public function __construct($file, array $config = [],OutputInterface $output=null) {
+	public function __construct($file, array $config = [], OutputInterface $output = null) {
 		$this->file = $file;
-		$this->output=$output;
+		$this->output = $output;
 		if ($config) {
 			$this->config = array_merge($this->config, $config);
 		}
-		$ffm = FFMpeg::create($this->config);
-		$ffm->getFFMpegDriver()->listen(new DebugListener());
-		$ffm->getFFMpegDriver()->on('debug', function ($message) {
-			echo $message."\n";
-		});
+		$ffm = $this->buildFFM();
 		$this->video = $ffm->open($file);
 	}
+
+	/**
+	 * 构造FFM
+	 * @return FFMpeg
+	 */
+	private function buildFFM() {
+		$ffm = FFMpeg::create($this->config);
+		$ffm->getFFMpegDriver()->listen(new DebugListener());
+		if ($this->output) {
+			$consoleUtil = new ConsoleUtil($this->output);
+			$ffm->getFFMpegDriver()->on('debug', function ($message) use ($consoleUtil) {
+				$consoleUtil->info($message);
+			});
+		}
+		return $ffm;
+	}
+
+	/**
+	 * 构造 format
+	 * @return X264
+	 */
+	private function buildFormat() {
+		$format = new X264('libfdk_aac');
+		if ($this->output) {
+			$consoleUtil = new ConsoleUtil($this->output);
+			$format->on('progress', function ($video, $format, $percentage) use ($consoleUtil) {
+				$consoleUtil->info("$percentage % done.");
+			});
+		}
+		return $format;
+	}
+
 
 	/**
 	 * 提取图片
@@ -97,45 +125,97 @@ class VideoUtil {
 			30 => ExtractMultipleFramesFilter::FRAMERATE_EVERY_30SEC,
 			60 => ExtractMultipleFramesFilter::FRAMERATE_EVERY_60SEC
 		];
-		$format=new X264('libfdk_aac');
+		$format = new X264('libfdk_aac');
 		$format->setAudioCodec("libmp3lame");
 		$this->video->filters()->extractMultipleFrames($map[$everySecond], $destImageFolder)->synchronize();
 		$this->video->save($format, 'libfdk_aac');
 	}
+
 	/**
 	 * 裁剪
 	 */
-	public function clip(){
-		$getID3=new getID3();
-		$fileInfo=$getID3->analyze($this->file);
-		//文件名
-		$fileName=$fileInfo['filename'];
-		$fileFormat=$fileInfo['fileformat'];
-		$fileBaseName=str_replace('.'.$fileFormat,'',$fileName);
-
-		$fileSize=$fileInfo['filesize'];
-		$playtimeSeconds=$fileInfo['playtime_seconds'];
+	public function clip() {
+		//文件信息
+		$fileInfo = $this->getFileInfo();
+		$fileBaseName = $fileInfo['basename'];
+		$fileFormat = $fileInfo['fileformat'];
+		$fileSize = $fileInfo['filesize'];
+		$playtimeSeconds = $fileInfo['playtime_seconds'];
 
 		//文件数量
-		$fileSizeMB=intval(ceil($fileSize/1024/1024));
-		$fileChunkSizeMB=30;
-		$fileChunkNum=intval(ceil($fileSizeMB/$fileChunkSizeMB));
+		$fileSizeMB = $fileSize / 1024 / 1024;
+		$fileChunkSizeMB = 33;
+		$fileChunkNum = intval(ceil($fileSizeMB / $fileChunkSizeMB));
 		//计算时长
-		$playTimeChunk=intval(ceil($playtimeSeconds/$fileChunkNum));
+		$playTimeChunk = intval(ceil($playtimeSeconds / $fileChunkNum));
+
 		//分隔视频
-		for($i=1;$i<=1;$i++){
-			$startSeconds=($i-1)*$playTimeChunk;
-			$this->video->filters()->clip(TimeCode::fromSeconds($startSeconds), TimeCode::fromSeconds($playTimeChunk));
-			$format = new X264('libfdk_aac');
-			if($this->output){
-				$consoleUtil=new ConsoleUtil($this->output);
-				$format->on('progress', function ($video, $format, $percentage) use($consoleUtil) {
-					$consoleUtil->info("$percentage % done.");
-				});
-			}
-			$chunkFileName="{$fileBaseName}_{$i}.{$fileFormat}";
-			$this->video->save($format, BASE_DIR.'/'.$chunkFileName);
+		for ($i = 1; $i <= $fileChunkNum; $i++) {
+			$startSeconds = ($i - 1) * $playTimeChunk;
+			$duration = $i == $fileChunkNum ? null : TimeCode::fromSeconds($playTimeChunk);
+			$this->video->filters()->clip(TimeCode::fromSeconds($startSeconds), $duration);
+			$format = $this->buildFormat();
+			$chunkFileName = "{$fileBaseName}_{$i}.{$fileFormat}";
+			$destFile = BASE_DIR . '/video/' . $chunkFileName;
+			$this->video->save($format, $destFile);
 		}
+		return true;
+	}
+
+	/**
+	 * 添加水印
+	 * @return bool
+	 * @throws \getid3_exception
+	 */
+	public function watermark(){
+		return $this->addWatermark();
+	}
+
+	/**
+	 * 获取文件信息
+	 * @param null $file
+	 * @return array
+	 * @throws \getid3_exception
+	 */
+	private function getFileInfo($file = null) {
+		$getID3 = new getID3();
+		$fileInfo = $getID3->analyze($file ?: $this->file);
+		$fileName = $fileInfo['filename'];
+		$fileFormat = $fileInfo['fileformat'];
+		$fileBaseName = str_replace('.' . $fileFormat, '', $fileName);
+		return array_merge($fileInfo, ['basename' => $fileBaseName]);
+	}
+
+	/**
+	 * 添加水印
+	 * @param null $file
+	 * @return bool
+	 * @throws \getid3_exception
+	 */
+	private function addWatermark($file = null) {
+		$watermarkPath = BASE_DIR.'/kz_logo.png';
+		$absolute = ['x' => 50, 'y' => 100];
+		$relative = [
+			'position' => 'relative',
+			'top'   => 0,
+			'right'    => 5
+		];
+		if ($file) {
+			$ffm = $this->buildFFM();
+			$video = $ffm->open($file);
+		} else {
+			$video = $this->video;
+		}
+		$video->filters()->watermark($watermarkPath, $relative);
+		//文件信息
+		$fileInfo = $this->getFileInfo($file);
+		$fileBaseName = $fileInfo['basename'];
+		$fileFormat = $fileInfo['fileformat'];
+		//目标文件
+		$destFile = BASE_DIR . '/video/' . "{$fileBaseName}_watermark.{$fileFormat}";
+		//保存
+		$format = $this->buildFormat();
+		$video->save($format, $destFile);
 		return true;
 	}
 }
