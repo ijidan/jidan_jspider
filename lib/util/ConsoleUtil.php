@@ -46,7 +46,7 @@ class ConsoleUtil {
 	 * @param $message
 	 */
 	public function info($message) {
-		$this->writeColorLn($message);
+		$this->writeColorLn($message,self::COLOR_BLUE);
 	}
 
 	/**

@@ -108,19 +108,34 @@ class VideoUtil {
 	public function clip(){
 		$getID3=new getID3();
 		$fileInfo=$getID3->analyze($this->file);
-		dump($fileInfo,1);
-		$data=$this->video->getStreams()->all();
-		pr($data,1);
-		dump(get_class_methods(get_class($this->video)),1);
-		$this->video->filters()->clip(TimeCode::fromSeconds(30), TimeCode::fromSeconds(15));
-//		$this->video->filters()->resize(new Dimension(320, 240), ResizeFilter::RESIZEMODE_INSET, true);
-		$format = new X264('libfdk_aac');
-		if($this->output){
-			$consoleUtil=new ConsoleUtil();
-			$format->on('progress', function ($video, $format, $percentage) use($consoleUtil) {
-				$consoleUtil->info("$percentage % done.");
-			});
+		//文件名
+		$fileName=$fileInfo['filename'];
+		$fileFormat=$fileInfo['fileformat'];
+		$fileBaseName=str_replace('.'.$fileFormat,'',$fileName);
+
+		$fileSize=$fileInfo['filesize'];
+		$playtimeSeconds=$fileInfo['playtime_seconds'];
+
+		//文件数量
+		$fileSizeMB=intval(ceil($fileSize/1024/1024));
+		$fileChunkSizeMB=30;
+		$fileChunkNum=intval(ceil($fileSizeMB/$fileChunkSizeMB));
+		//计算时长
+		$playTimeChunk=intval(ceil($playtimeSeconds/$fileChunkNum));
+		//分隔视频
+		for($i=1;$i<=1;$i++){
+			$startSeconds=($i-1)*$playTimeChunk;
+			$this->video->filters()->clip(TimeCode::fromSeconds($startSeconds), TimeCode::fromSeconds($playTimeChunk));
+			$format = new X264('libfdk_aac');
+			if($this->output){
+				$consoleUtil=new ConsoleUtil($this->output);
+				$format->on('progress', function ($video, $format, $percentage) use($consoleUtil) {
+					$consoleUtil->info("$percentage % done.");
+				});
+			}
+			$chunkFileName="{$fileBaseName}_{$i}.{$fileFormat}";
+			$this->video->save($format, BASE_DIR.'/'.$chunkFileName);
 		}
-		return $this->video->save($format, BASE_DIR.'/cut_and_resize.mp4');
+		return true;
 	}
 }

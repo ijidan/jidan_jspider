@@ -9,8 +9,7 @@ $app = new Silly\Application();
 $app->command('run [cmd] [path] [arg] [other]', function ($cmd,$path, $arg, $other, OutputInterface $output=null) {
 	switch ($cmd){
 		case 'clip':
-			$videoUtil=new VideoUtil($path);
-			dump('1',1);
+			$videoUtil=new VideoUtil($path,[],$output);
 			$videoUtil->clip();
 		default:
 			break;
