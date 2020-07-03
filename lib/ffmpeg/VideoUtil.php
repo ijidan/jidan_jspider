@@ -9,6 +9,7 @@ use FFMpeg\Filters\Video\ExtractMultipleFramesFilter;
 use FFMpeg\Format\Video\X264;
 use FFMpeg\Media\Video;
 use getID3;
+use getid3_exception;
 use InvalidArgumentException;
 use Lib\Util\ConsoleUtil;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -133,6 +134,8 @@ class VideoUtil {
 
 	/**
 	 * 裁剪
+	 * @return bool
+	 * @throws \getid3_exception
 	 */
 	public function clip() {
 		//文件信息
@@ -154,6 +157,11 @@ class VideoUtil {
 			$startSeconds = ($i - 1) * $playTimeChunk;
 			$duration = $i == $fileChunkNum ? null : TimeCode::fromSeconds($playTimeChunk);
 			$this->video->filters()->clip(TimeCode::fromSeconds($startSeconds), $duration);
+			//添加水印
+			$watermarkPath=$this->getWatermarkPath();
+			$pos=$this->getWatermarkPosition();
+			$this->video->filters()->watermark($watermarkPath, $pos);
+			//格式
 			$format = $this->buildFormat();
 			$chunkFileName = "{$fileBaseName}_{$i}.{$fileFormat}";
 			$destFile = BASE_DIR . '/video/' . $chunkFileName;
@@ -190,23 +198,18 @@ class VideoUtil {
 	 * 添加水印
 	 * @param null $file
 	 * @return bool
-	 * @throws \getid3_exception
+	 * @throws getid3_exception
 	 */
 	private function addWatermark($file = null) {
-		$watermarkPath = BASE_DIR.'/kz_logo.png';
-		$absolute = ['x' => 50, 'y' => 100];
-		$relative = [
-			'position' => 'relative',
-			'top'   => 0,
-			'right'    => 5
-		];
+		$watermarkPath=$this->getWatermarkPath();
+		$pos=$this->getWatermarkPosition();
 		if ($file) {
 			$ffm = $this->buildFFM();
 			$video = $ffm->open($file);
 		} else {
 			$video = $this->video;
 		}
-		$video->filters()->watermark($watermarkPath, $relative);
+		$video->filters()->watermark($watermarkPath, $pos);
 		//文件信息
 		$fileInfo = $this->getFileInfo($file);
 		$fileBaseName = $fileInfo['basename'];
@@ -217,5 +220,28 @@ class VideoUtil {
 		$format = $this->buildFormat();
 		$video->save($format, $destFile);
 		return true;
+	}
+
+	/**
+	 * 水印路径
+	 * @return string
+	 */
+	private function getWatermarkPath(){
+		$watermarkPath = BASE_DIR.'/kz_logo_v2.png';
+		return $watermarkPath;
+	}
+
+	/**
+	 * 获取定位
+	 * @return array
+	 */
+	private function getWatermarkPosition(){
+		$absolute = ['x' => 50, 'y' => 100];
+		$relative = [
+			'position' => 'relative',
+			'top'   => 20,
+			'right'    => 20
+		];
+		return $relative;
 	}
 }
