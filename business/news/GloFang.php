@@ -94,6 +94,7 @@ class GloFang extends NewsBase {
 		$fileName = __FUNCTION__ . '_id_' . $id;
 		$url = $this->computeDetailPageUrl($id);
 		$htmlContent = $this->fetchContent($fileName, $url);
+		pr();
 		$title = $this->computeOnlyOneData($htmlContent, 'title');
 		$abstract = '';
 		//详情页替换

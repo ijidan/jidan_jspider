@@ -327,8 +327,12 @@ abstract class BaseCrawl {
 	 * @throws Exception
 	 */
 	protected function fetchContent($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = '') {
-		$fileName = $this->standardizeFileName($fileName);
-		$content = $this->fetchContentFromCache($fileName);
+		if($fileName){
+			$fileName = $this->standardizeFileName($fileName);
+			$content = $this->fetchContentFromCache($fileName);
+		}else{
+			$content='';
+		}
 		if (!$content) {
 			$rsp = BaseService::sendGetRequest($url, [], $this->config);
 			$content = $rsp->success() ? $rsp->getData() : '';
@@ -463,18 +467,19 @@ abstract class BaseCrawl {
 		}
 		return $content;
 	}
+
+	/**
+	 * 计算列表
+	 * @param $content
+	 * @param $express
+	 * @return array
+	 */
 	protected function computeHtmlContentList($content, $express){
 		$crawler = new Crawler($content);
 		$nodeValues = $crawler->filter($express)->each(function (Crawler $node, $i) {
-			return $node->text();
+			return trim($node->text());
 		});
-		pr($nodeValues,1);
-
-		$crawler = new Crawler($content);
-		$crawler->filter($express);
-		$data=$crawler->count();
-		pr($data,1);
-
+		return $nodeValues;
 	}
 
 	/**
@@ -571,6 +576,17 @@ abstract class BaseCrawl {
 		$rand = mt_rand(500000, 2500000);
 		usleep($rand);
 		return $rand;
+	}
+
+	/**
+	 * 替换
+	 * @param $content
+	 * @param array $replacementList
+	 */
+	protected function multiReplace(&$content,array $replacementList){
+		foreach ($replacementList as $r){
+			$content=str_replace($r,'',$content);
+		}
 	}
 
 	/**

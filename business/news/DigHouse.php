@@ -11,7 +11,6 @@ use Exception;
  */
 class DigHouse extends NewsBase {
 
-	public $platformsSubDir = ''; //子目录
 
 	public $baseUrl = 'https://www.dighouse.com/';
 
