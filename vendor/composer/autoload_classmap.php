@@ -15,6 +15,7 @@ return array(
     'CallbackParameterToReference' => $vendorDir . '/jaeger/phpquery-single/phpQuery.php',
     'CallbackReturnReference' => $vendorDir . '/jaeger/phpquery-single/phpQuery.php',
     'CallbackReturnValue' => $vendorDir . '/jaeger/phpquery-single/phpQuery.php',
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DOMDocumentWrapper' => $vendorDir . '/jaeger/phpquery-single/phpQuery.php',
     'DOMEvent' => $vendorDir . '/jaeger/phpquery-single/phpQuery.php',
     'EasyPeasyICS' => $vendorDir . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',

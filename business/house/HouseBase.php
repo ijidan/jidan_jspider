@@ -67,12 +67,21 @@ abstract class HouseBase extends BaseCrawl {
 	public function computeListId(array &$strIdList) {
 		if ($strIdList) {
 			array_walk($strIdList, function (&$value) {
-				$pattern = '/(\d)+/';
-				preg_match($pattern, $value, $matches);
-				$id = $matches[0];
-				$value = $id;
+				$value=$this->extractId($value);
 			});
 		}
+	}
+
+	/**
+	 * 提取ID
+	 * @param $value
+	 * @return mixed
+	 */
+	public function extractId($value){
+		$pattern = '/(\d)+/';
+		preg_match($pattern, $value, $matches);
+		$id = $matches[0];
+		return $id;
 	}
 
 
@@ -122,7 +131,6 @@ abstract class HouseBase extends BaseCrawl {
 	 * 资讯入库
 	 * @param $newsId
 	 * @param array $imgList
-	 * @throws \ErrorException
 	 */
 	public function doImage($newsId, array $imgList) {
 		foreach ($imgList as $img) {
@@ -185,7 +193,7 @@ abstract class HouseBase extends BaseCrawl {
 	 */
 	public function crawl() {
 		$this->info('总页数抓取开始');
-		$firstListPage = $this->computeListPageUrl(1);
+		//$firstListPage = $this->computeListPageUrl(1);
 		//$pageCnt = $this->crawlPageCnt($firstListPage);
 		$pageCnt = 1;
 		$this->info("总页数抓取结束：一共 {$pageCnt} 页");
@@ -200,6 +208,7 @@ abstract class HouseBase extends BaseCrawl {
 					continue;
 				}
 				$this->info("列表抓取开始：第 {$i} 页");
+				$allId=[3172];
 				foreach ($allId as $id) {
 					$this->info("项目详情抓取开始： ID为 $id");
 					try{

@@ -102,6 +102,13 @@ abstract class BaseCrawl {
 	 */
 	protected $imgUploadURL = '';
 
+
+	/**
+	 * 存储数据
+	 * @var array
+	 */
+	protected $data=[];
+
 	/**
 	 * 构造函数
 	 * BaseCrawl constructor.
@@ -478,6 +485,30 @@ abstract class BaseCrawl {
 		$crawler = new Crawler($content);
 		$nodeValues = $crawler->filter($express)->each(function (Crawler $node, $i) {
 			return trim($node->text());
+		});
+		return $nodeValues;
+	}
+
+	/**
+	 * 提取一个HTML
+	 * @param $content
+	 * @param $express
+	 * @return mixed|string
+	 */
+	protected function extractOnlyOneContentHtml($content,$express){
+		$contentHtml=$this->extractContentHtml($content,$express);
+		return $contentHtml ? $contentHtml[0]:'';
+	}
+	/**
+	 * 提取HTML
+	 * @param $content
+	 * @param $express
+	 * @return array
+	 */
+	protected function extractContentHtml($content,$express){
+		$crawler = new Crawler($content);
+		$nodeValues = $crawler->filter($express)->each(function (Crawler $node, $i) {
+			return trim($node->html());
 		});
 		return $nodeValues;
 	}

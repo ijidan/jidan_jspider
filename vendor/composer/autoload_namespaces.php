@@ -10,6 +10,7 @@ return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Slim' => array($vendorDir . '/slim/middleware/src'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
+    'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
     'Neutron' => array($vendorDir . '/neutron/temporary-filesystem/src'),
     'Mustache' => array($vendorDir . '/mustache/mustache/src'),
     'Gregwar\\Image' => array($vendorDir . '/gregwar/image'),
