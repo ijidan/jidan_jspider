@@ -92,7 +92,6 @@ abstract class HouseBase extends BaseCrawl {
 	 * @param array $abstractList
 	 * @param array $cusData 自定义数据
 	 * @return bool
-	 * @throws \ErrorException
 	 */
 	public function doId(array $idList, array $thumbnailList, array $abstractList, array $cusData = []) {
 		if (!$idList) {

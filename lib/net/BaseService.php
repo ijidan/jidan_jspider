@@ -42,6 +42,17 @@ class BaseService {
 		return self::sendRequest(Request::METHOD_POST, $host, $param, $requestConfig);
 	}
 
+	/**
+	 * POST JSON请求
+	 * @param string $host
+	 * @param array $param
+	 * @param array $requestConfig
+	 * @return \GuzzleHttp\Psr7\Response|\Lib\Net\Response|mixed|null|\Psr\Http\Message\ResponseInterface
+	 * @throws \Exception
+	 */
+	public static function sendPostJsonRequest($host = "", array $param = [], array $requestConfig = []) {
+		return self::sendRequest(Request::METHOD_POST_JSON, $host, $param, $requestConfig);
+	}
 
 	/**
 	 * 文件上传
@@ -63,6 +74,19 @@ class BaseService {
 		$request->setUrl($host);
 		$request->setParams($param);
 		return $request->sendFile();
+	}
+
+	/**
+	 * 保存房源信息
+	 * @param $host
+	 * @param $roomName
+	 * @param $houseInfo
+	 * @param array $requestConfig
+	 * @return \GuzzleHttp\Psr7\Response|Response|mixed|\Psr\Http\Message\ResponseInterface|null
+	 * @throws \Exception
+	 */
+	public static function saveHouse($host,$roomName,$houseInfo,array $requestConfig = []){
+		return self::sendPostJsonRequest($host,$houseInfo);
 	}
 
 	/**
@@ -175,5 +199,76 @@ class BaseService {
 		$host = Config::getConfigItem($key);
 		return $host;
 	}
+
+	/**
+	 * POST请求
+	 * @param $url
+	 * @param $param
+	 * @param int $timeout
+	 * @param bool $isStrictCheck
+	 * @return mixed
+	 */
+	public static function curlPost($url, $param, $timeout = 10, $isStrictCheck = false)
+	{
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
+		curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_POST, 1);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($param));
+		curl_setopt($curl, CURLOPT_URL, $url);
+
+		if (!empty($_SERVER['HTTP_USER_AGENT']) || $_SERVER['HTTP_USER_AGENT'] != null) {
+			curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+		} else {
+			curl_setopt($curl, CURLOPT_USERAGENT, 'Dg_Helper_Curl');
+		}
+		$clientIP = self::getClientIp();
+		if ($clientIP) {
+			$headers = ["CLIENT-IP:$clientIP"];
+			curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);  //构造IP
+		}
+		$response = curl_exec($curl);
+		if ($isStrictCheck) {
+			$arr_temp = curl_getinfo($curl);
+			$errorCode = $arr_temp['http_code'] == 404 ? 404 : 0;
+		} else {
+			$errorCode = curl_errno($curl);
+		}
+		$errorMsg = curl_error($curl);
+		curl_close($curl);
+		return $errorCode ? '':$response;
+	}
+
+	/**
+	 * 获取IP
+	 * @param int $type
+	 * @return mixed
+	 */
+	public static function getClientIp($type = 0)
+	{
+		$type = $type ? 1 : 0;
+
+		if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+			$arr = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+			$pos = array_search('unknown', $arr);
+			if (false !== $pos)
+				unset($arr[$pos]);
+			$ip = trim($arr[0]);
+		} elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+		} elseif (isset($_SERVER['REMOTE_ADDR'])) {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
+		// IP地址合法验证
+		$long = sprintf("%u", ip2long($ip));
+		$ip = $long ? array($ip, $long) : array('0.0.0.0', 0);
+
+		return $ip[$type];
+	}
+
 }
 

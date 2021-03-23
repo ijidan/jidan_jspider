@@ -4,6 +4,7 @@ namespace Lib\Net;
 
 use App\Models\Queue;
 use GuzzleHttp\Client;
+use GuzzleHttp\Cookie\CookieJar;
 use Lib\BaseLogger;
 use Lib\Util\UuidUtil;
 use SplFileInfo;
@@ -30,6 +31,7 @@ class Request {
 	const METHOD_GET = "GET"; //GET请求
 	const METHOD_POST = "POST"; //POST请求
 	const METHOD_PUT = "PUT"; //PUT请求
+	const METHOD_POST_JSON = 'POST_JSON'; //POST JSON
 
 	/**
 	 * 配置
@@ -42,7 +44,11 @@ class Request {
 	 * @var array
 	 */
 	private $guzzleHttpConfig = array(
-		'timeout' => 2,                     //超时时间(秒)
+		'timeout' => 0,                     //超时时间(秒)
+		'verify'  => false,
+		'proxy'   => [
+			'http' => 'tcp://172.16.1.82:8888',
+		],
 	);
 
 	/**
@@ -178,8 +184,13 @@ class Request {
 			}
 		}
 		*/
+		$cookieJar = CookieJar::fromArray([
+			'PHPSESSID' => '7vhi3i429eus032iivvleiu9k6'
+		], 'operate.hinabian.com');
+		$conf = $this->guzzleHttpConfig;
+		$conf['cookies'] = $cookieJar;
 		$this->startTime = microtime(true);
-		$httpClient = new Client($this->guzzleHttpConfig);
+		$httpClient = new Client($conf);
 		try {
 			switch ($this->method) {
 				case self::METHOD_GET:
@@ -191,6 +202,12 @@ class Request {
 					break;
 				case self::METHOD_POST:
 					$config = array_merge($this->guzzleHttpConfig, ['body' => \json_encode($this->params)]);
+					$rsp = $httpClient->post($this->url, $config);
+					break;
+				case self::METHOD_POST_JSON:
+					$conf = $this->guzzleHttpConfig;
+					$conf['headers'] = ['Content-Type' => 'application/json'];
+					$config = array_merge($conf, ['body' => \json_encode($this->params)]);
 					$rsp = $httpClient->post($this->url, $config);
 					break;
 				case self::METHOD_PUT:
@@ -229,8 +246,12 @@ class Request {
 			$result = json_decode($contents, true);
 			//判断是否JSON
 			if (json_last_error() == JSON_ERROR_NONE && $result) {
-				if (isset($result['code'])) {
-					if ($result['code'] == RetCode::SUCCESS) {
+				if (isset($result['code']) || isset($result['errorCode'])) {
+					$code=isset($result['code'])?$result['code']:'--';
+					if($code==='--'){
+						$code=isset($result['errorCode'])?$result['errorCode']:'--';
+					}
+					if ($code == RetCode::SUCCESS) {
 						$data = isset($result['data']) ? $result['data'] : [];
 						$response = new Response(RetCode::UNKNOWN, '', $data, $message);
 					} else {

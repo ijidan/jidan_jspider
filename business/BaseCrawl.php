@@ -107,7 +107,7 @@ abstract class BaseCrawl {
 	 * 存储数据
 	 * @var array
 	 */
-	protected $data=[];
+	protected $data = [];
 
 	/**
 	 * 构造函数
@@ -124,7 +124,7 @@ abstract class BaseCrawl {
 		$this->useCache = $useCache;
 		$this->isConsole = $this->isConsole();
 		$this->isOutputLog = $this->isConsole && $output;
-		$this->platform=$this->getPlatform();
+		$this->platform = $this->getPlatform();
 		$this->cacheDir = BASE_DIR . '/storage/spider_cache/' . $this->business . '/' . $this->platform;
 		if ($this->platformsSubDir) {
 			$this->cacheDir .= '/' . $this->platformsSubDir;
@@ -334,11 +334,11 @@ abstract class BaseCrawl {
 	 * @throws Exception
 	 */
 	protected function fetchContent($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = '') {
-		if($fileName){
+		if ($fileName) {
 			$fileName = $this->standardizeFileName($fileName);
 			$content = $this->fetchContentFromCache($fileName);
-		}else{
-			$content='';
+		} else {
+			$content = '';
 		}
 		if (!$content) {
 			$rsp = BaseService::sendGetRequest($url, [], $this->config);
@@ -374,6 +374,24 @@ abstract class BaseCrawl {
 		}
 		$url = $dataArr['real_url'];
 		return $url;
+	}
+
+	/**
+	 * 保存房源
+	 * @param $roomName
+	 * @param array $houseInfo
+	 * @param array $config
+	 * @return string|null
+	 * @throws Exception
+	 */
+	protected function saveHouse($roomName,array $houseInfo, array $config = []) {
+		$host = Config::getConfigItem('struct/house_save_url');
+		$rsp = BaseService::saveHouse($host, $roomName,$houseInfo, $config);
+		dump($rsp,1);
+		if ($rsp->fail()) {
+			return '';
+		}
+		return $rsp->getData();
 	}
 
 	/**
@@ -481,7 +499,7 @@ abstract class BaseCrawl {
 	 * @param $express
 	 * @return array
 	 */
-	protected function computeHtmlContentList($content, $express){
+	protected function computeHtmlContentList($content, $express) {
 		$crawler = new Crawler($content);
 		$nodeValues = $crawler->filter($express)->each(function (Crawler $node, $i) {
 			return trim($node->text());
@@ -495,17 +513,18 @@ abstract class BaseCrawl {
 	 * @param $express
 	 * @return mixed|string
 	 */
-	protected function extractOnlyOneContentHtml($content,$express){
-		$contentHtml=$this->extractContentHtml($content,$express);
-		return $contentHtml ? $contentHtml[0]:'';
+	protected function extractOnlyOneContentHtml($content, $express) {
+		$contentHtml = $this->extractContentHtml($content, $express);
+		return $contentHtml ? $contentHtml[0] : '';
 	}
+
 	/**
 	 * 提取HTML
 	 * @param $content
 	 * @param $express
 	 * @return array
 	 */
-	protected function extractContentHtml($content,$express){
+	protected function extractContentHtml($content, $express) {
 		$crawler = new Crawler($content);
 		$nodeValues = $crawler->filter($express)->each(function (Crawler $node, $i) {
 			return trim($node->html());
@@ -537,6 +556,17 @@ abstract class BaseCrawl {
 		return $content;
 	}
 
+	/**
+	 * 提取图片
+	 * @param string $content
+	 * @param string $express
+	 * @param string $attr
+	 * @return array|mixed
+	 */
+	protected function extractOnlyOneImage($content, $express = 'img', $attr = 'src') {
+		$imgList = $this->computeData($content, $express, $attr);
+		return $imgList ? $imgList[0]:'';
+	}
 	/**
 	 * 提取图片
 	 * @param string $content
@@ -614,9 +644,9 @@ abstract class BaseCrawl {
 	 * @param $content
 	 * @param array $replacementList
 	 */
-	protected function multiReplace(&$content,array $replacementList){
-		foreach ($replacementList as $r){
-			$content=str_replace($r,'',$content);
+	protected function multiReplace(&$content, array $replacementList) {
+		foreach ($replacementList as $r) {
+			$content = str_replace($r, '', $content);
 		}
 	}
 

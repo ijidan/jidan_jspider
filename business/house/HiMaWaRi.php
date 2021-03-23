@@ -116,7 +116,8 @@ class HiMaWaRi extends HouseBase {
 			$url = $this->computeOnlyOneData($house, '.item-title a', 'href');
 			$id = $this->extractId($url);
 			$itemTable = $this->computeData($house, '.item-table td');
-			$map[$id] = array_push($itemTable, $img);
+			array_push($itemTable,$img);
+			$map[$id] = $itemTable;
 		}
 		return $map;
 	}
@@ -139,14 +140,15 @@ class HiMaWaRi extends HouseBase {
 		$layoutImg = '';
 		$bannerInfos = [];
 		foreach ($sliderList as $slider) {
-			$_img = $this->computeOnlyOneData($slider, 'img', 'src');
-			$_desc = $this->computeOnlyOneData($slider, 'em');
-			$_item = ['img' => $_img, 'desc' => $_desc];
-			array_push($bannerInfos, $_item);
 			//户型图
 			if (strpos($slider, '户型') !== false) {
-				$layoutImg = $this->extractImage($slider);
+				$layoutImg = $this->extractOnlyOneImage($slider);
 				break;
+			}else{
+				$_img = $this->computeOnlyOneData($slider, 'img', 'src');
+				$_desc = $this->computeOnlyOneData($slider, 'em');
+				$_item = ['img' => $_img, 'desc' => $_desc];
+				array_push($bannerInfos, $_item);
 			}
 		}
 
@@ -166,10 +168,10 @@ class HiMaWaRi extends HouseBase {
 		$cityName = '';
 		$cityId = '';
 		$roomZone = $houseAround;
-		foreach ($cityMap as $name => $id) {
-			if (strpos($houseAround, $name) !== false) {
-				$cityName = $name;
-				$cityId = $id;
+		foreach ($cityMap as $cMpName => $cMapId) {
+			if (strpos($houseAround, $cMpName) !== false) {
+				$cityName = $cMpName;
+				$cityId = $cMapId;
 				$roomZone = str_replace($roomName, '', $houseAround);
 				break;
 			}
@@ -182,7 +184,7 @@ class HiMaWaRi extends HouseBase {
 		$this->multiReplace($layoutArea, ['平米']);
 
 		//列表页数据
-		list($apartmentType, $direction, $layoutName, $houseArea, $houseType, $propertyRight, $isDownloadable, $broker, $img) = $this->data;
+		list($apartmentType, $direction, $layoutName, $houseArea, $houseType, $propertyRight, $isDownloadable, $broker, $img) = $this->data[$id];
 		$this->multiReplace($houseArea, ['平米']);
 		//公寓类型
 		$apartmentTypeMap = [
@@ -195,7 +197,7 @@ class HiMaWaRi extends HouseBase {
 		$apartmentTypeConverted = isset($apartmentTypeMap[$apartmentType]) ? $apartmentTypeMap[$apartmentType] : 8;
 
 		//推广图片
-		$promotionImg = $this->computeData($htmlContent, '.gallery-top .swiper-slide img', 'src');
+		//$promotionImg = $this->computeData($htmlContent, '.gallery-top .swiper-slide img', 'src');
 		///房产描述
 		$roomDesc = $this->computeOnlyOneData($htmlContent, '.house-feature .col-right');//房产描述,
 		$houseTableKeyList = $this->computeHtmlContentList($htmlContent, '.house-table li label');
@@ -253,9 +255,9 @@ class HiMaWaRi extends HouseBase {
 			'handing_in_date'          => $handingInDate,
 			'payment_deposit'          => '',
 			'f_id'                     => '',
-			'promotion_img'            => $promotionImg,
+			'promotion_img'            => $img,
 			'banner_infos'             => $bannerInfos,
-			'is_online'                => 0,
+			'is_online'                => 1,
 			'status'                   => '0',
 			'process_id'               => '',
 			'project_leader'           => '',
@@ -266,7 +268,7 @@ class HiMaWaRi extends HouseBase {
 			'base_info_tags'           => array(),
 			'house_info_tags'          => array(),
 			'house_layout_infos'       => array(
-				0 => array(
+				array(
 					'img'      => $layoutImg,
 					'layout'   => $layoutName,
 					'floorage' => $layoutArea,
@@ -299,6 +301,7 @@ class HiMaWaRi extends HouseBase {
 			'video_pro'                => '',
 			'project_news'             => '',
 		);
+		$rsp=$this->saveHouse($roomName,$houseItem);
 		return $houseItem;
 	}
 
