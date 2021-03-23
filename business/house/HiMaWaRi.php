@@ -61,7 +61,8 @@ class HiMaWaRi extends HouseBase {
 	 */
 	public function crawlPageCnt($shortUrl) {
 		$shortUrl = trim($shortUrl, '/');
-		$fileName = __FUNCTION__ . '_url_' . $shortUrl;
+		$id = $this->extractId($shortUrl);
+		$fileName = __FUNCTION__ . '_id_' . $id;
 		$content = $this->fetchContent($fileName, $shortUrl, 'GBK', 'UTF-8//IGNORE');
 		$idStr = $this->computeData($content, '.pagination li a', 'href');
 		$maxId = $this->computeMaxId($idStr);

@@ -14,8 +14,8 @@
     <link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.himawari-japan.com/fang/3172" >
     <link rel="canonical" href="https://www.himawari-japan.com/fang/3172">
         <link rel="shortcut icon" target="_blank" href="/favicon.ico"/>
-    <link href="/static/new/css/common.css?v=20210322" rel="stylesheet">
-    <link href="/static/new/css/style.css?v=20210322" rel="stylesheet">
+    <link href="/static/new/css/common.css?v=20210323" rel="stylesheet">
+    <link href="/static/new/css/style.css?v=20210323" rel="stylesheet">
     <link href="/static/new/css/iziToast.min.css" rel="stylesheet">
     <script>
         var _hmt = _hmt || [];
@@ -976,27 +976,6 @@
                     <div class="right-box-tit"><b>热门文章</b></div>
                     <div class="right-box-con">
                         <ul>
-                                                        <li><a href="https://www.himawari-japan.com/article/2157" target="_blank">
-                                <div class="img"><img src="https://static.himawari-japan.com/Content/2019-06-05/5cf77eb9064b6.jpg-123u85?imageslim"/></div>
-                                <div class="text" style="width:180px;">
-                                    <b>陷入选择困难症时，日本人这样整理买房思路</b>
-                                    <p>2019-04-22</p>
-                                </div>
-                            </a></li>
-                                                        <li><a href="https://www.himawari-japan.com/article/2228" target="_blank">
-                                <div class="img"><img src="https://static.himawari-japan.com/Content/2019-06-03/5cf4c0abda118.jpg-123u85?imageslim"/></div>
-                                <div class="text" style="width:180px;">
-                                    <b>在日本买房投资后，如何能再轻松卖出去？</b>
-                                    <p>2019-05-28</p>
-                                </div>
-                            </a></li>
-                                                        <li><a href="https://www.himawari-japan.com/article/3149" target="_blank">
-                                <div class="img"><img src="https://static.himawari-japan.com/Content/2020-07-15/dbe41202007150930092635.png-123u85?imageslim"/></div>
-                                <div class="text" style="width:180px;">
-                                    <b>木造或钢筋混凝土造？日本一般房屋结构的优缺点</b>
-                                    <p>2020-07-15</p>
-                                </div>
-                            </a></li>
                                                         <li><a href="https://www.himawari-japan.com/article/2918" target="_blank">
                                 <div class="img"><img src="https://static.himawari-japan.com/Content/2020-03-13/b0fef202003132142166482.png-123u85?imageslim"/></div>
                                 <div class="text" style="width:180px;">
@@ -1009,6 +988,27 @@
                                 <div class="text" style="width:180px;">
                                     <b>日本不动产投资者的经验教你预防空室危机</b>
                                     <p>2018-11-20</p>
+                                </div>
+                            </a></li>
+                                                        <li><a href="https://www.himawari-japan.com/article/2850" target="_blank">
+                                <div class="img"><img src="https://static.himawari-japan.com/Content/2020-02-18/29ed6202002182006562654.jpg-123u85?imageslim"/></div>
+                                <div class="text" style="width:180px;">
+                                    <b>“充满下町情趣”的日本东京都荒川区房价多少钱一平米？</b>
+                                    <p>2020-02-18</p>
+                                </div>
+                            </a></li>
+                                                        <li><a href="https://www.himawari-japan.com/article/2956" target="_blank">
+                                <div class="img"><img src="https://static.himawari-japan.com/Content/2020-04-07/ee5e6202004071436387164.png-123u85?imageslim"/></div>
+                                <div class="text" style="width:180px;">
+                                    <b>日本房产投资失败的可能性有多大？</b>
+                                    <p>2020-04-07</p>
+                                </div>
+                            </a></li>
+                                                        <li><a href="https://www.himawari-japan.com/article/2586" target="_blank">
+                                <div class="img"><img src="https://static.himawari-japan.com/Content/2019-10-31/5dba497915a4e.jpg-123u85?imageslim"/></div>
+                                <div class="text" style="width:180px;">
+                                    <b>日本塔式公寓的修缮费是真的“物超所值”</b>
+                                    <p>2019-10-31</p>
                                 </div>
                             </a></li>
                                                     </ul>
@@ -1026,10 +1026,10 @@
                                                         <li><a href="https://www.himawari-japan.com/topic/9904963" target="_blank">塔式高级公寓</a></li>
                                                         <li><a href="https://www.himawari-japan.com/topic/67234140" target="_blank">日本税费</a></li>
                                                         <li><a href="https://www.himawari-japan.com/topic/19753289" target="_blank">日本房产租赁</a></li>
-                                                        <li><a href="https://www.himawari-japan.com/topic/53037194" target="_blank">在日本做房东</a></li>
                                                         <li><a href="https://www.himawari-japan.com/topic/80572568" target="_blank">日本别墅</a></li>
-                                                        <li><a href="https://www.himawari-japan.com/topic/26050185" target="_blank">日本购房流程</a></li>
+                                                        <li><a href="https://www.himawari-japan.com/topic/53037194" target="_blank">在日本做房东</a></li>
                                                         <li><a href="https://www.himawari-japan.com/topic/53254179" target="_blank">在日本的中国人</a></li>
+                                                        <li><a href="https://www.himawari-japan.com/topic/26050185" target="_blank">日本购房流程</a></li>
                                                         <li><a href="https://www.himawari-japan.com/topic/3000955" target="_blank">日本贷款买房</a></li>
                                                         <li><a href="https://www.himawari-japan.com/topic/57946341" target="_blank">日本人买房</a></li>
                                                         <li><a href="https://www.himawari-japan.com/topic/304451066" target="_blank">东京地铁</a></li>
@@ -1536,7 +1536,7 @@
 </div>
 <div class="himawari-mask"></div>
 <script type="text/javascript" src="/static/new/js/jquery.min.js"></script>
-<script type="text/javascript" src="/static/new/js/common.js?v=20210322"></script>
+<script type="text/javascript" src="/static/new/js/common.js?v=20210323"></script>
 <script type="text/javascript" src="/static/new/js/iziToast.min.js"></script>
 <script>
   (function(){

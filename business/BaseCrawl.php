@@ -387,7 +387,6 @@ abstract class BaseCrawl {
 	protected function saveHouse($roomName,array $houseInfo, array $config = []) {
 		$host = Config::getConfigItem('struct/house_save_url');
 		$rsp = BaseService::saveHouse($host, $roomName,$houseInfo, $config);
-		dump($rsp,1);
 		if ($rsp->fail()) {
 			return '';
 		}

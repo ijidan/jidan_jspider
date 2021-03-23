@@ -192,9 +192,9 @@ abstract class HouseBase extends BaseCrawl {
 	 */
 	public function crawl() {
 		$this->info('总页数抓取开始');
-		//$firstListPage = $this->computeListPageUrl(1);
-		//$pageCnt = $this->crawlPageCnt($firstListPage);
-		$pageCnt = 1;
+		$firstListPage = $this->computeListPageUrl(1);
+		$pageCnt = $this->crawlPageCnt($firstListPage);
+//		$pageCnt = 1;
 		$this->info("总页数抓取结束：一共 {$pageCnt} 页");
 		if ($pageCnt) {
 			for ($i = 1; $i <= $pageCnt; $i++) {
@@ -207,7 +207,7 @@ abstract class HouseBase extends BaseCrawl {
 					continue;
 				}
 				$this->info("列表抓取开始：第 {$i} 页");
-				$allId=[3172];
+//				$allId=[3172];
 				foreach ($allId as $id) {
 					$this->info("项目详情抓取开始： ID为 $id");
 					try{
