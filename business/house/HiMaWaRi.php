@@ -149,6 +149,32 @@ class HiMaWaRi extends HouseBase {
 				break;
 			}
 		}
+
+		//地址
+		$houseAround = $this->computeOnlyOneData($htmlContent, '.house-around span');
+		$this->multiReplace($houseAround, ['地址：']);
+		$cityMap = [
+			'东京都'  => '20000043',
+			'大阪府'  => '20000044',
+			'神奈川县' => '20000063',
+			'京都府'  => '20000070',
+			//		    '北海道'=>'',
+			'静岡県'  => '20000066',
+			'静冈县'  => '20000066',
+			'茨城县'  => '20000069'
+		];
+		$cityName = '';
+		$cityId = '';
+		$roomZone = $houseAround;
+		foreach ($cityMap as $name => $id) {
+			if (strpos($houseAround, $name) !== false) {
+				$cityName = $name;
+				$cityId = $id;
+				$roomZone = str_replace($roomName, '', $houseAround);
+				break;
+			}
+		}
+
 		//房源信息
 		$houseInfo = $this->extractOnlyOneContentHtml($htmlContent, '.house-infor');
 		$houseInfoData = $this->computeData($houseInfo, 'p');
@@ -166,7 +192,7 @@ class HiMaWaRi extends HouseBase {
 			'酒店'   => 3,
 			'土地'   => 6
 		];
-		$apartmentTypeConverted=isset($apartmentTypeMap[$apartmentType])?$apartmentTypeMap[$apartmentType]:8;
+		$apartmentTypeConverted = isset($apartmentTypeMap[$apartmentType]) ? $apartmentTypeMap[$apartmentType] : 8;
 
 		//推广图片
 		$promotionImg = $this->computeData($htmlContent, '.gallery-top .swiper-slide img', 'src');
@@ -177,7 +203,8 @@ class HiMaWaRi extends HouseBase {
 
 		//价格
 		$price = $this->extractValue($houseTableKeyList, $houseTableValueList, '价格');
-		$this->multiReplace($price, [',', '万日元']);
+		$this->multiReplace($price, ['亿',',', '万日元']);
+		//价格转化
 		$priceRMB = $this->extractValue($houseTableKeyList, $houseTableValueList, '约合');
 		$this->multiReplace($priceRMB, [',', '万人民币']);
 		//物业类型
@@ -233,7 +260,8 @@ class HiMaWaRi extends HouseBase {
 			'process_id'               => '',
 			'project_leader'           => '',
 			'room_country'             => '20000034',
-			'city_id'                  => '20000044',
+			'city_id'                  => $cityId,
+			'room_zone'                => $roomZone,
 			'currency_gb'              => 'JPY',
 			'base_info_tags'           => array(),
 			'house_info_tags'          => array(),
@@ -264,14 +292,13 @@ class HiMaWaRi extends HouseBase {
 			'loan_trading_period'      => array(),
 			'loan_holding_period'      => array(),
 			'project_intro'            => '',
-			'room_price_total'         => $priceRMB,
+			'room_price_total'         => $price,
 			'join_assess'              => '1',
 			'promotion_video'          => '',
 			'vr_link'                  => '',
 			'video_pro'                => '',
 			'project_news'             => '',
 		);
-		pr($houseItem,1);
 		return $houseItem;
 	}
 
@@ -357,23 +384,24 @@ class HiMaWaRi extends HouseBase {
 	 * @param array $map
 	 * @return string
 	 */
-	private function computeSupportSimple(array $data,array $map){
+	private function computeSupportSimple(array $data, array $map) {
 		$content = '';
 		if (!$data) {
 			return $content;
 		}
-		$nameList=[];
+		$nameList = [];
 		foreach ($data as $idx => $item) {
 			if (isset($map[$idx])) {
 				foreach ($item as $_item) {
 					$name = $_item['name'];
-					array_push($nameList,$name);
+					array_push($nameList, $name);
 				}
 			}
 		}
-		$content=$nameList ? \join('、',$nameList):'';
+		$content = $nameList ? \join('、', $nameList) : '';
 		return $content;
 	}
+
 	/**
 	 * 计算配套
 	 * @param array $data
