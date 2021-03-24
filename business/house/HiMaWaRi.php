@@ -95,10 +95,9 @@ class HiMaWaRi extends HouseBase {
 	public function crawAllId($shortUrl) {
 		$id = $this->extractId($shortUrl);
 		$fileName = __FUNCTION__ . '_id_' . $id;
-		$content = $this->fetchContent('', $shortUrl);
+		$content = $this->fetchContent($fileName, $shortUrl);
 		//解析数据
 		$idList = $this->computeData($content, '.item-title a', "href");
-		pr($idList,1);
 		$this->computeListId($idList);
 		$map = $this->parseListData($content);
 		$this->data = $map;

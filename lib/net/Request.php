@@ -195,9 +195,8 @@ class Request {
 		try {
 			switch ($this->method) {
 				case self::METHOD_GET:
-					$config = ['query' => $this->params];
 					$link = $this->params ? $this->url . "?" . http_build_query($this->params) : $this->url;
-					$rsp = $httpClient->get($link, $config);
+					$rsp = $httpClient->get($link, []);
 					break;
 				case self::METHOD_POST_JSON:
 				case self::METHOD_POST:
