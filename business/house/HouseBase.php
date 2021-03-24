@@ -3,6 +3,7 @@
 namespace Business\House;
 
 use Business\BaseCrawl;
+use GuzzleHttp\Cookie\CookieJar;
 use Lib\Http\UserAgent;
 use Lib\Util\CommonUtil;
 use Model\Spider\News;
@@ -67,7 +68,7 @@ abstract class HouseBase extends BaseCrawl {
 	public function computeListId(array &$strIdList) {
 		if ($strIdList) {
 			array_walk($strIdList, function (&$value) {
-				$value=$this->extractId($value);
+				$value = $this->extractId($value);
 			});
 		}
 	}
@@ -77,7 +78,7 @@ abstract class HouseBase extends BaseCrawl {
 	 * @param $value
 	 * @return mixed
 	 */
-	public function extractId($value){
+	public function extractId($value) {
 		$pattern = '/(\d)+/';
 		preg_match($pattern, $value, $matches);
 		$id = $matches[0];
@@ -198,22 +199,22 @@ abstract class HouseBase extends BaseCrawl {
 		$this->info("总页数抓取结束：一共 {$pageCnt} 页");
 		if ($pageCnt) {
 			for ($i = 1; $i <= $pageCnt; $i++) {
-				$i=2;
+				$i = 2;
 				$listPageUrl = $this->computeListPageUrl($i);
 				//随机等待多少秒
-//				$this->waitRandomMS();
-				try{
+				//				$this->waitRandomMS();
+				try {
 					$allId = $this->crawAllId($listPageUrl);
-				}catch (\Exception $e){
+				} catch (\Exception $e) {
 					continue;
 				}
 				$this->info("列表抓取开始：第 {$i} 页");
-//				$allId=[3172];
+				//				$allId=[3172];
 				foreach ($allId as $id) {
 					$this->info("项目详情抓取开始： ID为 $id");
-					try{
+					try {
 						//$this->crawlDetail($id);
-					}catch (\Exception $e){
+					} catch (\Exception $e) {
 						continue;
 					}
 					$this->info("项目详情抓取结束： ID为 $id");
@@ -227,7 +228,11 @@ abstract class HouseBase extends BaseCrawl {
 	 * @return mixed
 	 */
 	public function getGuzzleHttpConfig() {
-		return [];
+		$cookieJar = CookieJar::fromArray(['PHPSESSID' => '7vhi3i429eus032iivvleiu9k6'], 'operate.hinabian.com');
+		$guzzleConfig = [
+			'cookies' => $cookieJar,
+		];
+		return $guzzleConfig;
 	}
 
 

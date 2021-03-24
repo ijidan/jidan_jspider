@@ -184,36 +184,28 @@ class Request {
 			}
 		}
 		*/
-		$cookieJar = CookieJar::fromArray([
-			'PHPSESSID' => '7vhi3i429eus032iivvleiu9k6'
-		], 'operate.hinabian.com');
-		$conf = $this->guzzleHttpConfig;
-		$conf['cookies'] = $cookieJar;
-		$headers=$this->computeHeaders();
-		$clientConfig =  $headers+$conf;
+
+		$headers = $this->computeHeaders();
+		$clientConfig = $headers + $this->guzzleHttpConfig;
+		if ($this->method == self::METHOD_POST_JSON) {
+			$clientConfig['headers']['Content-Type'] = 'application/json';
+		}
 		$this->startTime = microtime(true);
 		$httpClient = new Client($clientConfig);
 		try {
 			switch ($this->method) {
 				case self::METHOD_GET:
-					$config= ['query' => $this->params];
-					$link = $this->params ?$this->url . "?" . http_build_query($this->params):$this->url;
+					$config = ['query' => $this->params];
+					$link = $this->params ? $this->url . "?" . http_build_query($this->params) : $this->url;
 					$rsp = $httpClient->get($link, $config);
 					break;
-				case self::METHOD_POST:
-//					$config = array_merge($this->guzzleHttpConfig, ['body' => \json_encode($this->params)]);
-					$config=['body' => \json_encode($this->params)];
-					$rsp = $httpClient->post($this->url, $config);
-					break;
 				case self::METHOD_POST_JSON:
-					$conf = $this->guzzleHttpConfig;
-					$conf['headers'] = ['Content-Type' => 'application/json'];
-					$config = array_merge($conf, ['body' => \json_encode($this->params)]);
-					$config=['body' => \json_encode($this->params)];
+				case self::METHOD_POST:
+					$config = ['body' => \json_encode($this->params)];
 					$rsp = $httpClient->post($this->url, $config);
 					break;
 				case self::METHOD_PUT:
-					$config = array_merge($this->guzzleHttpConfig, ['body' => \json_encode($this->params)]);
+					$config = ['body' => \json_encode($this->params)];
 					$rsp = $httpClient->put($this->url, $config);
 			}
 			/** @var \GuzzleHttp\Psr7\Response $rsp */
@@ -249,9 +241,9 @@ class Request {
 			//判断是否JSON
 			if (json_last_error() == JSON_ERROR_NONE && $result) {
 				if (isset($result['code']) || isset($result['errorCode'])) {
-					$code=isset($result['code'])?$result['code']:'--';
-					if($code==='--'){
-						$code=isset($result['errorCode'])?$result['errorCode']:'--';
+					$code = isset($result['code']) ? $result['code'] : '--';
+					if ($code === '--') {
+						$code = isset($result['errorCode']) ? $result['errorCode'] : '--';
 					}
 					if ($code == RetCode::SUCCESS) {
 						$data = isset($result['data']) ? $result['data'] : [];
@@ -443,10 +435,10 @@ EOF;
 	 * @return array
 	 */
 	private function computeHeaders() {
-		$urlArr=parse_url($this->url);
-		$host=$urlArr['host'];
+		$urlArr = parse_url($this->url);
+		$host = $urlArr['host'];
 		$server['User-Agent'] = self::genRandomUA();
-		$server['referer']=$host;
+		$server['referer'] = $host;
 		//$server['client-ip']=get_ip();
 		$headers = ["headers" => $server];
 		return $headers;
@@ -456,7 +448,7 @@ EOF;
 	 * 随机UA
 	 * @return string
 	 */
-	private function genRandomUA(){
+	private function genRandomUA() {
 		try {
 			$ua = \Campo\UserAgent::random(['os_type' => 'Windows']);
 			return $ua;
