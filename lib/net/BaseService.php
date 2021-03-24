@@ -86,7 +86,7 @@ class BaseService {
 	 * @throws \Exception
 	 */
 	public static function saveHouse($host,$roomName,$houseInfo,array $requestConfig = []){
-		return self::sendPostJsonRequest($host,$houseInfo);
+		return self::sendPostJsonRequest($host,$houseInfo,$requestConfig);
 	}
 
 	/**

@@ -7,9 +7,11 @@ use Exception;
 use Gregwar\Cache\Cache;
 use Lib\BaseLogger;
 use Lib\BaseModel;
-use Lib\Http\UserAgent;
 use Lib\Net\BaseService;
 use Lib\Util\Config;
+use Model\Spider\ContentCache;
+use Model\Spider\IdMap;
+use Model\Spider\ImageMap;
 use RuntimeException;
 use Symfony\Component\Console\Output\OutputInterface;
 use League\Flysystem\FileNotFoundException;
@@ -248,11 +250,26 @@ abstract class BaseCrawl {
 	 */
 	public function writeFile($fileName, $content) {
 		$filePath = $this->computeFilePath($fileName);
+		pr($filePath, $this->cacheDir, 1);
 		$filesystem = new Filesystem();
 		if (!$filesystem->exists($filePath)) {
 			$this->checkAndCreateFile($fileName);
 		}
 		$filesystem->appendToFile($filePath, $content);
+	}
+
+	/**
+	 *写数据库
+	 * @param $fileName
+	 * @param $content
+	 */
+	public function writeDb($fileName, $content) {
+		$insData = [
+			'f_key'         => $fileName,
+			'f_content'     => $content,
+			'f_create_time' => time()
+		];
+		ContentCache::insert($insData);
 	}
 
 	/**
@@ -286,6 +303,17 @@ abstract class BaseCrawl {
 		}
 		return $content;
 	}
+
+	/**
+	 * 从数据库读取内容
+	 * @param $fileName
+	 * @return string
+	 */
+	public function getContentFromDB($fileName) {
+		$record = ContentCache::findOne('f_key=?', [$fileName]);
+		return $record ? $record['f_content'] : '';
+	}
+
 
 	/**
 	 * 缓存文件路径
@@ -334,16 +362,16 @@ abstract class BaseCrawl {
 	 * @return bool|false|string|null
 	 * @throws Exception
 	 */
-	protected function fetchContent($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = '',$type='base') {
+	protected function fetchContent($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = '', $type = 'base') {
 		if ($fileName) {
 			$fileName = $this->standardizeFileName($fileName);
 			$content = $this->fetchContentFromCache($fileName);
-			if(!$content){
-				$content=$this->doFetchContent($url,$type);
+			if (!$content) {
+				$content = $this->doFetchContent($url, $type);
 				$this->writeFile($fileName, $content);
 			}
 		} else {
-			$content=$this->doFetchContent($url,$type);
+			$content = $this->doFetchContent($url, $type);
 		}
 		if (!$content) {
 			throw new RuntimeException($fileName . ':content empty');
@@ -355,16 +383,59 @@ abstract class BaseCrawl {
 	}
 
 	/**
+	 * 从DB中获取内容
+	 * @param $fileName
+	 * @param $url
+	 * @param string $sourceCharset
+	 * @param string $destCharset
+	 * @param string $type
+	 * @return bool|false|string|null
+	 * @throws Exception
+	 */
+	protected function fetchContentFromDb($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = '', $type = 'base') {
+		if ($fileName) {
+			$fileName = $this->standardizeFileName($fileName);
+			$cacheKey = $this->computeCacheKey($fileName);
+			$content = $this->fetchContentFromCache($cacheKey, 'db');
+			if (!$content) {
+				$content = $this->doFetchContent($url, $type);
+				$this->writeDb($cacheKey, $content);
+			}
+		} else {
+			$content = $this->doFetchContent($url, $type);
+		}
+		if (!$content) {
+			throw new RuntimeException($fileName . ':content empty');
+		}
+		if ($sourceCharset && $destCharset) {
+			$content = iconv($sourceCharset, $destCharset, $content);
+		}
+		return $content;
+	}
+
+	/**
+	 * 计算key
+	 * @param $fileName
+	 * @return string
+	 */
+	protected function computeCacheKey($fileName) {
+		$fileName = $this->computeFilePath($fileName);
+		$fileName = str_replace(BASE_DIR . '/storage/spider_cache/', '', $fileName);
+		$fileName = str_replace('//', '/', $fileName);
+		return $fileName;
+	}
+
+	/**
 	 * 获取内容
 	 * @param $url
 	 * @param $type
 	 * @return false|string|null
 	 * @throws Exception
 	 */
-	protected function doFetchContent($url,$type){
-		switch ($type){
+	protected function doFetchContent($url, $type) {
+		switch ($type) {
 			case 'content':
-				$content=file_get_contents($url);
+				$content = file_get_contents($url);
 				break;
 			case 'base':
 			default:
@@ -397,6 +468,55 @@ abstract class BaseCrawl {
 		return $url;
 	}
 
+
+	/**
+	 * 图片入库
+	 * @param $id
+	 * @param array $imgList
+	 */
+	public function doImage($id, array $imgList) {
+		foreach ($imgList as $img) {
+			$record = ImageMap::findOne('f_origin_img_url=?', [$img]);
+			if (!$record) {
+				$insData = [
+					'f_origin_img_url' => $img,
+					'f_update_time'    => time()
+				];
+				ImageMap::insert($insData);
+			}
+		}
+		$this->info("图片入库结束：ID {$id}");
+	}
+
+	/**
+	 * 获取新ID
+	 * @param $originId
+	 * @return int
+	 */
+	public function getNewId($originId) {
+		$record = IdMap::findOne('f_origin_id=?', [$originId]);
+		return $record ? $record['f_new_id'] : 0;
+
+	}
+
+	/**
+	 * ID映射
+	 * @param $originId
+	 * @param $newId
+	 * @return mixed
+	 */
+	public function doId($originId, $newId) {
+		$record = IdMap::findOne('f_origin_id=?', [$originId]);
+		if (!$record) {
+			$insData = [
+				'f_origin_id'   => $originId,
+				'f_new_id'      => $newId,
+				'f_create_time' => time()
+			];
+			IdMap::insert($insData);
+		}
+	}
+
 	/**
 	 * 保存房源
 	 * @param $roomName
@@ -405,9 +525,9 @@ abstract class BaseCrawl {
 	 * @return string|null
 	 * @throws Exception
 	 */
-	protected function saveHouse($roomName,array $houseInfo, array $config = []) {
+	protected function saveHouse($roomName, array $houseInfo, array $config = []) {
 		$host = Config::getConfigItem('struct/house_save_url');
-		$rsp = BaseService::saveHouse($host, $roomName,$houseInfo, $config);
+		$rsp = BaseService::saveHouse($host, $roomName, $houseInfo, $config);
 		if ($rsp->fail()) {
 			return '';
 		}
@@ -417,13 +537,23 @@ abstract class BaseCrawl {
 	/**
 	 * 从缓存中取内容
 	 * @param $fileName
+	 * @param string $type
 	 * @return bool|string
 	 */
-	protected function fetchContentFromCache($fileName) {
+	protected function fetchContentFromCache($fileName, $type = 'file') {
 		$content = '';
 		if ($this->useCache) {
 			try {
-				$content = $this->getContent($fileName);
+				switch ($type) {
+					case 'db':
+						$content = $this->getContentFromDB($fileName);
+						break;
+					case 'file':
+					default:
+						$content = $this->getContent($fileName);
+						break;
+				}
+
 			} catch (Exception $e) {
 			}
 		} else {
@@ -585,8 +715,9 @@ abstract class BaseCrawl {
 	 */
 	protected function extractOnlyOneImage($content, $express = 'img', $attr = 'src') {
 		$imgList = $this->computeData($content, $express, $attr);
-		return $imgList ? $imgList[0]:'';
+		return $imgList ? $imgList[0] : '';
 	}
+
 	/**
 	 * 提取图片
 	 * @param string $content

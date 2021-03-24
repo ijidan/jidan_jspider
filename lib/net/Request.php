@@ -246,7 +246,7 @@ class Request {
 					}
 					if ($code == RetCode::SUCCESS) {
 						$data = isset($result['data']) ? $result['data'] : [];
-						$response = new Response(RetCode::UNKNOWN, '', $data, $message);
+						$response = new Response(RetCode::SUCCESS, '', $data, $message);
 					} else {
 						//记录日志
 						$response = new Response(RetCode::JSON_PARSE_FAIL, $message, $result);

@@ -22,7 +22,7 @@ class HiMaWaRi extends HouseBase {
 	 * 子目录
 	 * @var string
 	 */
-	protected $platformsSubDir = 'house';
+	protected $platformsSubDir = 'HiMaWaRi';
 
 
 	/**
@@ -63,7 +63,7 @@ class HiMaWaRi extends HouseBase {
 		$shortUrl = trim($shortUrl, '/');
 		$id = $this->extractId($shortUrl);
 		$fileName = __FUNCTION__ . '_id_' . $id;
-		$content = $this->fetchContent($fileName, $shortUrl, 'GBK', 'UTF-8//IGNORE');
+		$content = $this->fetchContentFromDb($fileName, $shortUrl, 'GBK', 'UTF-8//IGNORE');
 		$idStr = $this->computeData($content, '.pagination li a', 'href');
 		$maxId = $this->computeMaxId($idStr);
 		return $maxId;
@@ -95,7 +95,7 @@ class HiMaWaRi extends HouseBase {
 	public function crawAllId($shortUrl) {
 		$id = $this->extractId($shortUrl);
 		$fileName = __FUNCTION__ . '_id_' . $id;
-		$content = $this->fetchContent($fileName, $shortUrl);
+		$content = $this->fetchContentFromDb($fileName  , $shortUrl);
 		//解析数据
 		$idList = $this->computeData($content, '.item-title a', "href");
 		$this->computeListId($idList);
@@ -132,7 +132,7 @@ class HiMaWaRi extends HouseBase {
 	public function crawlDetail($id) {
 		$fileName = __FUNCTION__ . '_id_' . $id;
 		$url = $this->computeDetailPageUrl($id);
-		$htmlContent = $this->fetchContent($fileName, $url);
+		$htmlContent = $this->fetchContentFromDb($fileName, $url);
 		//标题
 		$roomName = $this->computeOnlyOneData($htmlContent, '.house-title h1');
 
@@ -193,7 +193,7 @@ class HiMaWaRi extends HouseBase {
 			'一户建'  => 2,
 			'整栋公寓' => 5,
 			'酒店'   => 3,
-			'土地'   => 6
+			'土地'   => 3
 		];
 		$apartmentTypeConverted = isset($apartmentTypeMap[$apartmentType]) ? $apartmentTypeMap[$apartmentType] : 8;
 
@@ -302,7 +302,15 @@ class HiMaWaRi extends HouseBase {
 			'video_pro'                => '',
 			'project_news'             => '',
 		);
-		$rsp=$this->saveHouse($roomName,$houseItem);
+		pr($houseItem,1);
+		$newId=$this->getNewId($id);
+		if($newId){
+			$houseItem['f_id']=$newId;
+		}
+		$id=$this->saveHouse($roomName,$houseItem,$this->config);
+		if(!$newId && $id){
+			$this->doId($id,$newId);
+		}
 		return $houseItem;
 	}
 
@@ -510,7 +518,7 @@ class HiMaWaRi extends HouseBase {
 	private function crawlMap($type, $key, $id) {
 		$fileName = __FUNCTION__ . '_type_' .$type.'_id_'. $id;
 		$url = $this->baseUrl . "ajax/{$type}Map.html?id={$id}";
-		$content = $this->fetchContent($fileName, $url,'','','content');
+		$content = $this->fetchContentFromDb($fileName, $url,'','','content');
 		$contentArr = \json_decode($content, true);
 		$data = $contentArr['code'] == 0 && $contentArr['data'] ? $contentArr['data'] : [];
 		return $data && $key && isset($data[$key]) ? $data[$key] : $data;
