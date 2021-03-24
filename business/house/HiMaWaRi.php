@@ -95,9 +95,10 @@ class HiMaWaRi extends HouseBase {
 	public function crawAllId($shortUrl) {
 		$id = $this->extractId($shortUrl);
 		$fileName = __FUNCTION__ . '_id_' . $id;
-		$content = $this->fetchContent($fileName, $shortUrl);
+		$content = $this->fetchContent('', $shortUrl);
 		//解析数据
 		$idList = $this->computeData($content, '.item-title a', "href");
+		pr($idList,1);
 		$this->computeListId($idList);
 		$map = $this->parseListData($content);
 		$this->data = $map;
@@ -458,8 +459,9 @@ class HiMaWaRi extends HouseBase {
 	/**
 	 * 抓取购物数据
 	 * @param $id
-	 * @param $key
+	 * @param string $key
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	private function shoppingMap($id, $key = '') {
 		return $this->crawlMap('shopping', $key, $id);
@@ -468,8 +470,9 @@ class HiMaWaRi extends HouseBase {
 	/**
 	 * 抓取教育数据
 	 * @param $id
-	 * @param $key
+	 * @param string $key
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	private function eduMap($id, $key = '') {
 		return $this->crawlMap('edu', $key, $id);
@@ -478,8 +481,9 @@ class HiMaWaRi extends HouseBase {
 	/**
 	 * 抓取交通数据
 	 * @param $id
-	 * @param $key
+	 * @param string $key
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	private function subwayMap($id, $key = '') {
 		return $this->crawlMap('subway', $key, $id);
@@ -488,8 +492,9 @@ class HiMaWaRi extends HouseBase {
 	/**
 	 *抓取生活数据
 	 * @param $id
-	 * @param $key
+	 * @param string $key
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	private function lifeMap($id, $key = '') {
 		return $this->crawlMap('life', $key, $id);
@@ -501,10 +506,12 @@ class HiMaWaRi extends HouseBase {
 	 * @param $key
 	 * @param $id
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	private function crawlMap($type, $key, $id) {
+		$fileName = __FUNCTION__ . '_type_' .$type.'_id_'. $id;
 		$url = $this->baseUrl . "ajax/{$type}Map.html?id={$id}";
-		$content = file_get_contents($url);
+		$content = $this->fetchContent($fileName, $url,'','','content');
 		$contentArr = \json_decode($content, true);
 		$data = $contentArr['code'] == 0 && $contentArr['data'] ? $contentArr['data'] : [];
 		return $data && $key && isset($data[$key]) ? $data[$key] : $data;

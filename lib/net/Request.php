@@ -189,25 +189,27 @@ class Request {
 		], 'operate.hinabian.com');
 		$conf = $this->guzzleHttpConfig;
 		$conf['cookies'] = $cookieJar;
+		$headers=$this->computeHeaders();
+		$clientConfig =  $headers+$conf;
 		$this->startTime = microtime(true);
-		$httpClient = new Client($conf);
+		$httpClient = new Client($clientConfig);
 		try {
 			switch ($this->method) {
 				case self::METHOD_GET:
-					$config = array_merge($this->guzzleHttpConfig, ['query' => $this->params]);
-					$link = $this->url . "?" . http_build_query($this->params);
-					$link = urldecode($link);
-					//pr($link,$config,1);
-					$rsp = $httpClient->get($this->url, $config);
+					$config= ['query' => $this->params];
+					$link = $this->params ?$this->url . "?" . http_build_query($this->params):$this->url;
+					$rsp = $httpClient->get($link, $config);
 					break;
 				case self::METHOD_POST:
-					$config = array_merge($this->guzzleHttpConfig, ['body' => \json_encode($this->params)]);
+//					$config = array_merge($this->guzzleHttpConfig, ['body' => \json_encode($this->params)]);
+					$config=['body' => \json_encode($this->params)];
 					$rsp = $httpClient->post($this->url, $config);
 					break;
 				case self::METHOD_POST_JSON:
 					$conf = $this->guzzleHttpConfig;
 					$conf['headers'] = ['Content-Type' => 'application/json'];
 					$config = array_merge($conf, ['body' => \json_encode($this->params)]);
+					$config=['body' => \json_encode($this->params)];
 					$rsp = $httpClient->post($this->url, $config);
 					break;
 				case self::METHOD_PUT:
@@ -435,4 +437,32 @@ EOF;
 	public function setCacheTTL($cacheTTL) {
 		$this->cacheTTL = $cacheTTL;
 	}
+
+	/**
+	 * 计算header
+	 * @return array
+	 */
+	private function computeHeaders() {
+		$urlArr=parse_url($this->url);
+		$host=$urlArr['host'];
+		$server['User-Agent'] = self::genRandomUA();
+		$server['referer']=$host;
+		//$server['client-ip']=get_ip();
+		$headers = ["headers" => $server];
+		return $headers;
+	}
+
+	/**
+	 * 随机UA
+	 * @return string
+	 */
+	private function genRandomUA(){
+		try {
+			$ua = \Campo\UserAgent::random(['os_type' => 'Windows']);
+			return $ua;
+		} catch (\Exception $e) {
+			return '';
+		}
+	}
+
 }

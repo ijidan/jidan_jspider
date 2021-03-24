@@ -66,6 +66,7 @@ return array(
     'Curl\\' => array($vendorDir . '/php-curl-class/php-curl-class/src/Curl'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
+    'Campo\\' => array($vendorDir . '/campo/random-user-agent/src'),
     'Business\\' => array($baseDir . '/business'),
     'Aws\\' => array($vendorDir . '/aws/aws-sdk-php/src'),
     'App\\' => array($baseDir . '/src/app'),

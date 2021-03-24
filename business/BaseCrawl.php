@@ -330,10 +330,11 @@ abstract class BaseCrawl {
 	 * @param $url
 	 * @param string $sourceCharset
 	 * @param string $destCharset
+	 * @param string $type
 	 * @return bool|false|string|null
 	 * @throws Exception
 	 */
-	protected function fetchContent($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = '') {
+	protected function fetchContent($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = '',$type='base') {
 		if ($fileName) {
 			$fileName = $this->standardizeFileName($fileName);
 			$content = $this->fetchContentFromCache($fileName);
@@ -341,8 +342,15 @@ abstract class BaseCrawl {
 			$content = '';
 		}
 		if (!$content) {
-			$rsp = BaseService::sendGetRequest($url, [], $this->config);
-			$content = $rsp->success() ? $rsp->getData() : '';
+			switch ($type){
+				case 'content':
+					$content=file_get_contents($url);
+					break;
+				case 'base':
+				default:
+					$rsp = BaseService::sendGetRequest($url, [], $this->config);
+					$content = $rsp->success() ? $rsp->getData() : '';
+			}
 			$this->writeFile($fileName, $content);
 		}
 		if (!$content) {
@@ -352,6 +360,28 @@ abstract class BaseCrawl {
 			$content = iconv($sourceCharset, $destCharset, $content);
 		}
 		return $content;
+	}
+	protected function fileGetContent($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = ''){
+		if ($fileName) {
+			$fileName = $this->standardizeFileName($fileName);
+			$content = $this->fetchContentFromCache($fileName);
+		} else {
+			$content = '';
+		}
+		if (!$content) {
+			$rsp = BaseService::sendGetRequest($url, [], $this->config);
+			$content = $rsp->success() ? $rsp->getData() : '';
+			$content=
+			$this->writeFile($fileName, $content);
+		}
+		if (!$content) {
+			throw new RuntimeException($fileName . ':content empty');
+		}
+		if ($sourceCharset && $destCharset) {
+			$content = iconv($sourceCharset, $destCharset, $content);
+		}
+		return $content;
+
 	}
 
 	/**

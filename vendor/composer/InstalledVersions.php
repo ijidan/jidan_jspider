@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '65839aff14ed5cc75f5acf3ebea76375b23b68e1',
+    'reference' => '3b0cf48d95d5899a7f1b77a6a731712cadfe19dd',
     'name' => 'jidan/j-spider',
   ),
   'versions' => 
@@ -51,6 +51,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '0a0b9e4d485fe0cd53db2a4075eba9a416d8331c',
+    ),
+    'campo/random-user-agent' => 
+    array (
+      'pretty_version' => '1.3.0',
+      'version' => '1.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4a88bd90f66ca398b050b19848e3c6ea143ce8a0',
     ),
     'codeguy/upload' => 
     array (
@@ -230,7 +239,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '65839aff14ed5cc75f5acf3ebea76375b23b68e1',
+      'reference' => '3b0cf48d95d5899a7f1b77a6a731712cadfe19dd',
     ),
     'layershifter/tld-database' => 
     array (

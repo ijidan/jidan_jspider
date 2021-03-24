@@ -196,6 +196,7 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
             'Curl\\' => 5,
             'Composer\\CaBundle\\' => 18,
             'Complex\\' => 8,
+            'Campo\\' => 6,
         ),
         'B' => 
         array (
@@ -450,6 +451,10 @@ class ComposerStaticInitdce429aa3f3499178ee9efed907aea07
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
+        ),
+        'Campo\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/campo/random-user-agent/src',
         ),
         'Business\\' => 
         array (
