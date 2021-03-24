@@ -193,12 +193,12 @@ abstract class HouseBase extends BaseCrawl {
 	public function crawl() {
 		$this->info('总页数抓取开始');
 		$firstListPage = $this->computeListPageUrl(1);
-		$pageCnt = $this->crawlPageCnt($firstListPage);
+		//$pageCnt = $this->crawlPageCnt($firstListPage);
 		$pageCnt = 1;
 		$this->info("总页数抓取结束：一共 {$pageCnt} 页");
 		if ($pageCnt) {
 			for ($i = 1; $i <= $pageCnt; $i++) {
-				$i=14;
+				$i=2;
 				$listPageUrl = $this->computeListPageUrl($i);
 				//随机等待多少秒
 //				$this->waitRandomMS();
@@ -227,19 +227,7 @@ abstract class HouseBase extends BaseCrawl {
 	 * @return mixed
 	 */
 	public function getGuzzleHttpConfig() {
-		$userAgent = UserAgent::random();
-		$guzzleConfig = [
-			'timeout' => 20,
-			'headers' => [
-				'User-Agent' => $userAgent
-			]
-		];
-		if(!$this->isDebugMode){
-			$guzzleConfig['proxy']=[
-				'http' => 'tcp://163.204.246.18:9999'
-			];
-		}
-		return $guzzleConfig;
+		return [];
 	}
 
 

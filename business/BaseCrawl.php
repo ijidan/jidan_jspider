@@ -338,20 +338,12 @@ abstract class BaseCrawl {
 		if ($fileName) {
 			$fileName = $this->standardizeFileName($fileName);
 			$content = $this->fetchContentFromCache($fileName);
-		} else {
-			$content = '';
-		}
-		if (!$content) {
-			switch ($type){
-				case 'content':
-					$content=file_get_contents($url);
-					break;
-				case 'base':
-				default:
-					$rsp = BaseService::sendGetRequest($url, [], $this->config);
-					$content = $rsp->success() ? $rsp->getData() : '';
+			if(!$content){
+				$content=$this->doFetchContent($url,$type);
+				$this->writeFile($fileName, $content);
 			}
-			$this->writeFile($fileName, $content);
+		} else {
+			$content=$this->doFetchContent($url,$type);
 		}
 		if (!$content) {
 			throw new RuntimeException($fileName . ':content empty');
@@ -361,24 +353,23 @@ abstract class BaseCrawl {
 		}
 		return $content;
 	}
-	protected function fileGetContent($fileName, $url, $sourceCharset = 'UTF-8', $destCharset = ''){
-		if ($fileName) {
-			$fileName = $this->standardizeFileName($fileName);
-			$content = $this->fetchContentFromCache($fileName);
-		} else {
-			$content = '';
-		}
-		if (!$content) {
-			$rsp = BaseService::sendGetRequest($url, [], $this->config);
-			$content = $rsp->success() ? $rsp->getData() : '';
-			$content=
-			$this->writeFile($fileName, $content);
-		}
-		if (!$content) {
-			throw new RuntimeException($fileName . ':content empty');
-		}
-		if ($sourceCharset && $destCharset) {
-			$content = iconv($sourceCharset, $destCharset, $content);
+
+	/**
+	 * 获取内容
+	 * @param $url
+	 * @param $type
+	 * @return false|string|null
+	 * @throws Exception
+	 */
+	protected function doFetchContent($url,$type){
+		switch ($type){
+			case 'content':
+				$content=file_get_contents($url);
+				break;
+			case 'base':
+			default:
+				$rsp = BaseService::sendGetRequest($url, [], $this->config);
+				$content = $rsp->success() ? $rsp->getData() : '';
 		}
 		return $content;
 
