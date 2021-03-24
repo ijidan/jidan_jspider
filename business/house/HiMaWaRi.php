@@ -3,6 +3,9 @@
 namespace Business\House;
 
 
+use Model\Spider\IdParse;
+use Model\Spider\ImageMap;
+
 /**
  * 日本房源
  * Class HiMaWaRi
@@ -10,7 +13,10 @@ namespace Business\House;
  */
 class HiMaWaRi extends HouseBase {
 
-	/**
+	//唯一ID
+	protected $uniqueId = 'HiMaWaRi';
+
+	/*
 	 * 映射
 	 * @var array
 	 */
@@ -95,7 +101,7 @@ class HiMaWaRi extends HouseBase {
 	public function crawAllId($shortUrl) {
 		$id = $this->extractId($shortUrl);
 		$fileName = __FUNCTION__ . '_id_' . $id;
-		$content = $this->fetchContentFromDb($fileName  , $shortUrl);
+		$content = $this->fetchContentFromDb($fileName, $shortUrl);
 		//解析数据
 		$idList = $this->computeData($content, '.item-title a', "href");
 		$this->computeListId($idList);
@@ -117,7 +123,7 @@ class HiMaWaRi extends HouseBase {
 			$url = $this->computeOnlyOneData($house, '.item-title a', 'href');
 			$id = $this->extractId($url);
 			$itemTable = $this->computeData($house, '.item-table td');
-			array_push($itemTable,$img);
+			array_push($itemTable, $img);
 			$map[$id] = $itemTable;
 		}
 		return $map;
@@ -135,7 +141,6 @@ class HiMaWaRi extends HouseBase {
 		$htmlContent = $this->fetchContentFromDb($fileName, $url);
 		//标题
 		$roomName = $this->computeOnlyOneData($htmlContent, '.house-title h1');
-
 		//户型图
 		$sliderList = $this->extractContentHtml($htmlContent, '.gallery-top .swiper-slide');
 		$layoutImg = '';
@@ -145,13 +150,14 @@ class HiMaWaRi extends HouseBase {
 			if (strpos($slider, '户型') !== false) {
 				$layoutImg = $this->extractOnlyOneImage($slider);
 				break;
-			}else{
+			} else {
 				$_img = $this->computeOnlyOneData($slider, 'img', 'src');
 				$_desc = $this->computeOnlyOneData($slider, 'em');
 				$_item = ['img' => $_img, 'desc' => $_desc];
 				array_push($bannerInfos, $_item);
 			}
 		}
+
 
 		//地址
 		$houseAround = $this->computeOnlyOneData($htmlContent, '.house-around span');
@@ -206,7 +212,7 @@ class HiMaWaRi extends HouseBase {
 
 		//价格
 		$price = $this->extractValue($houseTableKeyList, $houseTableValueList, '价格');
-		$this->multiReplace($price, ['亿',',', '万日元']);
+		$this->multiReplace($price, ['亿', ',', '万日元']);
 		//价格转化
 		$priceRMB = $this->extractValue($houseTableKeyList, $houseTableValueList, '约合');
 		$this->multiReplace($priceRMB, [',', '万人民币']);
@@ -302,16 +308,111 @@ class HiMaWaRi extends HouseBase {
 			'video_pro'                => '',
 			'project_news'             => '',
 		);
-		pr($houseItem,1);
-		$newId=$this->getNewId($id);
-		if($newId){
-			$houseItem['f_id']=$newId;
-		}
-		$id=$this->saveHouse($roomName,$houseItem,$this->config);
-		if(!$newId && $id){
-			$this->doId($id,$newId);
-		}
+
+		//记录图片
+		$this->doImage($id, [$img, $layoutImg]);
+		$bannerInfosImgList = array_column($bannerInfos, 'img');
+		$this->doImage($id, $bannerInfosImgList);
+		//保存解析内容
+		$this->doParse($id, $houseItem);
 		return $houseItem;
+	}
+
+
+	/**
+	 * 图片上传
+	 */
+	public function uploadImage(){
+		$dataList = ImageMap::find("f_unique_id=? and f_new_img_url=''", [$this->uniqueId]);
+		if ($dataList) {
+			foreach ($dataList as $data) {
+				$id=$data['f_id'];
+				$originUrl=$data['f_origin_img_url'];
+				$toUpUrl=$this->cleanImage($originUrl);
+				try {
+					$newUrl = $this->uploadFile2Cache($toUpUrl, $this->config);
+					ImageMap::update(['f_new_img_url'=> $newUrl],'f_id='.$id);
+				} catch (\Exception $e) {
+				}
+				$this->info('图片上传结束：'.$id);
+
+			}
+		}
+	}
+
+	/**
+	 * 清理图片
+	 * @param $originUrl
+	 * @return string
+	 */
+	private function cleanImage($originUrl){
+		$pathInfo=pathinfo($originUrl);
+		$extension=$pathInfo['extension'];
+		$extensionArr=explode('-',$extension);
+		$ext=$extensionArr[0];
+		$originUrlArr=explode($ext,$originUrl);
+		$toUpUrl=$originUrlArr[0].$ext;
+		return $toUpUrl;
+
+	}
+	/**
+	 * 数据上传
+	 * @throws \Exception
+	 */
+	public function uploadData() {
+		$dataList = IdParse::find('f_unique_id=?', [$this->uniqueId]);
+		if ($dataList) {
+			foreach ($dataList as $data) {
+				$originId=$data['f_origin_id'];
+				$content=$data['f_parse_content'];
+				$houseItem=\json_decode($content,true);
+				$newId = $this->getNewId($originId);
+				if ($newId) {
+					$houseItem['f_id'] = $newId;
+				}
+				$this->replaceImage($houseItem);
+				$rspId = $this->saveHouse('', $houseItem, $this->config);
+				if (!$newId && $rspId) {
+					$this->doId($originId, $rspId);
+				}
+				$this->info('数据上传完毕：'.$originId);
+			}
+		}
+	}
+
+	/**
+	 * 图片替换
+	 * @param array $houseItem
+	 */
+	private function replaceImage(array &$houseItem){
+		//推广图片
+		$promotionImg=$houseItem['promotion_img'];
+		if($promotionImg){
+			$imgUrl=$this->getNewImageUrl($promotionImg);
+			$houseItem['promotion_img']=$imgUrl;
+		}
+		$bannerInfos=$houseItem['banner_infos'];
+		if($bannerInfos){
+			$this->convertImage($bannerInfos);
+			$houseItem['banner_infos']=$bannerInfos;
+		}
+		$houseLayoutInfos=$houseItem['house_layout_infos'];
+		if($houseLayoutInfos){
+			$this->convertImage($houseLayoutInfos);
+			$houseItem['house_layout_infos']=$houseLayoutInfos;
+		}
+	}
+
+	/**
+	 * 图片转换
+	 * @param $dataList
+	 */
+	private function convertImage(&$dataList){
+		foreach ($dataList as &$data){
+			$img=$data['img'];
+			$newImg=$this->getNewImageUrl($img);
+			$data['img']=$newImg;
+		}
 	}
 
 	/**
@@ -516,9 +617,9 @@ class HiMaWaRi extends HouseBase {
 	 * @throws \Exception
 	 */
 	private function crawlMap($type, $key, $id) {
-		$fileName = __FUNCTION__ . '_type_' .$type.'_id_'. $id;
+		$fileName = __FUNCTION__ . '_type_' . $type . '_id_' . $id;
 		$url = $this->baseUrl . "ajax/{$type}Map.html?id={$id}";
-		$content = $this->fetchContentFromDb($fileName, $url,'','','content');
+		$content = $this->fetchContentFromDb($fileName, $url, '', '', 'content');
 		$contentArr = \json_decode($content, true);
 		$data = $contentArr['code'] == 0 && $contentArr['data'] ? $contentArr['data'] : [];
 		return $data && $key && isset($data[$key]) ? $data[$key] : $data;

@@ -11,6 +11,7 @@ use Lib\Net\BaseService;
 use Lib\Util\Config;
 use Model\Spider\ContentCache;
 use Model\Spider\IdMap;
+use Model\Spider\IdParse;
 use Model\Spider\ImageMap;
 use RuntimeException;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -26,6 +27,10 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 abstract class BaseCrawl {
 
+	//唯一ID
+	protected $uniqueId = '';
+
+	//颜色
 	const COLOR_RED = "red";
 	const COLOR_YELLOW = "yellow";
 	const COLOR_BLUE = "blue";
@@ -111,6 +116,7 @@ abstract class BaseCrawl {
 	 */
 	protected $data = [];
 
+
 	/**
 	 * 构造函数
 	 * BaseCrawl constructor.
@@ -120,6 +126,9 @@ abstract class BaseCrawl {
 	 * @throws Exception
 	 */
 	public function __construct(OutputInterface $output = null, $useCache = true, $isDebugMode = true) {
+		if (!$this->uniqueId) {
+			throw new \Exception('请设置唯一ID');
+		}
 		$this->imgUploadURL = Config::getConfigItem('struct/img_upload_url');
 		$this->logger = BaseLogger::instance(BaseLogger::CHANNEL_SPIDER_CACHE);
 		$this->output = $output;
@@ -250,7 +259,6 @@ abstract class BaseCrawl {
 	 */
 	public function writeFile($fileName, $content) {
 		$filePath = $this->computeFilePath($fileName);
-		pr($filePath, $this->cacheDir, 1);
 		$filesystem = new Filesystem();
 		if (!$filesystem->exists($filePath)) {
 			$this->checkAndCreateFile($fileName);
@@ -264,12 +272,25 @@ abstract class BaseCrawl {
 	 * @param $content
 	 */
 	public function writeDb($fileName, $content) {
-		$insData = [
-			'f_key'         => $fileName,
-			'f_content'     => $content,
-			'f_create_time' => time()
-		];
-		ContentCache::insert($insData);
+		$record = ContentCache::findOne('f_unique_id=? and f_key=?', [$this->uniqueId, $fileName]);
+		if($record){
+			$insData = [
+				'f_unique_id'   => $this->uniqueId,
+				'f_key'         => $fileName,
+				'f_content'     => $content,
+				'f_update_time' => time()
+			];
+			ContentCache::update($insData,'f_id='.$record['f_id']);
+		}else{
+			$insData = [
+				'f_unique_id'   => $this->uniqueId,
+				'f_key'         => $fileName,
+				'f_content'     => $content,
+				'f_update_time' => time()
+			];
+			ContentCache::insert($insData);
+		}
+
 	}
 
 	/**
@@ -310,7 +331,7 @@ abstract class BaseCrawl {
 	 * @return string
 	 */
 	public function getContentFromDB($fileName) {
-		$record = ContentCache::findOne('f_key=?', [$fileName]);
+		$record = ContentCache::findOne('f_unique_id=? and f_key=?', [$this->uniqueId, $fileName]);
 		return $record ? $record['f_content'] : '';
 	}
 
@@ -425,6 +446,7 @@ abstract class BaseCrawl {
 		return $fileName;
 	}
 
+
 	/**
 	 * 获取内容
 	 * @param $url
@@ -451,21 +473,16 @@ abstract class BaseCrawl {
 	 * @param $file
 	 * @param array $config
 	 * @return string
+	 * @throws Exception
 	 */
 	protected function uploadFile2Cache($file, array $config = []) {
-		$data = '{"originalName":"","name":"c66cc3e614ffd868325adaca7d560504.png","url":"images\/release\/c\/4\/c66cc3e614ffd868325adaca7d560504.png","real_url":"https:\/\/cache.hinabian.com\/images\/release\/c\/4\/c66cc3e614ffd868325adaca7d560504.png","size":512541,"type":".png","state":"SUCCESS"}';
-		//		$rsp=BaseService::sendFile($this->imgUploadURL,$file,$config);
-		//		if($rsp->fail()){
-		//			return '';
-		//		}
-		//		$data=$rsp->getData();
-		$dataArr = \json_decode($data, true);
-		$state = $dataArr['state'];
-		if ($state !== 'SUCCESS') {
+		//		$data = '{"originalName":"","name":"c66cc3e614ffd868325adaca7d560504.png","url":"images\/release\/c\/4\/c66cc3e614ffd868325adaca7d560504.png","real_url":"https:\/\/cache.hinabian.com\/images\/release\/c\/4\/c66cc3e614ffd868325adaca7d560504.png","size":512541,"type":".png","state":"SUCCESS"}';
+		$rsp = BaseService::sendFile($this->imgUploadURL, $file,'file',$config);
+		if ($rsp->fail()) {
 			return '';
 		}
-		$url = $dataArr['real_url'];
-		return $url;
+		$data = $rsp->getData();
+		return $data;
 	}
 
 
@@ -476,9 +493,13 @@ abstract class BaseCrawl {
 	 */
 	public function doImage($id, array $imgList) {
 		foreach ($imgList as $img) {
-			$record = ImageMap::findOne('f_origin_img_url=?', [$img]);
+			if (!$img) {
+				continue;
+			}
+			$record = ImageMap::findOne('f_unique_id=? and f_origin_img_url=?', [$this->uniqueId, $img]);
 			if (!$record) {
 				$insData = [
+					'f_unique_id'      => $this->uniqueId,
 					'f_origin_img_url' => $img,
 					'f_update_time'    => time()
 				];
@@ -489,14 +510,37 @@ abstract class BaseCrawl {
 	}
 
 	/**
+	 * 获取新URL
+	 * @param $originUrl
+	 * @return string
+	 */
+	public function getNewImageUrl($originUrl){
+		$record = ImageMap::findOne('f_unique_id=? and f_origin_img_url=?', [$this->uniqueId, $originUrl]);
+		return $record? $record['f_new_img_url']:'';
+	}
+
+
+	/**
 	 * 获取新ID
 	 * @param $originId
 	 * @return int
 	 */
 	public function getNewId($originId) {
-		$record = IdMap::findOne('f_origin_id=?', [$originId]);
+		$record = IdMap::findOne('f_unique_id=? and f_origin_id=?', [$this->uniqueId, $originId]);
 		return $record ? $record['f_new_id'] : 0;
+	}
 
+	/**
+	 * 计算ID
+	 * @param $id
+	 * @return mixed|string
+	 */
+	public function computeOriginId($id) {
+		$fileName = $this->computeFilePath($id);
+		$fileName = str_replace(BASE_DIR . '/storage/spider_cache/', '', $fileName);
+		$fileName = str_replace('//', '/', $fileName);
+		$fileName = str_replace('.log', '', $fileName);
+		return $fileName;
 	}
 
 	/**
@@ -509,11 +553,39 @@ abstract class BaseCrawl {
 		$record = IdMap::findOne('f_origin_id=?', [$originId]);
 		if (!$record) {
 			$insData = [
+				'f_unique_id'   => $this->uniqueId,
 				'f_origin_id'   => $originId,
 				'f_new_id'      => $newId,
-				'f_create_time' => time()
+				'f_update_time' => time()
 			];
 			IdMap::insert($insData);
+		}
+	}
+
+	/**
+	 * 保存内容
+	 * @param $originId
+	 * @param $parseContent
+	 */
+	public function doParse($originId, $parseContent) {
+		$record = IdParse::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
+		if (!$record) {
+			$insData = [
+				'f_unique_id'     => $this->uniqueId,
+				'f_origin_id'     => $originId,
+				'f_parse_content' => \json_encode($parseContent),
+				'f_update_time'   => time()
+			];
+			IdParse::insert($insData);
+		} else {
+			$updateData = [
+				'f_unique_id'     => $this->uniqueId,
+				'f_origin_id'     => $originId,
+				'f_parse_content' => \json_encode($parseContent),
+				'f_update_time'   => time()
+			];
+			$id = $record['f_id'];
+			IdParse::update($updateData, 'f_id=' . $id);
 		}
 	}
 

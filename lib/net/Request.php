@@ -274,8 +274,7 @@ class Request {
 		$response = null;
 		$httpClient = new Client($this->guzzleHttpConfig);
 		try {
-			$body = ['multipart' => [$this->params]];
-			$config = array_merge($this->guzzleHttpConfig, $body);
+			$config = ['multipart' => [$this->params]];
 			$rsp = $httpClient->post($this->url, $config);
 			/** @var \GuzzleHttp\Psr7\Response $rsp */
 			$response = $this->handleResponse($rsp);

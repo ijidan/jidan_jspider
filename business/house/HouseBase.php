@@ -4,6 +4,7 @@ namespace Business\House;
 
 use Business\BaseCrawl;
 use GuzzleHttp\Cookie\CookieJar;
+use Lib\Util\Config;
 
 
 /**
@@ -87,35 +88,6 @@ abstract class HouseBase extends BaseCrawl {
 	 * @return mixed|void
 	 */
 	public function crawl() {
-		$this->info('总页数抓取开始');
-		$firstListPage = $this->computeListPageUrl(1);
-		//$pageCnt = $this->crawlPageCnt($firstListPage);
-		$pageCnt = 1;
-		$this->info("总页数抓取结束：一共 {$pageCnt} 页");
-		if ($pageCnt) {
-			for ($i = 1; $i <= $pageCnt; $i++) {
-				$i = 2;
-				$listPageUrl = $this->computeListPageUrl($i);
-				//随机等待多少秒
-				//				$this->waitRandomMS();
-				try {
-					$allId = $this->crawAllId($listPageUrl);
-				} catch (\Exception $e) {
-					continue;
-				}
-				$this->info("列表抓取开始：第 {$i} 页");
-				//				$allId=[3172];
-				foreach ($allId as $id) {
-					$this->info("项目详情抓取开始： ID为 $id");
-					try {
-						$this->crawlDetail($id);
-					} catch (\Exception $e) {
-						continue;
-					}
-					$this->info("项目详情抓取结束： ID为 $id");
-				}
-			}
-		}
 	}
 
 	/**
@@ -123,7 +95,8 @@ abstract class HouseBase extends BaseCrawl {
 	 * @return mixed
 	 */
 	public function getGuzzleHttpConfig() {
-		$cookieJar = CookieJar::fromArray(['PHPSESSID' => '7vhi3i429eus032iivvleiu9k6'], 'operate.hinabian.com');
+		$cookies = Config::getConfigItem('cookie/' . $this->business);
+		$cookieJar = CookieJar::fromArray([$cookies['name'] => $cookies['value']], $cookies['domain']);
 		$guzzleConfig = [
 			'cookies' => $cookieJar,
 		];
@@ -147,4 +120,40 @@ abstract class HouseBase extends BaseCrawl {
 		$customConfig = ['need_uuid' => false];
 		return $customConfig;
 	}
+
+
+	/**
+	 * 开始爬取
+	 * @return mixed|void
+	 */
+	public function crawlContent() {
+		$this->info('总页数抓取开始');
+		$firstListPage = $this->computeListPageUrl(1);
+		//		$pageCnt = $this->crawlPageCnt($firstListPage);
+		$pageCnt = 1;
+		$this->info("总页数抓取结束：一共 {$pageCnt} 页");
+		if ($pageCnt) {
+			for ($i = 1; $i <= $pageCnt; $i++) {
+				$listPageUrl = $this->computeListPageUrl($i);
+				//随机等待多少秒
+				//$this->waitRandomMS();
+				try {
+					$allId = $this->crawAllId($listPageUrl);
+				} catch (\Exception $e) {
+					continue;
+				}
+				$this->info("列表抓取开始：第 {$i} 页");
+				foreach ($allId as $id) {
+					$this->info("项目详情抓取开始： ID为 $id");
+					try {
+						$this->crawlDetail($id);
+					} catch (\Exception $e) {
+						continue;
+					}
+					$this->info("项目详情抓取结束： ID为 $id");
+				}
+			}
+		}
+	}
+
 }
