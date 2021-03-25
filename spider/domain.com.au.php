@@ -12,6 +12,9 @@ $app->command('crawl [type] [keyword1] [keyword2]', function ($type, $keyword1, 
 		case 'content': //爬取内容
 			$crawler->crawlContent();
 			break;
+		case 'excel': //生成excel
+			$crawler->genExcel();
+			break;
 		case 'image'://图片上传
 			//$crawler->uploadImage();
 			break;

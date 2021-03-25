@@ -9,6 +9,7 @@ use Lib\BaseLogger;
 use Lib\BaseModel;
 use Lib\Net\BaseService;
 use Lib\Util\Config;
+use Lib\Util\ExcelUtil;
 use Model\Spider\ContentCache;
 use Model\Spider\IdMap;
 use Model\Spider\IdParse;
@@ -194,6 +195,13 @@ abstract class BaseCrawl {
 
 
 	/**
+	 * 图片整理
+	 * @param $originUrl
+	 * @return mixed
+	 */
+	abstract public function cleanImage($originUrl);
+
+	/**
 	 * 输出信息
 	 * @param $message
 	 * @param string $fg
@@ -270,6 +278,7 @@ abstract class BaseCrawl {
 	 *写数据库
 	 * @param $fileName
 	 * @param $content
+	 * @throws ErrorException
 	 */
 	public function writeDb($fileName, $content) {
 		$record = ContentCache::findOne('f_unique_id=? and f_key=?', [$this->uniqueId, $fileName]);
@@ -329,6 +338,7 @@ abstract class BaseCrawl {
 	 * 从数据库读取内容
 	 * @param $fileName
 	 * @return string
+	 * @throws ErrorException
 	 */
 	public function getContentFromDB($fileName) {
 		$record = ContentCache::findOne('f_unique_id=? and f_key=?', [$this->uniqueId, $fileName]);
@@ -474,6 +484,27 @@ abstract class BaseCrawl {
 
 	/**
 	 * 图片上传
+	 */
+	public function uploadImage(){
+		$dataList = ImageMap::find("f_unique_id=? and f_new_img_url=''", [$this->uniqueId]);
+		if ($dataList) {
+			foreach ($dataList as $data) {
+				$id=$data['f_id'];
+				$originUrl=$data['f_origin_img_url'];
+				$toUpUrl=$this->cleanImage($originUrl);
+				try {
+					$newUrl = $this->uploadFile2Cache($toUpUrl, $this->config);
+					ImageMap::update(['f_new_img_url'=> $newUrl],'f_id='.$id);
+				} catch (\Exception $e) {
+				}
+				$this->info('图片上传结束：'.$id);
+
+			}
+		}
+	}
+
+	/**
+	 * 图片上传
 	 * @param $file
 	 * @param array $config
 	 * @return string
@@ -494,6 +525,7 @@ abstract class BaseCrawl {
 	 * 图片入库
 	 * @param $id
 	 * @param array $imgList
+	 * @throws ErrorException
 	 */
 	public function doImage($id, array $imgList) {
 		foreach ($imgList as $img) {
@@ -517,6 +549,7 @@ abstract class BaseCrawl {
 	 * 获取新URL
 	 * @param $originUrl
 	 * @return string
+	 * @throws ErrorException
 	 */
 	public function getNewImageUrl($originUrl){
 		$record = ImageMap::findOne('f_unique_id=? and f_origin_img_url=?', [$this->uniqueId, $originUrl]);
@@ -528,6 +561,7 @@ abstract class BaseCrawl {
 	 * 获取新ID
 	 * @param $originId
 	 * @return int
+	 * @throws ErrorException
 	 */
 	public function getNewId($originId) {
 		$record = IdMap::findOne('f_unique_id=? and f_origin_id=?', [$this->uniqueId, $originId]);
@@ -535,23 +569,11 @@ abstract class BaseCrawl {
 	}
 
 	/**
-	 * 计算ID
-	 * @param $id
-	 * @return mixed|string
-	 */
-	public function computeOriginId($id) {
-		$fileName = $this->computeFilePath($id);
-		$fileName = str_replace(BASE_DIR . '/storage/spider_cache/', '', $fileName);
-		$fileName = str_replace('//', '/', $fileName);
-		$fileName = str_replace('.log', '', $fileName);
-		return $fileName;
-	}
-
-	/**
 	 * ID映射
 	 * @param $originId
 	 * @param $newId
 	 * @return mixed
+	 * @throws ErrorException
 	 */
 	public function doId($originId, $newId) {
 		$record = IdMap::findOne('f_origin_id=?', [$originId]);
@@ -564,12 +586,14 @@ abstract class BaseCrawl {
 			];
 			IdMap::insert($insData);
 		}
+		return true;
 	}
 
 	/**
 	 * 保存内容
 	 * @param $originId
 	 * @param $parseContent
+	 * @throws ErrorException
 	 */
 	public function doParse($originId, $parseContent) {
 		$record = IdParse::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
@@ -877,6 +901,18 @@ abstract class BaseCrawl {
 		}
 	}
 
+	/**
+	 * 生成EXCEL文件
+	 * @param array $headers
+	 * @param array $dataList
+	 * @return string
+	 * @throws \PHPExcel_Exception
+	 */
+	protected function writeExcel(array $headers,array $dataList){
+		$fileName=$this->uniqueId.'_'.date('ymdHis');
+		$file=ExcelUtil::genExcel($fileName,$headers,$dataList);
+		return $file;
+	}
 	/**
 	 *获取分布式ID
 	 * @param BaseModel $cls
