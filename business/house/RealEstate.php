@@ -7,14 +7,14 @@ use Model\Spider\IdParse;
 use Model\Spider\ImageMap;
 
 /**
- * 日本房源
- * Class HiMaWaRi
- * @package Business\News\Fang
+ * 澳洲房源
+ * Class RealEstate
+ * @package Business\House
  */
-class HiMaWaRi extends HouseBase {
+class RealEstate extends HouseBase {
 
 	//唯一ID
-	protected $uniqueId = 'HiMaWaRi';
+	protected $uniqueId = 'RealEstate';
 
 	/*
 	 * 映射
@@ -22,13 +22,13 @@ class HiMaWaRi extends HouseBase {
 	 */
 	protected $data = [];
 
-	public $baseUrl = 'https://www.himawari-japan.com/';
+	public $baseUrl = 'https://www.realestate.com.au/';
 
 	/**
 	 * 子目录
 	 * @var string
 	 */
-	protected $platformsSubDir = 'HiMaWaRi';
+	protected $platformsSubDir = 'RealEstate';
 
 
 	/**
@@ -45,7 +45,7 @@ class HiMaWaRi extends HouseBase {
 	 * @return mixed
 	 */
 	public function computeListPageUrl($page = 1) {
-		$url = $this->baseUrl . "house?page={$page}";
+		$url = $this->baseUrl . "buy/list-{$page}";
 		return $url;
 	}
 
@@ -70,8 +70,9 @@ class HiMaWaRi extends HouseBase {
 		$id = $this->extractId($shortUrl);
 		$fileName = __FUNCTION__ . '_id_' . $id;
 		$content = $this->fetchContentFromDb($fileName, $shortUrl);
-		$idStr = $this->computeData($content, '.pagination li a', 'href');
+		$idStr = $this->computeData($content, '.pagination__numbers a', 'href');
 		$maxId = $this->computeMaxId($idStr);
+		pr($maxId,1);
 		return $maxId;
 	}
 

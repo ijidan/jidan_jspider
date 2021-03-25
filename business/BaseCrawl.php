@@ -420,14 +420,18 @@ abstract class BaseCrawl {
 			$content = $this->fetchContentFromCache($cacheKey, 'db');
 			if (!$content) {
 				$content = $this->doFetchContent($url, $type);
+				if (!$content) {
+					throw new RuntimeException($fileName . ':content empty');
+				}
 				$this->writeDb($cacheKey, $content);
 			}
 		} else {
 			$content = $this->doFetchContent($url, $type);
+			if (!$content) {
+				throw new RuntimeException($fileName . ':content empty');
+			}
 		}
-		if (!$content) {
-			throw new RuntimeException($fileName . ':content empty');
-		}
+
 		if ($sourceCharset && $destCharset) {
 			$content = iconv($sourceCharset, $destCharset, $content);
 		}
@@ -857,7 +861,7 @@ abstract class BaseCrawl {
 	 * @return int
 	 */
 	protected function waitRandomMS() {
-		$rand = mt_rand(500000, 2500000);
+		$rand = mt_rand(500000, 1000000);
 		usleep($rand);
 		return $rand;
 	}

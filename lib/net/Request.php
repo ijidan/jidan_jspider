@@ -44,7 +44,7 @@ class Request {
 	 * @var array
 	 */
 	private $guzzleHttpConfig = array(
-		'timeout' => 0,                     //超时时间(秒)
+		'timeout' => 5,                     //超时时间(秒)
 		'verify'  => false,
 		'proxy'   => [
 			'http' => 'tcp://172.16.1.82:8888',

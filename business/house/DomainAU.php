@@ -7,14 +7,14 @@ use Model\Spider\IdParse;
 use Model\Spider\ImageMap;
 
 /**
- * 日本房源
- * Class HiMaWaRi
- * @package Business\News\Fang
+ * 澳洲房源
+ * Class DomainAU
+ * @package Business\House
  */
-class HiMaWaRi extends HouseBase {
+class DomainAU extends HouseBase {
 
 	//唯一ID
-	protected $uniqueId = 'HiMaWaRi';
+	protected $uniqueId = 'DomainAU';
 
 	/*
 	 * 映射
@@ -22,13 +22,13 @@ class HiMaWaRi extends HouseBase {
 	 */
 	protected $data = [];
 
-	public $baseUrl = 'https://www.himawari-japan.com/';
+	public $baseUrl = 'https://www.domain.com.au/';
 
 	/**
 	 * 子目录
 	 * @var string
 	 */
-	protected $platformsSubDir = 'HiMaWaRi';
+	protected $platformsSubDir = 'DomainAU';
 
 
 	/**
@@ -45,7 +45,7 @@ class HiMaWaRi extends HouseBase {
 	 * @return mixed
 	 */
 	public function computeListPageUrl($page = 1) {
-		$url = $this->baseUrl . "house?page={$page}";
+		$url = $this->baseUrl . "/sale/?excludeunderoffer=1&page={$page}";
 		return $url;
 	}
 
@@ -66,13 +66,7 @@ class HiMaWaRi extends HouseBase {
 	 * @throws \Exception
 	 */
 	public function crawlPageCnt($shortUrl) {
-		$shortUrl = trim($shortUrl, '/');
-		$id = $this->extractId($shortUrl);
-		$fileName = __FUNCTION__ . '_id_' . $id;
-		$content = $this->fetchContentFromDb($fileName, $shortUrl);
-		$idStr = $this->computeData($content, '.pagination li a', 'href');
-		$maxId = $this->computeMaxId($idStr);
-		return $maxId;
+		return 50;
 	}
 
 	/**
@@ -102,33 +96,46 @@ class HiMaWaRi extends HouseBase {
 		$id = $this->extractId($shortUrl);
 		$fileName = __FUNCTION__ . '_id_' . $id;
 		$content = $this->fetchContentFromDb($fileName, $shortUrl);
-		//解析数据
-		$idList = $this->computeData($content, '.item-title a', "href");
-		$this->computeListId($idList);
-		$map = $this->parseListData($content);
-		$this->data = $map;
-		return $idList;
+		$contentArr=explode('window[',$content);
+		$filteredContent=$contentArr[1];
+		$this->multiReplace($filteredContent,["__domain_group/APP_PROPS']","'"," ","=",";"]);
+		$data=\json_decode($filteredContent,true);
+		$allIdList=$data['listingSearchResultIds'];
+		$listingsMap=$data['listingsMap'];
+		//解析详情
+		foreach ($allIdList as $id){
+			$this->parseDetail($id,$listingsMap);
+		}
+		return $allIdList;
 	}
 
 	/**
-	 * 解析列表数据
-	 * @param $content
-	 * @return array
+	 * 获取页数
+	 * @param $shortUrl
+	 * @return mixed|string
 	 */
-	private function parseListData($content) {
-		$houseList = $this->extractContentHtml($content, '.house-lists .item');
-		$map = [];
-		foreach ($houseList as $house) {
-			$img = $this->computeOnlyOneData($house, '.item-photo img', 'src');
-			$url = $this->computeOnlyOneData($house, '.item-title a', 'href');
-			$id = $this->extractId($url);
-			$itemTable = $this->computeData($house, '.item-table td');
-			array_push($itemTable, $img);
-			$map[$id] = $itemTable;
-		}
-		return $map;
+	public function extractId($shortUrl){
+		$page=$this->getQueryValue($shortUrl,'page');
+		return $page;
 	}
 
+
+	/**
+	 * 解析详情
+	 * @param $id
+	 * @param $listingsMap
+	 */
+	private function parseDetail($id,$listingsMap){
+		$houseType=$listingsMap[$id]['listingType'];
+		$houseInfo=$listingsMap[$id]['listingModel'];
+		$childList=$houseInfo['childListingIds'];
+		foreach ($childList as $childId){
+			$houseInfo['childListingInfos'][$childId]=$listingsMap[$childId];
+		}
+		//记录图片 TODO
+		//保存解析内容
+		$this->doParse($id, $houseInfo);
+	}
 	/**
 	 * 爬取详情页
 	 * @param $id
@@ -136,186 +143,6 @@ class HiMaWaRi extends HouseBase {
 	 * @throws \Exception
 	 */
 	public function crawlDetail($id) {
-		$fileName = __FUNCTION__ . '_id_' . $id;
-		$url = $this->computeDetailPageUrl($id);
-		$htmlContent = $this->fetchContentFromDb($fileName, $url);
-		//标题
-		$roomName = $this->computeOnlyOneData($htmlContent, '.house-title h1');
-		//户型图
-		$sliderList = $this->extractContentHtml($htmlContent, '.gallery-top .swiper-slide');
-		$layoutImg = '';
-		$bannerInfos = [];
-		foreach ($sliderList as $slider) {
-			//户型图
-			if (strpos($slider, '户型') !== false) {
-				$layoutImg = $this->extractOnlyOneImage($slider);
-				break;
-			} else {
-				$_img = $this->computeOnlyOneData($slider, 'img', 'src');
-				$_desc = $this->computeOnlyOneData($slider, 'em');
-				$_item = ['img' => $_img, 'desc' => $_desc];
-				array_push($bannerInfos, $_item);
-			}
-		}
-
-
-		//地址
-		$houseAround = $this->computeOnlyOneData($htmlContent, '.house-around span');
-		$this->multiReplace($houseAround, ['地址：']);
-		$cityMap = [
-			'东京都'  => '20000043',
-			'大阪府'  => '20000044',
-			'神奈川县' => '20000063',
-			'京都府'  => '20000070',
-			//		    '北海道'=>'',
-			'静岡県'  => '20000066',
-			'静冈县'  => '20000066',
-			'茨城县'  => '20000069'
-		];
-		$cityName = '';
-		$cityId = '';
-		$roomZone = $houseAround;
-		foreach ($cityMap as $cMpName => $cMapId) {
-			if (strpos($houseAround, $cMpName) !== false) {
-				$cityName = $cMpName;
-				$cityId = $cMapId;
-				$roomZone = str_replace($roomName, '', $houseAround);
-				break;
-			}
-		}
-
-		//房源信息
-		$houseInfo = $this->extractOnlyOneContentHtml($htmlContent, '.house-infor');
-		$houseInfoData = $this->computeData($houseInfo, 'p');
-		list($layoutName, $floor, $layoutArea, $roomStandard, $layoutDirection, $handingInDate) = $houseInfoData;
-		$this->multiReplace($layoutArea, ['平米']);
-
-		//列表页数据
-		list($apartmentType, $direction, $layoutName, $houseArea, $houseType, $propertyRight, $isDownloadable, $broker, $img) = $this->data[$id];
-		$this->multiReplace($houseArea, ['平米']);
-		//公寓类型
-		$apartmentTypeMap = [
-			'公寓'   => 5,
-			'一户建'  => 2,
-			'整栋公寓' => 5,
-			'酒店'   => 3,
-			'土地'   => 3
-		];
-		$apartmentTypeConverted = isset($apartmentTypeMap[$apartmentType]) ? $apartmentTypeMap[$apartmentType] : 8;
-
-		//推广图片
-		//$promotionImg = $this->computeData($htmlContent, '.gallery-top .swiper-slide img', 'src');
-		///房产描述
-		$roomDesc = $this->computeOnlyOneData($htmlContent, '.house-feature .col-right');//房产描述,
-		$houseTableKeyList = $this->computeHtmlContentList($htmlContent, '.house-table li label');
-		$houseTableValueList = $this->computeHtmlContentList($htmlContent, '.house-table li span');
-
-		//价格
-		$price = $this->extractValue($houseTableKeyList, $houseTableValueList, '价格');
-		$this->multiReplace($price, ['亿', ',', '万日元']);
-		//价格转化
-		$priceRMB = $this->extractValue($houseTableKeyList, $houseTableValueList, '约合');
-		$this->multiReplace($priceRMB, [',', '万人民币']);
-		//物业类型
-		$apartmentType = $this->extractValue($houseTableKeyList, $houseTableValueList, '房产类型');
-		//面积
-		$roomAreaMin = $this->extractValue($houseTableKeyList, $houseTableValueList, '专有面积');
-		$this->multiReplace($roomAreaMin, ['平米']);
-		$roomAreaBalcony = $this->extractValue($houseTableKeyList, $houseTableValueList, '阳台面积');
-		$this->multiReplace($roomAreaMax, ['平米']);
-		$roomAreaMax = $roomAreaMin + $roomAreaBalcony;
-		//单价
-		$perPrice = $this->computeOnlyOneData($htmlContent, '.danjia span');
-
-		//生活相关
-		$life = $this->lifeMap($id);
-		$bankContent = $this->computeBank($life);
-		$hospitalContent = $this->computeHospital($life);
-
-		//购物
-		$shopping = $this->shoppingMap($id);
-		$shoppingContent = $this->computeShopping($shopping);
-		//学校
-		$edu = $this->eduMap($id);
-		$eduContent = $this->computeEdu($edu);
-		//交通
-		$trans = $this->subwayMap($id);
-		$transContent = $this->computeTrans($trans);
-		//构造数据
-		$houseItem = array(
-			'file'                     => '',
-			'weight'                   => '',
-			'room_name'                => $roomName,
-			'room_desc'                => $roomDesc,
-			'room_rate'                => '',
-			'rental_rate'              => '',
-			'downpayment_rate'         => '',
-			'loan_payments_rate'       => '',
-			'annual_net_earnings_rate' => '',
-			'apartment_type'           => array($apartmentTypeConverted),
-			'invest_purpose'           => array(),
-			'property_right'           => $propertyRight,
-			'price_per_sqm'            => $perPrice,
-			'room_area_min'            => $roomAreaMin,
-			'room_area_max'            => $roomAreaMax,
-			'room_standard'            => $roomStandard,
-			'handing_in_date'          => $handingInDate,
-			'payment_deposit'          => '',
-			'f_id'                     => '',
-			'promotion_img'            => $img,
-			'banner_infos'             => $bannerInfos,
-			'is_online'                => 1,
-			'status'                   => '0',
-			'process_id'               => '',
-			'project_leader'           => '',
-			'room_country'             => '20000034',
-			'city_id'                  => $cityId,
-			'room_zone'                => $roomZone,
-			'currency_gb'              => 'JPY',
-			'base_info_tags'           => array(),
-			'house_info_tags'          => array(),
-			'house_layout_infos'       => array(
-				array(
-					'img'      => $layoutImg,
-					'layout'   => $layoutName,
-					'floorage' => $layoutArea,
-					'price'    => $price,
-					'tag'      => array(),
-				),
-			),
-			'house_static_map'         => '',
-			'location_round'           => array(
-				'school'        => $eduContent,
-				'restaurant'    => '',
-				'shopping_mall' => $shoppingContent,
-				'hospital'      => $hospitalContent,
-				'bank'          => $bankContent,
-				'bus_station'   => $transContent,
-				'hotel'         => '',
-			),
-			'purchase_process'         => array(),
-			'full_trading_period'      => array(),
-			'full_holding_period'      => array(),
-			'loan_rate_max'            => '请选择最高比例',
-			'loan_year_limit'          => '请选择最高比例',
-			'loan_trading_period'      => array(),
-			'loan_holding_period'      => array(),
-			'project_intro'            => '',
-			'room_price_total'         => $price,
-			'join_assess'              => '1',
-			'promotion_video'          => '',
-			'vr_link'                  => '',
-			'video_pro'                => '',
-			'project_news'             => '',
-		);
-
-		//记录图片
-		$this->doImage($id, [$img, $layoutImg]);
-		$bannerInfosImgList = array_column($bannerInfos, 'img');
-		$this->doImage($id, $bannerInfosImgList);
-		//保存解析内容
-		$this->doParse($id, $houseItem);
-		return $houseItem;
 	}
 
 

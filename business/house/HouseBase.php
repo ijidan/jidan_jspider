@@ -82,6 +82,42 @@ abstract class HouseBase extends BaseCrawl {
 		return $id;
 	}
 
+	/**
+	 * 获取查询字符串
+	 * @param $url
+	 * @return mixed
+	 */
+	public function getQuery($url){
+		$urlList=parse_url($url);
+		return $urlList['query'];
+	}
+	/**
+	 * 转换查询字符串
+	 * @param $query
+	 * @return array
+	 */
+	public function convertUrlQuery($query) {
+		$queryParts = explode('&', $query);
+		$params = array();
+		foreach ($queryParts as $param) {
+			$item = explode('=', $param);
+			$params[$item[0]] = $item[1];
+		}
+		return $params;
+	}
+
+	/**
+	 * 获取参数值
+	 * @param $url
+	 * @param $key
+	 * @return mixed|string
+	 */
+	public function getQueryValue($url,$key){
+		$query=$this->getQuery($url);
+		$queryList=$this->convertUrlQuery($query);
+		return isset($queryList[$key])?$queryList[$key]:'';
+	}
+
 
 	/**
 	 * 开始爬取
@@ -129,8 +165,7 @@ abstract class HouseBase extends BaseCrawl {
 	public function crawlContent() {
 		$this->info('总页数抓取开始');
 		$firstListPage = $this->computeListPageUrl(1);
-		//		$pageCnt = $this->crawlPageCnt($firstListPage);
-		$pageCnt = 1;
+		$pageCnt = $this->crawlPageCnt($firstListPage);
 		$this->info("总页数抓取结束：一共 {$pageCnt} 页");
 		if ($pageCnt) {
 			for ($i = 1; $i <= $pageCnt; $i++) {
