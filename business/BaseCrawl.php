@@ -15,7 +15,7 @@ use Lib\Net\BaseService;
 use Lib\Util\Config;
 use Lib\Util\ExcelUtil;
 use Model\Spider\ContentCache;
-use Model\Spider\HouseEval;
+use Model\Spider\HouseEvaluate;
 use Model\Spider\IdMap;
 use Model\Spider\IdParse;
 use Model\Spider\ImageMap;
@@ -949,7 +949,7 @@ abstract class BaseCrawl {
 	 * @throws ErrorException
 	 */
 	public function writeHouseEval($originId, $data) {
-		$record = HouseEval::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
+		$record = HouseEvaluate::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
 		if (!$record) {
 			$insData = [
 				'f_unique_id'         => $this->uniqueId,
@@ -972,7 +972,7 @@ abstract class BaseCrawl {
 				'f_create_time'       => time(),
 				'f_update_time'       => 0,
 			];
-			HouseEval::insert($insData);
+			HouseEvaluate::insert($insData);
 			$this->info('数据写入完毕：'.$originId);
 		} else {
 			$updateData = [
@@ -996,7 +996,7 @@ abstract class BaseCrawl {
 				'f_update_time'       => time(),
 			];
 			$id = $record['f_id'];
-			HouseEval::update($updateData, 'f_id=' . $id);
+			HouseEvaluate::update($updateData, 'f_id=' . $id);
 			$this->info('数据更新完毕：'.$originId);
 
 		}
