@@ -4,6 +4,7 @@ namespace Business\House;
 
 use Business\BaseCrawl;
 use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Cookie\SetCookie;
 use Lib\Util\Config;
 
 
@@ -132,7 +133,21 @@ abstract class HouseBase extends BaseCrawl {
 	 */
 	public function getGuzzleHttpConfig() {
 		$cookies = Config::getConfigItem('cookie/' . $this->business);
-		$cookieJar = CookieJar::fromArray([$cookies['name'] => $cookies['value']], $cookies['domain']);
+		$reBuildCookies=[];
+		foreach ($cookies as $idx=>$cookie){
+			if(isset($cookie['name'])){
+				$reBuildCookies[$idx]=$cookie;
+			}else{
+				$cookieStr=$cookie[0];
+				$cookieStrList=explode(';',$cookieStr);
+				foreach ($cookieStrList as $item){
+					$setCookie = SetCookie::fromString($item);
+					$newCookieItem=['name'=> $setCookie->getName(),'value'=> $setCookie->getValue()];
+					$reBuildCookies[$idx]=$newCookieItem;
+				}
+			}
+		}
+		$cookieJar = CookieJar::fromArray($reBuildCookies,'');
 		$guzzleConfig = [
 			'cookies' => $cookieJar,
 		];
@@ -171,10 +186,11 @@ abstract class HouseBase extends BaseCrawl {
 			for ($i = 1; $i <= $pageCnt; $i++) {
 				$listPageUrl = $this->computeListPageUrl($i);
 				//随机等待多少秒
-				//$this->waitRandomMS();
+				$this->waitRandomMS();
 				try {
 					$allId = $this->crawAllId($listPageUrl);
 				} catch (\Exception $e) {
+					$this->error($e->getMessage());
 					continue;
 				}
 				$this->info("列表抓取开始：第 {$i} 页");

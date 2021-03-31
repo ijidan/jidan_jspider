@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fb08cd5d032565196674d6d7438a939",
+    "content-hash": "6496010968f6b217bcda24445137254f",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -1338,6 +1338,80 @@
                 "tags"
             ],
             "time": "2020-06-30T18:43:34+00:00"
+        },
+        {
+            "name": "jeremykendall/php-domain-parser",
+            "version": "4.0.3-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykendall/php-domain-parser.git",
+                "reference": "026a459bb2d32b0352731b5cb525f2c1d2b9d673"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykendall/php-domain-parser/zipball/026a459bb2d32b0352731b5cb525f2c1d2b9d673",
+                "reference": "026a459bb2d32b0352731b5cb525f2c1d2b9d673",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-intl": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.11",
+                "jeremykendall/debug-die": "0.0.1.*",
+                "mikey179/vfsstream": "~1.6",
+                "phing/phing": "^2.13",
+                "phpunit/phpunit": "~4.8"
+            },
+            "bin": [
+                "bin/parse",
+                "bin/update-psl"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Pdp\\": "src/"
+                },
+                "files": [
+                    "src/pdp-parse-url.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Kendall",
+                    "homepage": "http://about.me/jeremykendall",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/jeremykendall/php-domain-parser/graphs/contributors"
+                }
+            ],
+            "description": "Public Suffix List based URL parsing implemented in PHP.",
+            "homepage": "https://github.com/jeremykendall/php-domain-parser",
+            "keywords": [
+                "Public Suffix List",
+                "domain parsing",
+                "url parsing"
+            ],
+            "support": {
+                "issues": "https://github.com/jeremykendall/php-domain-parser/issues",
+                "source": "https://github.com/jeremykendall/php-domain-parser"
+            },
+            "time": "2017-09-28T15:52:11+00:00"
         },
         {
             "name": "layershifter/tld-database",
@@ -2988,6 +3062,83 @@
                 "video processing"
             ],
             "time": "2020-03-29T09:57:10+00:00"
+        },
+        {
+            "name": "php-webdriver/webdriver",
+            "version": "1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-webdriver/php-webdriver.git",
+                "reference": "cd9290b95b7651d495bd69253d6e3ef469a7f211"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-webdriver/php-webdriver/zipball/cd9290b95b7651d495bd69253d6e3ef469a7f211",
+                "reference": "cd9290b95b7651d495bd69253d6e3ef469a7f211",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-zip": "*",
+                "php": "^5.6 || ~7.0 || ^8.0",
+                "symfony/polyfill-mbstring": "^1.12",
+                "symfony/process": "^2.8 || ^3.1 || ^4.0 || ^5.0"
+            },
+            "replace": {
+                "facebook/webdriver": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "ondram/ci-detector": "^2.1 || ^3.5 || ^4.0",
+                "php-coveralls/php-coveralls": "^2.4",
+                "php-mock/php-mock-phpunit": "^1.1 || ^2.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpunit/phpunit": "^5.7 || ^7 || ^8 || ^9",
+                "squizlabs/php_codesniffer": "^3.5",
+                "symfony/var-dumper": "^3.3 || ^4.0 || ^5.0"
+            },
+            "suggest": {
+                "ext-SimpleXML": "For Firefox profile creation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Facebook\\WebDriver\\": "lib/"
+                },
+                "files": [
+                    "lib/Exception/TimeoutException.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A PHP client for Selenium WebDriver. Previously facebook/webdriver.",
+            "homepage": "https://github.com/php-webdriver/php-webdriver",
+            "keywords": [
+                "Chromedriver",
+                "geckodriver",
+                "php",
+                "selenium",
+                "webdriver"
+            ],
+            "support": {
+                "issues": "https://github.com/php-webdriver/php-webdriver/issues",
+                "source": "https://github.com/php-webdriver/php-webdriver/tree/1.10.0"
+            },
+            "time": "2021-02-25T13:38:09+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -5025,7 +5176,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "jeremykendall/php-domain-parser": 15
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

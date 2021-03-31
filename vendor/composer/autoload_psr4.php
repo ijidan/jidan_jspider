@@ -60,6 +60,7 @@ return array(
     'GeoIp2\\' => array($vendorDir . '/geoip2/geoip2/src'),
     'GatewayWorker\\' => array($vendorDir . '/workerman/gateway-worker/src'),
     'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
+    'Facebook\\WebDriver\\' => array($vendorDir . '/php-webdriver/webdriver/lib'),
     'Elasticsearch\\' => array($vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch'),
     'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
     'Dflydev\\FigCookies\\' => array($vendorDir . '/dflydev/fig-cookies/src/Dflydev/FigCookies'),

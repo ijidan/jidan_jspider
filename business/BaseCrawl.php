@@ -4,6 +4,10 @@ namespace Business;
 
 use ErrorException;
 use Exception;
+use Facebook\WebDriver\Chrome\ChromeOptions;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Facebook\WebDriver\Remote\WebDriverCapabilityType;
 use Gregwar\Cache\Cache;
 use Lib\BaseLogger;
 use Lib\BaseModel;
@@ -11,6 +15,7 @@ use Lib\Net\BaseService;
 use Lib\Util\Config;
 use Lib\Util\ExcelUtil;
 use Model\Spider\ContentCache;
+use Model\Spider\HouseEval;
 use Model\Spider\IdMap;
 use Model\Spider\IdParse;
 use Model\Spider\ImageMap;
@@ -154,6 +159,24 @@ abstract class BaseCrawl {
 	}
 
 	/**
+	 * 解析header
+	 * @param $headerStr
+	 * @return array
+	 */
+	protected function parseHeader($headerStr) {
+		$headersArr = [];
+		$headersStrArr = explode("\r\n", $headerStr);
+		foreach ($headersStrArr as $headerItem) {
+			$headerItemArr = explode(': ', $headerItem);
+			list($key, $value) = $headerItemArr;
+			$key = trim($key);
+			$value = trim($value);
+			$headersArr[$key] = $value;
+		}
+		return $headersArr;
+	}
+
+	/**
 	 * 计算平台
 	 */
 	private function computePlatform() {
@@ -282,15 +305,15 @@ abstract class BaseCrawl {
 	 */
 	public function writeDb($fileName, $content) {
 		$record = ContentCache::findOne('f_unique_id=? and f_key=?', [$this->uniqueId, $fileName]);
-		if($record){
+		if ($record) {
 			$insData = [
 				'f_unique_id'   => $this->uniqueId,
 				'f_key'         => $fileName,
 				'f_content'     => $content,
 				'f_update_time' => time()
 			];
-			ContentCache::update($insData,'f_id='.$record['f_id']);
-		}else{
+			ContentCache::update($insData, 'f_id=' . $record['f_id']);
+		} else {
 			$insData = [
 				'f_unique_id'   => $this->uniqueId,
 				'f_key'         => $fileName,
@@ -485,19 +508,19 @@ abstract class BaseCrawl {
 	/**
 	 * 图片上传
 	 */
-	public function uploadImage(){
+	public function uploadImage() {
 		$dataList = ImageMap::find("f_unique_id=? and f_new_img_url=''", [$this->uniqueId]);
 		if ($dataList) {
 			foreach ($dataList as $data) {
-				$id=$data['f_id'];
-				$originUrl=$data['f_origin_img_url'];
-				$toUpUrl=$this->cleanImage($originUrl);
+				$id = $data['f_id'];
+				$originUrl = $data['f_origin_img_url'];
+				$toUpUrl = $this->cleanImage($originUrl);
 				try {
 					$newUrl = $this->uploadFile2Cache($toUpUrl, $this->config);
-					ImageMap::update(['f_new_img_url'=> $newUrl],'f_id='.$id);
+					ImageMap::update(['f_new_img_url' => $newUrl], 'f_id=' . $id);
 				} catch (\Exception $e) {
 				}
-				$this->info('图片上传结束：'.$id);
+				$this->info('图片上传结束：' . $id);
 
 			}
 		}
@@ -512,7 +535,7 @@ abstract class BaseCrawl {
 	 */
 	protected function uploadFile2Cache($file, array $config = []) {
 		//		$data = '{"originalName":"","name":"c66cc3e614ffd868325adaca7d560504.png","url":"images\/release\/c\/4\/c66cc3e614ffd868325adaca7d560504.png","real_url":"https:\/\/cache.hinabian.com\/images\/release\/c\/4\/c66cc3e614ffd868325adaca7d560504.png","size":512541,"type":".png","state":"SUCCESS"}';
-		$rsp = BaseService::sendFile($this->imgUploadURL, $file,'file',$config);
+		$rsp = BaseService::sendFile($this->imgUploadURL, $file, 'file', $config);
 		if ($rsp->fail()) {
 			return '';
 		}
@@ -551,9 +574,9 @@ abstract class BaseCrawl {
 	 * @return string
 	 * @throws ErrorException
 	 */
-	public function getNewImageUrl($originUrl){
+	public function getNewImageUrl($originUrl) {
 		$record = ImageMap::findOne('f_unique_id=? and f_origin_img_url=?', [$this->uniqueId, $originUrl]);
-		return $record? $record['f_new_img_url']:'';
+		return $record ? $record['f_new_img_url'] : '';
 	}
 
 
@@ -897,7 +920,12 @@ abstract class BaseCrawl {
 	 */
 	protected function multiReplace(&$content, array $replacementList) {
 		foreach ($replacementList as $r) {
-			$content = str_replace($r, '', $content);
+			if ($r) {
+				$content = str_replace($r, '', $content);
+			} else {
+				$content = trim($content);
+			}
+
 		}
 	}
 
@@ -908,11 +936,73 @@ abstract class BaseCrawl {
 	 * @return string
 	 * @throws \PHPExcel_Exception
 	 */
-	protected function writeExcel(array $headers,array $dataList){
-		$fileName=$this->uniqueId.'_'.date('ymdHis');
-		$file=ExcelUtil::genExcel($fileName,$headers,$dataList);
+	protected function writeExcel(array $headers, array $dataList) {
+		$fileName = $this->uniqueId . '_' . date('ymdHis');
+		$file = ExcelUtil::genExcel($fileName, $headers, $dataList);
 		return $file;
 	}
+
+	/**
+	 * 海房评估
+	 * @param $originId
+	 * @param $data
+	 * @throws ErrorException
+	 */
+	public function writeHouseEval($originId, $data) {
+		$record = HouseEval::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
+		if (!$record) {
+			$insData = [
+				'f_unique_id'         => $this->uniqueId,
+				'f_origin_id'         => $originId,
+				'f_origin_parent_id'  => $data['f_origin_parent_id'],
+				'f_title'             => $data['f_title'],
+				'f_province'         => $data['f_province'],
+				'f_city'             => $data['f_city'],
+				'f_address'          => $data['f_address'],
+				'f_full_address'     => $data['f_full_address'],
+				'f_post_code'         => $data['f_post_code'],
+				'f_house_type'        => $data['f_house_type'],
+				'f_house_area'        => $data['f_house_area'],
+				'f_house_unit'        => $data['f_house_unit'],
+				'f_currency_symbol'   => $data['f_currency_symbol'],
+				'f_price'             => $data['f_price'],
+				'f_bedroom_num'       => $data['f_bedroom_num'],
+				'f_bathroom_num'      => $data['f_bathroom_num'],
+				'f_parking_space_num' => $data['f_parking_space_num'],
+				'f_create_time'       => time(),
+				'f_update_time'       => 0,
+			];
+			HouseEval::insert($insData);
+			$this->info('数据写入完毕：'.$originId);
+		} else {
+			$updateData = [
+				'f_unique_id'         => $this->uniqueId,
+				'f_origin_id'         => $originId,
+				'f_origin_parent_id'  => $data['f_origin_parent_id'],
+				'f_title'             => $data['f_title'],
+				'f_province'         => $data['f_province'],
+				'f_city'             => $data['f_city'],
+				'f_address'          => $data['f_address'],
+				'f_full_address'     => $data['f_full_address'],
+				'f_post_code'         => $data['f_post_code'],
+				'f_house_type'        => $data['f_house_type'],
+				'f_house_area'        => $data['f_house_area'],
+				'f_house_unit'        => $data['f_house_unit'],
+				'f_currency_symbol'   => $data['f_currency_symbol'],
+				'f_price'             => $data['f_price'],
+				'f_bedroom_num'       => $data['f_bedroom_num'],
+				'f_bathroom_num'      => $data['f_bathroom_num'],
+				'f_parking_space_num' => $data['f_parking_space_num'],
+				'f_update_time'       => time(),
+			];
+			$id = $record['f_id'];
+			HouseEval::update($updateData, 'f_id=' . $id);
+			$this->info('数据更新完毕：'.$originId);
+
+		}
+	}
+
+
 	/**
 	 *获取分布式ID
 	 * @param BaseModel $cls
@@ -936,5 +1026,30 @@ abstract class BaseCrawl {
 		];
 		$cls::insert($insData);
 		return $nextId;
+	}
+
+	/**
+	 * 获取数据
+	 * @param $url
+	 * @return RemoteWebDriver
+	 * @throws Exception
+	 */
+	public function driverGet($url) {
+		$proxy = 'tcp://192.168.185.33:8888';
+		$serverUrl = 'http://localhost:4444';
+		$options = new ChromeOptions();
+		$options->addArguments(['-headless', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage']);
+		//参数
+		$capabilitites = DesiredCapabilities::chrome();
+		$capabilitites->setCapability(ChromeOptions::CAPABILITY, $options);
+		$capabilitites->setCapability(WebDriverCapabilityType::PROXY, [
+			'proxyType' => 'manual',
+			'httpProxy' => $proxy,
+			'sslProxy'  => $proxy,
+		]);
+		$driver = RemoteWebDriver::create($serverUrl, $capabilitites);
+		$driver->get($url);
+		return $driver;
+
 	}
 }

@@ -15,7 +15,7 @@ class HouseSummary {
 	private $room_zone;//区域,
 	private $base_info_tags;//基础信息标签,
 	private $room_rate;//近一年房价涨幅,
-	private $rental_rate;//年均租金,
+	private $rental_rate;//年均租金
 	private $downpayment_rate;//首付款比率,
 	private $loan_payments_rate;//贷款首付比率,
 	private $currency_gb;//币种,

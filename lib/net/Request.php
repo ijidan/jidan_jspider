@@ -5,8 +5,13 @@ namespace Lib\Net;
 use App\Models\Queue;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Cookie\SetCookie;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\RequestOptions;
 use Lib\BaseLogger;
 use Lib\Util\UuidUtil;
+use Pdp\Parser;
+use Pdp\PublicSuffixListManager;
 use SplFileInfo;
 
 /**
@@ -24,6 +29,7 @@ class Request {
 	private $cacheKey = "";
 	private $cacheTTL = 1;
 	private $startTime = 0;
+
 
 	/** @var \Monolog\Logger|void 单例 */
 	private $logger = null;
@@ -44,10 +50,13 @@ class Request {
 	 * @var array
 	 */
 	private $guzzleHttpConfig = array(
-		'timeout' => 5,                     //超时时间(秒)
-		'verify'  => false,
-		'proxy'   => [
+		RequestOptions::TIMEOUT         => 30,                     //超时时间(秒)
+		RequestOptions::VERIFY          => false,
+		RequestOptions::ALLOW_REDIRECTS => true,
+		RequestOptions::HTTP_ERRORS     => true,
+		RequestOptions::PROXY           => [
 			'http' => 'tcp://172.16.1.82:8888',
+			'https' => 'tcp://172.16.1.82:8888',
 		],
 	);
 
@@ -56,6 +65,13 @@ class Request {
 	 * @var array
 	 */
 	private $customConfig = array();
+
+
+	/**
+	 * 跟踪数据
+	 * @var array
+	 */
+	private $traceData=array();
 
 	/**
 	 * 配置文件
@@ -185,49 +201,66 @@ class Request {
 		}
 		*/
 
-		$headers = $this->computeHeaders();
-		$clientConfig = $headers + $this->guzzleHttpConfig;
+		//合并
+		$this->mergeHeaders();;
+		$clientConfig = $this->guzzleHttpConfig;
 		if ($this->method == self::METHOD_POST_JSON) {
 			$clientConfig['headers']['Content-Type'] = 'application/json';
 		}
 		$this->startTime = microtime(true);
 		$httpClient = new Client($clientConfig);
+		$rsp = null;
+		$cookieDomain = $this->getCookieDomain();
+		$cookieJar = CookieJar::fromArray($_COOKIE, $cookieDomain);
+
+		//请求
 		try {
 			switch ($this->method) {
 				case self::METHOD_GET:
+					$config = ['cookies' => $cookieJar,];
 					$link = $this->params ? $this->url . "?" . http_build_query($this->params) : $this->url;
-					$rsp = $httpClient->get($link, []);
+					$rsp = $httpClient->get($link, $config);
 					break;
 				case self::METHOD_POST_JSON:
 				case self::METHOD_POST:
-					$config = ['body' => \json_encode($this->params)];
+					$config = ['cookies' => $cookieJar, 'body' => \json_encode($this->params)];
 					$rsp = $httpClient->post($this->url, $config);
 					break;
 				case self::METHOD_PUT:
-					$config = ['body' => \json_encode($this->params)];
+					$config = ['cookies' => $cookieJar, 'body' => \json_encode($this->params)];
 					$rsp = $httpClient->put($this->url, $config);
 			}
 			/** @var \GuzzleHttp\Psr7\Response $rsp */
 			$response = $this->handleResponse($rsp);
-		} catch (\Exception $e) {
+		} catch (RequestException  $e) {
 			$msg = $e->getMessage();
-			//记录日志
-			$this->addLog(0, "", "请求异常" . $msg);
-			$response = new Response(RetCode::UNKNOWN, $msg, []);
+			if($e->hasResponse()){
+				$rsp=$e->getResponse();
+				$response=$this->handleResponse($rsp,$msg);
+			}else{
+				//记录日志
+				$this->addLog(0, "", "请求异常" . $msg);
+				$response = new Response(RetCode::UNKNOWN, $msg, []);
+			}
 			//发送邮件
 			//$this->sendRequestExceptionMail($msg);
 		}
 		return $response;
 	}
 
+
+
+
 	/**
 	 * 处理响应
 	 * @param \GuzzleHttp\Psr7\Response $rsp
+	 * @param string $msg
 	 * @return Response
 	 */
-	private function handleResponse($rsp) {
+	private function handleResponse($rsp,$msg='') {
+		$this->rpsWriteCookie($rsp);
 		$statusCode = $rsp->getStatusCode();
-		$message = $rsp->getReasonPhrase();
+		$message = $msg ?:$rsp->getReasonPhrase();
 		if ($statusCode != Response::HTTP_STATUS_CODE_SUCCESS) {
 			//记录日志
 			$this->addLog($statusCode, "", $message);
@@ -258,7 +291,29 @@ class Request {
 				$response = new Response(RetCode::SUCCESS, '非JSON格式', $contents, $message);
 			}
 		}
+		//header处理
+		$rspHeaders=$rsp->getHeaders();
+		$dc=DataContainer::getInstance();
+		$dc->setData('headers',$rspHeaders);
+		//日志
+		$this->writeDebugLog($rspHeaders,'rsp');
 		return $response;
+	}
+
+	/**
+	 * 回写cookie
+	 * @param $response
+	 */
+	private function rpsWriteCookie($response) {
+		/** @var \GuzzleHttp\Psr7\Response $response */
+		//cookie处理
+		$cookies = $response->getHeader('Set-Cookie');
+		if ($cookies) {
+			foreach ($cookies as $cookie) {
+				$setCookie = SetCookie::fromString($cookie);
+				\setcookie($setCookie->getName(), $setCookie->getValue(), $setCookie->getExpires(), $setCookie->getPath(), $setCookie->getDomain(), $setCookie->getSecure(), $setCookie->getHttpOnly());
+			}
+		}
 	}
 
 	/**
@@ -429,17 +484,50 @@ EOF;
 	}
 
 	/**
+	 * 合并header
+	 */
+	private function mergeHeaders(){
+		$dc=DataContainer::getInstance();
+		$headers=$dc->getData('headers');
+		$guzzleHeaders=$headers ?$headers:isset($this->guzzleHttpConfig['headers'])?$this->guzzleHttpConfig['headers']:[];
+		$this->guzzleHttpConfig['headers']=$guzzleHeaders;
+
+		$this->writeDebugLog($guzzleHeaders,'req');
+
+//		$headers = $this->computeHeaders();
+//		if($headers){
+//			$guzzleHeaders=isset($this->guzzleHttpConfig['headers'])?$this->guzzleHttpConfig['headers']:[];
+//			foreach ($headers as $key=>$v){
+//				$guzzleHeaders[$key]=$v;
+//			}
+//			$this->guzzleHttpConfig['headers']=$guzzleHeaders;
+//		}
+
+	}
+	/**
 	 * 计算header
 	 * @return array
 	 */
 	private function computeHeaders() {
 		$urlArr = parse_url($this->url);
 		$host = $urlArr['host'];
+
 		$server['User-Agent'] = self::genRandomUA();
-		$server['referer'] = $host;
+		//$server['referer'] = $host;
 		//$server['client-ip']=get_ip();
-		$headers = ["headers" => $server];
-		return $headers;
+		return $server;
+	}
+
+	/**
+	 * 获取域名
+	 * @return mixed
+	 */
+	private function getCookieDomain() {
+		$pslManager = new PublicSuffixListManager();
+		$parser = new Parser($pslManager->getList());
+		$url = $parser->parseUrl($this->url);
+		$regDomain = $url->getHost()->getRegisterableDomain();
+		return $regDomain;
 	}
 
 	/**
@@ -453,6 +541,17 @@ EOF;
 		} catch (\Exception $e) {
 			return '';
 		}
+	}
+
+	/**
+	 * 写调试日志
+	 * @param $message
+	 * @param string $type
+	 */
+	private function writeDebugLog($message,$type='req'){
+		$_message=is_array($message)?\json_encode($message):$message;
+		$msg=date('Y-m-d H:i:s').' '.$type.'       '.$_message;
+		file_put_contents('/tmp/jidan.log',$msg,FILE_APPEND);
 	}
 
 }

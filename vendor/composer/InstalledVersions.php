@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '3b0cf48d95d5899a7f1b77a6a731712cadfe19dd',
+    'reference' => 'bd812280d3c8da2368a661748cb32f4de34b4ca7',
     'name' => 'jidan/j-spider',
   ),
   'versions' => 
@@ -123,6 +123,13 @@ private static $installed = array (
       array (
       ),
       'reference' => '6ba9a777870ab49f417e703229d53931ed40fd7a',
+    ),
+    'facebook/webdriver' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '*',
+      ),
     ),
     'geoip2/geoip2' => 
     array (
@@ -232,6 +239,15 @@ private static $installed = array (
       ),
       'reference' => '3c15e353b9bb1252201c73394bb8390b573a751d',
     ),
+    'jeremykendall/php-domain-parser' => 
+    array (
+      'pretty_version' => '4.0.3-alpha',
+      'version' => '4.0.3.0-alpha',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '026a459bb2d32b0352731b5cb525f2c1d2b9d673',
+    ),
     'jidan/j-spider' => 
     array (
       'pretty_version' => 'dev-master',
@@ -239,7 +255,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '3b0cf48d95d5899a7f1b77a6a731712cadfe19dd',
+      'reference' => 'bd812280d3c8da2368a661748cb32f4de34b4ca7',
     ),
     'layershifter/tld-database' => 
     array (
@@ -465,6 +481,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '4175c02b7d9f7e1a02cec2ba73474266ba2c5fa1',
+    ),
+    'php-webdriver/webdriver' => 
+    array (
+      'pretty_version' => '1.10.0',
+      'version' => '1.10.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cd9290b95b7651d495bd69253d6e3ef469a7f211',
     ),
     'phpmailer/phpmailer' => 
     array (

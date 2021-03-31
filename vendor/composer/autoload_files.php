@@ -78,5 +78,7 @@ return array(
     'aa53dcba601214d17ad405b7c291b7e8' => $vendorDir . '/markbaker/matrix/classes/src/operations/multiply.php',
     '75c79eb1b25749b05a47976f32b0d8a2' => $vendorDir . '/markbaker/matrix/classes/src/operations/divideby.php',
     '6ab8ad87a734f276a6bcd5a0fe1289be' => $vendorDir . '/markbaker/matrix/classes/src/operations/divideinto.php',
+    '50b81ffc01da30f98e463592787d7917' => $vendorDir . '/jeremykendall/php-domain-parser/src/pdp-parse-url.php',
     '98ac7ebbcd4b271b4f101d3af2543920' => $vendorDir . '/layershifter/tld-extract/src/static.php',
+    '2a3c2110e8e0295330dc3d11a4cbc4cb' => $vendorDir . '/php-webdriver/webdriver/lib/Exception/TimeoutException.php',
 );

@@ -49,15 +49,6 @@ class DomainAU extends HouseBase {
 		return $url;
 	}
 
-	/**
-	 * 计算详情页URL
-	 * @param $id
-	 * @return mixed
-	 */
-	public function computeDetailPageUrl($id) {
-		$url = $this->baseUrl . "fang/{$id}";
-		return $url;
-	}
 
 	/**
 	 * 爬取总数
@@ -150,6 +141,7 @@ class DomainAU extends HouseBase {
 	/**
 	 * 生成EXCEL
 	 * @return bool
+	 * @throws \ErrorException
 	 */
 	public function genExcel() {
 		$dataList = IdParse::find('f_unique_id=?', [$this->uniqueId]);
@@ -206,6 +198,8 @@ class DomainAU extends HouseBase {
 				//户型处理
 				$features = $listingModel['features'];
 				$features['price'] = $listingModel['price'];
+
+				pr($features,1);
 				$layoutListInfos = [$features];
 			}
 			$mapItem = [
@@ -249,4 +243,12 @@ class DomainAU extends HouseBase {
 	}
 
 
+	/**
+	 * 计算详情页URL
+	 * @param $id
+	 * @return mixed
+	 */
+	public function computeDetailPageUrl($id) {
+		// TODO: Implement computeDetailPageUrl() method.
+	}
 }
