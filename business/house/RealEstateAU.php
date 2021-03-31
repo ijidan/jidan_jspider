@@ -429,7 +429,6 @@ EOF;
 				'f_bathroom_num'      => $bathroom,
 				'f_parking_space_num' => $parkingSpace,
 			];
-			pr($data, 1);
 			$this->writeHouseEval($childId, $data);
 
 		}

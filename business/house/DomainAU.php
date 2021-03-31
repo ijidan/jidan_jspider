@@ -167,14 +167,8 @@ class DomainAU extends HouseBase {
 			//区分类型
 			if ($listingType == 'project') {
 				$projectName = $listingModel['projectName'];
-				$address = $listingModel['address'];
-				$postCode = $address['postcode'];
-
-				$displayAddress = $listingModel['displayAddress'];
-
 				//户型处理
 				$childListingIds=$listingModel['childListingIds'];
-				$layoutListInfos = [];
 				foreach ($childListingIds as $childId){
 					if(isset($dataList[$childId])){
 						$itemContent=$dataList[$childId]['f_parse_content'];
@@ -182,9 +176,46 @@ class DomainAU extends HouseBase {
 						$itemListingModel=$itemDetail['listingModel'];
 						unset($itemListingModel['skeletonImages'], $itemListingModel['branding']);
 
+						$addressInfo = $itemListingModel['address'];
+						$postCode = $addressInfo['postcode'];
+						$province=$addressInfo['state'];
+						$city=$addressInfo['suburb'];
+						$address=$addressInfo['street'];
+
+						$fullAddress = $address . ' ' . $city . ' ' . $province . ' ' . $postCode;
+
+						$price = $itemListingModel['price'];
+
 						$features = $itemListingModel['features'];
-						$features['price'] = $itemListingModel['price'];
-						array_push($layoutListInfos, $features);
+						$propertyType=$features['propertyType'];
+						$propertySizes=$features['landSize'];
+						$sizeUnit=$features['landUnit'];
+						$bedrooms=$features['beds'];
+						$bathroom=$features['baths'];
+						$parkingSpace=$features['parking'];
+
+
+						//写数据库
+						$data = [
+							'f_origin_id'         => $childId,
+							'f_origin_parent_id'  => $id,
+							'f_title'             => $projectName,
+							'f_post_code'         => $postCode,
+							'f_province'          => $province,
+							'f_city'              => $city,
+							'f_address'           => $address,
+							'f_full_address'      => $fullAddress,
+							'f_house_type'        => $propertyType,
+							'f_house_area'        => $propertySizes,
+							'f_house_unit'        => $sizeUnit,
+							'f_currency_symbol'   => '$',
+							'f_price'             => $price,
+							'f_bedroom_num'       => $bedrooms,
+							'f_bathroom_num'      => $bathroom,
+							'f_parking_space_num' => $parkingSpace,
+						];
+						$this->writeHouseEval($childId,$data);
+
 					}
 				}
 			} else {
@@ -192,53 +223,47 @@ class DomainAU extends HouseBase {
 					continue;
 				}
 				$projectName = $listingModel['price'];
-				$address = $listingModel['address'];
-				$postCode = $address['postcode'];
-				$displayAddress = $address['street'] . ' ' . $address['suburb'] . ' ' . $address['state'] . ' ' . $address['postcode'];
+				$addressInfo = $listingModel['address'];
+				$postCode = $addressInfo['postcode'];
+				$province=$addressInfo['state'];
+				$city=$addressInfo['suburb'];
+				$address=$addressInfo['street'];
+
+				$fullAddress = $address . ' ' . $city . ' ' . $province . ' ' . $postCode;
+
+				$price = $listingModel['price'];
 				//户型处理
 				$features = $listingModel['features'];
-				$features['price'] = $listingModel['price'];
+				$propertyType=$features['propertyType'];
+				$propertySizes=$features['landSize'];
+				$sizeUnit=$features['landUnit'];
+				$bedrooms=$features['beds'];
+				$bathroom=$features['baths'];
+				$parkingSpace=$features['parking'];
 
-				pr($features,1);
-				$layoutListInfos = [$features];
+				//写数据库
+				$data = [
+					'f_origin_id'         => $id,
+					'f_origin_parent_id'  => 0,
+					'f_title'             => $projectName,
+					'f_post_code'         => $postCode,
+					'f_province'          => $province,
+					'f_city'              => $city,
+					'f_address'           => $address,
+					'f_full_address'      => $fullAddress,
+					'f_house_type'        => $propertyType,
+					'f_house_area'        => $propertySizes,
+					'f_house_unit'        => $sizeUnit,
+					'f_currency_symbol'   => '$',
+					'f_price'             => $price,
+					'f_bedroom_num'       => $bedrooms,
+					'f_bathroom_num'      => $bathroom,
+					'f_parking_space_num' => $parkingSpace,
+				];
+
+				$this->writeHouseEval($id,$data);
 			}
-			$mapItem = [
-				'id'              => $id,
-				'project_name'    => $projectName,
-				//				'direction'       => '',
-				'post_code'       => $postCode,
-				'display_address' => $displayAddress,
-				'currency_gb'     => '$',
 
-				//				'property_right'  => '',
-				//				'price_per_sqm'   => '',
-				//				'room_standard'   => '',
-				//				'handing_in_date' => '',
-				'layout'          => $layoutListInfos ? \json_encode($layoutListInfos) : ''
-			];
-			array_push($map, $mapItem);
-		}
-
-		$headers = [
-			'Id',
-			'项目名称',
-			//			'朝向',
-			'邮政编号',
-			'地理位置',
-			'币种',
-			//'房屋单价',
-			//'物业类型',
-			//			'产权年限',
-			//			'项目均价',
-			//			'交房标准',
-			//			'交房时间（建造年份）',
-			'户型（房间数、洗浴室数量、停车位数量、房源类型、面积、价格）'
-		];
-		try {
-			$file = $this->writeExcel($headers, $map);
-			$this->success('excel 创建成功：' . $file);
-		} catch (\PHPExcel_Exception $e) {
-			$this->error('excel 创建失败!');
 		}
 	}
 
