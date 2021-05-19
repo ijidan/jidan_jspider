@@ -209,6 +209,7 @@ class KeUSNewHouse extends KeUSSecondHouse {
 
 				$index = $idx + 1;
 				$originId = sprintf('%s-%d', $id, $index);
+
 				$data = [
 					'f_origin_id'         => $originId,
 					'f_origin_parent_id'  => $id,
@@ -242,7 +243,7 @@ class KeUSNewHouse extends KeUSSecondHouse {
 					'f_spu_area'   => $houseAreaStr,
 					'f_tag'        => ''
 				];
-				$this->writeHouseEvalUS($id, $data);
+				$this->writeHouseEvalUS($originId, $data);
 			}
 		}
 	}
