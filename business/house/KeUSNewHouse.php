@@ -62,6 +62,8 @@ class KeUSNewHouse extends KeUSSecondHouse {
 		$url = $this->computeDetailPageUrl($id);
 		$htmlContent = $this->fetchContentFromDb($fileName, $url);
 
+		//标签
+		$houseTag = $this->computeData($htmlContent, '.title-box .tag');
 		//地址
 		$houseAddress = $this->computeOnlyOneData($htmlContent, '.address .content');
 		//价格
@@ -103,6 +105,7 @@ class KeUSNewHouse extends KeUSSecondHouse {
 		}
 		$houseItem = [
 			'house_address' => $houseAddress,
+			'house_tag'     => \join(',', $houseTag),
 			'spu_price'     => $spuPrice,
 			'spu_price_rmb' => $spuPriceRMB,
 			'house_info'    => $houseInfoMap,
@@ -139,7 +142,7 @@ class KeUSNewHouse extends KeUSSecondHouse {
 			$content = $data['f_parse_content'];
 			$detail = \json_decode($content, true);
 
-
+			$houseTag = $detail['house_tag'];
 			$houseAddress = $detail['house_address'];
 			$spuPrice = $detail['spu_price'];
 			$spuPriceRMB = $detail['spu_price_rmb'];
@@ -241,7 +244,7 @@ class KeUSNewHouse extends KeUSSecondHouse {
 					'f_spu_price'  => $priceStr,
 					'f_spu_layout' => $houseLayoutStr,
 					'f_spu_area'   => $houseAreaStr,
-					'f_tag'        => ''
+					'f_tag'        => $houseTag
 				];
 				$this->writeHouseEvalUS($originId, $data);
 			}
@@ -258,12 +261,17 @@ class KeUSNewHouse extends KeUSSecondHouse {
 		$priceList = array_column($houseLayout, 'house_price');
 		$priceRMBList = array_column($houseLayout, 'house_price_rmb');
 		$houseAreaList = array_column($houseLayout, 'house_area');
-
-		$houseLayout = \join(',', $houseLayoutList);
-		$price = min($priceList) . '-' . max($priceList);
-		$housePriceRMB = min($priceRMBList) . '-' . max($priceRMBList);
-		$houseArea = min($houseAreaList) . '-' . max($houseAreaList);
-
+		if (count($houseLayoutList) > 1) {
+			$houseLayout = \join(',', $houseLayoutList);
+			$price = min($priceList) . '-' . max($priceList);
+			$housePriceRMB = min($priceRMBList) . '-' . max($priceRMBList);
+			$houseArea = min($houseAreaList) . '-' . max($houseAreaList);
+		} else {
+			$houseLayout = $houseLayoutList[0];
+			$price = $priceList[0];
+			$housePriceRMB = $priceRMBList[0];
+			$houseArea = $houseAreaList[0];
+		}
 		return [$houseLayout, $price, $housePriceRMB, $houseArea];
 	}
 
