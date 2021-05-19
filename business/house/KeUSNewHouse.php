@@ -196,6 +196,7 @@ class KeUSNewHouse extends KeUSSecondHouse {
 			//数据
 			$houseName = $houseInfo['楼盘当地名称'];
 			$houseStandard = $houseInfo['装修标准'];
+			$this->multiReplaceInner($houseStandard,['\n','']);
 			$propertyInfo = $houseInfo['产权年限'];
 			$parkingSpace = $houseInfo['车位数量'];
 			$this->multiReplace($parkingSpace, ['个', '']);

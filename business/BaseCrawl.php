@@ -931,6 +931,21 @@ abstract class BaseCrawl {
 	}
 
 	/**
+	 * 内部替换
+	 * @param $content
+	 * @param array $replacementList
+	 * @param string $sep
+	 */
+	protected function multiReplaceInner(&$content, array $replacementList,$sep=','){
+		$contentList=\explode($sep,$content);
+		foreach ($contentList as &$item){
+			$this->multiReplace($item,$replacementList);
+		}
+		$content=\join($sep,$contentList);
+		$this->multiReplace($content,$replacementList);
+	}
+
+	/**
 	 * 生成EXCEL文件
 	 * @param array $headers
 	 * @param array $dataList
