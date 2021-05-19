@@ -31,6 +31,7 @@ class KeUSSecondHouse extends HouseBase {
 	protected $platformsSubDir = 'KeUSSecond';
 
 
+
 	/**
 	 * 获取平台
 	 * @return mixed
@@ -74,11 +75,20 @@ class KeUSSecondHouse extends HouseBase {
 		$dataList = $this->computeData($content, '.list-wrap dd h3 a', 'href');
 		$allIdList = [];
 		foreach ($dataList as $data) {
-			$id = str_replace('/homes/us/', '', $data);
-			$id = str_replace('.html', '', $id);
+			$id=$data;
+			$replaceList=$this->getReplaceList();
+			$this->multiReplace($id,$replaceList);
 			array_push($allIdList, $id);
 		}
 		return $allIdList;
+	}
+
+	/**
+	 * 获取过滤列表
+	 * @return array
+	 */
+	public function getReplaceList(){
+		return ['/homes/us/','.html'];
 	}
 
 
@@ -120,40 +130,7 @@ class KeUSSecondHouse extends HouseBase {
 		return $houseItem;
 	}
 
-	/**
-	 * 清理图片
-	 * @param $originUrl
-	 * @return string
-	 */
-	public function cleanImage($originUrl) {
-		return $originUrl;
-	}
 
-	/**
-	 * 计算所有子ID
-	 * @param array $dataList
-	 * @return array
-	 */
-	private function computeAllChildIds(array $dataList) {
-		$allChildIds = [];
-		foreach ($dataList as $data) {
-			$content = $data['f_parse_content'];
-			$detail = \json_decode($content, true);
-			$listingType = $detail['listingType'];
-			if (isset($detail['listingModel']['childListingIds'])) {
-				$childListingIds = $detail['listingModel']['childListingIds'];
-				if ($childListingIds) {
-					foreach ($childListingIds as $id) {
-						if (!in_array($allChildIds, $id)) {
-							array_push($allChildIds, $id);
-						}
-					}
-				}
-
-			}
-		}
-		return $allChildIds;
-	}
 
 	/**
 	 * 生成EXCEL
@@ -165,7 +142,6 @@ class KeUSSecondHouse extends HouseBase {
 			$this->warning('无数据');
 			return false;
 		}
-
 		//重组数据
 		foreach ($dataList as $data) {
 			$id = $data['f_origin_id'];
@@ -243,9 +219,6 @@ class KeUSSecondHouse extends HouseBase {
 				'f_tag'        => ''
 			];
 			$this->writeHouseEvalUS($id,$data);
-
-
-
 		}
 	}
 
@@ -258,5 +231,14 @@ class KeUSSecondHouse extends HouseBase {
 	public function computeDetailPageUrl($id) {
 		$url = $this->baseUrl . $id . '.html';
 		return $url;
+	}
+
+	/**
+	 * 图片整理
+	 * @param $originUrl
+	 * @return mixed
+	 */
+	public function cleanImage($originUrl) {
+		// TODO: Implement cleanImage() method.
 	}
 }
