@@ -1008,7 +1008,7 @@ abstract class BaseCrawl {
 	 * @param $data
 	 */
 	public function writeHouseEvalUS($originId, $data) {
-		$record = HouseEvaluate::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
+		$record = HouseEvaluateUS::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
 		$data = [
 			'f_unique_id'         => $this->uniqueId,
 			'f_origin_id'         => $originId,
