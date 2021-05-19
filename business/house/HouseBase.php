@@ -83,6 +83,19 @@ abstract class HouseBase extends BaseCrawl {
 		return $id;
 	}
 
+
+	/**
+	 * 提取数字
+	 * @param $pattern
+	 * @param $str
+	 * @return int|mixed
+	 */
+	public function extractNum($pattern,$str){
+		$re=preg_match($pattern,$str,$matches);
+		return $re ?$matches[1]:0;
+
+	}
+
 	/**
 	 * 获取查询字符串
 	 * @param $url

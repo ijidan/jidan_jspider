@@ -55,8 +55,8 @@ class Request {
 		RequestOptions::ALLOW_REDIRECTS => true,
 		RequestOptions::HTTP_ERRORS     => true,
 		RequestOptions::PROXY           => [
-			'http' => 'tcp://172.16.1.82:8888',
-			'https' => 'tcp://172.16.1.82:8888',
+			//'http' => 'tcp://127.0.0.1:8888',
+			//'https' => 'tcp://127.0.0.1:8888',
 		],
 	);
 

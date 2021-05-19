@@ -24,6 +24,6 @@ return [
 		'domain' => '.jspider.com'
 	],
 	'event_log_path'   => BASE_DIR . '/storage/events/',
-	'img_upload_url'   => 'http://imgupload.hinabian.com/image/save/',
+	'img_upload_url'   => 'https://operate.hinabian.com/file/image/saveWithOssLimit/size/5000',
 	'house_save_url'   => 'https://operate.hinabian.com/estate/home/save',
 ];

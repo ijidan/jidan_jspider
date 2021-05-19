@@ -16,6 +16,7 @@ use Lib\Util\Config;
 use Lib\Util\ExcelUtil;
 use Model\Spider\ContentCache;
 use Model\Spider\HouseEvaluate;
+use Model\Spider\HouseEvaluateUS;
 use Model\Spider\IdMap;
 use Model\Spider\IdParse;
 use Model\Spider\ImageMap;
@@ -946,7 +947,6 @@ abstract class BaseCrawl {
 	 * 海房评估
 	 * @param $originId
 	 * @param $data
-	 * @throws ErrorException
 	 */
 	public function writeHouseEval($originId, $data) {
 		$record = HouseEvaluate::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
@@ -956,10 +956,10 @@ abstract class BaseCrawl {
 				'f_origin_id'         => $originId,
 				'f_origin_parent_id'  => $data['f_origin_parent_id'],
 				'f_title'             => $data['f_title'],
-				'f_province'         => $data['f_province'],
-				'f_city'             => $data['f_city'],
-				'f_address'          => $data['f_address'],
-				'f_full_address'     => $data['f_full_address'],
+				'f_province'          => strtoupper($data['f_province']),
+				'f_city'              => $data['f_city'],
+				'f_address'           => $data['f_address'],
+				'f_full_address'      => $data['f_full_address'],
 				'f_post_code'         => $data['f_post_code'],
 				'f_house_type'        => $data['f_house_type'],
 				'f_house_area'        => $data['f_house_area'],
@@ -973,17 +973,17 @@ abstract class BaseCrawl {
 				'f_update_time'       => 0,
 			];
 			HouseEvaluate::insert($insData);
-			$this->info('数据写入完毕：'.$originId);
+			$this->info('数据写入完毕：' . $originId);
 		} else {
 			$updateData = [
 				'f_unique_id'         => $this->uniqueId,
 				'f_origin_id'         => $originId,
 				'f_origin_parent_id'  => $data['f_origin_parent_id'],
 				'f_title'             => $data['f_title'],
-				'f_province'         => $data['f_province'],
-				'f_city'             => $data['f_city'],
-				'f_address'          => $data['f_address'],
-				'f_full_address'     => $data['f_full_address'],
+				'f_province'          => strtoupper($data['f_province']),
+				'f_city'              => $data['f_city'],
+				'f_address'           => $data['f_address'],
+				'f_full_address'      => $data['f_full_address'],
 				'f_post_code'         => $data['f_post_code'],
 				'f_house_type'        => $data['f_house_type'],
 				'f_house_area'        => $data['f_house_area'],
@@ -997,7 +997,69 @@ abstract class BaseCrawl {
 			];
 			$id = $record['f_id'];
 			HouseEvaluate::update($updateData, 'f_id=' . $id);
-			$this->info('数据更新完毕：'.$originId);
+			$this->info('数据更新完毕：' . $originId);
+
+		}
+	}
+
+	/**
+	 * 海房评估
+	 * @param $originId
+	 * @param $data
+	 */
+	public function writeHouseEvalUS($originId, $data) {
+		$record = HouseEvaluate::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
+		$data = [
+			'f_unique_id'         => $this->uniqueId,
+			'f_origin_id'         => $originId,
+			'f_origin_parent_id'  => $data['f_origin_parent_id'],
+			'f_title'             => $data['f_title'],
+			'f_province'          => strtoupper($data['f_province']),
+			'f_city'              => $data['f_city'],
+			'f_address'           => $data['f_address'],
+			'f_full_address'      => $data['f_full_address'],
+			'f_post_code'         => $data['f_post_code'],
+			'f_house_type'        => $data['f_house_type'],
+			'f_house_area'        => $data['f_house_area'],
+			'f_house_unit'        => $data['f_house_unit'],
+			'f_currency_symbol'   => $data['f_currency_symbol'],
+			'f_price'             => $data['f_price'],
+			'f_bedroom_num'       => $data['f_bedroom_num'],
+			'f_bathroom_num'      => $data['f_bathroom_num'],
+			'f_parking_space_num' => $data['f_parking_space_num'],
+
+
+			'f_house_layout'   => $data['f_house_layout'],
+			'f_building_time'  => $data['f_building_time'],
+			'f_handing_time'   => $data['f_handing_time'],
+			'f_land_area'      => $data['f_land_area'],
+			'f_balcony_area'   => $data['f_balcony_area'],
+			'f_house_no'       => $data['f_house_no'],
+			'f_house_floor'    => $data['f_house_floor'],
+			'f_house_standard' => $data['f_house_standard'],
+			'f_property_info'  => $data['f_property_info'],
+			'f_tag'            => $data['f_tag'],
+
+			'f_spu_price'  => $data['f_spu_price'],
+			'f_spu_layout' => $data['f_spu_layout'],
+			'f_spu_area'   => $data['f_spu_area'],
+
+
+			'f_create_time' => time(),
+			'f_update_time' => 0,
+		];
+		if (!$record) {
+			$insData = $data;
+			$insData['f_create_time'] = time();
+			$insData['f_update_time'] = 0;
+			HouseEvaluateUS::insert($insData);
+			$this->info('数据写入完毕：' . $originId);
+		} else {
+			$updateData = $data;
+			$updateData['f_update_time'] = time();
+			$id = $record['f_id'];
+			HouseEvaluateUS::update($updateData, 'f_id=' . $id);
+			$this->info('数据更新完毕：' . $originId);
 
 		}
 	}

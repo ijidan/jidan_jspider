@@ -1,12 +1,17 @@
 <?php
 
-$host = '172.16.10.91';
-$user = 'u_spider';
-$password = 'Dj0w9F4jg0q6';
+$host = '172.16.10.111';
+$user = 'hnb';
+$password = 'alyHnb2015';
 
 return [
 	"mysql"   => [
-		'd_spider_news' => [
+		'd_spider' => [
+			"host"     => $host,
+			"user"     => $user,
+			"password" => $password,
+		],
+		'd_hnb' => [
 			"host"     => $host,
 			"user"     => $user,
 			"password" => $password,

@@ -4,13 +4,12 @@ namespace Model\Spider;
 
 use Lib\BaseModel;
 
-
 /**
- * 房源评估
- * Class HouseEval
+ * 估价
+ * Class HouseEvaluate
  * @package Model\Spider
  */
-class HouseEval extends BaseModel {
+class HouseEvaluate extends BaseModel {
 	/**
 	 * 数据库名
 	 * @return mixed
@@ -25,7 +24,7 @@ class HouseEval extends BaseModel {
 	 * @return mixed
 	 */
 	public function getTableName() {
-		return 'house_eval';
+		return 'house_evaluate';
 		// TODO: Implement getTableName() method.
 	}
 
