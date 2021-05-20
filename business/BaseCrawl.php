@@ -936,13 +936,13 @@ abstract class BaseCrawl {
 	 * @param array $replacementList
 	 * @param string $sep
 	 */
-	protected function multiReplaceInner(&$content, array $replacementList,$sep=','){
-		$contentList=\explode($sep,$content);
-		foreach ($contentList as &$item){
-			$this->multiReplace($item,$replacementList);
+	protected function multiReplaceInner(&$content, array $replacementList, $sep = ',') {
+		$contentList = \explode($sep, $content);
+		foreach ($contentList as &$item) {
+			$this->multiReplace($item, $replacementList);
 		}
-		$content=\join($sep,$contentList);
-		$this->multiReplace($content,$replacementList);
+		$content = \join($sep, $contentList);
+		$this->multiReplace($content, $replacementList);
 	}
 
 	/**
@@ -1018,12 +1018,12 @@ abstract class BaseCrawl {
 	}
 
 	/**
-	 * 海房评估
+	 * 计算贝壳数据
 	 * @param $originId
 	 * @param $data
+	 * @return array
 	 */
-	public function writeHouseEvalUS($originId, $data) {
-		$record = HouseEvaluateUS::findOne('f_unique_id =? and f_origin_id=?', [$this->uniqueId, $originId]);
+	public function computeKeHouseData($originId, $data) {
 		$data = [
 			'f_unique_id'         => $this->uniqueId,
 			'f_origin_id'         => $originId,
@@ -1063,20 +1063,7 @@ abstract class BaseCrawl {
 			'f_create_time' => time(),
 			'f_update_time' => 0,
 		];
-		if (!$record) {
-			$insData = $data;
-			$insData['f_create_time'] = time();
-			$insData['f_update_time'] = 0;
-			HouseEvaluateUS::insert($insData);
-			$this->info('数据写入完毕：' . $originId);
-		} else {
-			$updateData = $data;
-			$updateData['f_update_time'] = time();
-			$id = $record['f_id'];
-			HouseEvaluateUS::update($updateData, 'f_id=' . $id);
-			$this->info('数据更新完毕：' . $originId);
-
-		}
+		return $data;
 	}
 
 
