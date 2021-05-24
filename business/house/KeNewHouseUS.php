@@ -50,6 +50,13 @@ class KeNewHouseUS extends KeSecondHouseUS {
 		return ['/newhomes/us/', '.html'];
 	}
 
+	/**
+	 * 获取项目数
+	 * @return int
+	 */
+	public function getListDetCnt(){
+		return 3;
+	}
 
 	/**
 	 * 爬取详情页
@@ -163,8 +170,8 @@ class KeNewHouseUS extends KeSecondHouseUS {
 
 			//地址
 			$address = '';
-			$city = '';
-			$province = '';
+			$city1 = '';
+			$province1 = '';
 			$postCode = '';
 			$this->multiReplace($houseAddress, ['地图', '\n', '']);
 			$houseAddressList = explode(',', $houseAddress);
@@ -173,20 +180,22 @@ class KeNewHouseUS extends KeSecondHouseUS {
 				case 3:
 					list($address, $city, $provincePostCode) = $houseAddressList;
 					$this->multiReplace($provincePostCode, ['地图', '\n', '']);
-					list($province, $postCode) = explode(' ', $provincePostCode);
+					list($province1, $postCode) = explode(' ', $provincePostCode);
 					break;
 				case 2:
 					list($address, $provincePostCode) = $houseAddressList;
 					$this->multiReplace($provincePostCode, ['地图', '\n', '']);
-					list($province, $postCode) = explode(' ', $provincePostCode);
+					list($province1, $postCode) = explode(' ', $provincePostCode);
 					break;
 				default:
 					$address = '';
-					$city = '';
-					$province = '';
+					$city1 = '';
+					$province1 = '';
 					$postCode = '';
 			}
 
+			$location=$this->data['location'][$id];
+			list($country,$province,$city)=explode('·',$location);
 
 			$this->multiReplace($address, ['地图', '\n', '']);
 			$this->multiReplace($city, ['地图', '\n', '']);

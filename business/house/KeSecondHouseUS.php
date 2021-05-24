@@ -33,6 +33,7 @@ class KeSecondHouseUS extends HouseBase {
 
 
 
+
 	/**
 	 * 获取平台
 	 * @return mixed
@@ -62,6 +63,14 @@ class KeSecondHouseUS extends HouseBase {
 		return 100;
 	}
 
+	/**
+	 * 获取项目数
+	 * @return int
+	 */
+	public function getListDetCnt(){
+		return 4;
+	}
+
 
 	/**
 	 * 爬取所有ID
@@ -74,15 +83,25 @@ class KeSecondHouseUS extends HouseBase {
 		$fileName = __FUNCTION__ . '_id_' . $id;
 		$content = $this->fetchContentFromDb($fileName, $shortUrl);
 		$dataList = $this->computeData($content, '.list-wrap dd h3 a', 'href');
+		$detList=$this->computeData($content,'.list-wrap dd .list-det');
+		$locationList=[];
+		$detCnt=$this->getListDetCnt();
+		foreach ($detList as $key=> $value){
+			if($key%$detCnt==0){
+				$locationList[]=$value;
+			}
+		}
 		$allIdList = [];
-		foreach ($dataList as $data) {
+		foreach ($dataList as $idx=>$data) {
 			$id=$data;
 			$replaceList=$this->getReplaceList();
 			$this->multiReplace($id,$replaceList);
 			array_push($allIdList, $id);
+			$this->data['location'][$id]=$locationList[$idx];
 		}
 		return $allIdList;
 	}
+
 
 	/**
 	 * 获取过滤列表
@@ -170,8 +189,11 @@ class KeSecondHouseUS extends HouseBase {
 			$priceReplacement=$this->getPriceReplacement();
 			$this->multiReplace($price,$priceReplacement);
 			//地址
+			$location=$this->data['location'][$id];
+			list($country,$province,$city)=explode('·',$location);
+
 			$houseAddressList = explode(',', $houseAddress);
-			list($address, $city, $province, $postCode) = $houseAddressList;
+			list($address, $city1, $province1, $postCode) = $houseAddressList;
 
 			//物业类型
 			$propertyType = $houseInfo['物业类型：'];
